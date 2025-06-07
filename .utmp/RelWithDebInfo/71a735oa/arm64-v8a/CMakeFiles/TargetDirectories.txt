@@ -1,0 +1,5 @@
+C:/Users/flipe/Documents/Unity/vr-tennis/.utmp/RelWithDebInfo/71a735oa/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/flipe/Documents/Unity/vr-tennis/.utmp/RelWithDebInfo/71a735oa/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/flipe/Documents/Unity/vr-tennis/.utmp/RelWithDebInfo/71a735oa/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/flipe/Documents/Unity/vr-tennis/.utmp/RelWithDebInfo/71a735oa/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/flipe/Documents/Unity/vr-tennis/.utmp/RelWithDebInfo/71a735oa/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir

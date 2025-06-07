@@ -1,0 +1,10 @@
+# ninja log v5
+40	2703	7698184198402837	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	b68f3e5425e6db9b
+50	2718	7698184198495800	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	1c7e87948541430e
+12	2736	7698184198832847	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a98b93de876c1077
+61	2762	7698184199091820	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	46f35dd99e75cfc6
+21	2866	7698184200122708	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	ed4f1df462f8647e
+73	3085	7698184202369410	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	a86d8b48f5178073
+30	3159	7698184203117149	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	156131a320cc75f2
+1	3259	7698184204099270	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	dc48e24d2cb2aa15
+3260	3451	7698184206086332	C:/Users/flipe/Documents/Unity/vr-tennis/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/71a735oa/obj/arm64-v8a/libgame.so	c83e1793de642d3f
