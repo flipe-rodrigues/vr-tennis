@@ -4,7 +4,7 @@ public class TennisManager : Singleton<TennisManager>
 {
     // Public properties
     public BallRigidbodyBhv Ball { get {return _ball; } set { _ball = value; } }
-    public RacketStringsBhv Racket => _racket;
+    public RacketRigidbodyBhv Racket => _racket;
     public Vector3 RelativePosition => _ball.Position - _racket.Position;
     public Vector3 RelativeVelocity => _racket.LinearVelocity - _ball.LinearVelocity;
 
@@ -12,7 +12,7 @@ public class TennisManager : Singleton<TennisManager>
     [SerializeField, ReadOnly]
     private BallRigidbodyBhv _ball;
     [SerializeField, ReadOnly]
-    private RacketStringsBhv _racket;
+    private RacketRigidbodyBhv _racket;
 
     private void OnValidate()
     {
@@ -22,7 +22,7 @@ public class TennisManager : Singleton<TennisManager>
         }
         if (_racket == null)
         {
-            _racket = FindFirstObjectByType<RacketStringsBhv>();
+            _racket = FindFirstObjectByType<RacketRigidbodyBhv>();
         }
     }
 

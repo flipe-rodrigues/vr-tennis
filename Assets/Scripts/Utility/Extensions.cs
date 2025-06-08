@@ -57,4 +57,9 @@ public static class Extensions
 
         return color;
     }
+
+    public static float TauToLambda(this float tau)
+    {
+        return 1f - Mathf.Exp(-Time.fixedDeltaTime / tau);
+    } 
 }

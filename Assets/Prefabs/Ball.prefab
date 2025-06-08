@@ -244,8 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945f4c7a02210df49ba08dd8bd399a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTimeScale: 0.5
-  minTimeScale: 0.01
+  maxTimeScale: 1
+  minTimeScale: 1
   distanceModifier: 1
   _distance: 0
   _lerp: 0
