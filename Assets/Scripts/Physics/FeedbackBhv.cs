@@ -1,12 +1,10 @@
 using Oculus.Interaction;
 using UnityEngine;
 
-public class FeedbackBhv : MonoBehaviour
+public class FeedbackBhv : CachedTransformBhv
 {
     // Public fields
     public LayerMask layerMask;
-    [Range(0, 1)]
-    public float amplitudeModifier = .1f;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -16,14 +14,6 @@ public class FeedbackBhv : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (((1 << other.gameObject.layer) & layerMask) != 0)
-        {
-            this.Play();
-        }
-    }
-
-    protected virtual void Play() { }
+    public virtual void Play(float speed) { }
     protected virtual void Play(Collision collision) { }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BallSpawningBhv : CachedTransformBhv
@@ -5,12 +6,33 @@ public class BallSpawningBhv : CachedTransformBhv
     // Public fields
     public GameObject ballPrefab;
     [Range(0, 100)]
+    public int ballPoolSize = 10;
+    [Range(0, 100)]
     public float linearSpeed = 10f;
     [Range(-500, 500)]
     public float topSpin = 0f;
     [Range(-500, 500)]
     public float sideSpin = 0f;
     public float spawnInterval = 5f;
+
+    // Private fields
+    private Queue<BallRigidbodyBhv> _ballPool = new Queue<BallRigidbodyBhv>();
+    private BallRigidbodyBhv _currentBall;
+
+    private void Start()
+    {
+        if (ballPrefab != null)
+        {
+            for (int i = 0; i < ballPoolSize; ++i)
+            {
+                BallRigidbodyBhv newBall = Instantiate(ballPrefab, this.Position, this.Rotation, this.transform).GetComponent<BallRigidbodyBhv>();
+
+                newBall.Active = false;
+
+                _ballPool.Enqueue(newBall);
+            }
+        }
+    }
 
     private void Update()
     {
@@ -27,11 +49,50 @@ public class BallSpawningBhv : CachedTransformBhv
             return;
         }
 
-        BallRigidbodyBhv ball = Instantiate(ballPrefab, this.Position, this.Rotation).GetComponent<BallRigidbodyBhv>();
+        if (_currentBall != null)
+        {
+            this.ReturnObjectToPool(_currentBall);
+        }
 
-        ball.LinearVelocity = this.Forward * linearSpeed;
-        ball.AngularVelocity = this.Right * topSpin + this.Up * sideSpin;
+        _currentBall = this.GetBallFromPool();
 
-        TennisManager.Instance.Ball = ball;
+        _currentBall.Move(this.Position, this.Rotation);
+
+        _currentBall.LinearVelocity = this.Forward * linearSpeed;
+        _currentBall.AngularVelocity = this.Right * topSpin + this.Up * sideSpin;
+
+        TennisManager.Instance.Ball = _currentBall;
+    }
+
+
+    private BallRigidbodyBhv GetBallFromPool()
+    {
+        while (_ballPool.Count > 0)
+        {
+            BallRigidbodyBhv ball = _ballPool.Dequeue();
+
+            if (ball != null)
+            {
+                ball.Active = true;
+
+                return ball;
+            }
+            else
+            {
+                Debug.LogWarning("Found a null object in the pool. Has some code outside the pool destroyed it?");
+            }
+        }
+
+        Debug.LogError("All pooled objects are already in use or have been destroyed");
+
+        return null;
+    }
+
+    public void ReturnObjectToPool(BallRigidbodyBhv ball)
+    {
+        if (ball != null)
+        {
+            _ballPool.Enqueue(ball);
+        }
     }
 }

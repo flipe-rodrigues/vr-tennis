@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class HapticsManager : Singleton<HapticsManager>
 {
+    // Public properties
+    public HapticClip Clip { set { _hapticSource.clip = value; } }
+
     // Read only fields
     [SerializeField, ReadOnly]
     private HapticSource _hapticSource;

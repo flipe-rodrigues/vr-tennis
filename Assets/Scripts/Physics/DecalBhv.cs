@@ -2,7 +2,7 @@ using Meta.Net.NativeWebSocket;
 using System.Collections;
 using UnityEngine;
 
-public class DecalBhv : MonoBehaviour
+public class DecalBhv : CachedTransformBhv
 {
     // Private properties
     private MeshRenderer MeshRenderer => _meshRenderer == null ? GetComponentInChildren<MeshRenderer>() : _meshRenderer;
@@ -19,8 +19,10 @@ public class DecalBhv : MonoBehaviour
         this.MeshRenderer.sharedMaterial.color = initialColor;
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _meshRenderer = this.MeshRenderer;
     }
 

@@ -1,12 +1,19 @@
-using Oculus.Haptics;
+using UnityEngine;
+using UnityEngine.XR;
 
-public class HapticFeedbackBhv : FeedbackBhv
+public class HapticFeedbackBhv : MonoBehaviour
 {
-    protected override void Play()
-    {
-        float relativeVelocity = (TennisManager.Instance.Ball.LinearVelocity - TennisManager.Instance.Racket.LinearVelocity).magnitude;
+    // Public fields
+    public InputDeviceCharacteristics controllerCharacteristics = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
+    [Range(0, 1)]
+    public float amplitudeModifier = 0.1f;
 
-         float amplitude = relativeVelocity * amplitudeModifier;
+    [SerializeField, ReadOnly]
+    private InputDevice targetDevice;
+
+    public void Play(float relativeSpeed)
+    {
+        float amplitude = relativeSpeed * amplitudeModifier;
 
         HapticsManager.Instance.Play(amplitude);
     }

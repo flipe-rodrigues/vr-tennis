@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CachedTransformBhv : MonoBehaviour
+public class CachedTransformBhv : CachedGameObjectBhv
 {
     // Public properties
     public Vector3 Forward => this.Transform.forward;
@@ -17,8 +16,10 @@ public class CachedTransformBhv : MonoBehaviour
     // Private fields
     private Transform _transform;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
-        _transform = GetComponent<Transform>();
+        base.Awake();
+
+        _transform = this.Transform;
     }
 }

@@ -28,7 +28,7 @@ public class CachedRigidbodyBhv : CachedTransformBhv
     {
         base.Awake();
 
-        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = this.Rigidbody;
     }
 
     protected virtual void Start()

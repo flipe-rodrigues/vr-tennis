@@ -1,9 +1,15 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.CompilerServices;
 
 public static class Extensions
 {
+    //public static IEnumerable<Vector3> Pop(this IEnumerable<Vector3> vectors)
+    //{
+        
+    //}
+
     public static Vector3 Mean(this IEnumerable<Vector3> vectors)
     {
         Vector3 mean = Vector3.zero;
@@ -44,6 +50,11 @@ public static class Extensions
     public static Vector3 ElementWiseMultiplication(this Vector3 v, Vector3 u)
     {
         return new Vector3(v.x * u.x, v.y * u.y, v.z * u.z);
+    }
+
+    public static Vector3 Abs(this Vector3 v)
+    {
+        return new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
     }
 
     public static Vector3 ClampBetween(this Vector3 v, Vector3 min, Vector3 max)

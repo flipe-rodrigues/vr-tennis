@@ -14,11 +14,8 @@ GameObject:
   - component: {fileID: 4846819890606111229}
   - component: {fileID: 5014508407714595441}
   - component: {fileID: -16429739311734148}
-  - component: {fileID: 8116212815236643136}
-  - component: {fileID: -4024201787168004432}
-  - component: {fileID: 829989405921202910}
+  - component: {fileID: 3296053829661479314}
   - component: {fileID: 2982270267574870622}
-  - component: {fileID: 909982113513334038}
   m_Layer: 7
   m_Name: Ball
   m_TagString: Untagged
@@ -165,7 +162,7 @@ MonoBehaviour:
   _dragCoefficient: 0
   _liftCoefficient: 0
   _spinDecayRate: 0
---- !u!114 &8116212815236643136
+--- !u!114 &3296053829661479314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,42 +176,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 256
-  amplitudeModifier: 0.1
-  audioClip: {fileID: 8300000, guid: 5a49a4f47f1cfd64391bfc2d64f95dc4, type: 3}
---- !u!114 &-4024201787168004432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1256145129520494433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 858c103e0df2f524a90cefbdb308a504, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  amplitudeModifier: 0.25
-  audioClip: {fileID: 8300000, guid: e4a1497f613eb654cbd6f7568bb85c92, type: 3}
---- !u!114 &829989405921202910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1256145129520494433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93fcb988aff64a64382cce49e993627e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  amplitudeModifier: 0.25
+    m_Bits: 384
+  audioClip: {fileID: 8300000, guid: 0dcc9c43016d7774dbcdcc76361feb1f, type: 3}
+  volumeModifier: 0.05
 --- !u!114 &2982270267574870622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,25 +194,11 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
-  amplitudeModifier: 0.6666667
   decalPrefab: {fileID: 240883527968456017, guid: 503a397687f5f4b46939bb6e09af296e, type: 3}
---- !u!114 &909982113513334038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1256145129520494433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 945f4c7a02210df49ba08dd8bd399a4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxTimeScale: 1
-  minTimeScale: 1
-  distanceModifier: 1
-  _distance: 0
-  _lerp: 0
+  alphaModifier: 0.1
+  scaleModifier: 0.005
+  _initialScale: {x: 0, y: 0, z: 0}
+  _initialAlpha: 0
 --- !u!1 &4267592074341302977
 GameObject:
   m_ObjectHideFlags: 0

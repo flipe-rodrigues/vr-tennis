@@ -1,9 +1,21 @@
+using Oculus.Interaction;
 using UnityEngine;
 
 public class AudioFeedbackBhv : FeedbackBhv
 {
     // Public fields
     public AudioClip audioClip;
+    [Range(0, 1)]
+    public float volumeModifier = .1f;
+
+    public override void Play(float relativeSpeed)
+    {
+        Vector3 position = TennisManager.Instance.Ball.Position;
+
+        float baseVolume = Mathf.Clamp(relativeSpeed * volumeModifier, 0, 1);
+
+        this.PlayClipAtPoint(position, relativeSpeed, baseVolume);
+    }
 
     protected override void Play(Collision collision)
     {
@@ -11,18 +23,7 @@ public class AudioFeedbackBhv : FeedbackBhv
 
         float relativeSpeed = collision.relativeVelocity.magnitude;
 
-        float baseVolume = Mathf.Clamp(relativeSpeed * amplitudeModifier, 0, 1);
-
-        this.PlayClipAtPoint(position, relativeSpeed, baseVolume);
-    }
-
-    protected override void Play()
-    {
-        Vector3 position = TennisManager.Instance.Ball.Position;
-
-        float relativeSpeed = (TennisManager.Instance.Ball.LinearVelocity - TennisManager.Instance.Racket.LinearVelocity).magnitude;
-
-        float baseVolume = Mathf.Clamp(relativeSpeed * amplitudeModifier, 0, 1);
+        float baseVolume = Mathf.Clamp(relativeSpeed * volumeModifier, 0, 1);
 
         this.PlayClipAtPoint(position, relativeSpeed, baseVolume);
     }
@@ -47,13 +48,12 @@ public class AudioFeedbackBhv : FeedbackBhv
 
         // Add natural variation
         audioSource.pitch = Random.Range(0.9f, 1.1f) ;
-        audioSource.volume = baseVolume * Random.Range(0.95f, 1.0f);
+        audioSource.volume = baseVolume * Random.Range(0.95f, 1.05f);
 
         // Play the audio clip
         audioSource.Play();
 
         // Destroy after clip finishes
-        Destroy(gameObject, audioClip.length / audioSource.pitch);
-        Object.Destroy(gameObject, audioClip.length * Time.timeScale);
+        Destroy(gameObject, audioClip.length);
     }
 }

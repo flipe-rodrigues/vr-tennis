@@ -7,7 +7,7 @@ MonoImporter:
   - ballPrefab: {fileID: 1256145129520494433, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
   - _ball: {instanceID: 0}
   - _racket: {instanceID: 0}
-  executionOrder: 0
+  executionOrder: 300
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 
