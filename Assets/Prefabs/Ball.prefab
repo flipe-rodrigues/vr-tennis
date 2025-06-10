@@ -197,8 +197,8 @@ MonoBehaviour:
   decalPrefab: {fileID: 240883527968456017, guid: 503a397687f5f4b46939bb6e09af296e, type: 3}
   alphaModifier: 0.1
   scaleModifier: 0.005
-  _initialScale: {x: 0, y: 0, z: 0}
-  _initialAlpha: 0
+  _defaultScale: {x: 0, y: 0, z: 0}
+  _maxAlpha: 0
 --- !u!1 &4267592074341302977
 GameObject:
   m_ObjectHideFlags: 0

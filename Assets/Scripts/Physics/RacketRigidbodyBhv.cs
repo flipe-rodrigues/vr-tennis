@@ -19,6 +19,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 {
     // Public properties
     public UnityEvent<float> OnHit => _onHit;
+    public Vector3 HitVelocity => _hitVelocity;
     public Vector3 SmoothLinearVelocity => _smoothLinearVelocity;
     public Vector3 SmoothAngularVelocity => _smoothAngularVelocity;
     public bool IsInRefractoryPeriod => _racketCollider.enabled == false;
@@ -99,26 +100,26 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
         _smoothLinearVelocity = Vector3.Lerp(_smoothLinearVelocity, this.LinearVelocity, _smoothingRate);
         _smoothAngularVelocity = Vector3.Lerp(_smoothAngularVelocity, this.AngularVelocity, _smoothingRate);
 
-        _contactNormals.Enqueue(this.GetContactNormal());
-        _linearVelocities.Enqueue(this.LinearVelocity);
-        _angularVelocities.Enqueue(this.AngularVelocity);
+        //_contactNormals.Enqueue(this.GetContactNormal());
+        //_linearVelocities.Enqueue(this.LinearVelocity);
+        //_angularVelocities.Enqueue(this.AngularVelocity);
 
-        if (_contactNormals.Count > _numFrames)
-        {
-            _contactNormals.Dequeue();
-        }
-        if (_linearVelocities.Count > _numFrames)
-        {
-            _linearVelocities.Dequeue();
-        }
-        if (_angularVelocities.Count > _numFrames)
-        {
-            _angularVelocities.Dequeue();
-        }
+        //if (_contactNormals.Count > _numFrames)
+        //{
+        //    _contactNormals.Dequeue();
+        //}
+        //if (_linearVelocities.Count > _numFrames)
+        //{
+        //    _linearVelocities.Dequeue();
+        //}
+        //if (_angularVelocities.Count > _numFrames)
+        //{
+        //    _angularVelocities.Dequeue();
+        //}
 
-        _smoothContactNormal = _contactNormals.MidPoint().normalized;
-        _smoothLinearVelocity = _linearVelocities.MidPoint();
-        _smoothAngularVelocity = _angularVelocities.MidPoint();
+        //_smoothContactNormal = _contactNormals.MidPoint().normalized;
+        //_smoothLinearVelocity = _linearVelocities.MidPoint();
+        //_smoothAngularVelocity = _angularVelocities.MidPoint();
     }
 
     public void MoveTransform()
@@ -141,11 +142,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 
         this.Move(anchorTransform.Position, anchorTransform.Rotation);
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        this.OnTriggerStay(other);
-    }
-
+    
     private void OnTriggerStay(Collider other)
     {
         Vector3 closestPointOnStrings = this.Position + Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, this.Forward);
@@ -156,11 +153,11 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 
             float relativeSpeed = (_smoothLinearVelocity - TennisManager.Instance.Ball.LinearVelocity).magnitude;
 
-            _onHit.Invoke(relativeSpeed);
-
             _hitVelocity = this.GetVelocityAtContactPoint();
 
             this.Hit(TennisManager.Instance.Ball);
+
+            _onHit.Invoke(relativeSpeed);
         }
     }
 
@@ -184,7 +181,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 
         // Apply friction and spin effects to tangential component
         Vector3 v_ball_tangential_f = 
-            apparentTangentialRestitution * v_racket_tangential_i + apparentTangentialRestitution * v_ball_tangential_i +
+            apparentTangentialRestitution * (v_racket_tangential_i + v_ball_tangential_i) +
             spinToTangentialConversion * ball.Radius * Vector3.Cross(w_ball_i, _smoothContactNormal);
 
         // Calculate final velocity

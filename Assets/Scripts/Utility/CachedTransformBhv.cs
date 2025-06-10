@@ -11,7 +11,7 @@ public class CachedTransformBhv : CachedGameObjectBhv
     public Vector3 Scale { get { return this.Transform.localScale; } set { this.Transform.localScale = value; } }
 
     // Private properties
-    private Transform Transform => _transform == null ? GetComponent<Transform>() : _transform;
+    protected Transform Transform => _transform == null ? GetComponent<Transform>() : _transform;
 
     // Private fields
     private Transform _transform;

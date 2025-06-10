@@ -1,10 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BallSpawningBhv : CachedTransformBhv
 {
+    // Public properties
+    public Vector3 InitialVelocity => this.Forward * linearSpeed;
+
     // Public fields
     public GameObject ballPrefab;
+    public TrackingBhv ballTracker;
     [Range(0, 100)]
     public int ballPoolSize = 10;
     [Range(0, 100)]
@@ -14,6 +19,7 @@ public class BallSpawningBhv : CachedTransformBhv
     [Range(-500, 500)]
     public float sideSpin = 0f;
     public float spawnInterval = 5f;
+    public UnityEvent onBallSpawned = new UnityEvent();
 
     // Private fields
     private Queue<BallRigidbodyBhv> _ballPool = new Queue<BallRigidbodyBhv>();
@@ -27,6 +33,8 @@ public class BallSpawningBhv : CachedTransformBhv
             {
                 BallRigidbodyBhv newBall = Instantiate(ballPrefab, this.Position, this.Rotation, this.transform).GetComponent<BallRigidbodyBhv>();
 
+                newBall.name = "Ball";
+
                 newBall.Active = false;
 
                 _ballPool.Enqueue(newBall);
@@ -39,6 +47,8 @@ public class BallSpawningBhv : CachedTransformBhv
         if (Time.time % spawnInterval < Time.deltaTime)
         {
             this.SpawnBall();
+
+            onBallSpawned.Invoke();
         }
     }
 
@@ -56,6 +66,8 @@ public class BallSpawningBhv : CachedTransformBhv
 
         _currentBall = this.GetBallFromPool();
 
+        ballTracker.trackedTransform = _currentBall.transform;
+
         _currentBall.Move(this.Position, this.Rotation);
 
         _currentBall.LinearVelocity = this.Forward * linearSpeed;
@@ -63,7 +75,6 @@ public class BallSpawningBhv : CachedTransformBhv
 
         TennisManager.Instance.Ball = _currentBall;
     }
-
 
     private BallRigidbodyBhv GetBallFromPool()
     {

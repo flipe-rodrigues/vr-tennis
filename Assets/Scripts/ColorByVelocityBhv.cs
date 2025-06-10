@@ -14,7 +14,7 @@ public class ColorByVelocityBhv : MonoBehaviour
 
     private void Awake()
     {
-        _rigidbody = GetComponentInParent<KinematicRigidbodyBhv>();
+        _rigidbody = GetComponentInParent<CachedRigidbodyBhv>();
         _renderer = GetComponent<Renderer>();
     }
 
