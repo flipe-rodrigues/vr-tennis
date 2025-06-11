@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEditor.Overlays;
+using Unity.XR.CoreUtils.Datums;
 
 public class TrackingBhv : CachedTransformBhv
 {
     // Public fields
-    public Transform trackedTransform;
-    [Header("Gizmo Settings:")]
     public Color gizmoColor = Color.red;
     [Min(.001f)]
     public float gizmoRadius = 0.025f;
@@ -14,59 +16,104 @@ public class TrackingBhv : CachedTransformBhv
     [Range(0, 1)]
     public float gizmoIdleAlpha = 0.25f;
 
+    // Read only fields
+    [SerializeField, ReadOnly]
+    private string _fileName;
+    private string _filePath;
+
     // Private fields
-    private List<float[]> _states;
+    private List<TrackingDatum> _trackingData = new List<TrackingDatum>();
+    private StreamWriter _fileWriter;
 
     private void OnValidate()
     {
-        if (trackedTransform != null)
-        {
-            this.name = trackedTransform.name + " Tracker";
+        _fileName = this.GetFileName();
+    }
 
-            this.Position = trackedTransform.position;
-        }
+    private string GetFileName()
+    {
+        return string.Concat(
+            UIManager.subjectName, "_",
+            UIManager.subjectAge, "_",
+            UIManager.subjectSex, "_",
+            UIManager.subjectTennisExp, "_",
+            UIManager.subjectVRExp, "_",
+            this.name.ToLower().Replace(" ", "-"), "_",
+            TrackingManager.GetFormattedTimestamp(),
+            ".csv");
     }
 
     private void Start()
     {
-        _states = new List<float[]>();
+        _filePath = Path.Combine(TrackingManager.Instance.DataPath, _fileName);
+
+        if (TrackingManager.Instance.saveData)
+        {
+            _fileWriter = File.CreateText(_filePath);
+
+            _fileWriter.WriteLine(TrackingDatum.header);
+        }
     }
 
     private void FixedUpdate()
     {
-        if (trackedTransform == null)
+        this.Record();
+    }
+
+    private void Record()
+    {
+        this.RecordEvent("");
+    }
+
+    public void RecordEvent(string eventName)
+    {
+        TrackingDatum datum = new TrackingDatum(
+            stage: TaskManager.Instance.StageIndex,
+            trial: TaskManager.Instance.TrialIndex,
+            time: Time.time,
+            position: this.Position,
+            rotation: this.Rotation,
+            eventName: eventName
+        );
+
+        _trackingData.Add(datum);
+    }
+
+    public void SaveAndClear()
+    {
+        if (_fileWriter == null)
         {
             return;
         }
 
-        float[] state = new float[] {
-           Time.timeSinceLevelLoad,
-           trackedTransform.position.x, trackedTransform.position.y, trackedTransform.position.z,
-           trackedTransform.rotation.x, trackedTransform.rotation.y, trackedTransform.rotation.z, trackedTransform.rotation.w
-       };
+        foreach (TrackingDatum datum in _trackingData)
+        {
+            _fileWriter.WriteLine(datum.Serialize());
+        }
 
-        _states.Add(state);
+        _trackingData.Clear();
+    }
+
+    private void OnDisable()
+    {
+        if (_fileWriter == null)
+        {
+            return;
+        }
+
+        _fileWriter.Flush();
+        _fileWriter.Close();
     }
 
     private void OnDrawGizmos()
     {
-        if (trackedTransform == null)
-        {
-            return;
-        }
-
         Gizmos.color = gizmoColor.SetAlpha(gizmoIdleAlpha);
-        Gizmos.DrawSphere(trackedTransform.position, gizmoRadius);
+        Gizmos.DrawSphere(this.Position, gizmoRadius);
     }
 
     private void OnDrawGizmosSelected()
     {
-        if (trackedTransform == null)
-        {
-            return;
-        }
-
         Gizmos.color = gizmoColor.SetAlpha(gizmoSelectedAlpha);
-        Gizmos.DrawSphere(trackedTransform.position, gizmoRadius);
+        Gizmos.DrawSphere(this.Position, gizmoRadius);
     }
 }

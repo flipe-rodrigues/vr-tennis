@@ -3,6 +3,7 @@ using UnityEngine;
 public class CachedGameObjectBhv : MonoBehaviour
 {
     // Public properties
+    public string Name { get { return this.GameObject.name; } set { this.GameObject.name = value; } }
     public bool Active { get { return this.GameObject.activeSelf; } set { this.GameObject.SetActive(value); } }
 
     // Private properties

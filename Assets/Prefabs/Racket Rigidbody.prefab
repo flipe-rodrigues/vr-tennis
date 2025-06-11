@@ -148,8 +148,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3508826337104390739}
+  - component: {fileID: 4908714529883086994}
   m_Layer: 6
-  m_Name: Racket Frame (base)
+  m_Name: Racket Frame Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,6 +171,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8045484937074307407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4908714529883086994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885203191561689320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoColor: {r: 0, g: 1, b: 1, a: 1}
+  gizmoRadius: 0.025
+  gizmoSelectedAlpha: 0.75
+  gizmoIdleAlpha: 0.25
+  _fileName: code_age_sex_tennis-xp_vr-xp_racket-frame-base_2025-06-11_13-51-48.csv
 --- !u!1 &4184398871533583225
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 325918767049802871}
+  - component: {fileID: 4059865396570719225}
   m_Layer: 6
   m_Name: Racket Grip
   m_TagString: Untagged
@@ -201,6 +220,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8045484937074307407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4059865396570719225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4184398871533583225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoColor: {r: 1, g: 1, b: 1, a: 1}
+  gizmoRadius: 0.025
+  gizmoSelectedAlpha: 0.75
+  gizmoIdleAlpha: 0.25
+  _fileName: code_age_sex_tennis-xp_vr-xp_racket-grip_2025-06-11_13-51-48.csv
 --- !u!1 &4366985766323789496
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,9 +326,7 @@ MonoBehaviour:
   tangentialToSpinConversion: 0.58
   refractoryPeriod: 0.25
   smoothingTimeConstant: 0.01
-  _smoothingRate: 0.09516257
-  _numFrames: 10
-  _onHit:
+  onRacketHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3921553247011690897}
@@ -319,6 +353,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _smoothingRate: 0.09516257
+  _numFrames: 10
 --- !u!114 &3921553247011690897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,8 +408,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8980307258623488567}
+  - component: {fileID: 7843026114750108742}
   m_Layer: 6
-  m_Name: Racket Frame (right)
+  m_Name: Racket Frame Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -394,6 +431,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8045484937074307407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7843026114750108742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424547552374195665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoColor: {r: 0, g: 1, b: 1, a: 1}
+  gizmoRadius: 0.025
+  gizmoSelectedAlpha: 0.75
+  gizmoIdleAlpha: 0.25
+  _fileName: code_age_sex_tennis-xp_vr-xp_racket-frame-right_2025-06-11_13-51-48.csv
 --- !u!1 &4837998024061670508
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +457,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7948062174993275090}
+  - component: {fileID: 3259352244687471260}
   m_Layer: 6
   m_Name: Racket COM
   m_TagString: Untagged
@@ -425,6 +480,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8045484937074307407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3259352244687471260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837998024061670508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoColor: {r: 0, g: 0, b: 0, a: 1}
+  gizmoRadius: 0.025
+  gizmoSelectedAlpha: 0.75
+  gizmoIdleAlpha: 0.25
+  _fileName: code_age_sex_tennis-xp_vr-xp_racket-com_2025-06-11_13-51-48.csv
 --- !u!1 &6836273951096070836
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +507,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8045484937074307407}
   m_Layer: 6
-  m_Name: Trackers
+  m_Name: Tracking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,8 +543,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3414839652748372715}
+  - component: {fileID: 1692753994715645107}
   m_Layer: 6
-  m_Name: Racket Frame (top)
+  m_Name: Racket Frame Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -493,6 +566,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8045484937074307407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1692753994715645107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6864912118469078454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoColor: {r: 0, g: 1, b: 1, a: 1}
+  gizmoRadius: 0.025
+  gizmoSelectedAlpha: 0.75
+  gizmoIdleAlpha: 0.25
+  _fileName: code_age_sex_tennis-xp_vr-xp_racket-frame-top_2025-06-11_13-51-48.csv
 --- !u!1 &7620714560613135057
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,8 +732,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5505523145656543220}
+  - component: {fileID: 7663550768408559955}
   m_Layer: 6
-  m_Name: Racket Frame (left)
+  m_Name: Racket Frame Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -664,3 +755,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8045484937074307407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7663550768408559955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8294093542262225752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoColor: {r: 0, g: 1, b: 1, a: 1}
+  gizmoRadius: 0.025
+  gizmoSelectedAlpha: 0.75
+  gizmoIdleAlpha: 0.25
+  _fileName: code_age_sex_tennis-xp_vr-xp_racket-frame-left_2025-06-11_13-51-48.csv

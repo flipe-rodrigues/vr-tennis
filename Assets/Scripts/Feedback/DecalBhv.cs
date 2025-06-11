@@ -26,7 +26,12 @@ public class DecalBhv : CachedTransformBhv
         _meshRenderer = this.MeshRenderer;
     }
 
-    private IEnumerator Start()
+    public void FadeAndReturnTo(ObjectPool<DecalBhv> pool)
+    {
+        this.StartCoroutine(FadeAndReturnToCoroutine(pool));
+    }
+
+    private IEnumerator FadeAndReturnToCoroutine(ObjectPool<DecalBhv> pool)
     {
         float lerp = 0;
 
@@ -39,6 +44,6 @@ public class DecalBhv : CachedTransformBhv
             yield return new WaitForUpdate();
         }
 
-        Destroy(this.gameObject);
+        pool.Return(this, deactivate: true);
     }
 }

@@ -8,6 +8,9 @@ public class AudioFeedbackBhv : FeedbackBhv
     [Range(0, 1)]
     public float volumeModifier = .1f;
 
+    // Private fields
+    private ObjectPool<AudioSource> _audioSource;
+
     public override void Play(float relativeSpeed)
     {
         Vector3 position = TennisManager.Instance.Ball.Position;

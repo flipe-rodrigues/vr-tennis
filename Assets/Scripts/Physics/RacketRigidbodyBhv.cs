@@ -1,15 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
-using System;
 using UnityEngine.InputSystem.XR;
-using System.Linq;
-using UnityEditor;
 
 // TODO:
-// double hits still! how?!
-// only play racket sound / haptics if Hit happened!!
 // Cleanup after debugging..
 // Angular velocity in collider bhv
 
@@ -18,7 +12,6 @@ using UnityEditor;
 public class RacketRigidbodyBhv : CachedRigidbodyBhv
 {
     // Public properties
-    public UnityEvent<float> OnHit => _onHit;
     public Vector3 HitVelocity => _hitVelocity;
     public Vector3 SmoothLinearVelocity => _smoothLinearVelocity;
     public Vector3 SmoothAngularVelocity => _smoothAngularVelocity;
@@ -36,6 +29,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
     public float refractoryPeriod = 0.05f;
     [Min(0.001f)]
     public float smoothingTimeConstant = 0.01f;
+    public UnityEvent<float> onRacketHit = new UnityEvent<float>();
 
     // Read only fields
     [SerializeField, ReadOnly]
@@ -44,8 +38,6 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
     private int _numFrames;
 
     // Private fields
-    [SerializeField]
-    private UnityEvent<float> _onHit = new UnityEvent<float>();
     private RacketColliderBhv _racketCollider;
     private Queue<Vector3> _contactNormals;
     private Queue<Vector3> _linearVelocities;
@@ -157,7 +149,9 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 
             this.Hit(TennisManager.Instance.Ball);
 
-            _onHit.Invoke(relativeSpeed);
+            onRacketHit.Invoke(relativeSpeed);
+
+            TrackingManager.Instance.RecordEvent("RacketHit");
         }
     }
 

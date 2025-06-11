@@ -5,24 +5,24 @@ using TMPro;
 public class UIManager : Singleton<UIManager> 
 {
     // Static fields to store subject information
-    public static string subjectCode = "code";
+    public static string subjectName = "name";
     public static string subjectAge = "age";
     public static string subjectSex = "sex";
     public static string subjectHandedness = "handedness";
-    public static string subjectTennisExp = "tennisxp";
-    public static string subjectVRExp = "vrexp";
+    public static string subjectTennisExp = "tennis-exp";
+    public static string subjectVRExp = "vr-exp";
 
     // Public fields
-    public TMP_InputField codeInput;
+    public TMP_InputField nameInput;
     public TMP_InputField ageInput;
     public TMP_Dropdown sexDropdown;
     public TMP_Dropdown handednessDropdown;
-    public TMP_Dropdown TennisDropdown;
+    public TMP_Dropdown tennisDropdown;
     public TMP_Dropdown VRDropdown;
 
     // Read only fields
     [SerializeField, ReadOnly]
-    private bool _codeIsFilled;
+    private bool _nameIsFilled;
     [SerializeField, ReadOnly] 
     private bool _ageIsFilled;
     [SerializeField, ReadOnly] 
@@ -32,25 +32,26 @@ public class UIManager : Singleton<UIManager>
     [SerializeField, ReadOnly] 
     private bool _tennisExpIsSelected;
     [SerializeField, ReadOnly] 
-    private bool _vrExpIsSelected;
+    private bool _VRExpIsSelected;
 
     private void Update ()
     {
-	    if (_codeIsFilled && _ageIsFilled && _sexIsSelected && _handednessIsSelected && _tennisExpIsSelected && _vrExpIsSelected)
+	    if (_nameIsFilled && _ageIsFilled && _sexIsSelected && _handednessIsSelected && _tennisExpIsSelected && _VRExpIsSelected)
         {
-            subjectCode = codeInput.text;
+            subjectName = nameInput.text;
             subjectAge = ageInput.text;
-            subjectTennisExp = TennisDropdown.options[TennisDropdown.value].text;
-            subjectVRExp = VRDropdown.options[VRDropdown.value].text;
             subjectSex = sexDropdown.options[sexDropdown.value].text;
             subjectHandedness = handednessDropdown.options[handednessDropdown.value].text;
+            subjectTennisExp = tennisDropdown.options[tennisDropdown.value].text;
+            subjectVRExp = VRDropdown.options[VRDropdown.value].text;
+
             SceneManager.LoadScene("Main");
         }
 	}
 
     public void UpdateCode()
     {
-        _codeIsFilled = !string.IsNullOrEmpty(codeInput.text);
+        _nameIsFilled = !string.IsNullOrEmpty(nameInput.text);
     }
 
     public void UpdateAge()
@@ -69,11 +70,11 @@ public class UIManager : Singleton<UIManager>
 
     public void UpdateTennisExp()
     {
-        _tennisExpIsSelected = TennisDropdown.value > 0;
+        _tennisExpIsSelected = tennisDropdown.value > 0;
     }
 
     public void UpdateVRExp()
     {
-        _vrExpIsSelected = VRDropdown.value > 0;
+        _VRExpIsSelected = VRDropdown.value > 0;
     }
 }
