@@ -16,7 +16,10 @@ public class TaskManager : Singleton<TaskManager>
 
     // Public fields
     [Header("Task Settings")]
+    [Min(1)]
     public int trialsPerStage = 10;
+    [Min(.01f)]
+    public float interTrialInterval = 3;
 
     // Read only fields
     [SerializeField, ReadOnly]

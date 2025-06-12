@@ -228,17 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   _dataPath: C:/Users/flipe/AppData/LocalLow/DefaultCompany/VR-tennis\Data\Tracking
-  _trackers:
-  - {fileID: 312602756}
-  - {fileID: 79771059}
-  - {fileID: 945721297}
-  - {fileID: 1290058707}
-  - {fileID: 1365010225}
-  - {fileID: 1555938314}
-  - {fileID: 166106165}
-  - {fileID: 200473216}
-  - {fileID: 1361894310}
-  - {fileID: 1854824343}
+  _trackers: []
 --- !u!1 &19562536
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,17 +612,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1166073041}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &79771059 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3259352244687471260, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
-  m_PrefabInstance: {fileID: 1933173152}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &96196245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,7 +1025,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_lefthandanchor_2025-06-12_00-26-10.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_lefthandanchor_2025-06-12_00-56-21.csv
 --- !u!1 &179611561
 GameObject:
   m_ObjectHideFlags: 0
@@ -1446,7 +1425,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_centereyeanchor_2025-06-12_00-26-11.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_centereyeanchor_2025-06-12_00-56-21.csv
 --- !u!1 &203415850
 GameObject:
   m_ObjectHideFlags: 0
@@ -2389,17 +2368,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &312602756 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4059865396570719225, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
-  m_PrefabInstance: {fileID: 1933173152}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &319614282
 GameObject:
   m_ObjectHideFlags: 0
@@ -5983,17 +5951,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -3.5085695, y: 0.08475034, z: -0.17565808}
     m_Extent: {x: 0.10651159, y: 0.18774159, z: 0.45612463}
   m_DirtyAABB: 0
---- !u!114 &945721297 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4908714529883086994, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
-  m_PrefabInstance: {fileID: 1933173152}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &948738427
 GameObject:
   m_ObjectHideFlags: 0
@@ -7999,17 +7956,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1954163413}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1290058707 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7843026114750108742, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
-  m_PrefabInstance: {fileID: 1933173152}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1303262395
 GameObject:
   m_ObjectHideFlags: 0
@@ -8215,18 +8161,7 @@ MonoBehaviour:
   gizmoRadius: 0.05
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-12_00-26-11.csv
---- !u!114 &1365010225 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7663550768408559955, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
-  m_PrefabInstance: {fileID: 1933173152}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _fileName: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-12_00-56-21.csv
 --- !u!1 &1384270280
 GameObject:
   m_ObjectHideFlags: 0
@@ -9191,17 +9126,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.03454852, y: 0.0005114786, z: 0.00007304177}
     m_Extent: {x: 0.0009967163, y: 0.0020704702, z: 0.004453361}
   m_DirtyAABB: 0
---- !u!114 &1555938314 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1692753994715645107, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
-  m_PrefabInstance: {fileID: 1933173152}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1558315719
 GameObject:
   m_ObjectHideFlags: 0
@@ -11824,7 +11748,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_righthandanchor_2025-06-12_00-26-10.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_righthandanchor_2025-06-12_00-56-21.csv
 --- !u!1 &1857444598
 GameObject:
   m_ObjectHideFlags: 0
@@ -12147,6 +12071,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1692753994715645107, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: _fileName
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-12_00-57-01.csv
+      objectReference: {fileID: 0}
     - target: {fileID: 3248523182090798507, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.10415129
@@ -12187,14 +12115,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3259352244687471260, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: _fileName
+      value: name_age_sex_tennis-exp_vr-exp_racket-com_2025-06-12_00-57-01.csv
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059865396570719225, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: _fileName
+      value: name_age_sex_tennis-exp_vr-exp_racket-grip_2025-06-12_00-57-01.csv
+      objectReference: {fileID: 0}
     - target: {fileID: 4366985766323789496, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: m_Name
       value: Racket Rigidbody
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908714529883086994, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: _fileName
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-12_00-57-01.csv
       objectReference: {fileID: 0}
     - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: anchorTransform
       value: 
       objectReference: {fileID: 4339771046634355650}
+    - target: {fileID: 7663550768408559955, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: _fileName
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-12_00-57-01.csv
+      objectReference: {fileID: 0}
+    - target: {fileID: 7843026114750108742, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: _fileName
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-12_00-57-01.csv
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13206,63 +13154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84975edd3d3ce2443932b12b2cb6f57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &8973349291164844567
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 412416087285328335, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-      propertyPath: m_Name
-      value: Audio
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757754271029671441, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757754271029671441, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757754271029671441, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757754271029671441, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757754271029671441, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757754271029671441, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757754271029671441, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757754271029671441, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757754271029671441, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5757754271029671441, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -13280,4 +13171,3 @@ SceneRoots:
   - {fileID: 1787883654}
   - {fileID: 1933173152}
   - {fileID: 519827990}
-  - {fileID: 8973349291164844567}

@@ -119,6 +119,28 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &226319802 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3259352244687471260, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+  m_PrefabInstance: {fileID: 1417578496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &276463347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1692753994715645107, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+  m_PrefabInstance: {fileID: 1417578496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &414221359 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
@@ -163,7 +185,7 @@ MonoBehaviour:
   gizmoRadius: 0.05
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-11_23-53-40.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-12_12-07-22.csv
 --- !u!4 &454428204
 Transform:
   m_ObjectHideFlags: 0
@@ -177,8 +199,76 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 1749113138}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &745214539 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7843026114750108742, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+  m_PrefabInstance: {fileID: 1417578496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1054472120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1054472121}
+  - component: {fileID: 1054472122}
+  m_Layer: 0
+  m_Name: Application Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1054472121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054472120}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1054472122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054472120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1836fa94319e82428348d967ce724c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 1
+  targetFrameRate: 120
+--- !u!114 &1113017188 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4908714529883086994, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+  m_PrefabInstance: {fileID: 1417578496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1172934395
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +298,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1798329365}
+  - {fileID: 1925945907}
+  - {fileID: 1576162556}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1172934397
@@ -227,8 +320,55 @@ MonoBehaviour:
   net: {fileID: 1925945903}
   targetZone: {fileID: 1576162552}
   trialsPerStage: 3
+  interTrialInterval: 1.5
   _stageIndex: 0
   _trialIndex: 0
+--- !u!1 &1396866739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1396866741}
+  - component: {fileID: 1396866740}
+  m_Layer: 0
+  m_Name: Save System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1396866740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396866739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51bbf5eec6747be4bb80da5944fa941d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveData: 1
+  _dataPath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data
+--- !u!4 &1396866741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396866739}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1417578496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -239,7 +379,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1692753994715645107, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: code_age_sex_tennis-xp_vr-xp_racket-frame-top_2025-06-11_13-51-48.csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-12_10-03-05.csv
       objectReference: {fileID: 0}
     - target: {fileID: 3248523182090798507, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -283,11 +423,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3259352244687471260, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: code_age_sex_tennis-xp_vr-xp_racket-com_2025-06-11_13-51-48.csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-com_2025-06-12_10-03-05.csv
       objectReference: {fileID: 0}
     - target: {fileID: 4059865396570719225, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: code_age_sex_tennis-xp_vr-xp_racket-grip_2025-06-11_13-51-48.csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-grip_2025-06-12_10-03-05.csv
       objectReference: {fileID: 0}
     - target: {fileID: 4366985766323789496, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: m_Name
@@ -295,7 +435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4908714529883086994, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: code_age_sex_tennis-xp_vr-xp_racket-frame-base_2025-06-11_13-51-48.csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-12_10-03-05.csv
       objectReference: {fileID: 0}
     - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: anchorTransform
@@ -303,11 +443,11 @@ PrefabInstance:
       objectReference: {fileID: 2008402079}
     - target: {fileID: 7663550768408559955, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: code_age_sex_tennis-xp_vr-xp_racket-frame-left_2025-06-11_13-51-48.csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-12_10-03-05.csv
       objectReference: {fileID: 0}
     - target: {fileID: 7843026114750108742, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: code_age_sex_tennis-xp_vr-xp_racket-frame-right_2025-06-11_13-51-48.csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-12_10-03-05.csv
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -464,7 +604,6 @@ MonoBehaviour:
   linearSpeed: 12.5
   topSpin: 100
   sideSpin: 0
-  spawnInterval: 2
   onBallSpawn:
     m_PersistentCalls:
       m_Calls:
@@ -591,7 +730,7 @@ Transform:
   m_GameObject: {fileID: 1566786339}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: -3}
+  m_LocalPosition: {x: 0, y: 0.15, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -653,6 +792,7 @@ GameObject:
   - component: {fileID: 1576162555}
   - component: {fileID: 1576162554}
   - component: {fileID: 1576162553}
+  - component: {fileID: 1576162557}
   m_Layer: 0
   m_Name: Pseudo Zone
   m_TagString: Untagged
@@ -742,13 +882,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576162552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.17699999, y: 0.476, z: -0.206}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1172934396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1576162557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576162552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f430bdc0d3866004eb9bcca58d0f5be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1665505046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -835,9 +987,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb16bd99a4448544a7c8e1c4602f624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveData: 1
-  _dataPath: C:/Users/flipe/AppData/LocalLow/DefaultCompany/VR-tennis\Data\Tracking
-  _trackers: []
+  _trackers:
+  - {fileID: 1997368631}
+  - {fileID: 1113017188}
+  - {fileID: 276463347}
+  - {fileID: 2013558584}
+  - {fileID: 745214539}
+  - {fileID: 454428203}
+  - {fileID: 226319802}
+  _expectedDataCount: 1575
 --- !u!4 &1749113138
 Transform:
   m_ObjectHideFlags: 0
@@ -850,7 +1008,8 @@ Transform:
   m_LocalPosition: {x: -0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 454428204}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1798329361
@@ -935,12 +1094,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798329361}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1172934396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1798329367
 Rigidbody:
@@ -1225,12 +1384,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925945903}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1172934396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1925945908
 MonoBehaviour:
@@ -1244,6 +1403,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f430bdc0d3866004eb9bcca58d0f5be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1997368631 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7663550768408559955, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+  m_PrefabInstance: {fileID: 1417578496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2008402079 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4339771048274739424, guid: 442fb9cfd547b414291482b2310dbf14, type: 3}
@@ -1255,19 +1425,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84975edd3d3ce2443932b12b2cb6f57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2013558584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4059865396570719225, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+  m_PrefabInstance: {fileID: 1417578496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1566786342}
+  - {fileID: 1807529658}
+  - {fileID: 1054472121}
+  - {fileID: 1396866741}
   - {fileID: 1534334721}
   - {fileID: 1749113138}
   - {fileID: 1172934396}
-  - {fileID: 1566786342}
-  - {fileID: 1807529658}
-  - {fileID: 1798329365}
-  - {fileID: 1559592743}
-  - {fileID: 454428204}
   - {fileID: 1665505046}
   - {fileID: 1417578496}
-  - {fileID: 1925945907}
-  - {fileID: 1576162556}
+  - {fileID: 1559592743}

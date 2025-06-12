@@ -8,6 +8,11 @@ public class FeedbackBhv : CachedTransformBhv
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (this.enabled == false)
+        {
+            return;
+        }
+
         if (((1 << collision.gameObject.layer) & layerMask) != 0)
         {
             this.Play(collision);

@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class ObjectPool<T> where T : CachedGameObjectBhv
 {
-    private readonly Queue<T> _pool = new Queue<T>();
+    private readonly Queue<T> _pool;
 
-    public ObjectPool(T prefab, int poolSize)
+    public ObjectPool(T prefab, int poolSize, Vector3? position = null)
     {
+        this._pool = new Queue<T>(poolSize);
+
         string parentName = $"{prefab.name} Pool";
 
         GameObject parentGameObject = GameObject.Find(parentName);
@@ -18,9 +20,11 @@ public class ObjectPool<T> where T : CachedGameObjectBhv
             parentGameObject = new GameObject(parentName);
         }
 
+        Vector3 spawnPosition = position ?? Vector3.zero;
+
         for (int i = 0; i < poolSize; i++)
         {
-            T obj = GameObject.Instantiate(prefab, parent: parentGameObject.transform);
+            T obj = GameObject.Instantiate(prefab, spawnPosition, Quaternion.identity, parent: parentGameObject.transform);
 
             obj.Active = false;
 

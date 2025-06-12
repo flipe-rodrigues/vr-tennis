@@ -187,7 +187,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: code_age_sex_tennis-xp_vr-xp_racket-frame-base_2025-06-11_13-51-48.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-12_00-57-01.csv
 --- !u!1 &4184398871533583225
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: code_age_sex_tennis-xp_vr-xp_racket-grip_2025-06-11_13-51-48.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-grip_2025-06-12_00-57-01.csv
 --- !u!1 &4366985766323789496
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +370,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  audioPrefab: {fileID: 4532499111118335401, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
+  audioPoolSize: 5
   audioClip: {fileID: 8300000, guid: 07da7da66278ccd4a89aad68ada93639, type: 3}
   volumeModifier: 0.05
 --- !u!114 &1151733698388262989
@@ -447,7 +449,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: code_age_sex_tennis-xp_vr-xp_racket-frame-right_2025-06-11_13-51-48.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-12_00-57-01.csv
 --- !u!1 &4837998024061670508
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +498,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: code_age_sex_tennis-xp_vr-xp_racket-com_2025-06-11_13-51-48.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-com_2025-06-12_00-57-01.csv
 --- !u!1 &6836273951096070836
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,7 +584,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: code_age_sex_tennis-xp_vr-xp_racket-frame-top_2025-06-11_13-51-48.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-12_00-57-01.csv
 --- !u!1 &7620714560613135057
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,4 +773,4 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: code_age_sex_tennis-xp_vr-xp_racket-frame-left_2025-06-11_13-51-48.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-12_00-57-01.csv

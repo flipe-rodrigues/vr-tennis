@@ -1,20 +1,35 @@
 using Oculus.Interaction;
+using System.Collections;
 using UnityEngine;
 
 public class AudioFeedbackBhv : FeedbackBhv
 {
     // Public fields
+    public AudioBhv audioPrefab;
+    [Range(0, 100)]
+    public int audioPoolSize = 10;
     public AudioClip audioClip;
     [Range(0, 1)]
     public float volumeModifier = .1f;
 
     // Private fields
-    private ObjectPool<AudioSource> _audioSource;
+    private ObjectPool<AudioBhv> _audioPool;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (audioClip == null)
+        {
+            return;
+        }
+
+        _audioPool = new ObjectPool<AudioBhv>(audioPrefab, audioPoolSize);
+    }
 
     public override void Play(float relativeSpeed)
     {
         Vector3 position = TennisManager.Instance.Ball.Position;
-
         float baseVolume = Mathf.Clamp(relativeSpeed * volumeModifier, 0, 1);
 
         this.PlayClipAtPoint(position, relativeSpeed, baseVolume);
@@ -23,9 +38,7 @@ public class AudioFeedbackBhv : FeedbackBhv
     protected override void Play(Collision collision)
     {
         Vector3 position = collision.GetContact(0).point;
-
         float relativeSpeed = collision.relativeVelocity.magnitude;
-
         float baseVolume = Mathf.Clamp(relativeSpeed * volumeModifier, 0, 1);
 
         this.PlayClipAtPoint(position, relativeSpeed, baseVolume);
@@ -38,25 +51,14 @@ public class AudioFeedbackBhv : FeedbackBhv
             return;
         }
 
-        // Create temporary GameObject
-        GameObject gameObject = new GameObject($"One Shot Audio ({audioClip.name})");
-        gameObject.transform.position = position;
+        AudioBhv audio = _audioPool.Get(activate: true);
 
-        // Add AudioSource component
-        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.clip = audioClip;
-        audioSource.spatialize = true;
-        audioSource.spatialBlend = 1.0f;
-        audioSource.dopplerLevel = 0.5f;
+        audio.Position = position;
 
-        // Add natural variation
-        audioSource.pitch = Random.Range(0.9f, 1.1f) ;
-        audioSource.volume = baseVolume * Random.Range(0.95f, 1.05f);
+        audio.Source.clip = audioClip;
+        audio.Source.pitch = Random.Range(0.9f, 1.1f);
+        audio.Source.volume = baseVolume * Random.Range(0.95f, 1.05f);
 
-        // Play the audio clip
-        audioSource.Play();
-
-        // Destroy after clip finishes
-        Destroy(gameObject, audioClip.length);
+        audio.PlayAndReturnTo(_audioPool);
     }
 }

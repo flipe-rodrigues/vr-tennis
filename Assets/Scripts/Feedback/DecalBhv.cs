@@ -13,6 +13,7 @@ public class DecalBhv : CachedTransformBhv
 
     // Private fields
     private MeshRenderer _meshRenderer;
+    private Material _material;
 
     private void OnValidate()
     {
@@ -24,6 +25,8 @@ public class DecalBhv : CachedTransformBhv
         base.Awake();
 
         _meshRenderer = this.MeshRenderer;
+
+        _material = _meshRenderer.material;
     }
 
     public void FadeAndReturnTo(ObjectPool<DecalBhv> pool)
@@ -37,11 +40,11 @@ public class DecalBhv : CachedTransformBhv
 
         while (lerp < 1)
         {
-            lerp += Time.deltaTime / lifetime;
+            lerp += Time.fixedDeltaTime / lifetime;
 
-            _meshRenderer.material.color = Color.Lerp(initialColor, Color.clear, lerp);
+            _material.color = Color.Lerp(initialColor, Color.clear, lerp);
 
-            yield return new WaitForUpdate();
+            yield return ApplicationManager.waitForFixedUpdateInstance;
         }
 
         pool.Return(this, deactivate: true);

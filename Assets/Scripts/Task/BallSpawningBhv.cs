@@ -13,12 +13,12 @@ public class BallSpawningBhv : CachedTransformBhv
     public float topSpin = 0f;
     [Range(-500, 500)]
     public float sideSpin = 0f;
-    public float spawnInterval = 5f;
     public UnityEvent onBallSpawn = new UnityEvent();
 
     // Private fields
     private ObjectPool<BallRigidbodyBhv> _ballPool;
     private BallRigidbodyBhv _currentBall;
+    private float _lastSpawnTime;
 
     protected override void Awake()
     {
@@ -29,13 +29,13 @@ public class BallSpawningBhv : CachedTransformBhv
             return;
         }
 
-        _ballPool = new ObjectPool<BallRigidbodyBhv>(ballPrefab, ballPoolSize);
+        _ballPool = new ObjectPool<BallRigidbodyBhv>(ballPrefab, ballPoolSize, this.Position);
     }
 
     private void Start()
     {
         // Should not be here.. but for now we record the metadata here
-        if (TrackingManager.Instance.saveData)
+        if (SaveSystem.Instance.saveData)
         {
             this.RecordMetaData();
         }
@@ -44,7 +44,7 @@ public class BallSpawningBhv : CachedTransformBhv
     // Should not be here.. but for now we record the metadata here
     private void RecordMetaData()
     {
-        TrackingManager.Instance.RecordEvent($"ball-spawner-interval-{spawnInterval}");
+        TrackingManager.Instance.RecordEvent($"ball-spawner-interval-{TaskManager.Instance.interTrialInterval}");
         TrackingManager.Instance.RecordEvent($"ball-spawner-position-{this.Position}");
         TrackingManager.Instance.RecordEvent($"ball-spawner-rotation-{this.Rotation}");
         TrackingManager.Instance.RecordEvent($"ball-initial-velocity-{linearSpeed}");
@@ -54,11 +54,13 @@ public class BallSpawningBhv : CachedTransformBhv
 
     private void Update()
     {
-        if (Time.time % spawnInterval < Time.deltaTime)
+        if (Time.time - _lastSpawnTime >= TaskManager.Instance.interTrialInterval && TrackingManager.Instance.IsSaving == false)
         {
             this.SpawnBall();
 
             onBallSpawn.Invoke();
+
+            _lastSpawnTime = Time.time;
         }
     }
 

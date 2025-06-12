@@ -1,12 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 using System.IO;
-using System.Linq;
-using UnityEditor.Overlays;
-using Unity.XR.CoreUtils.Datums;
 
 public class TrackingBhv : CachedTransformBhv
 {
+    // Public properties
+    public bool IsSaving => _isSaving;
+
     // Public fields
     public Color gizmoColor = Color.red;
     [Min(.001f)]
@@ -19,17 +20,20 @@ public class TrackingBhv : CachedTransformBhv
     // Read only fields
     [SerializeField, ReadOnly]
     private string _fileName;
-    private string _filePath;
+    [SerializeField, ReadOnly]
+    private bool _isSaving;
 
     // Private fields
-    private List<TrackingDatum> _trackingData = new List<TrackingDatum>();
+    private List<TrackingDatum> _trackingData;
     private StreamWriter _fileWriter;
+    private string _filePath;
 
     private void OnValidate()
     {
         _fileName = this.GetFileName();
     }
 
+    // MOVE ELSEWHERE!!!!!!!!!!!!!!!!!!!!!!!
     private string GetFileName()
     {
         return string.Concat(
@@ -39,20 +43,22 @@ public class TrackingBhv : CachedTransformBhv
             UIManager.subjectTennisExp, "_",
             UIManager.subjectVRExp, "_",
             this.name.ToLower().Replace(" ", "-"), "_",
-            TrackingManager.GetFormattedTimestamp(),
+            SaveSystem.GetFormattedTimestamp(),
             ".csv");
     }
 
     private void Start()
     {
-        _filePath = Path.Combine(TrackingManager.Instance.DataPath, _fileName);
+        _filePath = Path.Combine(SaveSystem.dataPath, _fileName);
 
-        if (TrackingManager.Instance.saveData)
+        if (SaveSystem.Instance.saveData)
         {
             _fileWriter = File.CreateText(_filePath);
 
             _fileWriter.WriteLine(TrackingDatum.header);
         }
+
+        _trackingData = new List<TrackingDatum>(TrackingManager.Instance.ExpectedDataSize);
     }
 
     private void FixedUpdate()
@@ -67,14 +73,19 @@ public class TrackingBhv : CachedTransformBhv
 
     public void RecordEvent(string eventName)
     {
-        TrackingDatum datum = new TrackingDatum(
-            stage: TaskManager.Instance.StageIndex,
-            trial: TaskManager.Instance.TrialIndex,
-            time: Time.time,
-            position: this.Position,
-            rotation: this.Rotation,
-            eventName: eventName
-        );
+        if (_isSaving)
+        {
+            return;
+        }
+
+        TrackingDatum datum = new TrackingDatum {
+            stage = TaskManager.Instance.StageIndex,
+            trial = TaskManager.Instance.TrialIndex,
+            time = Time.time,
+            position = this.Position,
+            rotation = this.Rotation,
+            eventName = eventName
+        };
 
         _trackingData.Add(datum);
     }
@@ -86,11 +97,27 @@ public class TrackingBhv : CachedTransformBhv
             return;
         }
 
+        this.StartCoroutine(SaveAndClearCoroutine());
+    }
+
+    private IEnumerator SaveAndClearCoroutine()
+    {
+        _isSaving = true;
+
         foreach (TrackingDatum datum in _trackingData)
         {
             _fileWriter.WriteLine(datum.Serialize());
+
+            yield return ApplicationManager.waitForFixedUpdateInstance;
         }
 
+        _isSaving = false;
+
+        this.Clear();
+    }
+
+    public void Clear()
+    {
         _trackingData.Clear();
     }
 
