@@ -8,7 +8,7 @@ public class CachedRigidbodyBhv : CachedTransformBhv
     public Vector3 AngularVelocity { get { return this.Rigidbody.angularVelocity; } set { this.Rigidbody.angularVelocity = value; } }
 
     // Private properties
-    private Rigidbody Rigidbody => _rigidbody == null ? GetComponent<Rigidbody>() : _rigidbody;
+    protected Rigidbody Rigidbody => _rigidbody == null ? GetComponent<Rigidbody>() : _rigidbody;
 
     // Public fields
     public float maxAngularVelocity = 50;

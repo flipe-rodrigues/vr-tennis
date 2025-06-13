@@ -122,6 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d4dd661d9115044927d3c61f73eb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
   scaleModifier: {x: 0.25, y: 0.25, z: 0.1}
   maxScaleFactor: 5
   smoothingTimeConstant: 0.1
@@ -183,11 +186,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
   gizmoColor: {r: 0, g: 1, b: 1, a: 1}
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-12_00-57-01.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-13_06-51-40..csv
+  _isSaving: 0
 --- !u!1 &4184398871533583225
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,11 +239,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
   gizmoColor: {r: 1, g: 1, b: 1, a: 1}
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-grip_2025-06-12_00-57-01.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-grip_2025-06-13_06-51-40..csv
+  _isSaving: 0
 --- !u!1 &4366985766323789496
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0023f5c07d366c740ba4771e28c0a810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
   maxAngularVelocity: 50
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
@@ -367,6 +381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858c103e0df2f524a90cefbdb308a504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0.25, y: 0.24999994, z: -0.51416355}
+  _rotation: {x: 25, y: 270, z: 90}
+  _scale: {x: 0.75, y: 0.75, z: 0.75}
   layerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -445,11 +462,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
   gizmoColor: {r: 0, g: 1, b: 1, a: 1}
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-12_00-57-01.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-13_06-51-40..csv
+  _isSaving: 0
 --- !u!1 &4837998024061670508
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,11 +515,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
   gizmoColor: {r: 0, g: 0, b: 0, a: 1}
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-com_2025-06-12_00-57-01.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-com_2025-06-13_06-51-40..csv
+  _isSaving: 0
 --- !u!1 &6836273951096070836
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,11 +605,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
   gizmoColor: {r: 0, g: 1, b: 1, a: 1}
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-12_00-57-01.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-13_06-51-40..csv
+  _isSaving: 0
 --- !u!1 &7620714560613135057
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,6 +737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d4dd661d9115044927d3c61f73eb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
   scaleModifier: {x: 0.5, y: 0.5, z: 10}
   maxScaleFactor: 1
   smoothingTimeConstant: 0.01
@@ -769,8 +801,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
   gizmoColor: {r: 0, g: 1, b: 1, a: 1}
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-12_00-57-01.csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-13_06-51-40..csv
+  _isSaving: 0

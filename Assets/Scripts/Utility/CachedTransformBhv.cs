@@ -14,6 +14,21 @@ public class CachedTransformBhv : CachedGameObjectBhv
     // Private fields
     private Transform _transform;
 
+    // Read only fields
+    [SerializeField, ReadOnly]
+    private Vector3 _position;
+    [SerializeField, ReadOnly]
+    private Vector3 _rotation;
+    [SerializeField, ReadOnly]
+    private Vector3 _scale;
+
+    private void OnValidate()
+    {
+        _position = this.Transform.position;
+        _rotation = this.Transform.eulerAngles;
+        _scale = this.Transform.localScale;
+    }
+
     protected override void Awake()
     {
         base.Awake();

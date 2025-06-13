@@ -5,7 +5,6 @@ using System.Linq;
 public class TrackingManager : Singleton<TrackingManager>
 {
     // Public properties
-    public int ExpectedDataSize => _expectedDataCount;
     public bool IsSaving => _trackers.Any(tracker => tracker.IsSaving);
 
     // Read only fields
@@ -26,13 +25,18 @@ public class TrackingManager : Singleton<TrackingManager>
         base.Awake();
 
         this.OnValidate();
+
+        foreach (var tracker in _trackers)
+        {
+            tracker.InitializeDataList(_expectedDataCount);
+        }
     }
 
     public void SaveAndClear()
     {
         foreach (var tracker in _trackers)
         {
-            if (SaveSystem.Instance.saveData)
+            if (DataManager.Instance.saveData)
             {
                 tracker.SaveAndClear();
             }
@@ -45,7 +49,7 @@ public class TrackingManager : Singleton<TrackingManager>
 
     public void RecordEvent(string eventName) 
     {
-        if (!SaveSystem.Instance.saveData)
+        if (!DataManager.Instance.saveData)
         {
             return;
         }

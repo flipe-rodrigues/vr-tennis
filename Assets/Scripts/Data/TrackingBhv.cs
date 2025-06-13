@@ -30,35 +30,24 @@ public class TrackingBhv : CachedTransformBhv
 
     private void OnValidate()
     {
-        _fileName = this.GetFileName();
-    }
-
-    // MOVE ELSEWHERE!!!!!!!!!!!!!!!!!!!!!!!
-    private string GetFileName()
-    {
-        return string.Concat(
-            UIManager.subjectName, "_",
-            UIManager.subjectAge, "_",
-            UIManager.subjectSex, "_",
-            UIManager.subjectTennisExp, "_",
-            UIManager.subjectVRExp, "_",
-            this.name.ToLower().Replace(" ", "-"), "_",
-            SaveSystem.GetFormattedTimestamp(),
-            ".csv");
+        _fileName = DataManager.GetFileName(this.name);
     }
 
     private void Start()
     {
-        _filePath = Path.Combine(SaveSystem.dataPath, _fileName);
+        _filePath = Path.Combine(DataManager.dataPath, _fileName);
 
-        if (SaveSystem.Instance.saveData)
+        if (DataManager.Instance.saveData)
         {
             _fileWriter = File.CreateText(_filePath);
 
             _fileWriter.WriteLine(TrackingDatum.header);
         }
+    }
 
-        _trackingData = new List<TrackingDatum>(TrackingManager.Instance.ExpectedDataSize);
+    public void InitializeDataList(int expectedDataSize)
+    {
+        _trackingData = new List<TrackingDatum>(expectedDataSize);
     }
 
     private void FixedUpdate()

@@ -26,7 +26,14 @@ public class AudioBhv : CachedTransformBhv
     {
         _audioSource.Play();
 
-        yield return new WaitForSeconds(_audioSource.clip.length);
+        float timer = 0f;
+
+        while (timer < _audioSource.clip.length)
+        {
+            timer += Time.fixedDeltaTime;
+
+            yield return ApplicationManager.waitForFixedUpdateInstance;
+        }
 
         pool.Return(this, deactivate: true);
     }

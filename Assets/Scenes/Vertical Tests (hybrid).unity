@@ -150,11 +150,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b18db8115ce9ca418a183c43b19de79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: -0.2, y: 2.54, z: 0.35}
+  _rotation: {x: 90, y: 90, z: 0}
+  _scale: {x: 0.25, y: 0.25, z: 0.05}
   ballPrefab: {fileID: 1256145129520494433, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
+  ballPoolSize: 10
   linearSpeed: 0
   topSpin: 0
   sideSpin: 0
-  spawnInterval: 5
+  onBallSpawn:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!23 &38902035
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -253,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ball: {fileID: 0}
-  _racket: {fileID: 874496987}
+  _racket: {fileID: 1735910228}
 --- !u!4 &159007198
 Transform:
   m_ObjectHideFlags: 0
@@ -395,16 +401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59730107cc4c06f40a204df5665c788e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAngularVelocity: 50
-  _linearVelocity: {x: 0, y: 0, z: 0}
-  _angularVelocity: {x: 0, y: 0, z: 0}
-  connectedTransform: {fileID: 1673063255}
-  apparentNormalRestitution: 0.4
-  apparentTangentialRestitution: 0.65
-  apparentSpinRestitution: 0.4
-  spinToTangentialConversion: 0.3
-  tangentialToSpinConversion: 0.58
-  refractoryPeriod: 0.1
 --- !u!54 &874496988
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -597,7 +593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcd2bd3c89cf9844961952ec0333438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectedRigidbody: {fileID: 1735910228}
 --- !u!1 &1219154973
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,7 +611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1219154974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,11 +624,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b18db8115ce9ca418a183c43b19de79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 1256145129520494433, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
+  _position: {x: 0.2, y: 2.54, z: 0.35}
+  _rotation: {x: 90, y: 90, z: 0}
+  _scale: {x: 0.25, y: 0.25, z: 0.05}
+  ballPrefab: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
+  ballPoolSize: 10
   linearSpeed: 0
   topSpin: 0
   sideSpin: 0
-  spawnInterval: 5
+  onBallSpawn:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!23 &1219154975
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -839,6 +840,52 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1629687310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1629687312}
+  - component: {fileID: 1629687311}
+  m_Layer: 0
+  m_Name: Application Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1629687311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629687310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1836fa94319e82428348d967ce724c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 0.118
+  targetFrameRate: 120
+--- !u!4 &1629687312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629687310}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1654470010
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,7 +962,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcd2bd3c89cf9844961952ec0333438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectedRigidbody: {fileID: 874496987}
 --- !u!4 &1673063256
 Transform:
   m_ObjectHideFlags: 0
@@ -1051,10 +1097,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0023f5c07d366c740ba4771e28c0a810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
   maxAngularVelocity: 50
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
-  connectedTransform: {fileID: 1212676729}
+  anchorTransform: {fileID: 0}
+  apparentNormalRestitution: 0.4
+  apparentTangentialRestitution: 0.65
+  apparentSpinRestitution: 0.4
+  spinToTangentialConversion: 0.3
+  tangentialToSpinConversion: 0.58
+  refractoryPeriod: 0.05
+  smoothingTimeConstant: 0.01
+  onRacketHit:
+    m_PersistentCalls:
+      m_Calls: []
+  _smoothingRate: 0.09516257
+  _numFrames: 10
 --- !u!114 &1735910229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1424,6 +1485,7 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1629687312}
   - {fileID: 159007198}
   - {fileID: 1566786342}
   - {fileID: 1807529658}

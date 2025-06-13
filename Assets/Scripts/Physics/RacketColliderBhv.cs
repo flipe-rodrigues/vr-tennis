@@ -64,7 +64,14 @@ public class RacketColliderBhv : CachedTransformBhv
 
         _collider.enabled = false;
 
-        yield return new WaitForSecondsRealtime(TennisManager.Instance.Racket.refractoryPeriod);
+        float timer = 0f;
+
+        while (timer < TennisManager.Instance.Racket.refractoryPeriod)
+        {
+            timer += Time.fixedDeltaTime;
+
+            yield return ApplicationManager.waitForFixedUpdateInstance;
+        }
 
         _meshRenderer.enabled = true;
 

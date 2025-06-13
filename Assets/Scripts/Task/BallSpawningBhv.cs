@@ -18,7 +18,7 @@ public class BallSpawningBhv : CachedTransformBhv
     // Private fields
     private ObjectPool<BallRigidbodyBhv> _ballPool;
     private BallRigidbodyBhv _currentBall;
-    private float _lastSpawnTime;
+    private float _lastSpawnTime = -Mathf.Infinity;
 
     protected override void Awake()
     {
@@ -30,26 +30,6 @@ public class BallSpawningBhv : CachedTransformBhv
         }
 
         _ballPool = new ObjectPool<BallRigidbodyBhv>(ballPrefab, ballPoolSize, this.Position);
-    }
-
-    private void Start()
-    {
-        // Should not be here.. but for now we record the metadata here
-        if (SaveSystem.Instance.saveData)
-        {
-            this.RecordMetaData();
-        }
-    }
-
-    // Should not be here.. but for now we record the metadata here
-    private void RecordMetaData()
-    {
-        TrackingManager.Instance.RecordEvent($"ball-spawner-interval-{TaskManager.Instance.interTrialInterval}");
-        TrackingManager.Instance.RecordEvent($"ball-spawner-position-{this.Position}");
-        TrackingManager.Instance.RecordEvent($"ball-spawner-rotation-{this.Rotation}");
-        TrackingManager.Instance.RecordEvent($"ball-initial-velocity-{linearSpeed}");
-        TrackingManager.Instance.RecordEvent($"ball-initial-topspin-{topSpin}");
-        TrackingManager.Instance.RecordEvent($"ball-initial-sidespin-{sideSpin}");
     }
 
     private void Update()

@@ -3,9 +3,11 @@
 public class BallRigidbodyBhv : CachedRigidbodyBhv
 {
     // Public properties
-    public float Radius => _radius;
+    public float Radius => radius;
 
     // Public fields
+    public float mass = 0.057f; // kg (standard tennis ball mass)
+    public float radius = 0.033f; // m (standard tennis ball radius)
     public float airDensity = 1.225f; // kg/m³ at sea level
 
     // Read only fields
@@ -17,17 +19,22 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
     private float _spinDecayRate;
 
     // Private fields
-    private float _radius;
     private float _crossSectionalArea;
     private float _V;
     private float _W;
+
+    private void OnValidate()
+    {
+        this.Scale = Vector3.one * radius * 2f;
+
+        this.Rigidbody.mass = mass;
+    }
 
     protected override void Start()
     {
         base.Start();
 
-        _radius = transform.localScale.magnitude / 2f;
-        _crossSectionalArea = Mathf.PI * _radius * _radius;
+        _crossSectionalArea = Mathf.PI * radius * radius;
     }
 
     protected override void FixedUpdate()
@@ -51,7 +58,7 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
         }
 
         // From Robinson & Robinson 2018
-        _dragCoefficient = 0.6204f - 9.76e-4f * (_V - 50) + (1.027e-4f - 2.24e-6f * (_V - 50)) * _W;
+        _dragCoefficient = 0.6204f - 9.76e-4f * (_V - 50f) + (1.027e-4f - 2.24e-6f * (_V - 50f)) * _W;
 
         // Calculate drag force: Fd = (1/2) * ρ * A * Cd * V * v
         Vector3 dragForce = -0.5f * airDensity * _crossSectionalArea * _dragCoefficient * _V * this.LinearVelocity;
@@ -78,7 +85,7 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
     private void UpdateBuoyancy()
     {
         // Calculate buoyancy force: Fb = (4/3) * π * r³ * ρ * g
-        Vector3 buoyancyForce = 4 / 3 * Mathf.PI * Mathf.Pow(_radius, 3) * airDensity * Physics.gravity;
+        Vector3 buoyancyForce = 4f / 3f * Mathf.PI * Mathf.Pow(radius, 3f) * airDensity * Physics.gravity;
 
         this.AddForce(buoyancyForce);
     }
@@ -91,7 +98,7 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
         }
 
         // From Robinson & Robinson 2018
-        _spinDecayRate = Mathf.Exp(-Time.fixedDeltaTime / (164 / _V));
+        _spinDecayRate = Mathf.Exp(-Time.fixedDeltaTime / (164f / _V));
 
         this.AngularVelocity *= _spinDecayRate;
     }
