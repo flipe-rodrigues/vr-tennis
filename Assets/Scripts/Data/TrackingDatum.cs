@@ -12,10 +12,10 @@ public struct TrackingDatum
     public float time;
     public Vector3 position;
     public Quaternion rotation;
-    public string eventName;
+    public TaskEventType taskEvent;
 
     public string Serialize()
     {
-        return $"{stage},{trial},{time},{position.x},{position.y},{position.z},{rotation.x},{rotation.y},{rotation.z},{rotation.w},{eventName}";
+        return $"{stage},{trial},{time},{position.x},{position.y},{position.z},{rotation.x},{rotation.y},{rotation.z},{rotation.w},{taskEvent.GetName()}";
     }
 }

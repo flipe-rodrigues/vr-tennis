@@ -74,7 +74,7 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
         }
 
         // From Robinson & Robinson 2018
-        _liftCoefficient = (4.68e-4f - 2.0984e-5f * (_V - 50)) * _W;
+        _liftCoefficient = (4.68e-4f - 2.0984e-5f * (_V - 50f)) * _W;
 
         // Calculate lift force: Fl = (1/2) * ρ * A * Cl * V * (w x v) / W
         Vector3 liftForce = 0.5f * airDensity * _crossSectionalArea * _liftCoefficient * _V * Vector3.Cross(this.AngularVelocity, this.LinearVelocity) / _W;

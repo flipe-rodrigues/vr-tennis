@@ -12,8 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Main (openXR).unity
     guid: 301a6e83d5933fe489a62eaba95975d3
   - enabled: 1
-    path: Assets/Scenes/Main (metaXR hybrid).unity
+    path: Assets/Scenes/Main.unity
     guid: 664ff57fc33a874429373b2ce7f0e201
+  - enabled: 0
+    path: Assets/Scenes/Horizontal Tests (hybrid).unity
+    guid: 81f0b0a66a51dfa44a03cd2e01c62fda
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}

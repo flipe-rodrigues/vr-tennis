@@ -11,6 +11,10 @@ public class AudioFeedbackBhv : FeedbackBhv
     public AudioClip audioClip;
     [Range(0, 1)]
     public float volumeModifier = .1f;
+    [Range(0, 1)]
+    public float volumeVariationRange = .1f;
+    [Range(0, 1)]
+    public float pitchVariationRange = .2f;
 
     // Private fields
     private ObjectPool<AudioBhv> _audioPool;
@@ -56,8 +60,8 @@ public class AudioFeedbackBhv : FeedbackBhv
         audio.Position = position;
 
         audio.Source.clip = audioClip;
-        audio.Source.pitch = Random.Range(0.9f, 1.1f);
-        audio.Source.volume = baseVolume * Random.Range(0.95f, 1.05f);
+        audio.Source.pitch = Random.Range(1 - pitchVariationRange / 2f, 1 + pitchVariationRange / 2f);
+        audio.Source.volume = baseVolume * Random.Range(1 - volumeVariationRange / 2f, 1 + volumeVariationRange / 2f);
 
         audio.PlayAndReturnTo(_audioPool);
     }

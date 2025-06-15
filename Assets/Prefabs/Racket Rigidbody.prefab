@@ -193,7 +193,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-13_06-51-40..csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-14_05-35-24..csv
   _isSaving: 0
 --- !u!1 &4184398871533583225
 GameObject:
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 325918767049802871}
   - component: {fileID: 4059865396570719225}
   m_Layer: 6
-  m_Name: Racket Grip
+  m_Name: Racket Grip Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-grip_2025-06-13_06-51-40..csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-grip-base_2025-06-14_05-35-24..csv
   _isSaving: 0
 --- !u!1 &4366985766323789496
 GameObject:
@@ -391,6 +391,8 @@ MonoBehaviour:
   audioPoolSize: 5
   audioClip: {fileID: 8300000, guid: 07da7da66278ccd4a89aad68ada93639, type: 3}
   volumeModifier: 0.05
+  volumeVariationRange: 0.1
+  pitchVariationRange: 0.2
 --- !u!114 &1151733698388262989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,7 +471,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-13_06-51-40..csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-14_05-35-24..csv
   _isSaving: 0
 --- !u!1 &4837998024061670508
 GameObject:
@@ -482,7 +484,7 @@ GameObject:
   - component: {fileID: 7948062174993275090}
   - component: {fileID: 3259352244687471260}
   m_Layer: 6
-  m_Name: Racket COM
+  m_Name: Racket Stringbed Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -522,7 +524,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-com_2025-06-13_06-51-40..csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-stringbed-center_2025-06-14_05-35-24..csv
   _isSaving: 0
 --- !u!1 &6836273951096070836
 GameObject:
@@ -612,7 +614,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-13_06-51-40..csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-14_05-35-24..csv
   _isSaving: 0
 --- !u!1 &7620714560613135057
 GameObject:
@@ -808,5 +810,5 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-13_06-51-40..csv
+  _fileName: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-14_05-35-24..csv
   _isSaving: 0

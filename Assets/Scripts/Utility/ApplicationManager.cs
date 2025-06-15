@@ -11,8 +11,10 @@ public class ApplicationManager : Singleton<ApplicationManager>
     public float timeScale = 1f;
     public int targetFrameRate = 120;
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
+
         Time.timeScale = timeScale;
 
         Application.targetFrameRate = targetFrameRate;

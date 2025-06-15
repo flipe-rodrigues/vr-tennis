@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -24,6 +25,14 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
             return _instance;
         }
+    }
+    protected virtual void OnValidate()
+    {
+        string className = this.GetType().Name;
+
+        string spacedName = Regex.Replace(className, "(?<!^)([A-Z])", " $1");
+
+        this.name = spacedName;
     }
 
     protected virtual void Awake()

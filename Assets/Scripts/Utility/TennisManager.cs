@@ -36,8 +36,10 @@ public class TennisManager : Singleton<TennisManager>
     [SerializeField, ReadOnly]
     private RacketRigidbodyBhv _racket;
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
+
         if (_ball == null)
         {
             _ball = FindFirstObjectByType<BallRigidbodyBhv>();

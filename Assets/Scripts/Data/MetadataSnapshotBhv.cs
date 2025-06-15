@@ -5,18 +5,21 @@ using System;
 
 public class MetadataSnapshotBhv : MonoBehaviour
 {
-    [Header("Component References")]
-    public BallRigidbodyBhv ball;
-    public RacketRigidbodyBhv racket;
-    public BallSpawningBhv ballSpawner;
-    public TaskManager taskManager;
-
-    [Header("Physics Materials")]
-    public List<PhysicsMaterial> physXMaterials = new List<PhysicsMaterial>();
-
     // Read only fields
     [SerializeField, ReadOnly]
     private string _fileName;
+
+    // Public fields
+    [Header("Components")]
+    public TaskManager taskManager;
+    public BallLaunchBhv ballSpawner;
+    public BallRigidbodyBhv ball;
+    public RacketRigidbodyBhv racket;
+
+    [Header("Physics Materials")]
+    public PhysicsMaterial ballPhysXMaterial;
+    public PhysicsMaterial courtPhysXMaterial;
+    public PhysicsMaterial netPhysXMaterial;
 
     // Private fields
     private string _filePath;
@@ -24,13 +27,17 @@ public class MetadataSnapshotBhv : MonoBehaviour
     private void OnValidate()
     {
         _fileName = DataManager.GetFileName("metadata", "json");
+
+        taskManager = TaskManager.Instance;
+        ballSpawner = FindFirstObjectByType<BallLaunchBhv>();
+        racket = TennisManager.Instance.Racket;
     }
 
     private void Start()
     {
-        _filePath = Path.Combine(DataManager.dataPath, _fileName);
+        _filePath = Path.Combine(DataManager.savePath, _fileName);
         
-        if (DataManager.Instance.saveData)
+        if (DataManager.Instance.saveMetadata)
         {
             this.MetadataToJSON();
         }
@@ -55,9 +62,16 @@ public class MetadataSnapshotBhv : MonoBehaviour
         {
             json = JsonUtility.ToJson(component, true);
 
-            File.AppendAllText(_filePath, $"\"{component.name.Replace(" ","")}\":");
+            File.AppendAllText(_filePath, $"\"{component.name.Replace(" ","")}\": ");
             File.AppendAllText(_filePath, $"{json}{delim}");
         }
+
+        List<PhysicsMaterial> physXMaterials = new List<PhysicsMaterial>
+        {
+            ballPhysXMaterial,
+            courtPhysXMaterial,
+            netPhysXMaterial
+        };
 
         for (int i = 0; i < physXMaterials.Count; i++)
         {
@@ -77,7 +91,7 @@ public class MetadataSnapshotBhv : MonoBehaviour
 
             json = JsonUtility.ToJson(physXMaterialData, true);
 
-            File.AppendAllText(_filePath, $"\"{physXMaterials[i].name.Replace(" ", "")}PhysX\":");
+            File.AppendAllText(_filePath, $"\"{physXMaterials[i].name.Replace(" ", "")}PhysX\": ");
             File.AppendAllText(_filePath, $"{json}{delim}");
         }
     }

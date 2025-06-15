@@ -1,7 +1,12 @@
 using UnityEngine;
+using System;
 
 public class TaskManager : Singleton<TaskManager>
 {
+    // Static fields
+    public static event Action onTrialStart;
+    public static event Action onTrialEnd;
+
     // Public properties
     public int StageIndex => _stageIndex;
     public int TrialIndex => _trialIndex;
@@ -9,13 +14,7 @@ public class TaskManager : Singleton<TaskManager>
     // Private properties
     private int StageTrialCount => trialsPerStage * (_stageIndex + 1);
 
-    // References
-    public MeshRenderer courtMeshRenderer;
-    public GameObject net;
-    public GameObject targetZone;
-
     // Public fields
-    [Header("Task Settings")]
     [Min(1)]
     public int trialsPerStage = 10;
     [Min(.01f)]
@@ -27,54 +26,82 @@ public class TaskManager : Singleton<TaskManager>
     [SerializeField, ReadOnly]
     private int _trialIndex;
 
-    private void Start()
+    // Private fields
+    private CourtBhv _court;
+    private NetBhv _net;
+    private TargetBhv _target;
+    private float _lastTrialStartTime = -Mathf.Infinity;
+    private bool _isTrialActive;
+
+    protected override void Awake()
     {
-        if (courtMeshRenderer != null)
-        {
-            courtMeshRenderer.enabled = false;
-        }
+        base.Awake();
 
-        if (net != null)
-        {
-            net.SetActive(false);
-        }
-
-        if (targetZone != null)
-        {
-            targetZone.SetActive(false);
-        }
-
+        _court = this.GetComponentInChildren<CourtBhv>();
+        _net = this.GetComponentInChildren<NetBhv>();
+        _target = this.GetComponentInChildren<TargetBhv>();
     }
 
-    public void StartTrial()
+    private void Start()
     {
-        TrackingManager.Instance.RecordEvent("TrialStart");
+        _court.MeshRenderer.enabled = false;
+        _net.Active = false;
+        _target.Active = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (Time.time - _lastTrialStartTime >= interTrialInterval)
+        {
+            if (_isTrialActive)
+            {
+                this.EndTrial();
+            }
+            else
+            {
+                if (TrackingManager.Instance.IsSaving == false)
+                {
+                    this.StartTrial();
+                }
+            }
+        }
+    }
+
+    private void StartTrial()
+    {
+        _isTrialActive = true;
 
         if (_trialIndex > this.StageTrialCount && _stageIndex == 0)
         {
-            if (net != null)
-            {
-                net.SetActive(true);
-            }
+            _net.Active = true;
 
-            if (courtMeshRenderer != null)
-            {
-                courtMeshRenderer.enabled = true;
-            }
+            _court.MeshRenderer.enabled = true;
 
             _stageIndex++;
         }
 
         if (_trialIndex > this.StageTrialCount && _stageIndex == 1)
         {
-            if (targetZone != null) 
-            { 
-                targetZone.SetActive(true);
-            }
+            _target.Active = true;
 
             _stageIndex++;
         }
 
+        _lastTrialStartTime = Time.time;
+
         _trialIndex++;
+        
+        TrackingManager.Instance.RecordEvent(TaskEventType.TrialStart);
+        
+        onTrialStart?.Invoke();
+    }
+
+    private void EndTrial()
+    {
+        _isTrialActive = false;
+
+        TrackingManager.Instance.RecordEvent(TaskEventType.TrialEnd);
+
+        onTrialEnd?.Invoke();
     }
 }

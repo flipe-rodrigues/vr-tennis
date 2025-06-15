@@ -151,7 +151,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 
             onRacketHit.Invoke(relativeSpeed);
 
-            TrackingManager.Instance.RecordEvent("RacketHit");
+            TrackingManager.Instance.RecordEvent(TaskEventType.RacketHit);
         }
     }
 

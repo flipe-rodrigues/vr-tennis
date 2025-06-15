@@ -5,7 +5,21 @@ using System.Linq;
 public class TrackingManager : Singleton<TrackingManager>
 {
     // Public properties
-    public bool IsSaving => _trackers.Any(tracker => tracker.IsSaving);
+    public bool IsSaving
+    {
+        get
+        {
+            for (int i = 0; i < _trackers.Count; i++)
+            {
+                if (_trackers[i].IsSaving)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
 
     // Read only fields
     [SerializeField, ReadOnly]
@@ -13,8 +27,10 @@ public class TrackingManager : Singleton<TrackingManager>
     [SerializeField, ReadOnly]
     private int _expectedDataCount;
 
-    public void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
+
         _trackers = FindObjectsByType<TrackingBhv>(FindObjectsSortMode.None).ToList();
 
         _expectedDataCount = Mathf.CeilToInt(TaskManager.Instance.interTrialInterval / Time.fixedDeltaTime * 1.05f);
@@ -32,6 +48,21 @@ public class TrackingManager : Singleton<TrackingManager>
         }
     }
 
+    private void OnEnable()
+    {
+        TaskManager.onTrialEnd += this.HandleTrialEnd;
+    }
+
+    private void OnDisable()
+    {
+        TaskManager.onTrialEnd -= this.HandleTrialEnd;
+    }
+
+    private void HandleTrialEnd()
+    {
+        this.SaveAndClear();
+    }
+
     public void SaveAndClear()
     {
         foreach (var tracker in _trackers)
@@ -47,7 +78,7 @@ public class TrackingManager : Singleton<TrackingManager>
         }
     }
 
-    public void RecordEvent(string eventName) 
+    public void RecordEvent(TaskEventType taskEvent) 
     {
         if (!DataManager.Instance.saveData)
         {
@@ -56,7 +87,7 @@ public class TrackingManager : Singleton<TrackingManager>
 
         foreach (var tracker in _trackers)
         {
-            tracker.RecordEvent(eventName);
+            tracker.Record(taskEvent);
         }
     }
 }

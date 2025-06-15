@@ -203,7 +203,8 @@ MonoBehaviour:
   gizmoRadius: 0.05
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _fileName: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-13_07-38-22..csv
+  _binaryFileName: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-15_22-40-31..bin
+  _csvFileName: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-15_22-40-31..csv
   _isSaving: 0
 --- !u!114 &745214539 stripped
 MonoBehaviour:
@@ -321,9 +322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570597e47369b94409c8be19b1a8bd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  courtMeshRenderer: {fileID: 1798329363}
-  net: {fileID: 1925945903}
-  targetZone: {fileID: 1576162552}
   trialsPerStage: 3
   interTrialInterval: 1.5
   _stageIndex: 0
@@ -340,7 +338,7 @@ GameObject:
   - component: {fileID: 1396866740}
   - component: {fileID: 1396866742}
   m_Layer: 0
-  m_Name: Save System
+  m_Name: Data Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +357,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveData: 1
-  _dataPath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data
+  saveMetadata: 1
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis\Data
 --- !u!4 &1396866741
 Transform:
   m_ObjectHideFlags: 0
@@ -387,15 +387,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcef3e864d8eb1488c300df1e1ff5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
-  racket: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
-  ballSpawner: {fileID: 1559592744}
+  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-15_22-40-31.json
   taskManager: {fileID: 1172934397}
-  physXMaterials:
-  - {fileID: 13400000, guid: b558220af477b2f4892404acd79394ba, type: 2}
-  - {fileID: 13400000, guid: d832140f09fae5645a787353fc5098e1, type: 2}
-  - {fileID: 13400000, guid: 9d26cd2b8e23cd84db2961ca90fe8964, type: 2}
-  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-13_07-38-23.json
+  ballSpawner: {fileID: 1559592744}
+  ball: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
+  racket: {fileID: 414221359}
+  ballPhysXMaterial: {fileID: 13400000, guid: b558220af477b2f4892404acd79394ba, type: 2}
+  courtPhysXMaterial: {fileID: 13400000, guid: d832140f09fae5645a787353fc5098e1, type: 2}
+  netPhysXMaterial: {fileID: 13400000, guid: 9d26cd2b8e23cd84db2961ca90fe8964, type: 2}
 --- !u!1001 &1417578496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -406,7 +405,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1692753994715645107, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-13_06-51-40..csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-14_05-35-24..csv
       objectReference: {fileID: 0}
     - target: {fileID: 3248523182090798507, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -450,7 +449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3259352244687471260, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: name_age_sex_tennis-exp_vr-exp_racket-com_2025-06-13_06-51-40..csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-stringbed-center_2025-06-14_05-35-24..csv
       objectReference: {fileID: 0}
     - target: {fileID: 3921553247011690897, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _position.x
@@ -478,15 +477,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4059865396570719225, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: name_age_sex_tennis-exp_vr-exp_racket-grip_2025-06-13_06-51-40..csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-grip-base_2025-06-14_05-35-24..csv
       objectReference: {fileID: 0}
     - target: {fileID: 4366985766323789496, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: m_Name
-      value: Racket
+      value: Racket Rigidbody
       objectReference: {fileID: 0}
     - target: {fileID: 4908714529883086994, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-13_06-51-40..csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-14_05-35-24..csv
       objectReference: {fileID: 0}
     - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: anchorTransform
@@ -494,11 +493,11 @@ PrefabInstance:
       objectReference: {fileID: 2008402079}
     - target: {fileID: 7663550768408559955, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-13_06-51-40..csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-14_05-35-24..csv
       objectReference: {fileID: 0}
     - target: {fileID: 7843026114750108742, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _fileName
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-13_06-51-40..csv
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-14_05-35-24..csv
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -564,7 +563,7 @@ GameObject:
   - component: {fileID: 1559592741}
   - component: {fileID: 1559592744}
   m_Layer: 0
-  m_Name: Ball Spawner
+  m_Name: Ball Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -647,7 +646,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1559592739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b18db8115ce9ca418a183c43b19de79, type: 3}
+  m_Script: {fileID: 11500000, guid: 71da6273a17ef664b8a72b478d4a44c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _position: {x: -10, y: 1, z: -0.5}
@@ -655,48 +654,9 @@ MonoBehaviour:
   _scale: {x: 1, y: 1, z: 0.049999997}
   ballPrefab: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
   ballPoolSize: 10
-  linearSpeed: 10
+  linearSpeed: 10.5
   topSpin: 100
   sideSpin: 0
-  onBallSpawn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1749113137}
-        m_TargetAssemblyTypeName: TrackingManager, Assembly-CSharp
-        m_MethodName: SaveAndClear
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1172934397}
-        m_TargetAssemblyTypeName: TaskManager, Assembly-CSharp
-        m_MethodName: StartTrial
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 454428205}
-        m_TargetAssemblyTypeName: BallTrackingBhv, Assembly-CSharp
-        m_MethodName: ReparentToCurrentBall
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1566786339
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,9 +806,10 @@ GameObject:
   - component: {fileID: 1576162555}
   - component: {fileID: 1576162554}
   - component: {fileID: 1576162553}
+  - component: {fileID: 1576162558}
   - component: {fileID: 1576162557}
-  m_Layer: 0
-  m_Name: Pseudo Zone
+  m_Layer: 10
+  m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -955,6 +916,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f430bdc0d3866004eb9bcca58d0f5be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionEnterEvent: 8
+  collisionExitEvent: 9
+--- !u!114 &1576162558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576162552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd20eaedecd7054bbc4c49d27e0aeae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: -0.17699999, y: 0.476, z: -0.206}
+  _rotation: {x: -0, y: 0, z: 0}
+  _scale: {x: 0.1, y: 0.1, z: 0.1}
 --- !u!1001 &1665505046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1046,13 +1024,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trackers:
-  - {fileID: 2013558584}
-  - {fileID: 1113017188}
   - {fileID: 1997368631}
+  - {fileID: 1113017188}
+  - {fileID: 276463347}
+  - {fileID: 454428205}
   - {fileID: 745214539}
   - {fileID: 226319802}
-  - {fileID: 454428205}
-  - {fileID: 276463347}
+  - {fileID: 2013558584}
   _expectedDataCount: 1575
 --- !u!4 &1749113138
 Transform:
@@ -1083,6 +1061,7 @@ GameObject:
   - component: {fileID: 1798329363}
   - component: {fileID: 1798329368}
   - component: {fileID: 1798329367}
+  - component: {fileID: 1798329370}
   - component: {fileID: 1798329369}
   m_Layer: 8
   m_Name: Court
@@ -1219,6 +1198,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f430bdc0d3866004eb9bcca58d0f5be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionEnterEvent: 4
+  collisionExitEvent: 5
+--- !u!114 &1798329370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798329361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e304121453ffda418f6b2fbb374edd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: -0, y: 0, z: 0}
+  _scale: {x: 100, y: 1, z: 100}
 --- !u!1 &1807529656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,9 +1348,10 @@ GameObject:
   - component: {fileID: 1925945906}
   - component: {fileID: 1925945905}
   - component: {fileID: 1925945904}
+  - component: {fileID: 1925945909}
   - component: {fileID: 1925945908}
   m_Layer: 9
-  m_Name: Pseudo Net
+  m_Name: Net
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1461,6 +1458,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f430bdc0d3866004eb9bcca58d0f5be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionEnterEvent: 6
+  collisionExitEvent: 7
+--- !u!114 &1925945909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925945903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 565297a3e537daa4ba1ac948dcabd328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: -0, y: 0, z: 0}
+  _scale: {x: 0.01, y: 0.5, z: 1.5}
 --- !u!114 &1997368631 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7663550768408559955, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
@@ -1498,12 +1512,12 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1566786342}
-  - {fileID: 1807529658}
   - {fileID: 1054472121}
   - {fileID: 1396866741}
   - {fileID: 1534334721}
   - {fileID: 1749113138}
   - {fileID: 1172934396}
+  - {fileID: 1566786342}
+  - {fileID: 1807529658}
   - {fileID: 1665505046}
   - {fileID: 1417578496}

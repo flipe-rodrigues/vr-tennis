@@ -10,8 +10,10 @@ public class HapticsManager : Singleton<HapticsManager>
     [SerializeField, ReadOnly]
     private HapticSource _hapticSource;
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
+
         _hapticSource = FindFirstObjectByType<HapticSource>();
     }
 

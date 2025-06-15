@@ -2,7 +2,22 @@ using UnityEngine;
 
 public class BallTrackingBhv : TrackingBhv
 {
-    public void ReparentToCurrentBall()
+    private void OnEnable()
+    {
+        BallLaunchBhv.onBallLaunch += this.HandleBallLaunch;
+    }
+
+    private void OnDisable()
+    {
+        BallLaunchBhv.onBallLaunch -= this.HandleBallLaunch;
+    }
+
+    private void HandleBallLaunch()
+    {
+        this.ReparentToCurrentBall();
+    }
+
+    private void ReparentToCurrentBall()
     {
         this.Transform.SetParent(TennisManager.Instance.Ball.Transform);
 

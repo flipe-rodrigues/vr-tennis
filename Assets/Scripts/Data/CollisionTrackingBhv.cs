@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class CollisionTrackingBhv : MonoBehaviour
 {
+    // Public fields
+    public TaskEventType collisionEnterEvent;
+    public TaskEventType collisionExitEvent;
+
     private void OnCollisionEnter(Collision collision)
     {
-        string eventName = $"{this.name}CollisionEnter";
-
-        TrackingManager.Instance.RecordEvent(eventName);
+        TrackingManager.Instance.RecordEvent(collisionEnterEvent);
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        string eventName = $"{this.name}CollisionExit";
-
-        TrackingManager.Instance.RecordEvent(eventName);
+        TrackingManager.Instance.RecordEvent(collisionExitEvent);
     }
 }

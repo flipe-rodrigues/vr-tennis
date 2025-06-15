@@ -6,29 +6,33 @@ using System;
 public class DataManager : Singleton<DataManager>
 {
     // Static fields
-    public static string dataPath = 
-        Path.Combine(Application.isEditor? Application.dataPath : Application.persistentDataPath, "Data").
-        Replace('/', Path.DirectorySeparatorChar).Replace('\\', Path.DirectorySeparatorChar);
-    
+    public static string savePath = GetFormattedSavePath(Application.isEditor ? Application.dataPath : Application.persistentDataPath);
+
     // Public fields
     public bool saveData;
+    public bool saveMetadata;
 
     // Read only fields
     [SerializeField, ReadOnly]
-    private string _dataPath;
+    private string _editorSavePath;
+    [SerializeField, ReadOnly]
+    private string _buildSavePath;
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
-        _dataPath = dataPath;
+        base.OnValidate();
+
+        _editorSavePath = GetFormattedSavePath(Application.dataPath);
+        _buildSavePath = GetFormattedSavePath(Application.persistentDataPath);
     }
 
     protected override void Awake()
     {
         base.Awake();
 
-        if (!Directory.Exists(dataPath))
+        if (!Directory.Exists(savePath))
         {
-            Directory.CreateDirectory(dataPath);
+            Directory.CreateDirectory(savePath);
         }
     }
 
@@ -62,5 +66,10 @@ public class DataManager : Singleton<DataManager>
     public static string GetFormattedTimestamp()
     {
         return DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+    }
+
+    private static string GetFormattedSavePath(string dataPath)
+    {
+        return Path.Combine(dataPath, "Data").Replace('/', Path.DirectorySeparatorChar).Replace('\\', Path.DirectorySeparatorChar);
     }
 }
