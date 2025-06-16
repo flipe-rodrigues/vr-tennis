@@ -5,7 +5,6 @@ public class TaskManager : Singleton<TaskManager>
 {
     // Static fields
     public static event Action onTrialStart;
-    public static event Action onTrialEnd;
 
     // Public properties
     public int StageIndex => _stageIndex;
@@ -31,7 +30,6 @@ public class TaskManager : Singleton<TaskManager>
     private NetBhv _net;
     private TargetBhv _target;
     private float _lastTrialStartTime = -Mathf.Infinity;
-    private bool _isTrialActive;
 
     protected override void Awake()
     {
@@ -53,24 +51,12 @@ public class TaskManager : Singleton<TaskManager>
     {
         if (Time.time - _lastTrialStartTime >= interTrialInterval)
         {
-            if (_isTrialActive)
-            {
-                this.EndTrial();
-            }
-            else
-            {
-                if (TrackingManager.Instance.IsSaving == false)
-                {
-                    this.StartTrial();
-                }
-            }
+            this.StartTrial();
         }
     }
 
     private void StartTrial()
     {
-        _isTrialActive = true;
-
         if (_trialIndex > this.StageTrialCount && _stageIndex == 0)
         {
             _net.Active = true;
@@ -94,14 +80,5 @@ public class TaskManager : Singleton<TaskManager>
         TrackingManager.Instance.RecordEvent(TaskEventType.TrialStart);
         
         onTrialStart?.Invoke();
-    }
-
-    private void EndTrial()
-    {
-        _isTrialActive = false;
-
-        TrackingManager.Instance.RecordEvent(TaskEventType.TrialEnd);
-
-        onTrialEnd?.Invoke();
     }
 }

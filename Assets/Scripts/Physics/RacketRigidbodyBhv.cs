@@ -13,6 +13,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 {
     // Public properties
     public Vector3 HitVelocity => _hitVelocity;
+    public Vector3 HitContactNormal => _hitContactNormal;
     public Vector3 SmoothLinearVelocity => _smoothLinearVelocity;
     public Vector3 SmoothAngularVelocity => _smoothAngularVelocity;
     public bool IsInRefractoryPeriod => _racketCollider.enabled == false;
@@ -46,6 +47,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
     private Vector3 _smoothLinearVelocity;
     private Vector3 _smoothAngularVelocity;
     private Vector3 _hitVelocity;
+    private Vector3 _hitContactNormal;
 
     private void OnValidate()
     {
@@ -146,6 +148,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
             float relativeSpeed = (_smoothLinearVelocity - TennisManager.Instance.Ball.LinearVelocity).magnitude;
 
             _hitVelocity = this.GetVelocityAtContactPoint();
+            _hitContactNormal = _smoothContactNormal;
 
             this.Hit(TennisManager.Instance.Ball);
 

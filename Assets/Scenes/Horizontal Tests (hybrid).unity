@@ -203,9 +203,7 @@ MonoBehaviour:
   gizmoRadius: 0.05
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFileName: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-15_22-40-31..bin
-  _csvFileName: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-15_22-40-31..csv
-  _isSaving: 0
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-16_11-19-13..bin
 --- !u!114 &745214539 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7843026114750108742, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
@@ -263,6 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: 1
   targetFrameRate: 120
+  _hasStartedQuitting: 0
 --- !u!114 &1113017188 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4908714529883086994, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
@@ -387,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcef3e864d8eb1488c300df1e1ff5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-15_22-40-31.json
+  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-16_11-19-13.json
   taskManager: {fileID: 1172934397}
   ballSpawner: {fileID: 1559592744}
   ball: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
@@ -916,8 +915,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f430bdc0d3866004eb9bcca58d0f5be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionEnterEvent: 8
-  collisionExitEvent: 9
+  collisionEnterEvent: 7
+  collisionExitEvent: 8
 --- !u!114 &1576162558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1025,13 +1024,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _trackers:
   - {fileID: 1997368631}
-  - {fileID: 1113017188}
   - {fileID: 276463347}
-  - {fileID: 454428205}
-  - {fileID: 745214539}
-  - {fileID: 226319802}
   - {fileID: 2013558584}
-  _expectedDataCount: 1575
+  - {fileID: 226319802}
+  - {fileID: 745214539}
+  - {fileID: 1113017188}
+  - {fileID: 454428205}
 --- !u!4 &1749113138
 Transform:
   m_ObjectHideFlags: 0
@@ -1198,8 +1196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f430bdc0d3866004eb9bcca58d0f5be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionEnterEvent: 4
-  collisionExitEvent: 5
+  collisionEnterEvent: 3
+  collisionExitEvent: 4
 --- !u!114 &1798329370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,8 +1456,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f430bdc0d3866004eb9bcca58d0f5be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionEnterEvent: 6
-  collisionExitEvent: 7
+  collisionEnterEvent: 5
+  collisionExitEvent: 6
 --- !u!114 &1925945909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1512,12 +1510,12 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1566786342}
+  - {fileID: 1807529658}
   - {fileID: 1054472121}
   - {fileID: 1396866741}
   - {fileID: 1534334721}
   - {fileID: 1749113138}
   - {fileID: 1172934396}
-  - {fileID: 1566786342}
-  - {fileID: 1807529658}
   - {fileID: 1665505046}
   - {fileID: 1417578496}

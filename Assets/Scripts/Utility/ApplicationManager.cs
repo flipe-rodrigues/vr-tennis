@@ -1,15 +1,24 @@
 using UnityEngine;
+using UnityEditor;
+using System;
 
 public class ApplicationManager : Singleton<ApplicationManager>
 {
-    // Static fields
+    // Public properties
+    public bool HasStartedQuitting => _hasStartedQuitting;
 
+    // Static fields
     public static readonly WaitForFixedUpdate waitForFixedUpdateInstance = new WaitForFixedUpdate();
+    public static Action onQuitRequest;
 
     // Public fields
     [Range(.01f, 1f)]
     public float timeScale = 1f;
     public int targetFrameRate = 120;
+
+    // Read only fields
+    [SerializeField, ReadOnly]
+    private bool _hasStartedQuitting = false;
 
     protected override void OnValidate()
     {
@@ -29,7 +38,23 @@ public class ApplicationManager : Singleton<ApplicationManager>
     {
         if (UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            Application.Quit();
+            onQuitRequest?.Invoke();
+
+            _hasStartedQuitting = true;
+        }
+
+        if (_hasStartedQuitting && TrackingManager.Instance.IsDoneSaving)
+        {
+            if (Application.isEditor)
+            {
+#if UNITY_EDITOR
+                EditorApplication.isPlaying = false;
+#endif
+            }
+            else
+            {
+                Application.Quit();
+            }
         }
     }
 }

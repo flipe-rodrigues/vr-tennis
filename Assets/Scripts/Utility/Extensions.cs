@@ -1,7 +1,9 @@
-using System.Linq;
 using System.Collections.Generic;
-using UnityEngine;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using UnityEngine;
 
 public static class Extensions
 {
@@ -73,4 +75,47 @@ public static class Extensions
     {
         return 1f - Mathf.Exp(-Time.fixedDeltaTime / tau);
     }
+
+    public static void WriteTrackingDatum(this BinaryWriter writer, TrackingDatum datum)
+    {
+        writer.Write(datum.stage);
+        writer.Write(datum.trial);
+        writer.Write((new BitwiseIntFloatConverter { floatValue = datum.time }).intValue);
+        writer.Write((new BitwiseIntFloatConverter { floatValue = datum.position.x }).intValue);
+        writer.Write((new BitwiseIntFloatConverter { floatValue = datum.position.y }).intValue);
+        writer.Write((new BitwiseIntFloatConverter { floatValue = datum.position.z }).intValue);
+        writer.Write((new BitwiseIntFloatConverter { floatValue = datum.rotation.x }).intValue);
+        writer.Write((new BitwiseIntFloatConverter { floatValue = datum.rotation.y }).intValue);
+        writer.Write((new BitwiseIntFloatConverter { floatValue = datum.rotation.z }).intValue);
+        writer.Write((new BitwiseIntFloatConverter { floatValue = datum.rotation.w }).intValue);
+        writer.Write((int)datum.taskEvent);
+    }
+
+    public static void ReadTrackingDatum(this BinaryReader reader, out TrackingDatum datum)
+    {
+        datum = new TrackingDatum
+        {
+            stage = reader.ReadInt32(),
+            trial = reader.ReadInt32(),
+            time = reader.ReadSingle(),
+            position = new Vector3(
+                reader.ReadSingle(), 
+                reader.ReadSingle(), 
+                reader.ReadSingle()),
+            rotation = new Quaternion(
+                reader.ReadSingle(), 
+                reader.ReadSingle(), 
+                reader.ReadSingle(), 
+                reader.ReadSingle()),
+            taskEvent = (TaskEventType)reader.ReadInt32()
+        };
+    }
+}
+
+
+[StructLayout(LayoutKind.Explicit)]
+public struct BitwiseIntFloatConverter
+{
+    [FieldOffset(0)] public int intValue;
+    [FieldOffset(0)] public float floatValue;
 }

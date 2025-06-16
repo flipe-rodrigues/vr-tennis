@@ -1,4 +1,3 @@
-using System.Text;
 using UnityEngine;
 
 [System.Serializable]

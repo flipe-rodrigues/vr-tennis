@@ -26,7 +26,7 @@ public class MetadataSnapshotBhv : MonoBehaviour
 
     private void OnValidate()
     {
-        _fileName = DataManager.GetFileName("metadata", "json");
+        _fileName = DataManager.GetFilename("metadata", "json");
 
         taskManager = TaskManager.Instance;
         ballSpawner = FindFirstObjectByType<BallLaunchBhv>();

@@ -2,13 +2,17 @@ using UnityEngine;
 
 public class BallTrackingBhv : TrackingBhv
 {
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         BallLaunchBhv.onBallLaunch += this.HandleBallLaunch;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+
         BallLaunchBhv.onBallLaunch -= this.HandleBallLaunch;
     }
 

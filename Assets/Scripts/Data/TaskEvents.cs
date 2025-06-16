@@ -4,7 +4,6 @@ public enum TaskEventType
 {
     None,
     TrialStart,
-    TrialEnd,
     BallSpawn,
     CourtEnter,
     CourtExit,
@@ -21,7 +20,6 @@ public static class TaskEvents
     {
         { TaskEventType.None, "" },
         { TaskEventType.TrialStart, "TrialStart" },
-        { TaskEventType.TrialEnd, "TrialEnd" },
         { TaskEventType.BallSpawn, "BallSpawn" },
         { TaskEventType.CourtEnter, "CourtEnter" },
         { TaskEventType.CourtExit, "CourtExit" },

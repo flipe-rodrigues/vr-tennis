@@ -6,7 +6,7 @@ using System;
 public class DataManager : Singleton<DataManager>
 {
     // Static fields
-    public static string savePath = GetFormattedSavePath(Application.isEditor ? Application.dataPath : Application.persistentDataPath);
+    public static readonly string savePath = GetFormattedSavePath(Application.isEditor ? Application.dataPath : Application.persistentDataPath);
 
     // Public fields
     public bool saveData;
@@ -50,7 +50,7 @@ public class DataManager : Singleton<DataManager>
         CultureInfo.DefaultThreadCurrentUICulture = customCulture;
     }
 
-    public static string GetFileName(string gameObjectName, string format = ".csv")
+    public static string GetFilename(string gameObjectName, string format = ".csv")
     {
         return 
             $"{UIManager.subjectName}_" +
