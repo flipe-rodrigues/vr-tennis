@@ -1,6 +1,5 @@
-using Meta.Net.NativeWebSocket;
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class DecalBhv : CachedTransformBhv
 {
@@ -8,7 +7,7 @@ public class DecalBhv : CachedTransformBhv
     private MeshRenderer MeshRenderer => _meshRenderer == null ? GetComponentInChildren<MeshRenderer>() : _meshRenderer;
 
     // Public fields
-    public Color initialColor = Color.black;
+    public Color initialColor;
     private float lifetime = 3f;
 
     // Private fields

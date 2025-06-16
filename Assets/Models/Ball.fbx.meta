@@ -1,49 +1,13 @@
 fileFormatVersion: 2
-guid: 34424729ef5b0754da8c5be8281d7931
+guid: 549ded312089a994eb38a3b74c548483
 ModelImporter:
   serializedVersion: 22200
-  internalIDToNameTable:
-  - first:
-      1: 100000
-    second: //RootNode
-  - first:
-      1: 100002
-    second: racket_MeshPart0
-  - first:
-      1: 100004
-    second: racket_MeshPart1
-  - first:
-      4: 400000
-    second: //RootNode
-  - first:
-      4: 400002
-    second: racket_MeshPart0
-  - first:
-      4: 400004
-    second: racket_MeshPart1
-  - first:
-      23: 2300000
-    second: racket_MeshPart0
-  - first:
-      23: 2300002
-    second: racket_MeshPart1
-  - first:
-      33: 3300000
-    second: racket_MeshPart0
-  - first:
-      33: 3300002
-    second: racket_MeshPart1
-  - first:
-      43: 4300000
-    second: racket_MeshPart0
-  - first:
-      43: 4300002
-    second: racket_MeshPart1
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 0
-    materialName: 1
-    materialSearch: 2
+    materialName: 0
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
@@ -74,13 +38,13 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importPhysicalCameras: 0
+    importPhysicalCameras: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
-    nodeNameCollisionStrategy: 0
-    fileIdsGeneration: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -97,7 +61,7 @@ ModelImporter:
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 0
+    secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
@@ -128,15 +92,15 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
   avatarSetup: 0
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

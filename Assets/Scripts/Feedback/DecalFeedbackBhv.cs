@@ -9,8 +9,7 @@ public class DecalFeedbackBhv : FeedbackBhv
     public int decalPoolSize = 10;
     [Range(0, 1)]
     public float alphaModifier = .05f;
-    [Range(0, 1)]
-    public float scaleModifier = .005f;
+    public Vector3 scaleModifier = Vector3.one * .005f;
 
     // Private fields
     private ObjectPool<DecalBhv> _decalPool;
@@ -51,13 +50,17 @@ public class DecalFeedbackBhv : FeedbackBhv
         DecalBhv decal = _decalPool.Get(activate: false);
 
         ContactPoint contact = collision.GetContact(0);
-        Quaternion rotation = Quaternion.LookRotation(collision.transform.forward, contact.normal);
-        Vector3 scale = Vector3.ProjectOnPlane(TennisManager.Instance.Ball.LinearVelocity, contact.normal).Abs();
-        float alpha = Mathf.Clamp(TennisManager.Instance.Ball.LinearVelocity.magnitude * alphaModifier, 0, _maxAlpha);
+
+        Vector3 relativeVelocity = -collision.relativeVelocity;
+        Vector3 tangentialVelocity = Vector3.ProjectOnPlane(relativeVelocity, Vector3.up);
+        Quaternion rotation = Quaternion.LookRotation(tangentialVelocity.normalized, Vector3.up);
+        Vector3 deltaScale = relativeVelocity.ElementWiseMultiplication(scaleModifier).Abs();
+
+        float alpha = Mathf.Clamp(collision.relativeVelocity.magnitude * alphaModifier, 0, _maxAlpha);
 
         decal.Position = contact.point;
         decal.Rotation = rotation;
-        decal.Scale = _defaultScale + scale * scaleModifier;
+        decal.Scale = _defaultScale + deltaScale;
         decal.initialColor.a = alpha;
         
         decal.Active = true;

@@ -46,7 +46,7 @@ public class RacketColliderBhv : CachedTransformBhv
         //_smoothLinearVelocity = TennisManager.Instance.Racket.SmoothLinearVelocity;
         _smoothLinearVelocity = Vector3.Lerp(_smoothLinearVelocity, TennisManager.Instance.Racket.LinearVelocity, _smoothingRate);
 
-        Vector3 localVelocity = transform.InverseTransformDirection(_smoothLinearVelocity);
+        Vector3 localVelocity = this.Transform.InverseTransformDirection(_smoothLinearVelocity);
 
         Vector3 deltaScale = localVelocity.ElementWiseMultiplication(scaleModifier).Abs();
 
