@@ -76,9 +76,9 @@ public class TaskManager : Singleton<TaskManager>
         _lastTrialStartTime = Time.time;
 
         _trialIndex++;
-        
-        TrackingManager.Instance.RecordEvent(TaskEventType.TrialStart);
-        
+
         onTrialStart?.Invoke();
+
+        TrackingManager.Instance.RecordEvent(TaskEventType.TrialStart);
     }
 }

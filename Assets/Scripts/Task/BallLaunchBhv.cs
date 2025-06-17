@@ -69,8 +69,8 @@ public class BallLaunchBhv : CachedTransformBhv
 
         TennisManager.Instance.Ball = _currentBall;
 
-        TrackingManager.Instance.RecordEvent(TaskEventType.BallSpawn);
-        
         onBallLaunch?.Invoke();
+
+        TrackingManager.Instance.RecordEvent(TaskEventType.BallSpawn);
     }
 }
