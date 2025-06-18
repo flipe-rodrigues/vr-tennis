@@ -246,7 +246,7 @@ MonoBehaviour:
   interTrialInterval: 1.5
   _stageIndex: 0
   _trialIndex: 0
-  _targetPosition: {x: -0.25, y: 0, z: -0.25}
+  _targetPosition: {x: -0.336, y: 0, z: -0.325}
   _targetScale: {x: 0.5, y: 1, z: 0.5}
 --- !u!4 &427517423
 Transform:
@@ -317,7 +317,7 @@ MonoBehaviour:
   gizmoRadius: 0.05
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-18_23-45-37..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-18_23-55-45..bin
   _isDoneSaving: 0
 --- !u!4 &550389140 stripped
 Transform:
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcef3e864d8eb1488c300df1e1ff5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-18_23-45-37.json
+  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-18_23-55-45.json
   taskManager: {fileID: 427517422}
   ballSpawner: {fileID: 2118512084}
   ball: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
@@ -773,7 +773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58712347717955250, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25
+      value: -0.336
       objectReference: {fileID: 0}
     - target: {fileID: 58712347717955250, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: m_LocalPosition.y
@@ -781,7 +781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58712347717955250, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.25
+      value: -0.325
       objectReference: {fileID: 0}
     - target: {fileID: 58712347717955250, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: m_LocalRotation.w
@@ -978,13 +978,13 @@ MonoBehaviour:
   samplingRate: 500
   _samplingInterval: 0.002
   _trackers:
-  - {fileID: 1113017188}
+  - {fileID: 276463347}
   - {fileID: 1997368631}
   - {fileID: 226319802}
-  - {fileID: 2013558584}
-  - {fileID: 745214539}
+  - {fileID: 1113017188}
   - {fileID: 454428205}
-  - {fileID: 276463347}
+  - {fileID: 745214539}
+  - {fileID: 2013558584}
 --- !u!4 &1749113138
 Transform:
   m_ObjectHideFlags: 0

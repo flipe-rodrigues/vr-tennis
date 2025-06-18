@@ -83,10 +83,6 @@ public class TaskManager : Singleton<TaskManager>
                     _target.Active = true;
                     break;
 
-                case 2:
-                    _net.Active = false;
-                    break;
-
                 default:
                     ApplicationManager.Instance.StartToQuit();
                     break;

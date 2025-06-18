@@ -118,7 +118,7 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
         this.AngularVelocity *= _spinDecayRate;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionExit(Collision collision)
     {
         _wasJustHit = false;
     }
