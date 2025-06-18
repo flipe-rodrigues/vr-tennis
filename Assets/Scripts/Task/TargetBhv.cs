@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TargetBhv : CachedTransformBhv 
 {
+    // Public fields
+    public UnityEvent<float> onTargetHit = new UnityEvent<float>();
+
     // Private fields
     private TargetMeshBhv _mesh;
 
@@ -15,5 +19,7 @@ public class TargetBhv : CachedTransformBhv
     private void OnTriggerEnter(Collider other)
     {
         _mesh.GlowAndFade();
+
+        onTargetHit?.Invoke(TennisManager.Instance.Ball.LinearVelocity.magnitude);
     }
 }

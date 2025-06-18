@@ -193,7 +193,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-18_13-48-20..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-18_15-04-18..bin
   _isDoneSaving: 0
 --- !u!1 &4184398871533583225
 GameObject:
@@ -246,7 +246,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-grip-base_2025-06-18_13-48-20..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-grip-base_2025-06-18_15-04-18..bin
   _isDoneSaving: 0
 --- !u!1 &4366985766323789496
 GameObject:
@@ -335,13 +335,13 @@ MonoBehaviour:
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
   anchorTransform: {fileID: 0}
-  apparentNormalRestitution: 0.4
+  apparentNormalRestitution: 0.45
   apparentTangentialRestitution: 0.65
   apparentSpinRestitution: 0.4
   spinToTangentialConversion: 0.35
   tangentialToSpinConversion: 0.58
   refractoryPeriod: 0.25
-  smoothingTimeConstant: 0.005
+  smoothingTimeConstant: 0.01
   onRacketHit:
     m_PersistentCalls:
       m_Calls:
@@ -369,8 +369,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _smoothingRate: 0.18126929
-  _numFrames: 5
+  _smoothingRate: 0.09516257
+  _numFrames: 10
 --- !u!114 &3921553247011690897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,8 +383,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858c103e0df2f524a90cefbdb308a504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: -0.10415129, y: 0.049920753, z: -12.4179535}
-  _rotation: {x: 307.6078, y: 86.141, z: 46.01067}
+  _position: {x: 0, y: 0.04999994, z: -0.014163554}
+  _rotation: {x: 270, y: -0.00000021344341, z: 0}
   _scale: {x: 0.75, y: 0.75, z: 0.75}
   layerMask:
     serializedVersion: 2
@@ -473,7 +473,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-18_13-48-20..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-18_15-04-18..bin
   _isDoneSaving: 0
 --- !u!1 &4837998024061670508
 GameObject:
@@ -526,7 +526,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-stringbed-center_2025-06-18_13-48-20..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-stringbed-center_2025-06-18_15-04-18..bin
   _isDoneSaving: 0
 --- !u!1 &6836273951096070836
 GameObject:
@@ -616,7 +616,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-18_13-48-20..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-18_15-04-18..bin
   _isDoneSaving: 0
 --- !u!1 &7620714560613135057
 GameObject:
@@ -812,7 +812,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-18_13-48-20..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-18_15-04-18..bin
   _isDoneSaving: 0
 --- !u!1 &8938344833686612761
 GameObject:

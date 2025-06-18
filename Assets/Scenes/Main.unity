@@ -227,16 +227,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trackers:
-  - {fileID: 1933173153}
   - {fileID: 1933173155}
-  - {fileID: 1933173158}
-  - {fileID: 1933173157}
-  - {fileID: 1933173154}
-  - {fileID: 200473216}
-  - {fileID: 1361894310}
+  - {fileID: 1933173153}
   - {fileID: 1933173159}
-  - {fileID: 166106165}
+  - {fileID: 1933173157}
   - {fileID: 1854824343}
+  - {fileID: 1361894310}
+  - {fileID: 1933173154}
+  - {fileID: 166106165}
+  - {fileID: 200473216}
+  - {fileID: 1933173158}
 --- !u!1 &19562536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,7 +1036,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_lefthandanchor_2025-06-18_13-44-52..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_lefthandanchor_2025-06-18_15-30-02..bin
   _isDoneSaving: 0
 --- !u!1 &179611561
 GameObject:
@@ -1440,7 +1440,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_centereyeanchor_2025-06-18_13-44-51..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_centereyeanchor_2025-06-18_15-30-02..bin
   _isDoneSaving: 0
 --- !u!1 &203415850
 GameObject:
@@ -1623,7 +1623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcef3e864d8eb1488c300df1e1ff5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-18_13-44-52.json
+  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-18_15-30-02.json
   taskManager: {fileID: 660574638}
   ballSpawner: {fileID: 1787883655}
   ball: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
@@ -4175,7 +4175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570597e47369b94409c8be19b1a8bd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trialsPerStage: 2
+  trialsPerStage: 100
   interTrialInterval: 3
   _stageIndex: 0
   _trialIndex: 0
@@ -7939,7 +7939,7 @@ MonoBehaviour:
   gizmoRadius: 0.05
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-18_13-44-52..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-18_15-30-02..bin
   _isDoneSaving: 0
 --- !u!1 &1384270280
 GameObject:
@@ -9568,14 +9568,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1721090370}
     m_Modifications:
     - target: {fileID: 654030446796799343, guid: 442fb9cfd547b414291482b2310dbf14, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.75000024
-      objectReference: {fileID: 0}
-    - target: {fileID: 654030446796799343, guid: 442fb9cfd547b414291482b2310dbf14, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.7499999
-      objectReference: {fileID: 0}
-    - target: {fileID: 654030446796799343, guid: 442fb9cfd547b414291482b2310dbf14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.203
       objectReference: {fileID: 0}
@@ -9622,10 +9614,6 @@ PrefabInstance:
     - target: {fileID: 4561973510006333309, guid: 442fb9cfd547b414291482b2310dbf14, type: 3}
       propertyPath: m_Name
       value: Racket Pivot
-      objectReference: {fileID: 0}
-    - target: {fileID: 6372772560647149118, guid: 442fb9cfd547b414291482b2310dbf14, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10740,7 +10728,7 @@ GameObject:
   - component: {fileID: 1787883655}
   - component: {fileID: 1787883656}
   m_Layer: 0
-  m_Name: Ball Spawner
+  m_Name: Ball Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10807,7 +10795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1787883650}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.038750943, y: 0.9604674, z: 0.21369857, w: -0.17416596}
+  m_LocalRotation: {x: 0.037917025, y: 0.9610901, z: 0.2144681, w: -0.16991654}
   m_LocalPosition: {x: 4.5, y: 1.5, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10849,10 +10837,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _position: {x: 4.5, y: 1.5, z: -2.5}
-  _rotation: {x: 334.91266, y: 200.55605, z: 0}
+  _rotation: {x: 334.87668, y: 200.30446, z: 0}
   _scale: {x: 1, y: 1, z: 1}
   target: {fileID: 200473212}
-  offset: {x: 0.75, y: 6.5, z: 0}
+  offset: {x: 0.85, y: 6.5, z: 0}
 --- !u!1 &1790615870
 GameObject:
   m_ObjectHideFlags: 0
@@ -11386,7 +11374,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_righthandanchor_2025-06-18_13-44-52..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_righthandanchor_2025-06-18_15-30-02..bin
   _isDoneSaving: 0
 --- !u!1 &1857444598
 GameObject:
@@ -11418,7 +11406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9dc93c7e1ae142448d4a122be86ea8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clip: {fileID: 2460798210113038985, guid: 3f52f7be47b03c0ca5fa3b3f981cc8c5, type: 3}
+  _clip: {fileID: 2460798210113038985, guid: cb12b330768f31df81d1c3697335a304, type: 3}
   _controller: 1
   _loop: 0
   _amplitude: 1
@@ -11712,7 +11700,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1692753994715645107, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-18_13-48-20..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-18_14-26-07..bin
       objectReference: {fileID: 0}
     - target: {fileID: 3248523182090798507, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11756,7 +11744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3259352244687471260, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-stringbed-center_2025-06-18_13-48-20..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-stringbed-center_2025-06-18_14-26-07..bin
       objectReference: {fileID: 0}
     - target: {fileID: 3921553247011690897, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _position.x
@@ -11784,7 +11772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4059865396570719225, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-grip-base_2025-06-18_13-48-20..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-grip-base_2025-06-18_14-26-07..bin
       objectReference: {fileID: 0}
     - target: {fileID: 4366985766323789496, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: m_Name
@@ -11792,7 +11780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4908714529883086994, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-18_13-48-20..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-18_14-26-07..bin
       objectReference: {fileID: 0}
     - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: anchorTransform
@@ -11800,11 +11788,15 @@ PrefabInstance:
       objectReference: {fileID: 4339771046634355650}
     - target: {fileID: 7663550768408559955, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-18_13-48-20..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-18_14-26-07..bin
       objectReference: {fileID: 0}
     - target: {fileID: 7843026114750108742, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-18_13-48-20..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-18_14-26-07..bin
+      objectReference: {fileID: 0}
+    - target: {fileID: 8673953547868582854, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -152,7 +152,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 
             this.Hit(TennisManager.Instance.Ball);
 
-            onRacketHit.Invoke(relativeSpeed);
+            onRacketHit?.Invoke(relativeSpeed);
 
             TrackingManager.Instance.RecordEvent(TaskEventType.RacketHit);
         }
