@@ -19,6 +19,12 @@ public class TaskManager : Singleton<TaskManager>
     [Min(.01f)]
     public float interTrialInterval = 3;
 
+    // IMPLEMENT AUTOMATIC END OF THE SESSIONS AFTER STAGE 3 !!!!
+
+    // IMPLEMENT: Add a way to set the stage and trial index externally, if needed SO THAT IT IS LOGGED IN THE METADATA
+    public float targetPosition; // Position of the target in the court, relative to the court's center
+    public Vector3 targetScale = Vector3.one; // Scale of the target in the court
+
     // Read only fields
     [SerializeField, ReadOnly]
     private int _stageIndex;

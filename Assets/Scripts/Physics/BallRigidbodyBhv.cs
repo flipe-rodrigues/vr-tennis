@@ -10,6 +10,8 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
     public float radius = 0.033f; // m (standard tennis ball radius)
     public float airDensity = 1.225f; // kg/m³ at sea level
 
+    public bool wasJustHit = false; // IMPLEMENT!! BECAUSE WE NEED TO KNOW WHEN THE BALL BOUNCES FIRST ON THE GROUND AFTER A HIT
+
     // Read only fields
     [SerializeField, ReadOnly]
     private float _dragCoefficient;
