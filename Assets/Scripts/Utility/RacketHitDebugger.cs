@@ -2,7 +2,7 @@ using System.Reflection;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class RacketHitDebugger : MonoBehaviour
+public class RacketHitDebugger : CachedTransformBhv
 {
     // Public fields
     public RacketHitFields field = RacketHitFields.HitVelocity;
@@ -15,6 +15,7 @@ public class RacketHitDebugger : MonoBehaviour
 
     // Private fields
     private LineRenderer _lineRenderer;
+    private string _propertyName;
 
     private void OnValidate()
     {
@@ -24,9 +25,14 @@ public class RacketHitDebugger : MonoBehaviour
         GetComponent<LineRenderer>().endColor = color;
     }
 
-    private void Awake()
+    protected override void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+    }
+
+    private void Start()
+    {
+        _propertyName = field.ToString();
     }
 
     private void Update()
@@ -38,28 +44,27 @@ public class RacketHitDebugger : MonoBehaviour
 
         _fieldValue = GetFieldValueFromRacket(field);
 
-        _lineRenderer.SetPosition(0, offset);
-        _lineRenderer.SetPosition(1, offset + _fieldValue);
+        _lineRenderer.SetPosition(0, this.Position + offset);
+        _lineRenderer.SetPosition(1, this.Position + offset + _fieldValue);
     }
 
     private Vector3 GetFieldValueFromRacket(RacketHitFields selectedField)
     {
         var racket = TennisManager.Instance.Racket;
-        string propertyName = selectedField.ToString(); // e.g., "HitVelocity", "HitContactNormal"
 
-        PropertyInfo prop = racket.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+        PropertyInfo prop = racket.GetType().GetProperty(_propertyName, BindingFlags.Public | BindingFlags.Instance);
         if (prop != null && prop.PropertyType == typeof(Vector3))
         {
             return (Vector3)prop.GetValue(racket);
         }
 
-        FieldInfo field = racket.GetType().GetField(propertyName, BindingFlags.Public | BindingFlags.Instance);
+        FieldInfo field = racket.GetType().GetField(_propertyName, BindingFlags.Public | BindingFlags.Instance);
         if (field != null && field.FieldType == typeof(Vector3))
         {
             return (Vector3)field.GetValue(racket);
         }
 
-        Debug.LogWarning($"Field or property {propertyName} not found on Racket.");
+        Debug.LogWarning($"Field or property {_propertyName} not found on Racket.");
         return Vector3.zero;
     }
 }

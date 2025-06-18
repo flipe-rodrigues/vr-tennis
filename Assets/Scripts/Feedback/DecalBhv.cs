@@ -8,6 +8,7 @@ public class DecalBhv : CachedTransformBhv
 
     // Public fields
     public Color initialColor;
+    [Range(.1f, 10)]
     private float lifetime = 3f;
 
     // Private fields

@@ -15,4 +15,13 @@ public class CollisionTrackingBhv : MonoBehaviour
     {
         TrackingManager.Instance.RecordEvent(collisionExitEvent);
     }
+    private void OnTriggerEnter(Collider collider)
+    {
+        TrackingManager.Instance.RecordEvent(collisionEnterEvent);
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        TrackingManager.Instance.RecordEvent(collisionExitEvent);
+    }
 }

@@ -155,6 +155,7 @@ MonoBehaviour:
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _scale: {x: 0, y: 0, z: 0}
+  maxLinearVelocity: 100
   maxAngularVelocity: 500
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
@@ -185,7 +186,7 @@ MonoBehaviour:
   audioPrefab: {fileID: 4532499111118335401, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
   audioPoolSize: 10
   audioClip: {fileID: 8300000, guid: 0dcc9c43016d7774dbcdcc76361feb1f, type: 3}
-  volumeModifier: 0.05
+  volumeModifier: 0.15
   volumeVariationRange: 0.1
   pitchVariationRange: 0.2
 --- !u!114 &1584005004659877603
@@ -209,7 +210,7 @@ MonoBehaviour:
   audioPrefab: {fileID: 4532499111118335401, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
   audioPoolSize: 3
   audioClip: {fileID: 8300000, guid: de9956cbb3ddc9d49b7d2d9868e26bab, type: 3}
-  volumeModifier: 0.05
+  volumeModifier: 0.3
   volumeVariationRange: 0.1
   pitchVariationRange: 0.5
 --- !u!114 &2982270267574870622

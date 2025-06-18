@@ -12,9 +12,4 @@ public class RacketAnchorBhv : CachedTransformBhv
             anchoredRigidbody.anchorTransform = this;
         }
     }
-
-    private void LateUpdate()
-    {
-        Physics.SyncTransforms();
-    }
 }

@@ -1,4 +1,3 @@
-using Meta.WitAi;
 using UnityEngine;
 
 public class DecalFeedbackBhv : FeedbackBhv
@@ -52,9 +51,10 @@ public class DecalFeedbackBhv : FeedbackBhv
         ContactPoint contact = collision.GetContact(0);
 
         Vector3 relativeVelocity = -collision.relativeVelocity;
+        Vector3 relativeLocalVelocity = this.Transform.InverseTransformDirection(relativeVelocity);
         Vector3 tangentialVelocity = Vector3.ProjectOnPlane(relativeVelocity, Vector3.up);
-        Quaternion rotation = Quaternion.LookRotation(tangentialVelocity.normalized, Vector3.up);
-        Vector3 deltaScale = relativeVelocity.ElementWiseMultiplication(scaleModifier).Abs();
+        Quaternion rotation = Quaternion.LookRotation(tangentialVelocity, Vector3.up);
+        Vector3 deltaScale = relativeLocalVelocity.ElementWiseMultiplication(scaleModifier).Abs();
 
         float alpha = Mathf.Clamp(collision.relativeVelocity.magnitude * alphaModifier, 0, _maxAlpha);
 

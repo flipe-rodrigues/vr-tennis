@@ -24,6 +24,11 @@ public class HapticsManager : Singleton<HapticsManager>
         this.OnValidate();
     }
 
+    private void Start()
+    {
+        
+    }
+
     public void Play(float amplitude)
     {
         if (_hapticSource == null)

@@ -16,7 +16,7 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
     [SerializeField, ReadOnly]
     private float _liftCoefficient;
     [SerializeField, ReadOnly]
-    private float _spinDecayRate;
+    private float _spinDecayRate = 1f;
 
     // Private fields
     private float _crossSectionalArea;
@@ -30,11 +30,23 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
         this.Rigidbody.mass = mass;
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        this.OnValidate();
+    }
+
     protected override void Start()
     {
         base.Start();
 
         _crossSectionalArea = Mathf.PI * radius * radius;
+    }
+
+    public void Restart()
+    {
+        this.Start();
     }
 
     protected override void FixedUpdate()

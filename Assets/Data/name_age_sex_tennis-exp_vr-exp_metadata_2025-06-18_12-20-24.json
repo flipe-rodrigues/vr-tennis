@@ -1,0 +1,171 @@
+{
+"Ball": {
+    "_position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "_rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "_scale": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "maxAngularVelocity": 500.0,
+    "_linearVelocity": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "_angularVelocity": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "mass": 0.05700000002980232,
+    "radius": 0.03400000184774399,
+    "airDensity": 1.225000023841858,
+    "_dragCoefficient": 0.0,
+    "_liftCoefficient": 0.0,
+    "_spinDecayRate": 0.0
+},
+"RacketRigidbody": {
+    "_position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "_rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "_scale": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "maxAngularVelocity": 100.0,
+    "_linearVelocity": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "_angularVelocity": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "anchorTransform": {
+        "instanceID": 179738
+    },
+    "apparentNormalRestitution": 0.4000000059604645,
+    "apparentTangentialRestitution": 0.6499999761581421,
+    "apparentSpinRestitution": 0.4000000059604645,
+    "spinToTangentialConversion": 0.3499999940395355,
+    "tangentialToSpinConversion": 0.5799999833106995,
+    "refractoryPeriod": 0.25,
+    "smoothingTimeConstant": 0.009999999776482582,
+    "onRacketHit": {
+        "m_PersistentCalls": {
+            "m_Calls": [
+                {
+                    "m_Target": {
+                        "instanceID": 179612
+                    },
+                    "m_TargetAssemblyTypeName": "AudioFeedbackBhv, Assembly-CSharp",
+                    "m_MethodName": "Play",
+                    "m_Mode": 0,
+                    "m_Arguments": {
+                        "m_ObjectArgument": {
+                            "instanceID": 0
+                        },
+                        "m_ObjectArgumentAssemblyTypeName": "UnityEngine.Object, UnityEngine",
+                        "m_IntArgument": 0,
+                        "m_FloatArgument": 0.0,
+                        "m_StringArgument": "",
+                        "m_BoolArgument": false
+                    },
+                    "m_CallState": 2
+                },
+                {
+                    "m_Target": {
+                        "instanceID": 179610
+                    },
+                    "m_TargetAssemblyTypeName": "HapticFeedbackBhv, Assembly-CSharp",
+                    "m_MethodName": "Play",
+                    "m_Mode": 0,
+                    "m_Arguments": {
+                        "m_ObjectArgument": {
+                            "instanceID": 0
+                        },
+                        "m_ObjectArgumentAssemblyTypeName": "UnityEngine.Object, UnityEngine",
+                        "m_IntArgument": 0,
+                        "m_FloatArgument": 0.0,
+                        "m_StringArgument": "",
+                        "m_BoolArgument": false
+                    },
+                    "m_CallState": 2
+                }
+            ]
+        }
+    },
+    "_smoothingRate": 0.09516257047653198,
+    "_numFrames": 10
+},
+"BallSpawner": {
+    "_position": {
+        "x": 4.5,
+        "y": 1.5,
+        "z": -2.5
+    },
+    "_rotation": {
+        "x": 333.98394775390627,
+        "y": 201.97450256347657,
+        "z": 9.500398618911277e-7
+    },
+    "_scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    },
+    "ballPrefab": {
+        "instanceID": 34784
+    },
+    "ballPoolSize": 10,
+    "linearSpeed": 8.5,
+    "topSpin": 0.0,
+    "sideSpin": 0.0
+},
+"TaskManager": {
+    "trialsPerStage": 2,
+    "interTrialInterval": 3.0,
+    "_stageIndex": 0,
+    "_trialIndex": 0
+},
+"BallPhysX": {
+    "dynamicFriction": 0.30000001192092898,
+    "staticFriction": 0.30000001192092898,
+    "bounciness": 0.7699999809265137,
+    "frictionCombine": "Multiply",
+    "bouncinessCombine": "Multiply"
+},
+"CourtPhysX": {
+    "dynamicFriction": 0.800000011920929,
+    "staticFriction": 0.800000011920929,
+    "bounciness": 1.0,
+    "frictionCombine": "Multiply",
+    "bouncinessCombine": "Multiply"
+},
+"NetPhysX": {
+    "dynamicFriction": 0.4000000059604645,
+    "staticFriction": 0.5,
+    "bounciness": 0.05000000074505806,
+    "frictionCombine": "Multiply",
+    "bouncinessCombine": "Multiply"
+}
+}

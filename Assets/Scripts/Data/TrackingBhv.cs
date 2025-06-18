@@ -53,7 +53,7 @@ public class TrackingBhv : CachedTransformBhv
 
     public void Record(TaskEventType taskEvent = TaskEventType.None)
     {
-        if (ApplicationManager.Instance.HasStartedQuitting)
+        if (!DataManager.Instance.saveData || ApplicationManager.Instance.HasStartedQuitting)
         {
             return;
         }
@@ -93,7 +93,7 @@ public class TrackingBhv : CachedTransformBhv
 
     private void OnApplicationQuit()
     {
-        if (_isDoneSaving)
+        if (!DataManager.Instance.saveData || _isDoneSaving)
         {
             return;
         }

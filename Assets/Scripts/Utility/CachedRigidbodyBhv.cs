@@ -11,6 +11,9 @@ public class CachedRigidbodyBhv : CachedTransformBhv
     protected Rigidbody Rigidbody => _rigidbody == null ? GetComponent<Rigidbody>() : _rigidbody;
 
     // Public fields
+    [Range(0, 1e3f)]
+    public float maxLinearVelocity = 500;
+    [Range(0, 1e3f)]
     public float maxAngularVelocity = 50;
 
     // Read only fields
@@ -33,6 +36,7 @@ public class CachedRigidbodyBhv : CachedTransformBhv
 
     protected virtual void Start()
     {
+        this.Rigidbody.maxLinearVelocity = maxLinearVelocity;
         this.Rigidbody.maxAngularVelocity = maxAngularVelocity;
 
         _previousPosition = this.Position;
