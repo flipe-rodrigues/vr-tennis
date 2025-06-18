@@ -36,13 +36,10 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
     [SerializeField, ReadOnly]
     private float _smoothingRate;
     [SerializeField, ReadOnly]
-    private int _numFrames;
+    private int _approxNumFrames;
 
     // Private fields
     private RacketColliderBhv _racketCollider;
-    private Queue<Vector3> _contactNormals;
-    private Queue<Vector3> _linearVelocities;
-    private Queue<Vector3> _angularVelocities;
     private Vector3 _smoothContactNormal;
     private Vector3 _smoothLinearVelocity;
     private Vector3 _smoothAngularVelocity;
@@ -57,7 +54,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
         }
 
         _smoothingRate = smoothingTimeConstant.TauToLambda();
-        _numFrames = Mathf.RoundToInt(smoothingTimeConstant / Time.fixedDeltaTime);
+        _approxNumFrames = Mathf.RoundToInt(smoothingTimeConstant / Time.fixedDeltaTime);
     }
 
     protected override void Awake()
@@ -65,15 +62,6 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
         base.Awake();
 
         _racketCollider = GetComponentInChildren<RacketColliderBhv>();
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-
-        _contactNormals = new Queue<Vector3>(_numFrames);
-        _linearVelocities = new Queue<Vector3>(_numFrames);
-        _angularVelocities = new Queue<Vector3>(_numFrames);
     }
 
     private void Update()
@@ -93,27 +81,6 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
         _smoothContactNormal = Vector3.Lerp(_smoothContactNormal, this.GetContactNormal(), _smoothingRate);
         _smoothLinearVelocity = Vector3.Lerp(_smoothLinearVelocity, this.LinearVelocity, _smoothingRate);
         _smoothAngularVelocity = Vector3.Lerp(_smoothAngularVelocity, this.AngularVelocity, _smoothingRate);
-
-        //_contactNormals.Enqueue(this.GetContactNormal());
-        //_linearVelocities.Enqueue(this.LinearVelocity);
-        //_angularVelocities.Enqueue(this.AngularVelocity);
-
-        //if (_contactNormals.Count > _numFrames)
-        //{
-        //    _contactNormals.Dequeue();
-        //}
-        //if (_linearVelocities.Count > _numFrames)
-        //{
-        //    _linearVelocities.Dequeue();
-        //}
-        //if (_angularVelocities.Count > _numFrames)
-        //{
-        //    _angularVelocities.Dequeue();
-        //}
-
-        //_smoothContactNormal = _contactNormals.MidPoint().normalized;
-        //_smoothLinearVelocity = _linearVelocities.MidPoint();
-        //_smoothAngularVelocity = _angularVelocities.MidPoint();
     }
 
     public void MoveTransform()
@@ -153,6 +120,8 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
             this.Hit(TennisManager.Instance.Ball);
 
             onRacketHit?.Invoke(relativeSpeed);
+
+            TennisManager.Instance.Ball.WasJustHit = true;
 
             TrackingManager.Instance.RecordEvent(TaskEventType.RacketHit);
         }

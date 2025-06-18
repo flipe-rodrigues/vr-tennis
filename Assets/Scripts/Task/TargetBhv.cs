@@ -18,6 +18,11 @@ public class TargetBhv : CachedTransformBhv
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!TennisManager.Instance.Ball.WasJustHit)
+        {
+            return;
+        }
+
         _mesh.GlowAndFade();
 
         onTargetHit?.Invoke(TennisManager.Instance.Ball.LinearVelocity.magnitude);

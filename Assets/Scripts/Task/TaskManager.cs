@@ -11,6 +11,7 @@ public class TaskManager : Singleton<TaskManager>
     public int TrialIndex => _trialIndex;
 
     // Private properties
+    private TargetBhv Target => _target == null ? this.GetComponentInChildren<TargetBhv>() : _target;
     private int StageTrialCount => trialsPerStage * (_stageIndex + 1);
 
     // Public fields
@@ -19,23 +20,29 @@ public class TaskManager : Singleton<TaskManager>
     [Min(.01f)]
     public float interTrialInterval = 3;
 
-    // IMPLEMENT AUTOMATIC END OF THE SESSIONS AFTER STAGE 3 !!!!
-
-    // IMPLEMENT: Add a way to set the stage and trial index externally, if needed SO THAT IT IS LOGGED IN THE METADATA
-    public float targetPosition; // Position of the target in the court, relative to the court's center
-    public Vector3 targetScale = Vector3.one; // Scale of the target in the court
-
     // Read only fields
     [SerializeField, ReadOnly]
     private int _stageIndex;
     [SerializeField, ReadOnly]
     private int _trialIndex;
+    [SerializeField, ReadOnly]
+    private Vector3 _targetPosition = Vector3.zero;
+    [SerializeField, ReadOnly]
+    private Vector3 _targetScale = Vector3.one;
 
     // Private fields
     private CourtBhv _court;
     private NetBhv _net;
     private TargetBhv _target;
     private float _lastTrialStartTime = -Mathf.Infinity;
+
+    protected override void OnValidate()
+    {
+        base.OnValidate();
+
+        _targetPosition = this.Target.Position;
+        _targetScale = this.Target.Scale;
+    }
 
     protected override void Awake()
     {
@@ -63,18 +70,27 @@ public class TaskManager : Singleton<TaskManager>
 
     private void StartTrial()
     {
-        if (_trialIndex > this.StageTrialCount && _stageIndex == 0)
+        if (_trialIndex >= this.StageTrialCount)
         {
-            _net.Active = true;
+            switch (_stageIndex)
+            {
+                case 0:
+                    _net.Active = true;
+                    _court.MeshRenderer.enabled = true;
+                    break;
 
-            _court.MeshRenderer.enabled = true;
+                case 1:
+                    _target.Active = true;
+                    break;
 
-            _stageIndex++;
-        }
+                case 2:
+                    _net.Active = false;
+                    break;
 
-        if (_trialIndex > this.StageTrialCount && _stageIndex == 1)
-        {
-            _target.Active = true;
+                default:
+                    ApplicationManager.Instance.StartToQuit();
+                    break;
+            }
 
             _stageIndex++;
         }

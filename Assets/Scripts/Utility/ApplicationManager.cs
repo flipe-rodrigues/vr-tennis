@@ -9,12 +9,13 @@ public class ApplicationManager : Singleton<ApplicationManager>
 
     // Static fields
     public static readonly WaitForFixedUpdate waitForFixedUpdateInstance = new WaitForFixedUpdate();
-    public static Action onQuitRequest;
+    public static Action onQuitStart;
 
     // Public fields
+    public int targetFrameRate = 90;
+    public int targetPhysicsRate = 1000;
     [Range(.01f, 1f)]
     public float timeScale = 1f;
-    public int targetFrameRate = 120;
 
     // Read only fields
     [SerializeField, ReadOnly]
@@ -24,9 +25,13 @@ public class ApplicationManager : Singleton<ApplicationManager>
     {
         base.OnValidate();
 
-        Time.timeScale = timeScale;
-
         Application.targetFrameRate = targetFrameRate;
+
+        Time.fixedDeltaTime = 1f / targetPhysicsRate;
+
+        Time.maximumDeltaTime = 1f / targetFrameRate;
+
+        Time.timeScale = timeScale;
     }
 
     private void Start()
@@ -38,23 +43,33 @@ public class ApplicationManager : Singleton<ApplicationManager>
     {
         if (UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            onQuitRequest?.Invoke();
-
-            _hasStartedQuitting = true;
+            this.StartToQuit();
         }
 
         if (_hasStartedQuitting && TrackingManager.Instance.IsDoneSaving)
         {
-            if (Application.isEditor)
-            {
+            this.Quit();
+        }
+    }
+
+    public void StartToQuit()
+    {
+        onQuitStart?.Invoke();
+
+        _hasStartedQuitting = true;
+    }
+
+    private void Quit()
+    {
+        if (Application.isEditor)
+        {
 #if UNITY_EDITOR
-                EditorApplication.isPlaying = false;
+            EditorApplication.isPlaying = false;
 #endif
-            }
-            else
-            {
-                Application.Quit();
-            }
+        }
+        else
+        {
+            Application.Quit();
         }
     }
 }

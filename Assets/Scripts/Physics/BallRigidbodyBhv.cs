@@ -4,13 +4,12 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
 {
     // Public properties
     public float Radius => radius;
+    public bool WasJustHit { get { return _wasJustHit; } set { _wasJustHit = value; } }
 
     // Public fields
     public float mass = 0.057f; // kg (standard tennis ball mass)
     public float radius = 0.033f; // m (standard tennis ball radius)
     public float airDensity = 1.225f; // kg/m³ at sea level
-
-    public bool wasJustHit = false; // IMPLEMENT!! BECAUSE WE NEED TO KNOW WHEN THE BALL BOUNCES FIRST ON THE GROUND AFTER A HIT
 
     // Read only fields
     [SerializeField, ReadOnly]
@@ -19,6 +18,8 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
     private float _liftCoefficient;
     [SerializeField, ReadOnly]
     private float _spinDecayRate = 1f;
+    [SerializeField, ReadOnly]
+    private bool _wasJustHit;
 
     // Private fields
     private float _crossSectionalArea;
@@ -115,5 +116,10 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
         _spinDecayRate = Mathf.Exp(-Time.fixedDeltaTime / (164f / _V));
 
         this.AngularVelocity *= _spinDecayRate;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        _wasJustHit = false;
     }
 }

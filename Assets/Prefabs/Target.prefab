@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 989851937215258607}
   - component: {fileID: 3283951366363006624}
   - component: {fileID: 3685396748422202557}
+  - component: {fileID: 1760354235337333427}
   m_Layer: 10
   m_Name: Target
   m_TagString: Untagged
@@ -27,15 +28,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2631111453368802562}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.51, y: 0, z: -8.6}
-  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -8.5, y: 0, z: -2}
+  m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4278224573348922735}
   - {fileID: 6836153936104255119}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!65 &989851937215258607
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -69,9 +70,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd20eaedecd7054bbc4c49d27e0aeae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: -0.233, y: 0, z: -0.368}
+  _position: {x: -1.8499998, y: 0, z: 4.25}
   _rotation: {x: -0, y: 0, z: 0}
-  _scale: {x: 0.5, y: 1, z: 0.5}
+  _scale: {x: 3, y: 1, z: 3}
+  onTargetHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1760354235337333427}
+        m_TargetAssemblyTypeName: AudioFeedbackBhv, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3685396748422202557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +102,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionEnterEvent: 7
   collisionExitEvent: 8
+--- !u!114 &1760354235337333427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631111453368802562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858c103e0df2f524a90cefbdb308a504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: -1.8499998, y: 0, z: 4.25}
+  _rotation: {x: -0, y: 0, z: 0}
+  _scale: {x: 3, y: 1, z: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  audioPrefab: {fileID: 4532499111118335401, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
+  audioPoolSize: 10
+  audioClip: {fileID: 8300000, guid: 455b9b36bd968934e95a0356de3da062, type: 3}
+  volumeModifier: 0.25
+  volumeVariationRange: 0
+  pitchVariationRange: 0
 --- !u!1 &3764962153919322560
 GameObject:
   m_ObjectHideFlags: 0

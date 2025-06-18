@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 226501250463370350}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -128,6 +128,7 @@ MonoBehaviour:
   scaleModifier: {x: 0.25, y: 0.25, z: 0.1}
   maxScaleFactor: 5
   smoothingTimeConstant: 0.1
+  displayAsMesh: 0
   _smoothingRate: 0.009950161
 --- !u!114 &7275832517984420083
 MonoBehaviour:
@@ -193,7 +194,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-18_15-04-18..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-18_23-47-59..bin
   _isDoneSaving: 0
 --- !u!1 &4184398871533583225
 GameObject:
@@ -246,7 +247,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-grip-base_2025-06-18_15-04-18..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-grip-base_2025-06-18_23-47-59..bin
   _isDoneSaving: 0
 --- !u!1 &4366985766323789496
 GameObject:
@@ -331,7 +332,7 @@ MonoBehaviour:
   _rotation: {x: 0, y: 0, z: 0}
   _scale: {x: 0, y: 0, z: 0}
   maxLinearVelocity: 100
-  maxAngularVelocity: 100
+  maxAngularVelocity: 250
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
   anchorTransform: {fileID: 0}
@@ -370,7 +371,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _smoothingRate: 0.09516257
-  _numFrames: 10
+  _approxNumFrames: 10
 --- !u!114 &3921553247011690897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,8 +384,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858c103e0df2f524a90cefbdb308a504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0.04999994, z: -0.014163554}
-  _rotation: {x: 270, y: -0.00000021344341, z: 0}
+  _position: {x: 0.217, y: 0.24499995, z: -0.51416355}
+  _rotation: {x: 10.000005, y: 270, z: 90}
   _scale: {x: 0.75, y: 0.75, z: 0.75}
   layerMask:
     serializedVersion: 2
@@ -473,7 +474,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-18_15-04-18..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-18_23-47-59..bin
   _isDoneSaving: 0
 --- !u!1 &4837998024061670508
 GameObject:
@@ -526,7 +527,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-stringbed-center_2025-06-18_15-04-18..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-stringbed-center_2025-06-18_23-47-59..bin
   _isDoneSaving: 0
 --- !u!1 &6836273951096070836
 GameObject:
@@ -616,7 +617,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-18_15-04-18..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-18_23-47-59..bin
   _isDoneSaving: 0
 --- !u!1 &7620714560613135057
 GameObject:
@@ -669,7 +670,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7620714560613135057}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -747,6 +748,7 @@ MonoBehaviour:
   scaleModifier: {x: 0.5, y: 0.5, z: 10}
   maxScaleFactor: 1
   smoothingTimeConstant: 0.01
+  displayAsMesh: 0
   _smoothingRate: 0.09516257
 --- !u!114 &945823809938687959
 MonoBehaviour:
@@ -812,7 +814,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-18_15-04-18..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-18_23-47-59..bin
   _isDoneSaving: 0
 --- !u!1 &8938344833686612761
 GameObject:

@@ -24,6 +24,7 @@ public class TrackingBhv : CachedTransformBhv
     // Private fields
     private BinaryWriter _binaryWriter;
     private string _binaryPath;
+    private float _samplingTimer;
 
     private void OnValidate()
     {
@@ -48,7 +49,14 @@ public class TrackingBhv : CachedTransformBhv
 
     private void FixedUpdate()
     {
-        this.Record();
+        _samplingTimer += Time.fixedDeltaTime;
+
+        if (_samplingTimer >= TrackingManager.Instance.SamplingInterval)
+        {
+            this.Record();
+
+            _samplingTimer = 0f;
+        }
     }
 
     public void Record(TaskEventType taskEvent = TaskEventType.None)
@@ -73,12 +81,12 @@ public class TrackingBhv : CachedTransformBhv
 
     protected virtual void OnEnable()
     {
-        ApplicationManager.onQuitRequest += this.HandleQuitRequest;
+        ApplicationManager.onQuitStart += this.HandleQuitRequest;
     }
 
     protected virtual void OnDisable()
     {
-        ApplicationManager.onQuitRequest -= this.HandleQuitRequest;
+        ApplicationManager.onQuitStart -= this.HandleQuitRequest;
     }
 
     private void HandleQuitRequest()

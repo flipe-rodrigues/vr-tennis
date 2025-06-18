@@ -5,12 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class RacketColliderBhv : CachedTransformBhv
 {
+    // Private properties
+    private MeshRenderer MeshRenderer => _meshRenderer == null ? GetComponent<MeshRenderer>() : _meshRenderer;
+
     // Public fields
     public Vector3 scaleModifier = Vector3.one;
     [Range(1, 10)]
     public float maxScaleFactor = 5f;
     [Min(0.001f)]
     public float smoothingTimeConstant = 0.1f;
+    public bool displayAsMesh;
 
     // Read only fields
     [SerializeField, ReadOnly]
@@ -25,11 +29,8 @@ public class RacketColliderBhv : CachedTransformBhv
     private void OnValidate()
     {
         _smoothingRate = smoothingTimeConstant.TauToLambda();
-    }
 
-    private void Start()
-    {
-        _defaultScale = this.Scale;
+        this.MeshRenderer.enabled = displayAsMesh;
     }
 
     protected override void Awake()
@@ -41,9 +42,15 @@ public class RacketColliderBhv : CachedTransformBhv
         _collider = GetComponent<Collider>();
     }
 
+    private void Start()
+    {
+        _defaultScale = this.Scale;
+
+        _meshRenderer.enabled = displayAsMesh;
+    }
+
     private void FixedUpdate()
     {
-        //_smoothLinearVelocity = TennisManager.Instance.Racket.SmoothLinearVelocity;
         _smoothLinearVelocity = Vector3.Lerp(_smoothLinearVelocity, TennisManager.Instance.Racket.LinearVelocity, _smoothingRate);
 
         Vector3 localVelocity = this.Transform.InverseTransformDirection(_smoothLinearVelocity);
@@ -73,7 +80,7 @@ public class RacketColliderBhv : CachedTransformBhv
             yield return ApplicationManager.waitForFixedUpdateInstance;
         }
 
-        _meshRenderer.enabled = true;
+        _meshRenderer.enabled = displayAsMesh;
 
         _collider.enabled = true;
     }
