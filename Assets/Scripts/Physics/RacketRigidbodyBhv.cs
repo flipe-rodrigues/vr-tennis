@@ -123,7 +123,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 
             TennisManager.Instance.Ball.WasJustHit = true;
 
-            TrackingManager.Instance.RecordEvent(TaskEventType.RacketHit);
+            TrackingManager.Instance.RecordTaskEvent(TaskEventType.RacketHit);
         }
     }
 

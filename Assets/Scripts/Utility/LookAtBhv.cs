@@ -9,7 +9,7 @@ public class LookAtBhv : CachedTransformBhv
 
     private void Update()
     {
-        if (target == null)
+        if (target == null || Application.isPlaying)
         {
             return;
         }

@@ -97,6 +97,6 @@ public class TaskManager : Singleton<TaskManager>
 
         onTrialStart?.Invoke();
 
-        TrackingManager.Instance.RecordEvent(TaskEventType.TrialStart);
+        TrackingManager.Instance.RecordTaskEvent(TaskEventType.TrialStart);
     }
 }

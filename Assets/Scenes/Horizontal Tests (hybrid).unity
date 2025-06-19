@@ -317,7 +317,7 @@ MonoBehaviour:
   gizmoRadius: 0.05
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-18_23-55-45..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-19_12-16-27..bin
   _isDoneSaving: 0
 --- !u!4 &550389140 stripped
 Transform:
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcef3e864d8eb1488c300df1e1ff5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-18_23-55-45.json
+  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-19_12-16-27.json
   taskManager: {fileID: 427517422}
   ballSpawner: {fileID: 2118512084}
   ball: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
@@ -764,14 +764,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 427517423}
     m_Modifications:
     - target: {fileID: 58712347717955250, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 58712347717955250, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 58712347717955250, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.336
       objectReference: {fileID: 0}
@@ -812,20 +804,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: _scale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: _scale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _position.x
-      value: -0.25
+      value: -0.336
       objectReference: {fileID: 0}
     - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _position.z
-      value: -0.25
+      value: -0.325
       objectReference: {fileID: 0}
     - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _rotation.x
@@ -833,14 +817,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _rotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: pitchVariationRange
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: volumeVariationRange
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2631111453368802562, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
@@ -848,20 +824,12 @@ PrefabInstance:
       value: Target
       objectReference: {fileID: 0}
     - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: _scale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: _scale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _position.x
-      value: -0.25
+      value: -0.336
       objectReference: {fileID: 0}
     - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _position.z
-      value: -0.25
+      value: -0.325
       objectReference: {fileID: 0}
     - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _rotation.x
@@ -870,6 +838,14 @@ PrefabInstance:
     - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _rotation.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
+      propertyPath: triggerExitEvent
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
+      propertyPath: triggerEnterEvent
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -978,13 +954,13 @@ MonoBehaviour:
   samplingRate: 500
   _samplingInterval: 0.002
   _trackers:
-  - {fileID: 276463347}
   - {fileID: 1997368631}
   - {fileID: 226319802}
-  - {fileID: 1113017188}
   - {fileID: 454428205}
   - {fileID: 745214539}
+  - {fileID: 276463347}
   - {fileID: 2013558584}
+  - {fileID: 1113017188}
 --- !u!4 &1749113138
 Transform:
   m_ObjectHideFlags: 0

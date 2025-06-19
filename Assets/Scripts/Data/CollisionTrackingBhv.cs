@@ -8,20 +8,11 @@ public class CollisionTrackingBhv : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        TrackingManager.Instance.RecordEvent(collisionEnterEvent);
+        TrackingManager.Instance.RecordTaskEvent(collisionEnterEvent);
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        TrackingManager.Instance.RecordEvent(collisionExitEvent);
-    }
-    private void OnTriggerEnter(Collider collider)
-    {
-        TrackingManager.Instance.RecordEvent(collisionEnterEvent);
-    }
-
-    private void OnTriggerExit(Collider collider)
-    {
-        TrackingManager.Instance.RecordEvent(collisionExitEvent);
+        TrackingManager.Instance.RecordTaskEvent(collisionExitEvent);
     }
 }

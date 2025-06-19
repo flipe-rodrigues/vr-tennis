@@ -33,16 +33,16 @@ public class TrackingManager : Singleton<TrackingManager>
         this.OnValidate();
     }
 
-    public void RecordEvent(TaskEventType taskEvent) 
+    public void RecordTaskEvent(TaskEventType taskEvent) 
     {
-        if (!DataManager.Instance.saveData)
+        if (!DataManager.Instance.saveData || ApplicationManager.Instance.HasStartedQuitting)
         {
             return;
         }
 
         foreach (TrackingBhv tracker in _trackers)
         {
-            tracker.Record(taskEvent);
+            tracker.BaitNextTaskEvent(taskEvent);
         }
     }
 }

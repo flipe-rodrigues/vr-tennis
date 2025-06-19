@@ -18,7 +18,7 @@ public class TargetBhv : CachedTransformBhv
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!TennisManager.Instance.Ball.WasJustHit)
+        if (!other.GetComponent<BallRigidbodyBhv>().WasJustHit)
         {
             return;
         }
@@ -26,5 +26,17 @@ public class TargetBhv : CachedTransformBhv
         _mesh.GlowAndFade();
 
         onTargetHit?.Invoke(TennisManager.Instance.Ball.LinearVelocity.magnitude);
+
+        TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetEnter);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.GetComponent<BallRigidbodyBhv>().WasJustHit)
+        {
+            return;
+        }
+
+        TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetExit);
     }
 }

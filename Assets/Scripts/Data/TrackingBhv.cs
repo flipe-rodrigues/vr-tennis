@@ -23,6 +23,7 @@ public class TrackingBhv : CachedTransformBhv
 
     // Private fields
     private BinaryWriter _binaryWriter;
+    private TaskEventType _taskEvent;
     private string _binaryPath;
     private float _samplingTimer;
 
@@ -49,6 +50,11 @@ public class TrackingBhv : CachedTransformBhv
 
     private void FixedUpdate()
     {
+        if (!DataManager.Instance.saveData || ApplicationManager.Instance.HasStartedQuitting)
+        {
+            return;
+        }
+
         _samplingTimer += Time.fixedDeltaTime;
 
         if (_samplingTimer >= TrackingManager.Instance.SamplingInterval)
@@ -59,13 +65,8 @@ public class TrackingBhv : CachedTransformBhv
         }
     }
 
-    public void Record(TaskEventType taskEvent = TaskEventType.None)
+    private void Record()
     {
-        if (!DataManager.Instance.saveData || ApplicationManager.Instance.HasStartedQuitting)
-        {
-            return;
-        }
-
         TrackingDatum datum = new TrackingDatum
         {
             stage = TaskManager.Instance.StageIndex,
@@ -73,10 +74,17 @@ public class TrackingBhv : CachedTransformBhv
             time = Time.time,
             position = this.Position,
             rotation = this.Rotation,
-            taskEvent = taskEvent
+            taskEvent = _taskEvent
         };
 
+        _taskEvent = TaskEventType.None;
+
         _binaryWriter.WriteTrackingDatum(datum);
+    }
+
+    public void BaitNextTaskEvent(TaskEventType taskEvent)
+    {
+        _taskEvent = taskEvent;
     }
 
     protected virtual void OnEnable()

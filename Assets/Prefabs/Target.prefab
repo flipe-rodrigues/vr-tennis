@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 58712347717955250}
   - component: {fileID: 989851937215258607}
   - component: {fileID: 3283951366363006624}
-  - component: {fileID: 3685396748422202557}
   - component: {fileID: 1760354235337333427}
   m_Layer: 10
   m_Name: Target
@@ -30,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -8.5, y: 0, z: -2}
-  m_LocalScale: {x: 3, y: 1, z: 3}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4278224573348922735}
@@ -70,9 +69,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd20eaedecd7054bbc4c49d27e0aeae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: -1.8499998, y: 0, z: 4.25}
+  _position: {x: -0.336, y: 0, z: -0.325}
   _rotation: {x: -0, y: 0, z: 0}
-  _scale: {x: 3, y: 1, z: 3}
+  _scale: {x: 0.5, y: 1, z: 0.5}
   onTargetHit:
     m_PersistentCalls:
       m_Calls:
@@ -88,20 +87,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3685396748422202557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2631111453368802562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f430bdc0d3866004eb9bcca58d0f5be2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionEnterEvent: 7
-  collisionExitEvent: 8
+  triggerEnterEvent: 0
+  triggerExitEvent: 0
 --- !u!114 &1760354235337333427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,9 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858c103e0df2f524a90cefbdb308a504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: -1.8499998, y: 0, z: 4.25}
+  _position: {x: -0.336, y: 0, z: -0.325}
   _rotation: {x: -0, y: 0, z: 0}
-  _scale: {x: 3, y: 1, z: 3}
+  _scale: {x: 0.5, y: 1, z: 0.5}
   layerMask:
     serializedVersion: 2
     m_Bits: 0
