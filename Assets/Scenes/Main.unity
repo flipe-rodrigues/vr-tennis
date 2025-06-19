@@ -229,16 +229,16 @@ MonoBehaviour:
   samplingRate: 500
   _samplingInterval: 0.002
   _trackers:
-  - {fileID: 166106165}
-  - {fileID: 1854824343}
-  - {fileID: 1361894310}
   - {fileID: 1933173153}
+  - {fileID: 1854824343}
+  - {fileID: 166106165}
+  - {fileID: 1933173154}
+  - {fileID: 1933173157}
   - {fileID: 1933173155}
   - {fileID: 1933173159}
-  - {fileID: 1933173154}
-  - {fileID: 200473216}
-  - {fileID: 1933173157}
   - {fileID: 1933173158}
+  - {fileID: 200473216}
+  - {fileID: 1361894310}
 --- !u!1 &19562536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1038,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_lefthandanchor_2025-06-19_11-46-57..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_lefthandanchor_2025-06-19_14-21-26..bin
   _isDoneSaving: 0
 --- !u!1 &179611561
 GameObject:
@@ -1442,7 +1442,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_centereyeanchor_2025-06-19_11-46-57..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_centereyeanchor_2025-06-19_14-21-26..bin
   _isDoneSaving: 0
 --- !u!1 &203415850
 GameObject:
@@ -1625,7 +1625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcef3e864d8eb1488c300df1e1ff5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-19_11-46-57.json
+  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-19_14-21-26.json
   taskManager: {fileID: 660574638}
   ballSpawner: {fileID: 1787883655}
   ball: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
@@ -2839,7 +2839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monoscopic: 0
   _sharpenType: 65536
-  _enableDynamicResolution: 1
+  _enableDynamicResolution: 0
   minDynamicResolutionScale: 1
   maxDynamicResolutionScale: 1
   quest2MinDynamicResolutionScale: 0.7
@@ -4116,11 +4116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570597e47369b94409c8be19b1a8bd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trialsPerStage: 3
+  trialsPerStage: 25
   interTrialInterval: 3
   _stageIndex: 0
   _trialIndex: 0
-  _targetPosition: {x: -1.8499998, y: 0, z: 4.25}
+  _targetPosition: {x: -2, y: 0, z: 4.5}
   _targetScale: {x: 3, y: 1, z: 3}
 --- !u!1 &665509979
 GameObject:
@@ -7968,7 +7968,7 @@ MonoBehaviour:
   gizmoRadius: 0.05
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-19_11-46-57..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-19_14-21-26..bin
   _isDoneSaving: 0
 --- !u!1 &1384270280
 GameObject:
@@ -10824,7 +10824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1787883650}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.96371496, z: 0.2669336, w: 0}
+  m_LocalRotation: {x: 0.0020016534, y: 0.96369445, z: 0.26690215, w: -0.007227301}
   m_LocalPosition: {x: 1, y: 0.5, z: -2.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -10845,7 +10845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _position: {x: 1, y: 0.5, z: -2.5}
-  _rotation: {x: 329.03622, y: 180, z: 0}
+  _rotation: {x: 329.0391, y: 180.85936, z: 0.000000015556765}
   _scale: {x: 0.5, y: 0.5, z: 0.5}
   ballPrefab: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
   ballPoolSize: 10
@@ -10865,10 +10865,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _position: {x: 1, y: 0.5, z: -2.5}
-  _rotation: {x: 329.03622, y: 180, z: 0}
+  _rotation: {x: 329.0391, y: 180.85936, z: 0.000000015556765}
   _scale: {x: 0.5, y: 0.5, z: 0.5}
   target: {fileID: 200473212}
-  offset: {x: 1, y: 6.5, z: 0}
+  offset: {x: 0.85, y: 6.5, z: 0}
 --- !u!1 &1790615870
 GameObject:
   m_ObjectHideFlags: 0
@@ -11403,7 +11403,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_righthandanchor_2025-06-19_11-46-57..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_righthandanchor_2025-06-19_14-21-26..bin
   _isDoneSaving: 0
 --- !u!1 &1857444598
 GameObject:
@@ -13038,7 +13038,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 58712347717955250, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.8499998
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 58712347717955250, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13046,7 +13046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58712347717955250, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.25
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 58712347717955250, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13086,11 +13086,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _position.x
-      value: -1.8499998
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _position.z
-      value: 4.25
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _rotation.x
@@ -13098,10 +13098,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _rotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1760354235337333427, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: _rotation.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2631111453368802562, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
@@ -13118,11 +13114,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _position.x
-      value: -1.8499998
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _position.z
-      value: 4.25
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _rotation.x
@@ -13131,18 +13127,6 @@ PrefabInstance:
     - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
       propertyPath: _rotation.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3283951366363006624, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: _rotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293494421820630755, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: glowColor.b
-      value: 1.2319999
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293494421820630755, guid: 848d02c9e5e8069489ee9ccebe9eedef, type: 3}
-      propertyPath: glowColor.g
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

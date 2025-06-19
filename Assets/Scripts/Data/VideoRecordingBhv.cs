@@ -1,9 +1,6 @@
+using UnityEngine;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using UnityEditor.Overlays;
-using UnityEngine;
-using UnityEngine.Rendering;
 
 public class VideoRecordingBhv : MonoBehaviour
 {
