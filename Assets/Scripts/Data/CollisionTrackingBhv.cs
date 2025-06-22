@@ -8,11 +8,17 @@ public class CollisionTrackingBhv : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        TrackingManager.Instance.RecordTaskEvent(collisionEnterEvent);
+        if (collision.collider == TennisManager.Instance.Ball.Collider)
+        {
+            TrackingManager.Instance.RecordTaskEvent(collisionEnterEvent);
+        }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        TrackingManager.Instance.RecordTaskEvent(collisionExitEvent);
+        if (collision.collider == TennisManager.Instance.Ball.Collider)
+        {
+            TrackingManager.Instance.RecordTaskEvent(collisionExitEvent);
+        }
     }
 }

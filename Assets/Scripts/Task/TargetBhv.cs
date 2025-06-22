@@ -27,16 +27,17 @@ public class TargetBhv : CachedTransformBhv
 
         onTargetHit?.Invoke(TennisManager.Instance.Ball.LinearVelocity.magnitude);
 
-        TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetEnter);
+        if (other == TennisManager.Instance.Ball.Collider)
+        {
+            TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetEnter);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.GetComponent<BallRigidbodyBhv>().WasJustHit)
+        if (other == TennisManager.Instance.Ball.Collider)
         {
-            return;
+            TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetExit);
         }
-
-        TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetExit);
     }
 }

@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Linq;
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Collider))]
-public class RacketColliderBhv : CachedTransformBhv
+public class RacketDynamicColliderBhv : CachedTransformBhv
 {
     // Private properties
     private MeshRenderer MeshRenderer => _meshRenderer == null ? GetComponent<MeshRenderer>() : _meshRenderer;

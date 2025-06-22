@@ -1,11 +1,7 @@
-using System.Collections.Generic;
-using UnityEngine.Events;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem.XR;
 
-// TODO:
-// Cleanup after debugging..
-// Angular velocity in collider bhv
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(Rigidbody))]
@@ -39,7 +35,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
     private int _approxNumFrames;
 
     // Private fields
-    private RacketColliderBhv _racketCollider;
+    private RacketDynamicColliderBhv _racketCollider;
     private Vector3 _smoothContactNormal;
     private Vector3 _smoothLinearVelocity;
     private Vector3 _smoothAngularVelocity;
@@ -61,7 +57,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
     {
         base.Awake();
 
-        _racketCollider = GetComponentInChildren<RacketColliderBhv>();
+        _racketCollider = GetComponentInChildren<RacketDynamicColliderBhv>();
     }
 
     private void Update()
@@ -148,7 +144,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
         // Apply friction and spin effects to tangential component
         Vector3 v_ball_tangential_f = 
             apparentTangentialRestitution * (v_racket_tangential_i + v_ball_tangential_i) +
-            spinToTangentialConversion * ball.Radius * Vector3.Cross(w_ball_i, _smoothContactNormal);
+            spinToTangentialConversion * ball.radius * Vector3.Cross(w_ball_i, _smoothContactNormal);
 
         // Calculate final velocity
         Vector3 v_ball_f = v_ball_normal_f + v_ball_tangential_f;
@@ -159,7 +155,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
         // Calculate the final angular velocity of the ball
         Vector3 w_ball_f = 
             apparentSpinRestitution * w_ball_i +
-            tangentialToSpinConversion * Vector3.Cross(_smoothContactNormal, v_ball_tangential_i - v_racket_tangential_i) / ball.Radius;
+            tangentialToSpinConversion * Vector3.Cross(_smoothContactNormal, v_ball_tangential_i - v_racket_tangential_i) / ball.radius;
 
         // Apply the final velocities to the ball
         ball.LinearVelocity = v_ball_f;
@@ -173,9 +169,9 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 
     private Vector3 GetVelocityAtContactPoint()
     {
-        // can be simplified !!!!!!!!!!!!!!!!!! (adding and subtracting...)
-        Vector3 contactPoint = this.Position + Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, this.Forward);
-        Vector3 relativePosition = contactPoint - this.Position;
+        //Vector3 contactPoint = this.Position + Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, this.Forward);
+        //Vector3 relativePosition = contactPoint - this.Position;
+        Vector3 relativePosition = Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, this.Forward);
         Vector3 tangentialVelocity = Vector3.Cross(_smoothAngularVelocity, relativePosition);
 
         return _smoothLinearVelocity + tangentialVelocity;

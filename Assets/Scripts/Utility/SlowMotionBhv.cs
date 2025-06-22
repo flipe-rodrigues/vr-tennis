@@ -37,7 +37,7 @@ public class SlowMotionBhv : CachedTransformBhv
     {
         if (this.IsInView())
         {
-            _distance = (TennisManager.Instance.Ball.Position - TennisManager.Instance.Racket.Position).magnitude - TennisManager.Instance.Ball.Radius;
+            _distance = (TennisManager.Instance.Ball.Position - TennisManager.Instance.Racket.Position).magnitude - TennisManager.Instance.Ball.radius;
 
             _lerp = _distance * distanceModifier;
 

@@ -3,7 +3,7 @@
 public class BallRigidbodyBhv : CachedRigidbodyBhv
 {
     // Public properties
-    public float Radius => radius;
+    public Collider Collider => _collider;
     public bool WasJustHit { get { return _wasJustHit; } set { _wasJustHit = value; } }
 
     // Public fields
@@ -22,6 +22,7 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
     private bool _wasJustHit;
 
     // Private fields
+    private Collider _collider;
     private float _crossSectionalArea;
     private float _V;
     private float _W;
@@ -38,6 +39,8 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
         base.Awake();
 
         this.OnValidate();
+
+        _collider = GetComponent<Collider>();
     }
 
     protected override void Start()
