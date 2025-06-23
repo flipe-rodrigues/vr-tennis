@@ -229,16 +229,16 @@ MonoBehaviour:
   samplingRate: 500
   _samplingInterval: 0.002
   _trackers:
+  - {fileID: 1933173155}
   - {fileID: 1933173159}
-  - {fileID: 1361894310}
-  - {fileID: 166106165}
+  - {fileID: 1933173157}
   - {fileID: 1933173153}
   - {fileID: 1854824343}
-  - {fileID: 1933173154}
-  - {fileID: 1933173157}
-  - {fileID: 1933173155}
-  - {fileID: 1933173158}
+  - {fileID: 1361894310}
   - {fileID: 200473216}
+  - {fileID: 166106165}
+  - {fileID: 1933173158}
+  - {fileID: 1933173154}
 --- !u!1 &19562536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1038,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_lefthandanchor_2025-06-22_13-28-03..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_lefthandanchor.bin
   _isDoneSaving: 0
 --- !u!1 &179611561
 GameObject:
@@ -1442,7 +1442,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_centereyeanchor_2025-06-22_13-28-03..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_centereyeanchor.bin
   _isDoneSaving: 0
 --- !u!1 &203415850
 GameObject:
@@ -1611,8 +1611,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis\Data
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-06-23_11-37-31
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis\Data\2025-06-23_11-37-31
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1625,7 +1625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcef3e864d8eb1488c300df1e1ff5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fileName: name_age_sex_tennis-exp_vr-exp_metadata_2025-06-22_13-28-03.json
+  _fileName: name_age_sex_tennis-exp_vr-exp_metadatajson
   taskManager: {fileID: 660574638}
   ballSpawner: {fileID: 1787883655}
   ball: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
@@ -4119,7 +4119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interTrialInterval: 3
   stages:
-  - trialCount: 3
+  - trialCount: 50
     objectsToEnable:
     - {fileID: 4048976150374128210}
     objectsToDisable:
@@ -4127,16 +4127,16 @@ MonoBehaviour:
     - {fileID: 9054235859950929352}
     - {fileID: 212002169676615347}
     - {fileID: 2631111453958804722}
-  - trialCount: 3
+  - trialCount: 50
     objectsToEnable:
     - {fileID: 5102816465464550694}
     - {fileID: 9054235859950929352}
     objectsToDisable: []
-  - trialCount: 3
+  - trialCount: 50
     objectsToEnable:
     - {fileID: 212002169676615347}
     objectsToDisable: []
-  - trialCount: 3
+  - trialCount: 50
     objectsToEnable:
     - {fileID: 2631111453958804722}
     objectsToDisable:
@@ -7991,7 +7991,7 @@ MonoBehaviour:
   gizmoRadius: 0.05
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_ball-tracker_2025-06-22_13-28-03..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_ball-tracker.bin
   _isDoneSaving: 0
 --- !u!1 &1384270280
 GameObject:
@@ -11426,7 +11426,7 @@ MonoBehaviour:
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_righthandanchor_2025-06-22_13-28-03..bin
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_righthandanchor.bin
   _isDoneSaving: 0
 --- !u!1 &1857444598
 GameObject:
@@ -11752,7 +11752,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1692753994715645107, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-top_2025-06-22_13-10-22..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-top.bin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2725066864886418079, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3248523182090798507, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11796,7 +11800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3259352244687471260, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-stringbed-center_2025-06-22_13-10-22..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-stringbed-center.bin
       objectReference: {fileID: 0}
     - target: {fileID: 3921553247011690897, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _position.x
@@ -11824,7 +11828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4059865396570719225, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-grip-base_2025-06-22_13-10-22..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-grip-base.bin
       objectReference: {fileID: 0}
     - target: {fileID: 4366985766323789496, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: m_Name
@@ -11832,19 +11836,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4908714529883086994, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-base_2025-06-22_13-10-22..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-base.bin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: _smoothingRate
+      value: 0.09516257
       objectReference: {fileID: 0}
     - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: anchorTransform
       value: 
       objectReference: {fileID: 4339771046634355650}
+    - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: _approxNumFrames
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: smoothingTimeConstant
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: apparentNormalRestitution
+      value: 0.65
+      objectReference: {fileID: 0}
     - target: {fileID: 7663550768408559955, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-left_2025-06-22_13-10-22..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-left.bin
       objectReference: {fileID: 0}
     - target: {fileID: 7843026114750108742, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
-      value: name_age_sex_tennis-exp_vr-exp_racket-frame-right_2025-06-22_13-10-22..bin
+      value: name_age_sex_tennis-exp_vr-exp_racket-frame-right.bin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13049,7 +13069,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.54, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.914, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5120076301280640834}
@@ -13087,7 +13107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4e0daff2ee4a84384669337671c93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.078431346, b: 0.57647055, a: 0.78431374}
+  glowColor: {r: 1, g: 0.627451, b: 0.4784314, a: 0.78431374}
   glowDelay: 0.1
   fadeDelay: 1
 --- !u!114 &855766851900429585
@@ -13358,7 +13378,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a21353471581d2144a6a1d86c774ec3d, type: 2}
+  - {fileID: 2100000, guid: ba76f4add6c4f1d48b595bcad5f9e5b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13638,7 +13658,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a21353471581d2144a6a1d86c774ec3d, type: 2}
+  - {fileID: 2100000, guid: ba76f4add6c4f1d48b595bcad5f9e5b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13763,7 +13783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position: {x: 0, y: 0.54, z: 0}
   _rotation: {x: -0, y: 90, z: -0}
-  _scale: {x: 1, y: 1, z: 1}
+  _scale: {x: 1, y: 0.914, z: 1}
 --- !u!114 &4475649960281327874
 MonoBehaviour:
   m_ObjectHideFlags: 0

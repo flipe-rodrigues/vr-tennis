@@ -58,8 +58,8 @@ public class DataManager : Singleton<DataManager>
             $"{UIManager.subjectSex}_" +
             $"{UIManager.subjectTennisExp}_" +
             $"{UIManager.subjectVRExp}_" +
-            $"{gameObjectName.ToLower().Replace(" ", "-")}_" +
-            $"{GetFormattedTimestamp()}." +
+            $"{gameObjectName.ToLower().Replace(" ", "-")}" +
+            //$"{GetFormattedTimestamp()}." +
             $"{format}";
     }
 
@@ -70,6 +70,6 @@ public class DataManager : Singleton<DataManager>
 
     private static string GetFormattedSavePath(string dataPath)
     {
-        return Path.Combine(dataPath, "Data").Replace('/', Path.DirectorySeparatorChar).Replace('\\', Path.DirectorySeparatorChar);
+        return Path.Combine(dataPath, "Data", GetFormattedTimestamp()).Replace('/', Path.DirectorySeparatorChar).Replace('\\', Path.DirectorySeparatorChar);
     }
 }
