@@ -7,6 +7,7 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
     public bool WasJustHit { get { return _wasJustHit; } set { _wasJustHit = value; } }
 
     // Public fields
+    public LayerMask courtLayer;
     public float mass = 0.057f; // kg (standard tennis ball mass)
     public float radius = 0.033f; // m (standard tennis ball radius)
     public float airDensity = 1.225f; // kg/m³ at sea level
@@ -123,6 +124,9 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
 
     private void OnCollisionExit(Collision collision)
     {
-        _wasJustHit = false;
+        if (((1 << collision.gameObject.layer) & courtLayer) != 0)
+        {
+            _wasJustHit = false;
+        }
     }
 }

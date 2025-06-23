@@ -25,12 +25,16 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
     [Min(0f)]
     public float refractoryPeriod = 0.05f;
     [Min(0.001f)]
-    public float smoothingTimeConstant = 0.01f;
+    public float smoothingTimeConstantVelocity = 0.01f;
+    [Min(0.001f)]
+    public float smoothingTimeConstantNormal = 0.005f;
     public UnityEvent<float> onRacketHit = new UnityEvent<float>();
 
     // Read only fields
     [SerializeField, ReadOnly]
-    private float _smoothingRate;
+    private float _smoothingRateVelocity;
+    [SerializeField, ReadOnly]
+    private float _smoothingRateNormal;
     [SerializeField, ReadOnly]
     private int _approxNumFrames;
 
@@ -49,8 +53,9 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
             anchorTransform.anchoredRigidbody = this;
         }
 
-        _smoothingRate = smoothingTimeConstant.TauToLambda();
-        _approxNumFrames = Mathf.RoundToInt(smoothingTimeConstant / Time.fixedDeltaTime);
+        _smoothingRateVelocity = smoothingTimeConstantVelocity.TauToLambda();
+        _smoothingRateNormal = smoothingTimeConstantNormal.TauToLambda();
+        _approxNumFrames = Mathf.RoundToInt(smoothingTimeConstantVelocity / Time.fixedDeltaTime);
     }
 
     protected override void Awake()
@@ -74,9 +79,9 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 
         this.MoveRigidbody();
 
-        _smoothContactNormal = Vector3.Lerp(_smoothContactNormal, this.GetContactNormal(), _smoothingRate);
-        _smoothLinearVelocity = Vector3.Lerp(_smoothLinearVelocity, this.LinearVelocity, _smoothingRate);
-        _smoothAngularVelocity = Vector3.Lerp(_smoothAngularVelocity, this.AngularVelocity, _smoothingRate);
+        _smoothContactNormal = Vector3.Lerp(_smoothContactNormal, this.GetContactNormal(), _smoothingRateNormal);
+        _smoothLinearVelocity = Vector3.Lerp(_smoothLinearVelocity, this.LinearVelocity, _smoothingRateVelocity);
+        _smoothAngularVelocity = Vector3.Lerp(_smoothAngularVelocity, this.AngularVelocity, _smoothingRateVelocity);
     }
 
     public void MoveTransform()

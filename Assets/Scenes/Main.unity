@@ -229,16 +229,16 @@ MonoBehaviour:
   samplingRate: 500
   _samplingInterval: 0.002
   _trackers:
+  - {fileID: 166106165}
+  - {fileID: 1933173157}
+  - {fileID: 1933173154}
+  - {fileID: 200473216}
+  - {fileID: 1933173158}
   - {fileID: 1933173155}
   - {fileID: 1933173159}
-  - {fileID: 1933173157}
-  - {fileID: 1933173153}
   - {fileID: 1854824343}
+  - {fileID: 1933173153}
   - {fileID: 1361894310}
-  - {fileID: 200473216}
-  - {fileID: 166106165}
-  - {fileID: 1933173158}
-  - {fileID: 1933173154}
 --- !u!1 &19562536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,8 +1611,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-06-23_11-37-31
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis\Data\2025-06-23_11-37-31
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-06-23_12-47-01
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis\Data\2025-06-23_12-47-01
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4117,7 +4117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570597e47369b94409c8be19b1a8bd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interTrialInterval: 3
+  interTrialInterval: 5
   stages:
   - trialCount: 50
     objectsToEnable:
@@ -11856,7 +11856,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: apparentNormalRestitution
-      value: 0.65
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 7663550768408559955, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
