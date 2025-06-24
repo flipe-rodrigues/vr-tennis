@@ -229,16 +229,16 @@ MonoBehaviour:
   samplingRate: 500
   _samplingInterval: 0.002
   _trackers:
-  - {fileID: 166106165}
-  - {fileID: 1933173157}
   - {fileID: 1933173154}
-  - {fileID: 200473216}
+  - {fileID: 1361894310}
   - {fileID: 1933173158}
-  - {fileID: 1933173155}
-  - {fileID: 1933173159}
   - {fileID: 1854824343}
   - {fileID: 1933173153}
-  - {fileID: 1361894310}
+  - {fileID: 1933173159}
+  - {fileID: 1933173157}
+  - {fileID: 166106165}
+  - {fileID: 200473216}
+  - {fileID: 1933173155}
 --- !u!1 &19562536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,8 +1611,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-06-23_12-47-01
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis\Data\2025-06-23_12-47-01
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-06-24_12-12-47
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis\Data\2025-06-24_12-12-47
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11851,12 +11851,28 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: _smoothingRateNormal
+      value: 0.18126929
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: smoothingTimeConstant
       value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: _smoothingRateVelocity
+      value: 0.09516257
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: apparentNormalRestitution
       value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: smoothingTimeConstantNormal
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780378168544894261, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
+      propertyPath: smoothingTimeConstantVelocity
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7663550768408559955, guid: 55f775502b59ab848b37cd6af0dee4d6, type: 3}
       propertyPath: _binaryFilename
