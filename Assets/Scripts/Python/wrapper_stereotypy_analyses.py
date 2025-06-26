@@ -98,7 +98,6 @@ for subject2plot in subject_paths:
                 csv_path = os.path.join(subject_dir, csv_to_read[0])
                 label = features2compare_labels[features2compare.index(feature)]
                 dfs_features[label] = pd.read_csv(csv_path)
-                # dfs_features[label]["position.x"] *= -1
                 print(f"Loaded {csv_to_read[0]} for subject {subject2plot}")
                 print(dfs_features[label].head())
             else:
@@ -131,107 +130,107 @@ for subject2plot in subject_paths:
 
     # %%
     dfs_trajectories_raw = {}
-dfs_trajectories_ref = {}
+    dfs_trajectories_ref = {}
 
-# Iterate through each feature label to extract trajectories
-for label in features2compare_labels:
-    df_feat = dfs_features[label]
-    trajectories = []
-    ref_trajectories = []
+    # Iterate through each feature label to extract trajectories
+    for label in features2compare_labels:
+        df_feat = dfs_features[label]
+        trajectories = []
+        ref_trajectories = []
 
-    # Iterate through each unique stage
-    for stage in unique_stages:
-        df_stage = df_feat[df_feat["stage"] == stage]
-        alignment_times = df_stage[df_stage["event"] == alignment]["time"].values
-        
-        # Iterate through each alignment time for the current stage
-        for trial_idx, t_align in enumerate(alignment_times):
+        # Iterate through each unique stage
+        for stage in unique_stages:
+            df_stage = df_feat[df_feat["stage"] == stage]
+            alignment_times = df_stage[df_stage["event"] == alignment]["time"].values
+            
+            # Iterate through each alignment time for the current stage
+            for trial_idx, t_align in enumerate(alignment_times):
 
-            # Get indices for the window around the hit
-            if label in ["ball"]:
-                t_start = t_align
-                t_end = t_align + window_duration
-            else:
-                t_start = t_align - half_window_duration
-                t_end = t_align + half_window_duration
-            traj = df_stage[
-                (df_stage["time"] >= t_start) & (df_stage["time"] <= t_end)
-            ][["position.x", "position.y", "position.z"]].to_numpy()
-            traj_time = df_stage[
-                (df_stage["time"] >= t_start) & (df_stage["time"] <= t_end)
-            ]["time"].to_numpy()
+                # Get indices for the window around the hit
+                if label in ["ball"]:
+                    t_start = t_align
+                    t_end = t_align + window_duration
+                else:
+                    t_start = t_align - half_window_duration
+                    t_end = t_align + half_window_duration
+                traj = df_stage[
+                    (df_stage["time"] >= t_start) & (df_stage["time"] <= t_end)
+                ][["position.x", "position.y", "position.z"]].to_numpy()
+                traj_time = df_stage[
+                    (df_stage["time"] >= t_start) & (df_stage["time"] <= t_end)
+                ]["time"].to_numpy()
 
-            # Downsample from 500 Hz to 120 Hz
-            if len(traj_time) > 1:
-                num_samples = int(np.round((traj_time[-1] - traj_time[0]) * target_fs)) + 1
-                if num_samples > 1 and len(traj_time) > num_samples:
-                    traj_time_ds = np.linspace(traj_time[0], traj_time[-1], num_samples)
-                    traj_ds = np.column_stack([
-                        np.interp(traj_time_ds, traj_time, traj[:, 0]),
-                        np.interp(traj_time_ds, traj_time, traj[:, 1]),
-                        np.interp(traj_time_ds, traj_time, traj[:, 2]),
-                    ])
+                # Downsample from 500 Hz to 120 Hz
+                if len(traj_time) > 1:
+                    num_samples = int(np.round((traj_time[-1] - traj_time[0]) * target_fs)) + 1
+                    if num_samples > 1 and len(traj_time) > num_samples:
+                        traj_time_ds = np.linspace(traj_time[0], traj_time[-1], num_samples)
+                        traj_ds = np.column_stack([
+                            np.interp(traj_time_ds, traj_time, traj[:, 0]),
+                            np.interp(traj_time_ds, traj_time, traj[:, 1]),
+                            np.interp(traj_time_ds, traj_time, traj[:, 2]),
+                        ])
+                    else:
+                        traj_time_ds = traj_time
+                        traj_ds = traj
                 else:
                     traj_time_ds = traj_time
                     traj_ds = traj
-            else:
-                traj_time_ds = traj_time
-                traj_ds = traj
 
-            # Append the trajectory data to records
-            trajectories.append(
-                {
-                    "stage": stage,
-                    "trial": trial_idx,
-                    "time": traj_time_ds - t_align,
-                    "x": traj_ds[:, 0],
-                    "y": traj_ds[:, 1],
-                    "z": traj_ds[:, 2],
-                }
-            )
+                # Append the trajectory data to records
+                trajectories.append(
+                    {
+                        "stage": stage,
+                        "trial": trial_idx,
+                        "time": traj_time_ds - t_align,
+                        "x": traj_ds[:, 0],
+                        "y": traj_ds[:, 1],
+                        "z": traj_ds[:, 2],
+                    }
+                )
 
-            # Define pre and post windows as fractions of window_duration
-            pre_t_start = t_align - 1.5 * window_duration
-            pre_t_end = t_align - 0.5 * window_duration
-            post_t_start = t_align + 0.5 * window_duration
-            post_t_end = t_align + 1.5 * window_duration
-            pre_mask = (df_stage["time"] >= pre_t_start) & (df_stage["time"] <= pre_t_end)
-            post_mask = (df_stage["time"] >= post_t_start) & (df_stage["time"] <= post_t_end)
-            union_mask = pre_mask | post_mask
-            ref_traj = df_stage.loc[union_mask, ["position.x", "position.y", "position.z"]].to_numpy()
-            ref_traj_time = df_stage.loc[union_mask, "time"].to_numpy()
+                # Define pre and post windows as fractions of window_duration
+                pre_t_start = t_align - 1.5 * window_duration
+                pre_t_end = t_align - 0.5 * window_duration
+                post_t_start = t_align + 0.5 * window_duration
+                post_t_end = t_align + 1.5 * window_duration
+                pre_mask = (df_stage["time"] >= pre_t_start) & (df_stage["time"] <= pre_t_end)
+                post_mask = (df_stage["time"] >= post_t_start) & (df_stage["time"] <= post_t_end)
+                union_mask = pre_mask | post_mask
+                ref_traj = df_stage.loc[union_mask, ["position.x", "position.y", "position.z"]].to_numpy()
+                ref_traj_time = df_stage.loc[union_mask, "time"].to_numpy()
 
-            # Downsample reference trajectory
-            if len(ref_traj_time) > 1:
-                ref_num_samples = int(np.round((ref_traj_time[-1] - ref_traj_time[0]) * target_fs)) + 1
-                if ref_num_samples > 1 and len(ref_traj_time) > ref_num_samples:
-                    ref_traj_time_ds = np.linspace(ref_traj_time[0], ref_traj_time[-1], ref_num_samples)
-                    ref_traj_ds = np.column_stack([
-                        np.interp(ref_traj_time_ds, ref_traj_time, ref_traj[:, 0]),
-                        np.interp(ref_traj_time_ds, ref_traj_time, ref_traj[:, 1]),
-                        np.interp(ref_traj_time_ds, ref_traj_time, ref_traj[:, 2]),
-                    ])
+                # Downsample reference trajectory
+                if len(ref_traj_time) > 1:
+                    ref_num_samples = int(np.round((ref_traj_time[-1] - ref_traj_time[0]) * target_fs)) + 1
+                    if ref_num_samples > 1 and len(ref_traj_time) > ref_num_samples:
+                        ref_traj_time_ds = np.linspace(ref_traj_time[0], ref_traj_time[-1], ref_num_samples)
+                        ref_traj_ds = np.column_stack([
+                            np.interp(ref_traj_time_ds, ref_traj_time, ref_traj[:, 0]),
+                            np.interp(ref_traj_time_ds, ref_traj_time, ref_traj[:, 1]),
+                            np.interp(ref_traj_time_ds, ref_traj_time, ref_traj[:, 2]),
+                        ])
+                    else:
+                        ref_traj_time_ds = ref_traj_time
+                        ref_traj_ds = ref_traj
                 else:
                     ref_traj_time_ds = ref_traj_time
                     ref_traj_ds = ref_traj
-            else:
-                ref_traj_time_ds = ref_traj_time
-                ref_traj_ds = ref_traj
 
-            ref_trajectories.append(
-                {
-                    "stage": stage,
-                    "trial": trial_idx,
-                    "time": ref_traj_time_ds - t_align,
-                    "x": ref_traj_ds[:, 0],
-                    "y": ref_traj_ds[:, 1],
-                    "z": ref_traj_ds[:, 2],
-                }
-            )
-    
-    # Store the trajectories in the dictionaries as DataFrames
-    dfs_trajectories_raw[label] = pd.DataFrame(trajectories)
-    dfs_trajectories_ref[label] = pd.DataFrame(ref_trajectories)
+                ref_trajectories.append(
+                    {
+                        "stage": stage,
+                        "trial": trial_idx,
+                        "time": ref_traj_time_ds - t_align,
+                        "x": ref_traj_ds[:, 0],
+                        "y": ref_traj_ds[:, 1],
+                        "z": ref_traj_ds[:, 2],
+                    }
+                )
+        
+        # Store the trajectories in the dictionaries as DataFrames
+        dfs_trajectories_raw[label] = pd.DataFrame(trajectories)
+        dfs_trajectories_ref[label] = pd.DataFrame(ref_trajectories)
 
     # %%
     mean_xyz_per_traj = []
@@ -722,6 +721,54 @@ for label in features2compare_labels:
 
     # %%
     """
+    .########..########..########..######.
+    .##.....##.##.....##.##.......##....##
+    .##.....##.##.....##.##.......##......
+    .########..##.....##.######....######.
+    .##........##.....##.##.............##
+    .##........##.....##.##.......##....##
+    .##........########..##........######.
+    """
+    fig, axs = plt.subplots(
+        num_stages,
+        num_features,
+        figsize=(4 * num_features, 4 * num_stages),
+        sharex=False,
+        sharey="col",
+    )
+    fig.suptitle("DTW Distance Distributions per Feature and Stage", fontsize=16, y=0.98)
+
+    num_bins = 50  # Number of bins for histogram
+    bins = np.linspace(0, 25, num_bins + 1)  # Adjust range as needed
+
+    for stage_idx, stage in enumerate(unique_stages):
+        for f_idx, label in enumerate(features2compare_labels):
+
+            # Filter DTW distances for this stage and feature
+            mask = (df_dtw_distances["stage"] == stage) & (
+                df_dtw_distances["feature"] == label
+            )
+            dtw_vals = df_dtw_distances.loc[mask, "distance"].values
+
+            if len(dtw_vals) > 0:
+                axs[stage_idx, f_idx].hist(
+                    dtw_vals, bins=bins, color=feature_colors[f_idx], alpha=0.7
+                )
+            axs[stage_idx, f_idx].set_title(f"{label} - Stage {stage}")
+            axs[stage_idx, f_idx].set_xlabel("DTW Distance")
+            axs[stage_idx, f_idx].set_ylabel("Count")
+            axs[stage_idx, f_idx].grid()
+
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+
+    # Save the figure
+    fig_path = os.path.join(save_path, f"dtwcpfs_{subject2plot.lower()}.png")
+    fig.savefig(fig_path, dpi=300, bbox_inches="tight")
+    print(f"Figure saved to {fig_path}")
+    plt.close(fig)
+
+    # %%
+    """
     ..######..########..########..######.
     .##....##.##.....##.##.......##....##
     .##.......##.....##.##.......##......
@@ -783,7 +830,7 @@ for label in features2compare_labels:
     plt.tight_layout(rect=[0, 0, 1, 0.96])
 
     # Save the figure
-    fig_path = os.path.join(save_path, f"dtw_{subject2plot.lower()}.png")
+    fig_path = os.path.join(save_path, f"dtwcdfs_{subject2plot.lower()}.png")
     fig.savefig(fig_path, dpi=300, bbox_inches="tight")
     print(f"Figure saved to {fig_path}")
     plt.close(fig)
