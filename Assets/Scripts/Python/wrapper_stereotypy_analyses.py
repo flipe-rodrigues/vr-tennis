@@ -37,7 +37,7 @@ for subject2plot in subject_paths:
         "lefthandanchor",
         "racket-grip-base",
         "racket-stringbed-center",
-        "racket-frame-left",
+        # "racket-frame-left",
         "ball-tracker",
     ]
     features2compare_labels = [
@@ -45,7 +45,7 @@ for subject2plot in subject_paths:
         "left-hand",
         "grip",
         "strings",
-        "left-frame",
+        # "left-frame",
         "ball",
     ]
     feature_colors = [
@@ -53,7 +53,7 @@ for subject2plot in subject_paths:
         "tab:orange",
         "tab:green",
         "tab:red",
-        "tab:brown",
+        # "tab:brown",
         "tab:purple",
     ]
     num_features = len(features2compare)
@@ -67,6 +67,7 @@ for subject2plot in subject_paths:
 
     # %%
     useHeadCentricDriftCorrection = True
+    ballPostHitTravelDistance = 10.0  # meters
 
     # %%
     """
@@ -129,6 +130,15 @@ for subject2plot in subject_paths:
         ] = np.nan
 
     # %%
+    """
+    .########.########.....###..........##.########..######..########..#######..########..####.########..######.
+    ....##....##.....##...##.##.........##.##.......##....##....##....##.....##.##.....##..##..##.......##....##
+    ....##....##.....##..##...##........##.##.......##..........##....##.....##.##.....##..##..##.......##......
+    ....##....########..##.....##.......##.######...##..........##....##.....##.########...##..######....######.
+    ....##....##...##...#########.##....##.##.......##..........##....##.....##.##...##....##..##.............##
+    ....##....##....##..##.....##.##....##.##.......##....##....##....##.....##.##....##...##..##.......##....##
+    ....##....##.....##.##.....##..######..########..######.....##.....#######..##.....##.####.########..######.
+    """
     dfs_trajectories_raw = {}
     dfs_trajectories_ref = {}
 
@@ -149,10 +159,27 @@ for subject2plot in subject_paths:
                 # Get indices for the window around the hit
                 if label in ["ball"]:
                     t_start = t_align
-                    t_end = t_align + window_duration
+                    
+                    # Find the time when the ball has traveled X meters from the hit
+                    df_ball = df_stage[(df_stage["time"] >= t_align)]
+
+                    # Compute cumulative distance from the hit position
+                    pos = df_ball[["position.x", "position.y", "position.z"]].to_numpy()
+                    if len(pos) > 0:
+                        pos0 = pos[0]
+                        dists = np.linalg.norm(pos - pos0, axis=1)
+                        idx_Xm = np.argmax(dists >= ballPostHitTravelDistance)
+                        if dists[idx_Xm] >= ballPostHitTravelDistance:
+                            t_end = df_ball.iloc[idx_Xm]["time"]
+                        else:
+                            t_end = df_ball.iloc[-1]["time"]
+                    else:
+                        t_end = t_align + window_duration
                 else:
                     t_start = t_align - half_window_duration
                     t_end = t_align + half_window_duration
+                
+                # Extract the trajectory data within the defined time window
                 traj = df_stage[
                     (df_stage["time"] >= t_start) & (df_stage["time"] <= t_end)
                 ][["position.x", "position.y", "position.z"]].to_numpy()
@@ -302,7 +329,7 @@ for subject2plot in subject_paths:
         "grip",
         "strings",
         # "left-frame",
-        # "ball"
+        "ball"
     ]
 
     fig = plt.figure(figsize=(16, 12))
@@ -325,15 +352,33 @@ for subject2plot in subject_paths:
                 x = np.array(row["x"])
                 y = np.array(row["z"])
                 z = np.array(row["y"])
+                
+                # For the "ball" feature, plot only the first 1 meter of trajectory
+                if label == "ball":
+
+                    # Compute cumulative distance along the trajectory
+                    positions = np.column_stack([x, y, z])
+                    dists = np.linalg.norm(np.diff(positions, axis=0), axis=1)
+                    cum_dist = np.insert(np.cumsum(dists), 0, 0)
+                    mask_1m = cum_dist <= 1.0
+                    x_plot = x[mask_1m]
+                    y_plot = y[mask_1m]
+                    z_plot = z[mask_1m]
+                else:
+                    x_plot = x
+                    y_plot = y
+                    z_plot = z
+
                 ax.plot(
-                    x,
-                    y,
-                    z,
+                    x_plot,
+                    y_plot,
+                    z_plot,
                     color=feature_colors[f_idx],
                     label=label if idx == df_stage.index[0] else None,
                     linewidth=1,
                     alpha=0.25,
                 )
+                
                 # Mark the racket hit moment (time closest to zero)
                 if "time" in row:
                     t = np.array(row["time"])
@@ -572,8 +617,9 @@ for subject2plot in subject_paths:
     .##....##..##.....##.##....##.##......
     .##.....##.##.....##..######..########
     """
+    from scipy.interpolate import interp1d
 
-    # Plot stereotypy metrics: MSE, RMSE, and IQR using dfs_trajectories_pca
+    # Plot stereotypy metrics: MSE, RMSE, and IQR (no DTW) using dfs_trajectories_pca
     fig, axs = plt.subplots(
         num_stages, 3, figsize=(12, 4 * num_stages), sharex=True, sharey="col"
     )
@@ -584,21 +630,28 @@ for subject2plot in subject_paths:
     for stage_idx, stage in enumerate(unique_stages):
         for f_idx, label in enumerate(features2compare_labels):
             df_traj = dfs_trajectories_pca[label]
-
-            # Filter by stage
             df_stage = df_traj[df_traj["stage"] == stage]
+
+            # Collect all time vectors
+            time_list = [np.array(row["time"]) for _, row in df_stage.iterrows() if len(row["time"]) > 1]
+            if not time_list:
+                continue
+            min_len = min(map(len, time_list))
+            time_stack = np.array([t[:min_len] for t in time_list])
+            common_time = np.median(time_stack, axis=0)
 
             aligned_trajs = []
             for _, row in df_stage.iterrows():
-                traj = np.column_stack([row["x"], row["y"], row["z"]])
-                aligned_trajs.append(traj)
-
-            aligned_trajs = np.array(aligned_trajs)  # shape: (n_trials, window_size, 3)
+                traj_time = np.array(row["time"])
+                traj_xyz = np.column_stack([row["x"], row["y"], row["z"]])
+                if len(traj_time) != len(traj_xyz) or len(traj_time) < 2:
+                    continue
+                # Interpolate to common_time
+                f_interp = interp1d(traj_time, traj_xyz, axis=0, bounds_error=False, fill_value="extrapolate")
+                aligned_trajs.append(f_interp(common_time))
+            aligned_trajs = np.array(aligned_trajs)  # (n_trials, window_size, 3)
             if aligned_trajs.shape[0] == 0:
                 continue
-
-            # Extract the time vector for the current stage
-            traj_time = row["time"]
 
             # Mean trajectory
             mean_traj = np.mean(aligned_trajs, axis=0)  # (window_size, 3)
@@ -617,15 +670,11 @@ for subject2plot in subject_paths:
             )  # (n_trials, window_size)
             iqr = np.percentile(dists, 75, axis=0) - np.percentile(dists, 25, axis=0)
 
-            axs[stage_idx, 0].plot(
-                traj_time, mse, color=feature_colors[f_idx], label=label
-            )
+            axs[stage_idx, 0].plot(common_time, mse, color=feature_colors[f_idx], label=label)
             axs[stage_idx, 1].plot(
-                traj_time, rmse, color=feature_colors[f_idx], label=label
+                common_time, rmse, color=feature_colors[f_idx], label=label
             )
-            axs[stage_idx, 2].plot(
-                traj_time, iqr, color=feature_colors[f_idx], label=label
-            )
+            axs[stage_idx, 2].plot(common_time, iqr, color=feature_colors[f_idx], label=label)
 
         axs[stage_idx, 0].set_title(f"Stage {stage} - MSE")
         axs[stage_idx, 0].set_ylabel("MSE")
@@ -656,66 +705,82 @@ for subject2plot in subject_paths:
     # %% [markdown]
     # ### Compute trajectory dissimilarity metrics
     """
-    .########..########.##......##
-    .##.....##....##....##..##..##
-    .##.....##....##....##..##..##
-    .##.....##....##....##..##..##
-    .##.....##....##....##..##..##
-    .##.....##....##....##..##..##
-    .########.....##.....###..###.
+    .########..####..######..########....###....##....##..######..########..######.
+    .##.....##..##..##....##....##......##.##...###...##.##....##.##.......##....##
+    .##.....##..##..##..........##.....##...##..####..##.##.......##.......##......
+    .##.....##..##...######.....##....##.....##.##.##.##.##.......######....######.
+    .##.....##..##........##....##....#########.##..####.##.......##.............##
+    .##.....##..##..##....##....##....##.....##.##...###.##....##.##.......##....##
+    .########..####..######.....##....##.....##.##....##..######..########..######.
     """
+    from tqdm import tqdm
+
     dtw_distances = []
     procrustes_distances = []
 
-    # Iterate through each stage and feature to compute distances
+    # Calculate total number of iterations for progress bar
+    total_iterations = 0
     for stage in unique_stages:
         for f_idx, label in enumerate(features2compare_labels):
-            print(
-                f"  Computing DTW and Procrustes distances for stage {stage}, feature '{label}'..."
-            )
-            df_traj = dfs_trajectories_pca[label]
+            df_traj_norm = dfs_trajectories_norm[label]
+            df_stage_norm = df_traj_norm[df_traj_norm["stage"] == stage]
+            n_trials = len(df_stage_norm)
+            if n_trials >= 2:
+                total_iterations += len(list(combinations(range(n_trials), 2)))
 
-            # Filter by stage
-            df_stage = df_traj[df_traj["stage"] == stage]
+    # Iterate through each stage and feature to compute distances
+    with tqdm(total=total_iterations, desc="Computing distances") as pbar:
+        for stage in unique_stages:
+            for f_idx, label in enumerate(features2compare_labels):
 
-            # Collect aligned trajectories (PC1, PC2, PC3)
-            aligned_trajs = []
-            for _, row in df_stage.iterrows():
-                traj = np.column_stack([row["x"], row["y"], row["z"]])
-                aligned_trajs.append(traj)
-            aligned_trajs = np.array(aligned_trajs)  # shape: (n_trials, window_size, 3)
+                # DTW: use normalized trajectories
+                df_traj_norm = dfs_trajectories_norm[label]
+                df_stage_norm = df_traj_norm[df_traj_norm["stage"] == stage]
+                aligned_trajs_norm = [np.column_stack([row["x"], row["y"], row["z"]]) for _, row in df_stage_norm.iterrows()]
 
-            if aligned_trajs.shape[0] < 2:
-                continue
+                # Procrustes: use drift-corrected trajectories
+                df_traj_drift = dfs_trajectories_drift[label]
+                df_stage_drift = df_traj_drift[df_traj_drift["stage"] == stage]
+                aligned_trajs_drift = [np.column_stack([row["x"], row["y"], row["z"]]) for _, row in df_stage_drift.iterrows()]
 
-            # Compute distances for all unique pairs and store in DataFrames
-            for idx1, idx2 in combinations(range(len(aligned_trajs)), 2):
+                n_trials = min(len(aligned_trajs_norm), len(aligned_trajs_drift))
+                if n_trials < 2:
+                    continue
 
-                # DTW distance
-                distance_dtw, _ = fastdtw(
-                    aligned_trajs[idx1], aligned_trajs[idx2], dist=euclidean
-                )
-                dtw_distances.append(
-                    {
+                # Compute distances for all unique pairs and store in DataFrames
+                for idx1, idx2 in combinations(range(n_trials), 2):
+
+                    # DTW distance (normalized)
+                    traj1_norm = aligned_trajs_norm[idx1]
+                    traj2_norm = aligned_trajs_norm[idx2]
+                    distance_dtw, _ = fastdtw(traj1_norm, traj2_norm, dist=euclidean)
+                    dtw_distances.append({
                         "stage": stage,
                         "feature": label,
                         "trial1": idx1,
                         "trial2": idx2,
                         "distance": distance_dtw,
-                    }
-                )
+                    })
 
-                # Procrustes distance
-                _, _, disparity = procrustes(aligned_trajs[idx1], aligned_trajs[idx2])
-                procrustes_distances.append(
-                    {
+                    # Procrustes distance (drift-corrected)
+                    traj1_drift = aligned_trajs_drift[idx1]
+                    traj2_drift = aligned_trajs_drift[idx2]
+                    # Procrustes requires same number of points, so resample to min length
+                    min_len = min(len(traj1_drift), len(traj2_drift))
+                    if min_len < 2:
+                        continue
+                    traj1_proc = traj1_drift[:min_len]
+                    traj2_proc = traj2_drift[:min_len]
+                    _, _, disparity = procrustes(traj1_proc, traj2_proc)
+                    procrustes_distances.append({
                         "stage": stage,
                         "feature": label,
                         "trial1": idx1,
                         "trial2": idx2,
                         "distance": disparity,
-                    }
-                )
+                    })
+                    
+                    pbar.update(1)
 
     # Convert the lists of distances to DataFrames
     df_dtw_distances = pd.DataFrame(dtw_distances)
@@ -723,13 +788,13 @@ for subject2plot in subject_paths:
 
     # %%
     """
-    .########..########..########..######.
-    .##.....##.##.....##.##.......##....##
-    .##.....##.##.....##.##.......##......
-    .########..##.....##.######....######.
-    .##........##.....##.##.............##
-    .##........##.....##.##.......##....##
-    .##........########..##........######.
+    .########..########.##......##....########..########..########..######.
+    .##.....##....##....##..##..##....##.....##.##.....##.##.......##....##
+    .##.....##....##....##..##..##....##.....##.##.....##.##.......##......
+    .##.....##....##....##..##..##....########..##.....##.######....######.
+    .##.....##....##....##..##..##....##........##.....##.##.............##
+    .##.....##....##....##..##..##....##........##.....##.##.......##....##
+    .########.....##.....###..###.....##........########..##........######.
     """
     fig, axs = plt.subplots(
         num_stages,
@@ -764,70 +829,44 @@ for subject2plot in subject_paths:
     plt.tight_layout(rect=[0, 0, 1, 0.96])
 
     # Save the figure
-    fig_path = os.path.join(save_path, f"dtwcpfs_{subject2plot.lower()}.png")
+    fig_path = os.path.join(save_path, f"dtwpdfs_{subject2plot.lower()}.png")
     fig.savefig(fig_path, dpi=300, bbox_inches="tight")
     print(f"Figure saved to {fig_path}")
     plt.close(fig)
 
     # %%
     """
-    ..######..########..########..######.
-    .##....##.##.....##.##.......##....##
-    .##.......##.....##.##.......##......
-    .##.......##.....##.######....######.
-    .##.......##.....##.##.............##
-    .##....##.##.....##.##.......##....##
-    ..######..########..##........######.
+    .########..########.##......##.....######..########..########..######.
+    .##.....##....##....##..##..##....##....##.##.....##.##.......##....##
+    .##.....##....##....##..##..##....##.......##.....##.##.......##......
+    .##.....##....##....##..##..##....##.......##.....##.######....######.
+    .##.....##....##....##..##..##....##.......##.....##.##.............##
+    .##.....##....##....##..##..##....##....##.##.....##.##.......##....##
+    .########.....##.....###..###......######..########..##........######.
     """
     fig, axs = plt.subplots(
-        len(unique_stages),
-        2,
-        figsize=(10, 4 * len(unique_stages)),
-        sharex="col",
-        sharey=True,
+        len(unique_stages), 1,
+        figsize=(6, 3 * len(unique_stages)),
+        sharex=False, sharey=True
     )
-    fig.suptitle("CDFs of DTW and Procrustes Distances per Stage", fontsize=16, y=0.98)
+    fig.suptitle("CDFs of DTW Distances per Stage", fontsize=16, y=0.98)
 
     for stage_idx, stage in enumerate(unique_stages):
         for f_idx, label in enumerate(features2compare_labels):
-
             # DTW CDF
-            mask_dtw = (df_dtw_distances["stage"] == stage) & (
-                df_dtw_distances["feature"] == label
-            )
+            mask_dtw = (df_dtw_distances["stage"] == stage) & (df_dtw_distances["feature"] == label)
             dtw_vals = df_dtw_distances.loc[mask_dtw, "distance"].values
             if len(dtw_vals) > 0:
                 sorted_dtw = np.sort(dtw_vals)
                 cdf_dtw = np.arange(1, len(sorted_dtw) + 1) / len(sorted_dtw)
-                axs[stage_idx, 0].plot(
-                    sorted_dtw, cdf_dtw, color=feature_colors[f_idx], label=label
-                )
+                axs[stage_idx].plot(sorted_dtw, cdf_dtw, color=feature_colors[f_idx], label=label)
 
-            # Procrustes CDF
-            mask_proc = (df_procrustes_distances["stage"] == stage) & (
-                df_procrustes_distances["feature"] == label
-            )
-            proc_vals = df_procrustes_distances.loc[mask_proc, "distance"].values
-            if len(proc_vals) > 0:
-                sorted_proc = np.sort(proc_vals)
-                cdf_proc = np.arange(1, len(sorted_proc) + 1) / len(sorted_proc)
-                axs[stage_idx, 1].plot(
-                    sorted_proc, cdf_proc, color=feature_colors[f_idx], label=label
-                )
-
-        axs[stage_idx, 0].set_title(f"Stage {stage} - DTW CDF")
-        axs[stage_idx, 0].set_xlabel("DTW Distance")
-        axs[stage_idx, 0].set_ylabel("CDF")
-        axs[stage_idx, 0].set_xlim([0, 25])
-        axs[stage_idx, 0].legend()
-        axs[stage_idx, 0].grid()
-
-        axs[stage_idx, 1].set_title(f"Stage {stage} - Procrustes CDF")
-        axs[stage_idx, 1].set_xlabel("Procrustes Distance")
-        axs[stage_idx, 1].set_ylabel("CDF")
-        axs[stage_idx, 1].set_xlim([0, 0.5])
-        axs[stage_idx, 1].legend()
-        axs[stage_idx, 1].grid()
+        axs[stage_idx].set_title(f"Stage {stage} - DTW CDF")
+        axs[stage_idx].set_xlabel("DTW Distance")
+        axs[stage_idx].set_ylabel("CDF")
+        axs[stage_idx].set_xlim([0, 25])
+        axs[stage_idx].legend()
+        axs[stage_idx].grid()
 
     plt.tight_layout(rect=[0, 0, 1, 0.96])
 
@@ -885,50 +924,6 @@ for subject2plot in subject_paths:
         
     # Save the figure
     fig_path = os.path.join(save_path, f"dtwcdfs2_{subject2plot.lower()}.png")
-    fig.savefig(fig_path, dpi=300, bbox_inches="tight")
-    print(f"Figure saved to {fig_path}")
-    plt.close(fig)
-
-    # %%
-    """
-    .########..########...#######...######..########..##.....##..######..########.########..######.
-    .##.....##.##.....##.##.....##.##....##.##.....##.##.....##.##....##....##....##.......##....##
-    .##.....##.##.....##.##.....##.##.......##.....##.##.....##.##..........##....##.......##......
-    .########..########..##.....##.##.......########..##.....##..######.....##....######....######.
-    .##........##...##...##.....##.##.......##...##...##.....##.......##....##....##.............##
-    .##........##....##..##.....##.##....##.##....##..##.....##.##....##....##....##.......##....##
-    .##........##.....##..#######...######..##.....##..#######...######.....##....########..######.
-    """
-    fig, axs = plt.subplots(
-        num_features, 1, figsize=(6, 2 * num_features), sharex=False, sharey=True
-    )
-    fig.suptitle(f"{subject2plot}, Procrustes Distance CDFs by Feature (all stages)", fontsize=14, y=0.98)
-
-    for f_idx, label in enumerate(features2compare_labels):
-        ax = axs[f_idx]
-        base_color = mcolors.to_rgb(feature_colors[f_idx])
-
-        cmap = get_shades(feature_colors[f_idx], num_stages)
-        for stage_idx, stage in enumerate(unique_stages):
-            mask = (df_procrustes_distances["feature"] == label) & (
-                df_procrustes_distances["stage"] == stage
-            )
-            proc_vals = df_procrustes_distances.loc[mask, "distance"].values
-            if len(proc_vals) > 0:
-                sorted_proc = np.sort(proc_vals)
-                cdf = np.arange(1, len(sorted_proc) + 1) / len(sorted_proc)
-                color = cmap[stage_idx][:3]
-                ax.plot(sorted_proc, cdf, color=color, label=f"Stage {stage}", linewidth=1)
-        ax.set_title(f"{label}")
-        ax.set_ylabel("CDF")
-        ax.grid()
-        ax.legend()
-
-    axs[-1].set_xlabel("Procrustes Distance")
-    plt.tight_layout(rect=[0, 0, 1, 0.96])
-
-    # Save the figure
-    fig_path = os.path.join(save_path, f"procrustescdfs_{subject2plot.lower()}.png")
     fig.savefig(fig_path, dpi=300, bbox_inches="tight")
     print(f"Figure saved to {fig_path}")
     plt.close(fig)
