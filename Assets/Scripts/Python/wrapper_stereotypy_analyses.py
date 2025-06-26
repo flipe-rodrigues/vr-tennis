@@ -131,105 +131,150 @@ for subject2plot in subject_paths:
 
     # %%
     dfs_trajectories_raw = {}
+dfs_trajectories_ref = {}
 
-    # Iterate through each feature label to extract trajectories
-    for label in features2compare_labels:
-        df_feat = dfs_features[label]
-        trajectories = []
+# Iterate through each feature label to extract trajectories
+for label in features2compare_labels:
+    df_feat = dfs_features[label]
+    trajectories = []
+    ref_trajectories = []
 
-        # Iterate through each unique stage
-        for stage in unique_stages:
-            df_stage = df_feat[df_feat["stage"] == stage]
-            alignment_times = df_stage[df_stage["event"] == alignment]["time"].values
+    # Iterate through each unique stage
+    for stage in unique_stages:
+        df_stage = df_feat[df_feat["stage"] == stage]
+        alignment_times = df_stage[df_stage["event"] == alignment]["time"].values
+        
+        # Iterate through each alignment time for the current stage
+        for trial_idx, t_align in enumerate(alignment_times):
 
-            # Iterate through each alignment time for the current stage
-            for trial_idx, t_align in enumerate(alignment_times):
+            # Get indices for the window around the hit
+            if label in ["ball"]:
+                t_start = t_align
+                t_end = t_align + window_duration
+            else:
+                t_start = t_align - half_window_duration
+                t_end = t_align + half_window_duration
+            traj = df_stage[
+                (df_stage["time"] >= t_start) & (df_stage["time"] <= t_end)
+            ][["position.x", "position.y", "position.z"]].to_numpy()
+            traj_time = df_stage[
+                (df_stage["time"] >= t_start) & (df_stage["time"] <= t_end)
+            ]["time"].to_numpy()
 
-                # Get indices for the window around the hit
-                if label in ["ball"]:
-                    t_start = t_align
-                    t_end = t_align + window_duration
-                else:
-                    t_start = t_align - half_window_duration
-                    t_end = t_align + half_window_duration
-                traj = df_stage[
-                    (df_stage["time"] >= t_start) & (df_stage["time"] <= t_end)
-                ][["position.x", "position.y", "position.z"]].to_numpy()
-                traj_time = df_stage[
-                    (df_stage["time"] >= t_start) & (df_stage["time"] <= t_end)
-                ]["time"].to_numpy()
-
-                # Downsample from 500 Hz to 120 Hz
-                if len(traj_time) > 1:
-
-                    # Calculate number of samples for target rate
-                    num_samples = (
-                        int(np.round((traj_time[-1] - traj_time[0]) * target_fs)) + 1
-                    )
-                    if num_samples > 1 and len(traj_time) > num_samples:
-                        traj_time_ds = np.linspace(
-                            traj_time[0], traj_time[-1], num_samples
-                        )
-                        traj_ds = np.column_stack(
-                            [
-                                np.interp(traj_time_ds, traj_time, traj[:, 0]),
-                                np.interp(traj_time_ds, traj_time, traj[:, 1]),
-                                np.interp(traj_time_ds, traj_time, traj[:, 2]),
-                            ]
-                        )
-                    else:
-                        traj_time_ds = traj_time
-                        traj_ds = traj
+            # Downsample from 500 Hz to 120 Hz
+            if len(traj_time) > 1:
+                num_samples = int(np.round((traj_time[-1] - traj_time[0]) * target_fs)) + 1
+                if num_samples > 1 and len(traj_time) > num_samples:
+                    traj_time_ds = np.linspace(traj_time[0], traj_time[-1], num_samples)
+                    traj_ds = np.column_stack([
+                        np.interp(traj_time_ds, traj_time, traj[:, 0]),
+                        np.interp(traj_time_ds, traj_time, traj[:, 1]),
+                        np.interp(traj_time_ds, traj_time, traj[:, 2]),
+                    ])
                 else:
                     traj_time_ds = traj_time
                     traj_ds = traj
+            else:
+                traj_time_ds = traj_time
+                traj_ds = traj
 
-                # Append the trajectory data to records
-                trajectories.append(
-                    {
-                        "stage": stage,
-                        "trial": trial_idx,
-                        "time": traj_time_ds - t_align,
-                        "x": traj_ds[:, 0],
-                        "y": traj_ds[:, 1],
-                        "z": traj_ds[:, 2],
-                    }
-                )
+            # Append the trajectory data to records
+            trajectories.append(
+                {
+                    "stage": stage,
+                    "trial": trial_idx,
+                    "time": traj_time_ds - t_align,
+                    "x": traj_ds[:, 0],
+                    "y": traj_ds[:, 1],
+                    "z": traj_ds[:, 2],
+                }
+            )
 
-        # Store the trajectories in the dictionary as a DataFrame
-        dfs_trajectories_raw[label] = pd.DataFrame(trajectories)
+            # Define pre and post windows as fractions of window_duration
+            pre_t_start = t_align - 1.5 * window_duration
+            pre_t_end = t_align - 0.5 * window_duration
+            post_t_start = t_align + 0.5 * window_duration
+            post_t_end = t_align + 1.5 * window_duration
+            pre_mask = (df_stage["time"] >= pre_t_start) & (df_stage["time"] <= pre_t_end)
+            post_mask = (df_stage["time"] >= post_t_start) & (df_stage["time"] <= post_t_end)
+            union_mask = pre_mask | post_mask
+            ref_traj = df_stage.loc[union_mask, ["position.x", "position.y", "position.z"]].to_numpy()
+            ref_traj_time = df_stage.loc[union_mask, "time"].to_numpy()
+
+            # Downsample reference trajectory
+            if len(ref_traj_time) > 1:
+                ref_num_samples = int(np.round((ref_traj_time[-1] - ref_traj_time[0]) * target_fs)) + 1
+                if ref_num_samples > 1 and len(ref_traj_time) > ref_num_samples:
+                    ref_traj_time_ds = np.linspace(ref_traj_time[0], ref_traj_time[-1], ref_num_samples)
+                    ref_traj_ds = np.column_stack([
+                        np.interp(ref_traj_time_ds, ref_traj_time, ref_traj[:, 0]),
+                        np.interp(ref_traj_time_ds, ref_traj_time, ref_traj[:, 1]),
+                        np.interp(ref_traj_time_ds, ref_traj_time, ref_traj[:, 2]),
+                    ])
+                else:
+                    ref_traj_time_ds = ref_traj_time
+                    ref_traj_ds = ref_traj
+            else:
+                ref_traj_time_ds = ref_traj_time
+                ref_traj_ds = ref_traj
+
+            ref_trajectories.append(
+                {
+                    "stage": stage,
+                    "trial": trial_idx,
+                    "time": ref_traj_time_ds - t_align,
+                    "x": ref_traj_ds[:, 0],
+                    "y": ref_traj_ds[:, 1],
+                    "z": ref_traj_ds[:, 2],
+                }
+            )
+    
+    # Store the trajectories in the dictionaries as DataFrames
+    dfs_trajectories_raw[label] = pd.DataFrame(trajectories)
+    dfs_trajectories_ref[label] = pd.DataFrame(ref_trajectories)
+
+    # %%
+    mean_xyz_per_traj = []
+
+    df_head = dfs_trajectories_ref["head"]
+    num_traj = len(df_head)
+
+    for idx in range(num_traj):
+        row = df_head.iloc[idx]
+        mean_xyz_per_traj.append({
+            "stage": row["stage"],
+            "trial": row["trial"],
+            "time": row["time"],
+            "x": row["x"],
+            "y": row["y"],
+            "z": row["z"],
+        })
+
+    # Convert mean_xyz_per_traj to a DataFrame
+    df_mean_xyz_per_traj = pd.DataFrame(mean_xyz_per_traj)
+    df_mean_xyz_per_traj.head()
 
     # %%
     dfs_trajectories_drift = copy.deepcopy(dfs_trajectories_raw)
 
     # Iterate through each stage and feature to align trajectories
     for stage in unique_stages:
-        for f_idx, label in enumerate(features2compare_labels):
 
+        # Get all mean reference trajectories for this stage
+        ref_trajs_stage = df_mean_xyz_per_traj[df_mean_xyz_per_traj["stage"] == stage]
+        for f_idx, label in enumerate(features2compare_labels):
+            
             # Get all aligned trajectories for this feature and stage from dfs_trajectories
             df_feat_traj = dfs_trajectories_raw[label]
-            df_ref_traj = dfs_trajectories_raw["head"]
-
-            # Filter by stage
             feat_trajs_stage = df_feat_traj[df_feat_traj["stage"] == stage]
-            ref_trajs_stage = df_ref_traj[df_ref_traj["stage"] == stage]
 
             # Iterate through each trajectory in the stage
             for i in range(len(feat_trajs_stage)):
+                feat_traj = feat_trajs_stage.iloc[i]
+                ref_traj = ref_trajs_stage.iloc[i]
 
                 # Subtract the mean from the corresponding trajectory in the reference feature
-                if label in [
-                    "head",
-                    "left-hand",
-                    "grip",
-                    "strings",
-                    "left-frame",
-                    "ball",
-                ]:
-
-                    # Get the i-th trajectory for feature and reference
-                    feat_traj = feat_trajs_stage.iloc[i]
-                    ref_traj = ref_trajs_stage.iloc[i]
+                if label in ["head", "left-hand", "grip", "strings", "left-frame", "ball"]:
 
                     # Subtract the mean of the reference trajectory from the feature trajectory
                     new_x = feat_traj["x"] - np.mean(ref_traj["x"])
