@@ -40,7 +40,14 @@ for subject2plot in subject_paths:
         "racket-frame-left",
         "ball-tracker",
     ]
-    features2compare_labels = ["head", "left-hand", "grip", "strings", "left-frame", "ball"]
+    features2compare_labels = [
+        "head",
+        "left-hand",
+        "grip",
+        "strings",
+        "left-frame",
+        "ball",
+    ]
     feature_colors = [
         "tab:blue",
         "tab:orange",
@@ -91,11 +98,13 @@ for subject2plot in subject_paths:
                 csv_path = os.path.join(subject_dir, csv_to_read[0])
                 label = features2compare_labels[features2compare.index(feature)]
                 dfs_features[label] = pd.read_csv(csv_path)
-                dfs_features[label]["position.x"] *= -1
+                # dfs_features[label]["position.x"] *= -1
                 print(f"Loaded {csv_to_read[0]} for subject {subject2plot}")
                 print(dfs_features[label].head())
             else:
-                print(f"No CSV file found for feature: {feature} in subject {subject2plot}")
+                print(
+                    f"No CSV file found for feature: {feature} in subject {subject2plot}"
+                )
     else:
         print(f"No subject directory found for: {subject2plot}")
 
@@ -158,7 +167,9 @@ for subject2plot in subject_paths:
                         int(np.round((traj_time[-1] - traj_time[0]) * target_fs)) + 1
                     )
                     if num_samples > 1 and len(traj_time) > num_samples:
-                        traj_time_ds = np.linspace(traj_time[0], traj_time[-1], num_samples)
+                        traj_time_ds = np.linspace(
+                            traj_time[0], traj_time[-1], num_samples
+                        )
                         traj_ds = np.column_stack(
                             [
                                 np.interp(traj_time_ds, traj_time, traj[:, 0]),
@@ -207,7 +218,14 @@ for subject2plot in subject_paths:
             for i in range(len(feat_trajs_stage)):
 
                 # Subtract the mean from the corresponding trajectory in the reference feature
-                if label in ["head", "left-hand", "grip", "strings", "left-frame", "ball"]:
+                if label in [
+                    "head",
+                    "left-hand",
+                    "grip",
+                    "strings",
+                    "left-frame",
+                    "ball",
+                ]:
 
                     # Get the i-th trajectory for feature and reference
                     feat_traj = feat_trajs_stage.iloc[i]
@@ -225,8 +243,95 @@ for subject2plot in subject_paths:
                     dfs_trajectories_drift[label].at[idx, "z"] = new_z
 
     # %%
+    """
+    ..#######..########.
+    .##.....##.##.....##
+    ........##.##.....##
+    ..#######..##.....##
+    ........##.##.....##
+    .##.....##.##.....##
+    ..#######..########.
+    """
+    features2plot = [
+        "head",
+        "left-hand",
+        "grip",
+        "strings",
+        # "left-frame",
+        # "ball"
+    ]
+
+    fig = plt.figure(figsize=(16, 12))
+    n_stages = len(unique_stages)
+    for i, stage in enumerate(unique_stages):
+        ax = fig.add_subplot(2, (n_stages + 1) // 2, i + 1, projection="3d")
+        ax.set_title(f"Selected Features - Stage {stage}")
+        ax.set_xlabel("X")
+        ax.set_ylabel("Y")
+        ax.set_zlabel("Z")
+
+        for f_idx, label in enumerate(features2compare_labels):
+            if label not in features2plot:
+                continue
+            df_traj = dfs_trajectories_drift[label]
+            df_stage = df_traj[df_traj["stage"] == stage]
+            for idx, row in df_stage.iterrows():
+                x = np.array(row["x"])
+                y = np.array(row["z"])
+                z = np.array(row["y"])
+                ax.plot(
+                    x,
+                    y,
+                    z,
+                    color=feature_colors[f_idx],
+                    label=label if idx == df_stage.index[0] else None,
+                    linewidth=1,
+                    alpha=0.25,
+                )
+                # Mark the racket hit moment (time closest to zero)
+                if "time" in row:
+                    t = np.array(row["time"])
+                    hit_idx = np.abs(t).argmin()
+                    ax.plot(
+                        x[hit_idx],
+                        y[hit_idx],
+                        z[hit_idx],
+                        color=feature_colors[f_idx],
+                        label="racket hit" if idx == df_stage.index[0] else None,
+                        marker="x",
+                        markersize=5,
+                        alpha=0.25,
+                    )
+                    # Mark the first time point
+                    ax.plot(
+                        x[0],
+                        y[0],
+                        z[0],
+                        color=feature_colors[f_idx],
+                        label="swing start" if idx == df_stage.index[0] else None,
+                        marker="o",
+                        markersize=3,
+                        alpha=0.25,
+                    )
+
+        handles, labels_ = ax.get_legend_handles_labels()
+        by_label = dict(zip(labels_, handles))
+        ax.legend(by_label.values(), by_label.keys())
+        ax.view_init(elev=30, azim=-45)
+
+    plt.tight_layout()
+    
+    # Save the figure
+    fig_path = os.path.join(save_path, f"3dtrajectories_{subject2plot.lower()}.png")
+    fig.savefig(fig_path, dpi=300, bbox_inches="tight")
+    print(f"Figure saved to {fig_path}")
+    plt.close(fig)
+
+    # %%
     dfs_trajectories_norm = copy.deepcopy(
-        dfs_trajectories_drift if useHeadCentricDriftCorrection else dfs_trajectories_raw
+        dfs_trajectories_drift
+        if useHeadCentricDriftCorrection
+        else dfs_trajectories_raw
     )
 
     # normalization_denominator = "global_std"
@@ -268,7 +373,9 @@ for subject2plot in subject_paths:
             dists = np.linalg.norm(diffs, axis=1)
             path_length = np.nansum(dists)
             all_path_lengths.append(path_length)
-        global_avg_path_length = np.nanmean(all_path_lengths) if all_path_lengths else 1.0
+        global_avg_path_length = (
+            np.nanmean(all_path_lengths) if all_path_lengths else 1.0
+        )
 
         # Choose denominator for normalization
         if normalization_denominator == "global_std":
@@ -404,8 +511,8 @@ for subject2plot in subject_paths:
     plt.tight_layout()
 
     # Save the figure
-    fig_path = os.path.join(save_path, f"trajectories_{subject2plot.lower()}.png")
-    fig.savefig(fig_path, dpi=300, bbox_inches='tight')
+    fig_path = os.path.join(save_path, f"pcatrajectories_{subject2plot.lower()}.png")
+    fig.savefig(fig_path, dpi=300, bbox_inches="tight")
     print(f"Figure saved to {fig_path}")
     plt.close(fig)
 
@@ -464,11 +571,15 @@ for subject2plot in subject_paths:
             )  # (n_trials, window_size)
             iqr = np.percentile(dists, 75, axis=0) - np.percentile(dists, 25, axis=0)
 
-            axs[stage_idx, 0].plot(traj_time, mse, color=feature_colors[f_idx], label=label)
+            axs[stage_idx, 0].plot(
+                traj_time, mse, color=feature_colors[f_idx], label=label
+            )
             axs[stage_idx, 1].plot(
                 traj_time, rmse, color=feature_colors[f_idx], label=label
             )
-            axs[stage_idx, 2].plot(traj_time, iqr, color=feature_colors[f_idx], label=label)
+            axs[stage_idx, 2].plot(
+                traj_time, iqr, color=feature_colors[f_idx], label=label
+            )
 
         axs[stage_idx, 0].set_title(f"Stage {stage} - MSE")
         axs[stage_idx, 0].set_ylabel("MSE")
@@ -492,7 +603,7 @@ for subject2plot in subject_paths:
 
     # Save the figure
     fig_path = os.path.join(save_path, f"rmse_{subject2plot.lower()}.png")
-    fig.savefig(fig_path, dpi=300, bbox_inches='tight')
+    fig.savefig(fig_path, dpi=300, bbox_inches="tight")
     print(f"Figure saved to {fig_path}")
     plt.close(fig)
 
@@ -513,7 +624,9 @@ for subject2plot in subject_paths:
     # Iterate through each stage and feature to compute distances
     for stage in unique_stages:
         for f_idx, label in enumerate(features2compare_labels):
-            print(f"  Computing DTW and Procrustes distances for stage {stage}, feature '{label}'...")
+            print(
+                f"  Computing DTW and Procrustes distances for stage {stage}, feature '{label}'..."
+            )
             df_traj = dfs_trajectories_pca[label]
 
             # Filter by stage
@@ -626,7 +739,7 @@ for subject2plot in subject_paths:
 
     # Save the figure
     fig_path = os.path.join(save_path, f"dtw_{subject2plot.lower()}.png")
-    fig.savefig(fig_path, dpi=300, bbox_inches='tight')
+    fig.savefig(fig_path, dpi=300, bbox_inches="tight")
     print(f"Figure saved to {fig_path}")
     plt.close(fig)
 
