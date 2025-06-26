@@ -17,7 +17,7 @@ from scipy.spatial.distance import euclidean
 from fastdtw import fastdtw
 
 # %%
-data_path = "C:\\Users\\flipe\\AppData\\LocalLow\\Warehouse\\VR-tennis\\Data"
+data_path = "C:\\Users\\flipe\\AppData\\LocalLow\\Warehouse\\VR-tennis\\Data\\Selected"
 subject_paths = [f.name for f in os.scandir(data_path) if f.is_dir()]
 subject_count = len(subject_paths)
 
