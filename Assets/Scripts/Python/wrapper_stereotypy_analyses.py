@@ -830,7 +830,59 @@ for subject2plot in subject_paths:
     plt.tight_layout(rect=[0, 0, 1, 0.96])
 
     # Save the figure
-    fig_path = os.path.join(save_path, f"dtwcdfs_{subject2plot.lower()}.png")
+    fig_path = os.path.join(save_path, f"dtwcdfs1_{subject2plot.lower()}.png")
+    fig.savefig(fig_path, dpi=300, bbox_inches="tight")
+    print(f"Figure saved to {fig_path}")
+    plt.close(fig)
+
+    # %%
+    def get_shades(color, num_shades=4):
+        base_rgb = mcolors.to_rgb(color)
+        shades = []
+
+        for i in range(num_shades):
+            factor = 1 - (i + 1) / num_shades  # 1 (light) to 0 (dark)
+
+            # Interpolate between white (1,1,1) and base color
+            shade = tuple(factor + (1 - factor) * c for c in base_rgb)
+            shades.append(shade)
+
+        return shades
+
+
+    fig, axs = plt.subplots(
+        num_features, 1, figsize=(6, 2 * num_features), sharex=True, sharey=True
+    )
+    fig.suptitle("DTW Distance CDFs by Feature (all stages)", fontsize=16, y=0.98)
+
+    for f_idx, label in enumerate(features2compare_labels):
+        ax = axs[f_idx]
+        base_color = mcolors.to_rgb(feature_colors[f_idx])
+
+        # Use a colormap to get different shades for each stage
+        cmap = get_shades(feature_colors[f_idx], num_stages)
+        for stage_idx, stage in enumerate(unique_stages):
+            mask = (df_dtw_distances["feature"] == label) & (
+                df_dtw_distances["stage"] == stage
+            )
+            dtw_vals = df_dtw_distances.loc[mask, "distance"].values
+            if len(dtw_vals) > 0:
+                sorted_dtw = np.sort(dtw_vals)
+                cdf = np.arange(1, len(sorted_dtw) + 1) / len(sorted_dtw)
+
+                # Pick a shade for this stage
+                color = cmap[stage_idx][:3]  # skip lightest shades
+                ax.plot(sorted_dtw, cdf, color=color, label=f"Stage {stage}", linewidth=1)
+        ax.set_title(f"{label}")
+        ax.set_ylabel("CDF")
+        ax.grid()
+        ax.legend()
+
+    axs[-1].set_xlabel("DTW Distance")
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+        
+    # Save the figure
+    fig_path = os.path.join(save_path, f"dtwcdfs2_{subject2plot.lower()}.png")
     fig.savefig(fig_path, dpi=300, bbox_inches="tight")
     print(f"Figure saved to {fig_path}")
     plt.close(fig)
