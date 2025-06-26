@@ -312,6 +312,10 @@ for subject2plot in subject_paths:
                     dfs_trajectories_drift[label].at[idx, "x"] = new_x
                     dfs_trajectories_drift[label].at[idx, "y"] = new_y
                     dfs_trajectories_drift[label].at[idx, "z"] = new_z
+    
+    # If not using head-centric drift correction, copy the raw trajectories to drifted ones
+    if useHeadCentricDriftCorrection == False:
+        dfs_trajectories_drift = copy.deepcopy(dfs_trajectories_raw)
 
     # %%
     """
