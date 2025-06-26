@@ -306,6 +306,8 @@ for subject2plot in subject_paths:
     ]
 
     fig = plt.figure(figsize=(16, 12))
+    fig.suptitle(f"{subject2plot}", fontsize=14, x=0.15, y=0.975)
+
     n_stages = len(unique_stages)
     for i, stage in enumerate(unique_stages):
         ax = fig.add_subplot(2, (n_stages + 1) // 2, i + 1, projection="3d")
@@ -752,7 +754,7 @@ for subject2plot in subject_paths:
 
             if len(dtw_vals) > 0:
                 axs[stage_idx, f_idx].hist(
-                    dtw_vals, bins=bins, color=feature_colors[f_idx], alpha=0.7
+                    dtw_vals, bins=bins, color=feature_colors[f_idx], alpha=0.7, density=True
                 )
             axs[stage_idx, f_idx].set_title(f"{label} - Stage {stage}")
             axs[stage_idx, f_idx].set_xlabel("DTW Distance")
@@ -851,9 +853,9 @@ for subject2plot in subject_paths:
 
 
     fig, axs = plt.subplots(
-        num_features, 1, figsize=(6, 2 * num_features), sharex=True, sharey=True
+        num_features, 1, figsize=(6, 2 * num_features), sharex=False, sharey=True
     )
-    fig.suptitle("DTW Distance CDFs by Feature (all stages)", fontsize=16, y=0.98)
+    fig.suptitle(f"{subject2plot}, DTW Distance CDFs", fontsize=14, y=0.98)
 
     for f_idx, label in enumerate(features2compare_labels):
         ax = axs[f_idx]
@@ -883,6 +885,50 @@ for subject2plot in subject_paths:
         
     # Save the figure
     fig_path = os.path.join(save_path, f"dtwcdfs2_{subject2plot.lower()}.png")
+    fig.savefig(fig_path, dpi=300, bbox_inches="tight")
+    print(f"Figure saved to {fig_path}")
+    plt.close(fig)
+
+    # %%
+    """
+    .########..########...#######...######..########..##.....##..######..########.########..######.
+    .##.....##.##.....##.##.....##.##....##.##.....##.##.....##.##....##....##....##.......##....##
+    .##.....##.##.....##.##.....##.##.......##.....##.##.....##.##..........##....##.......##......
+    .########..########..##.....##.##.......########..##.....##..######.....##....######....######.
+    .##........##...##...##.....##.##.......##...##...##.....##.......##....##....##.............##
+    .##........##....##..##.....##.##....##.##....##..##.....##.##....##....##....##.......##....##
+    .##........##.....##..#######...######..##.....##..#######...######.....##....########..######.
+    """
+    fig, axs = plt.subplots(
+        num_features, 1, figsize=(6, 2 * num_features), sharex=False, sharey=True
+    )
+    fig.suptitle(f"{subject2plot}, Procrustes Distance CDFs by Feature (all stages)", fontsize=14, y=0.98)
+
+    for f_idx, label in enumerate(features2compare_labels):
+        ax = axs[f_idx]
+        base_color = mcolors.to_rgb(feature_colors[f_idx])
+
+        cmap = get_shades(feature_colors[f_idx], num_stages)
+        for stage_idx, stage in enumerate(unique_stages):
+            mask = (df_procrustes_distances["feature"] == label) & (
+                df_procrustes_distances["stage"] == stage
+            )
+            proc_vals = df_procrustes_distances.loc[mask, "distance"].values
+            if len(proc_vals) > 0:
+                sorted_proc = np.sort(proc_vals)
+                cdf = np.arange(1, len(sorted_proc) + 1) / len(sorted_proc)
+                color = cmap[stage_idx][:3]
+                ax.plot(sorted_proc, cdf, color=color, label=f"Stage {stage}", linewidth=1)
+        ax.set_title(f"{label}")
+        ax.set_ylabel("CDF")
+        ax.grid()
+        ax.legend()
+
+    axs[-1].set_xlabel("Procrustes Distance")
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+
+    # Save the figure
+    fig_path = os.path.join(save_path, f"procrustescdfs_{subject2plot.lower()}.png")
     fig.savefig(fig_path, dpi=300, bbox_inches="tight")
     print(f"Figure saved to {fig_path}")
     plt.close(fig)
