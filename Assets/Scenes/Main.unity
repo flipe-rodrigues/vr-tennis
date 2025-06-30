@@ -231,13 +231,13 @@ MonoBehaviour:
   _trackers:
   - {fileID: 1933173159}
   - {fileID: 1933173157}
-  - {fileID: 1933173155}
-  - {fileID: 1854824343}
-  - {fileID: 200473216}
-  - {fileID: 1361894310}
   - {fileID: 166106165}
   - {fileID: 1933173158}
+  - {fileID: 200473216}
+  - {fileID: 1361894310}
+  - {fileID: 1854824343}
   - {fileID: 1933173154}
+  - {fileID: 1933173155}
   - {fileID: 1933173153}
 --- !u!1 &19562536
 GameObject:
@@ -1611,8 +1611,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-06-27_14-09-24
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis\Data\2025-06-27_14-09-24
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-06-30_08-48-21
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis\Data\2025-06-30_08-48-21
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4117,9 +4117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570597e47369b94409c8be19b1a8bd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interTrialInterval: 3
+  interTrialInterval: 5
   stages:
-  - trialCount: 1
+  - trialCount: 50
     objectsToEnable:
     - {fileID: 4048976150374128210}
     objectsToDisable:
@@ -4127,16 +4127,16 @@ MonoBehaviour:
     - {fileID: 9054235859950929352}
     - {fileID: 212002169676615347}
     - {fileID: 2631111453958804722}
-  - trialCount: 1
+  - trialCount: 50
     objectsToEnable:
     - {fileID: 5102816465464550694}
     - {fileID: 9054235859950929352}
     objectsToDisable: []
-  - trialCount: 1
+  - trialCount: 50
     objectsToEnable:
     - {fileID: 212002169676615347}
     objectsToDisable: []
-  - trialCount: 500
+  - trialCount: 50
     objectsToEnable:
     - {fileID: 2631111453958804722}
     objectsToDisable:
