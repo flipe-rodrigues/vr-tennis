@@ -3,19 +3,17 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem.XR;
 
 [ExecuteInEditMode]
-[RequireComponent(typeof(Rigidbody))]
-public class RacketRigidbodyBhv : CachedRigidbodyBhv
+public class RacketBhv : CachedTransformBhv
 {
     // Public properties
-    public Vector3 HitVelocity => _hitVelocity;
+    public Vector3 HitVelocity => _hitLinearVelocity;
     public Vector3 HitContactNormal => _hitContactNormal;
-    public Vector3 SmoothLinearVelocity => _smoothLinearVelocity;
-    public Vector3 SmoothAngularVelocity => _smoothAngularVelocity;
+    public Vector3 LinearVelocity => _linearVelocity;
+    public Vector3 AngularVelocity => _angularVelocity;
     public bool IsInRefractoryPeriod => _racketCollider.enabled == false;
 
     // Public fields
     public XRController inputController;
-    public RacketAnchorBhv anchorTransform;
     public float apparentNormalRestitution = .4f;
     public float apparentTangentialRestitution = .65f;
     public float apparentSpinRestitution = .4f;
@@ -29,93 +27,68 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
     public float smoothingTimeConstantNormal = 0.005f;
     public UnityEvent<float> onRacketHit = new UnityEvent<float>();
 
-    // Read only fields
-    [SerializeField, ReadOnly]
-    private float _smoothingRateVelocity;
-    [SerializeField, ReadOnly]
-    private float _smoothingRateNormal;
-    [SerializeField, ReadOnly]
-    private int _approxNumFrames;
-
     // Private fields
-    private RacketDynamicColliderBhv _racketCollider;
-    private Vector3 _smoothContactNormal;
-    private Vector3 _smoothLinearVelocity;
-    private Vector3 _smoothAngularVelocity;
-    private Vector3 _hitVelocity;
+    private RacketColliderBhv _racketCollider;
+    private Vector3 _contactNormal;
+    private Vector3 _linearVelocity;
+    private Vector3 _angularVelocity;
+    private Vector3 _hitLinearVelocity;
     private Vector3 _hitContactNormal;
-
-    private void OnValidate()
-    {
-        if (anchorTransform != null && anchorTransform.anchoredRigidbody != this)
-        {
-            anchorTransform.anchoredRigidbody = this;
-        }
-
-        _smoothingRateVelocity = smoothingTimeConstantVelocity.TauToLambda();
-        _smoothingRateNormal = smoothingTimeConstantNormal.TauToLambda();
-        _approxNumFrames = Mathf.RoundToInt(smoothingTimeConstantVelocity / Time.fixedDeltaTime);
-    }
+    private Vector3 _previousPosition;
+    private Quaternion _previousRotation;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _racketCollider = GetComponentInChildren<RacketDynamicColliderBhv>();
+        _racketCollider = GetComponentInChildren<RacketColliderBhv>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (!Application.isPlaying)
-        {
-            this.MoveTransform();
-        }
+        this.UpdateLinearVelocity();
+
+        this.UpdateAngularVelocity();
+
+        //_racketCollider.CheckForCollision();
+
+        //if (true)
+        //{
+        //    this.OnTriggerStay(new Collider());
+        //}
     }
 
-    protected override void FixedUpdate()
+    private void UpdateLinearVelocity()
     {
-        base.FixedUpdate();
+        _linearVelocity = (this.Position - _previousPosition) / Time.fixedDeltaTime;
 
-        this.MoveRigidbody();
-
-        _smoothContactNormal = Vector3.Lerp(_smoothContactNormal, this.GetContactNormal(), _smoothingRateNormal);
-        _smoothLinearVelocity = Vector3.Lerp(_smoothLinearVelocity, this.LinearVelocity, _smoothingRateVelocity);
-        _smoothAngularVelocity = Vector3.Lerp(_smoothAngularVelocity, this.AngularVelocity, _smoothingRateVelocity);
+        _previousPosition = this.Position;
     }
 
-    public void MoveTransform()
+    private void UpdateAngularVelocity()
     {
-        if (anchorTransform == null)
-        {
-            return;
-        }
+        Quaternion deltaRotation = this.Rotation * Quaternion.Inverse(_previousRotation);
 
-        this.Position = anchorTransform.Position;
-        this.Rotation = anchorTransform.Rotation;
+        deltaRotation.ToAngleAxis(out float angleInDegrees, out Vector3 axis);
+
+        _angularVelocity = axis * (angleInDegrees * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+
+        _previousRotation = this.Rotation;
     }
 
-    private void MoveRigidbody()
-    {
-        if (anchorTransform == null)
-        {
-            return;
-        }
-
-        this.Move(anchorTransform.Position, anchorTransform.Rotation);
-    }
-    
     private void OnTriggerStay(Collider other)
     {
-        Vector3 closestPointOnStrings = this.Position + Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, this.Forward);
+        _contactNormal = this.GetContactNormal();
 
-        if (Vector3.Dot(_smoothContactNormal, TennisManager.Instance.RelativePosition) < 0)
+        if (Vector3.Dot(_contactNormal, TennisManager.Instance.RelativePosition) < 0)
         {
             _racketCollider.StartRefractoryPeriod();
 
-            float relativeSpeed = (_smoothLinearVelocity - TennisManager.Instance.Ball.LinearVelocity).magnitude;
+            float relativeSpeed = (_linearVelocity - TennisManager.Instance.Ball.LinearVelocity).magnitude;
 
-            _hitVelocity = this.GetVelocityAtContactPoint();
-            _hitContactNormal = _smoothContactNormal;
+            _hitLinearVelocity = this.GetVelocityAtContactPoint();
+
+            _hitContactNormal = _contactNormal;
 
             this.Hit(TennisManager.Instance.Ball);
 
@@ -135,10 +108,10 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
         Vector3 w_ball_i = ball.AngularVelocity;
 
         // Separate initial velocity into normal and tangential components
-        Vector3 v_ball_normal_i = Vector3.Project(v_ball_i, _smoothContactNormal);
+        Vector3 v_ball_normal_i = Vector3.Project(v_ball_i, _contactNormal);
         Vector3 v_ball_tangential_i = v_ball_i - v_ball_normal_i;
 
-        Vector3 v_racket_normal_i = Vector3.Project(v_racket_i, _smoothContactNormal);
+        Vector3 v_racket_normal_i = Vector3.Project(v_racket_i, _contactNormal);
         Vector3 v_racket_tangential_i = v_racket_i - v_racket_normal_i;
 
         // Apply restitution to normal component
@@ -148,7 +121,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
         // Apply friction and spin effects to tangential component
         Vector3 v_ball_tangential_f = 
             apparentTangentialRestitution * (v_racket_tangential_i + v_ball_tangential_i) +
-            spinToTangentialConversion * ball.radius * Vector3.Cross(w_ball_i, _smoothContactNormal);
+            spinToTangentialConversion * ball.radius * Vector3.Cross(w_ball_i, _contactNormal);
 
         // Calculate final velocity
         Vector3 v_ball_f = v_ball_normal_f + v_ball_tangential_f;
@@ -159,7 +132,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
         // Calculate the final angular velocity of the ball
         Vector3 w_ball_f = 
             apparentSpinRestitution * w_ball_i +
-            tangentialToSpinConversion * Vector3.Cross(_smoothContactNormal, v_ball_tangential_i - v_racket_tangential_i) / ball.radius;
+            tangentialToSpinConversion * Vector3.Cross(_contactNormal, v_ball_tangential_i - v_racket_tangential_i) / ball.radius;
 
         // Apply the final velocities to the ball
         ball.LinearVelocity = v_ball_f;
@@ -173,23 +146,21 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
 
     private Vector3 GetVelocityAtContactPoint()
     {
-        //Vector3 contactPoint = this.Position + Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, this.Forward);
-        //Vector3 relativePosition = contactPoint - this.Position;
         Vector3 relativePosition = Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, this.Forward);
-        Vector3 tangentialVelocity = Vector3.Cross(_smoothAngularVelocity, relativePosition);
+        Vector3 tangentialVelocity = Vector3.Cross(_angularVelocity, relativePosition);
 
-        return _smoothLinearVelocity + tangentialVelocity;
+        return _linearVelocity + tangentialVelocity;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
 
-        Gizmos.DrawLine(this.Position, this.Position + _smoothContactNormal * 0.5f);
+        Gizmos.DrawLine(this.Position, this.Position + _contactNormal * 0.5f);
 
         Gizmos.color = Color.magenta;
 
-        Gizmos.DrawLine(this.Position, this.Position + _hitVelocity * 0.025f);
+        Gizmos.DrawLine(this.Position, this.Position + _hitLinearVelocity * 0.025f);
 
         if (TennisManager.Instance.Ball != null)
         {
