@@ -46,7 +46,7 @@ public class ApplicationManager : Singleton<ApplicationManager>
             this.StartToQuit();
         }
 
-        if (_hasStartedQuitting && TrackingManager.Instance.IsDoneSaving)
+        if (_hasStartedQuitting && (TrackingManager.Instance.IsDoneSaving || !DataManager.Instance.saveData))
         {
             this.Quit();
         }

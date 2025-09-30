@@ -2,20 +2,19 @@ using UnityEngine;
 using System.Collections;
 
 [ExecuteInEditMode]
-public class AnchorToBhv : MonoBehaviour
+public class AnchorToBhv : CachedTransformBhv
 {
     public Transform anchorTransform;
     [Range(0, 5)]
     public float invokeDelay = 1f;
-    [Range(60, 500)]
-    public float updateRate = 250f;
-
+    public bool overridePosition;
+    
     private float _updateInterval;
     private WaitForSeconds _waitForSeconds;
 
     private void OnValidate()
     {
-        _updateInterval = 1f / updateRate;
+        _updateInterval = 1f / ApplicationManager.Instance.targetPhysicsRate;
 
         _waitForSeconds = new WaitForSeconds(_updateInterval);
 
@@ -33,14 +32,17 @@ public class AnchorToBhv : MonoBehaviour
 
         Invoke(nameof(AlignTransforms), invokeDelay);
 
-        StartCoroutine(this.UpdateCoroutine());
+        if (overridePosition)
+        {
+            StartCoroutine(this.UpdateCoroutine());
+        }
     }
 
     private IEnumerator UpdateCoroutine()
     {
         while (true)
         {
-            this.transform.position = anchorTransform.position;
+            this.Position = anchorTransform.position;
 
             yield return _waitForSeconds;
         }

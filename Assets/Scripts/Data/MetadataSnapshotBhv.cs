@@ -14,7 +14,7 @@ public class MetadataSnapshotBhv : MonoBehaviour
     public TaskManager taskManager;
     public BallLaunchBhv ballSpawner;
     public BallRigidbodyBhv ball;
-    public RacketRigidbodyBhv racket;
+    public RacketBhv racket;
 
     [Header("Physics Materials")]
     public PhysicsMaterial ballPhysXMaterial;
@@ -26,16 +26,21 @@ public class MetadataSnapshotBhv : MonoBehaviour
 
     private void OnValidate()
     {
-        _fileName = DataManager.GetFilename("metadata", "json");
+        _fileName = DataManager.GetFilename("metadata", ".json");
 
         taskManager = TaskManager.Instance;
         ballSpawner = FindFirstObjectByType<BallLaunchBhv>();
         racket = TennisManager.Instance.Racket;
     }
 
+    private void Awake()
+    {
+        this.OnValidate();
+    }
+
     private void Start()
     {
-        _filePath = Path.Combine(DataManager.savePath, _fileName);
+        _filePath = Path.Combine(DataManager.Instance.SavePath, _fileName);
         
         if (DataManager.Instance.saveMetadata)
         {

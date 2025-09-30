@@ -18,7 +18,7 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
     [SerializeField, ReadOnly]
     private float _liftCoefficient;
     [SerializeField, ReadOnly]
-    private float _spinDecayRate = 1f;
+    private float _spinDecayRate;
     [SerializeField, ReadOnly]
     private bool _wasJustHit;
 
@@ -33,6 +33,8 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
         this.Scale = Vector3.one * radius * 2f;
 
         this.Rigidbody.mass = mass;
+
+        _crossSectionalArea = Mathf.PI * radius * radius;
     }
 
     protected override void Awake()
@@ -48,11 +50,17 @@ public class BallRigidbodyBhv : CachedRigidbodyBhv
     {
         base.Start();
 
-        _crossSectionalArea = Mathf.PI * radius * radius;
+        _dragCoefficient = 0f;
+        _liftCoefficient = 0f;
+        _spinDecayRate = 1f;
+        _V = 0f;
+        _W = 0f;
     }
 
-    public void Restart()
+    public void SpawnAt(Vector3 position, Quaternion rotation)
     {
+        this.Position = position;
+        this.Rotation = rotation;
         this.Start();
     }
 

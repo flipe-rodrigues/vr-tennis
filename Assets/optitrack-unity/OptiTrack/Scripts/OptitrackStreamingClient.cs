@@ -341,7 +341,6 @@ public class OptitrackStreamingClient : MonoBehaviour
     private bool m_hasDrawnCameras = false;
     private bool m_hasDrawnForcePlates = false;
     private bool m_subscribedToMarkers = false;
-    private bool m_subscribedToTMarkMarkers = false; // trained markerset added
 
     private OptitrackHiResTimer.Timestamp m_lastFrameDeliveryTimestamp;
     private Coroutine m_connectionHealthCoroutine = null;
@@ -392,6 +391,12 @@ public class OptitrackStreamingClient : MonoBehaviour
     /// </summary>
     private object m_frameDataUpdateLock = new object();
     #endregion Private fields
+
+    void Start()
+    {
+        string lanIP = NetworkUtils.GetLocalIPAddress();
+        Debug.Log("My LAN IP: " + lanIP);
+    }
 
 
     private void Update()
@@ -611,7 +616,7 @@ public class OptitrackStreamingClient : MonoBehaviour
     /// <returns>An arbitrary OptitrackClient from the scene, or null if none are found.</returns>
     public static OptitrackStreamingClient FindDefaultClient()
     {
-        OptitrackStreamingClient[] allClients = FindObjectsOfType<OptitrackStreamingClient>();
+        OptitrackStreamingClient[] allClients = FindObjectsByType<OptitrackStreamingClient>(FindObjectsSortMode.None);
 
         if ( allClients.Length == 0 )
         {

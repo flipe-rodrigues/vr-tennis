@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem.XR;
 
-[ExecuteInEditMode]
+[ExecuteInEditMode, SelectionBase]
 public class RacketBhv : CachedTransformBhv
 {
     // Public properties
@@ -27,6 +27,14 @@ public class RacketBhv : CachedTransformBhv
     public float smoothingTimeConstantNormal = 0.005f;
     public UnityEvent<float> onRacketHit = new UnityEvent<float>();
 
+    // Read only fields
+    [SerializeField, ReadOnly]
+    private float _smoothingRateVelocity;
+    [SerializeField, ReadOnly]
+    private float _smoothingRateNormal;
+    [SerializeField, ReadOnly]
+    private int _approxNumFrames;
+
     // Private fields
     private RacketColliderBhv _racketCollider;
     private Vector3 _contactNormal;
@@ -36,6 +44,13 @@ public class RacketBhv : CachedTransformBhv
     private Vector3 _hitContactNormal;
     private Vector3 _previousPosition;
     private Quaternion _previousRotation;
+
+    private void OnValidate()
+    {
+        _smoothingRateVelocity = smoothingTimeConstantVelocity.TauToLambda();
+        _smoothingRateNormal = smoothingTimeConstantNormal.TauToLambda();
+        _approxNumFrames = Mathf.RoundToInt(smoothingTimeConstantVelocity / Time.fixedDeltaTime);
+    }
 
     protected override void Awake()
     {
@@ -49,18 +64,13 @@ public class RacketBhv : CachedTransformBhv
         this.UpdateLinearVelocity();
 
         this.UpdateAngularVelocity();
-
-        //_racketCollider.CheckForCollision();
-
-        //if (true)
-        //{
-        //    this.OnTriggerStay(new Collider());
-        //}
     }
 
     private void UpdateLinearVelocity()
     {
-        _linearVelocity = (this.Position - _previousPosition) / Time.fixedDeltaTime;
+        Vector3 instantaneousLinearVelocity = (this.Position - _previousPosition) / Time.fixedDeltaTime;
+
+        _linearVelocity = Vector3.Lerp(_linearVelocity, instantaneousLinearVelocity, _smoothingRateVelocity);
 
         _previousPosition = this.Position;
     }
@@ -71,14 +81,23 @@ public class RacketBhv : CachedTransformBhv
 
         deltaRotation.ToAngleAxis(out float angleInDegrees, out Vector3 axis);
 
-        _angularVelocity = axis * (angleInDegrees * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+        Vector3 instantaneousAngularVelocity = axis * (angleInDegrees * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+
+        _angularVelocity = Vector3.Lerp(_angularVelocity, instantaneousAngularVelocity, _smoothingRateVelocity);
 
         _previousRotation = this.Rotation;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void UpdateConstactNormal()
     {
-        _contactNormal = this.GetContactNormal();
+        Vector3 instantaneousContactNormal = (this.Forward * Vector3.Dot(this.Forward, TennisManager.Instance.RelativeVelocity)).normalized;
+
+        _contactNormal = Vector3.Lerp(_contactNormal, instantaneousContactNormal, _smoothingRateNormal);
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        this.UpdateConstactNormal();
 
         if (Vector3.Dot(_contactNormal, TennisManager.Instance.RelativePosition) < 0)
         {
@@ -137,11 +156,6 @@ public class RacketBhv : CachedTransformBhv
         // Apply the final velocities to the ball
         ball.LinearVelocity = v_ball_f;
         ball.AngularVelocity = w_ball_f;
-    }
-
-    private Vector3 GetContactNormal()
-    {
-        return (this.Forward * Vector3.Dot(this.Forward, TennisManager.Instance.RelativeVelocity)).normalized;
     }
 
     private Vector3 GetVelocityAtContactPoint()

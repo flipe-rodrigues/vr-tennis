@@ -5,8 +5,8 @@ using System;
 
 public class DataManager : Singleton<DataManager>
 {
-    // Static fields
-    public static readonly string savePath = GetFormattedSavePath(Application.isEditor ? Application.dataPath : Application.persistentDataPath);
+    // Public properties
+    public string SavePath => Application.isEditor ? _editorSavePath : _buildSavePath;
 
     // Public fields
     public bool saveData;
@@ -30,9 +30,9 @@ public class DataManager : Singleton<DataManager>
     {
         base.Awake();
 
-        if (!Directory.Exists(savePath))
+        if (!Directory.Exists(SavePath))
         {
-            Directory.CreateDirectory(savePath);
+            Directory.CreateDirectory(SavePath);
         }
     }
 

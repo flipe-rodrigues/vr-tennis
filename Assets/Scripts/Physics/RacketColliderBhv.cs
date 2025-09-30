@@ -11,6 +11,7 @@ public class RacketColliderBhv : CachedTransformBhv
     public bool displayAsMesh;
 
     // Private fields
+    private RacketBhv _racketBhv;
     private MeshRenderer _meshRenderer;
     private Collider _collider;
 
@@ -23,6 +24,8 @@ public class RacketColliderBhv : CachedTransformBhv
     {
         base.Awake();
 
+        _racketBhv = GetComponentInParent<RacketBhv>();
+
         _meshRenderer = GetComponent<MeshRenderer>();
 
         _collider = GetComponent<Collider>();
@@ -33,18 +36,10 @@ public class RacketColliderBhv : CachedTransformBhv
         this.OnValidate();
     }
 
-    //public void CheckForCollision()
-    //{
-    //    Collider[] hits = Physics.OverlapBox(_collider.bounds.center, _collider.bounds.extents, this.Transform.rotation);
-
-    //    foreach (Collider hit in hits)
-    //    {
-    //        if (hit.gameObject != this.gameObject && hit.gameObject.layer == LayerMask.NameToLayer("Ball"))
-    //        {
-    //            TennisManager.Instance.Racket.OnRacketHit(hit);
-    //        }
-    //    }
-    //}
+    private void OnTriggerStay(Collider other)
+    {
+        _racketBhv.OnTriggerStay(other);
+    }
 
     public void StartRefractoryPeriod()
     {

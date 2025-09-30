@@ -25,12 +25,14 @@ public class TrackingBhv : CachedTransformBhv
     private BinaryWriter _binaryWriter;
     private TaskEventType _taskEvent;
     private string _binaryPath;
+    private string _csvPath;
     private float _samplingTimer;
 
     private void OnValidate()
     {
         _binaryFilename = DataManager.GetFilename(this.name, ".bin");
-        _binaryPath = Path.Combine(DataManager.savePath, _binaryFilename);
+        _binaryPath = Path.Combine(DataManager.Instance.SavePath, _binaryFilename);
+        _csvPath = Path.ChangeExtension(_binaryPath, ".csv");
     }
 
     protected override void Awake()
@@ -122,10 +124,7 @@ public class TrackingBhv : CachedTransformBhv
 
     public void ConvertBinaryToCSV()
     {
-        string csvFilename = DataManager.GetFilename(this.name);
-        string csvPath = Path.Combine(DataManager.savePath, csvFilename);
-
-        StreamWriter csvWriter = File.CreateText(csvPath);
+        StreamWriter csvWriter = File.CreateText(_csvPath);
         csvWriter.WriteLine(TrackingDatum.header);
 
         using BinaryReader binaryReader = new BinaryReader(File.OpenRead(_binaryPath));

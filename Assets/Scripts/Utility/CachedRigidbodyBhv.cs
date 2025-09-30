@@ -27,18 +27,23 @@ public class CachedRigidbodyBhv : CachedTransformBhv
     private Vector3 _previousPosition;
     private Quaternion _previousRotation;
 
+    private void OnValidate()
+    {
+        this.Rigidbody.maxLinearVelocity = maxLinearVelocity;
+        this.Rigidbody.maxAngularVelocity = maxAngularVelocity;
+    }
+
     protected override void Awake()
     {
         base.Awake();
 
         _rigidbody = this.Rigidbody;
+
+        this.OnValidate();
     }
 
     protected virtual void Start()
     {
-        this.Rigidbody.maxLinearVelocity = maxLinearVelocity;
-        this.Rigidbody.maxAngularVelocity = maxAngularVelocity;
-
         _previousPosition = this.Position;
         _previousRotation = this.Rotation;
     }

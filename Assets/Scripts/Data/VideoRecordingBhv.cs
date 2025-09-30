@@ -38,7 +38,7 @@ public class VideoRecordingBhv : MonoBehaviour
         _renderTexture = _camera.targetTexture;
 
         _videoFilename = DataManager.GetFilename(this.name, ".mp4");
-        _videoPath = Path.Combine(DataManager.savePath, _videoFilename);
+        _videoPath = Path.Combine(DataManager.Instance.SavePath, _videoFilename);
     }
 
     private void Start()

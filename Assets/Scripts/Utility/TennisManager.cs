@@ -4,7 +4,7 @@ public class TennisManager : Singleton<TennisManager>
 {
     // Public properties
     public BallRigidbodyBhv Ball { get {return _ball; } set { _ball = value; } }
-    public RacketRigidbodyBhv Racket => _racket;
+    public RacketBhv Racket => _racket;
     public Vector3 RelativePosition
     {
         get 
@@ -34,7 +34,7 @@ public class TennisManager : Singleton<TennisManager>
     [SerializeField, ReadOnly]
     private BallRigidbodyBhv _ball;
     [SerializeField, ReadOnly]
-    private RacketRigidbodyBhv _racket;
+    private RacketBhv _racket;
 
     protected override void OnValidate()
     {
@@ -46,7 +46,7 @@ public class TennisManager : Singleton<TennisManager>
         }
         if (_racket == null)
         {
-            _racket = FindFirstObjectByType<RacketRigidbodyBhv>();
+            _racket = FindFirstObjectByType<RacketBhv>();
         }
     }
 

@@ -24,6 +24,7 @@ public class TaskManager : Singleton<TaskManager>
     // Public fields
     [Min(.01f)]
     public float interTrialInterval = 3;
+    public TruncatedExponentialDistribution itiDistribution = new TruncatedExponentialDistribution(1, 3, 10);
     public List<TaskStage> stages;
 
     // Read only fields
@@ -36,8 +37,14 @@ public class TaskManager : Singleton<TaskManager>
 
     // Private fields
     private float _lastTrialStartTime = -Mathf.Infinity;
-    [SerializeField, ReadOnly]
     private int[] _stageTransitionThresholds;
+
+    protected override void OnValidate()
+    {
+        base.OnValidate();
+
+        itiDistribution.UpdatePDF();
+    }
 
     private void Start()
     {
@@ -96,6 +103,8 @@ public class TaskManager : Singleton<TaskManager>
         _lastTrialStartTime = Time.time;
 
         _trialIndex++;
+
+        interTrialInterval = itiDistribution.Sample();
 
         onTrialStart?.Invoke();
 
