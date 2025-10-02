@@ -1,43 +1,94 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TargetBhv : CachedTransformBhv 
+[RequireComponent(typeof(MeshRenderer))]
+public class TargetBhv : CachedTransformBhv
 {
+    // Public properties
+    public MeshRenderer MeshRenderer => _meshRenderer;
+
     // Public fields
-    public UnityEvent<float> onTargetHit = new UnityEvent<float>();
+    [ColorUsage(true, true)]
+    public Color acquisitionColor;
+    [Range(.1f, 5f)]
+    public float glowDelay = 0.1f;
+    [Range(.1f, 5f)]
+    public float fadeDelay = 1f;
+    public UnityEvent<Vector3, float> onTargetAcquired = new UnityEvent<Vector3, float>();
+
+    // Readonly fields
+    [SerializeField, ReadOnly]
+    private bool _isDisplayingAcquisition;
 
     // Private fields
-    private TargetMeshBhv _mesh;
+    private MeshRenderer _meshRenderer;
+    private Material _material;
+    private Color _defaultColor;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _mesh = GetComponentInChildren<TargetMeshBhv>();
+        _meshRenderer = this.GetComponent<MeshRenderer>();
+        _material = _meshRenderer.material;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        if (!other.GetComponent<BallRigidbodyBhv>().WasJustHit)
+        _defaultColor = _material.color;
+    }
+
+    protected void TryDisplayProgress(float t)
+    {
+        if (_isDisplayingAcquisition)
         {
             return;
         }
 
-        _mesh.GlowAndFade();
-
-        onTargetHit?.Invoke(TennisManager.Instance.Ball.LinearVelocity.magnitude);
-
-        if (other == TennisManager.Instance.Ball.Collider)
-        {
-            TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetEnter);
-        }
+        _material.color = Color.Lerp(_defaultColor, acquisitionColor, t);
     }
 
-    private void OnTriggerExit(Collider other)
+    protected void TryAcquireAt(Vector3 position, float intensity)
     {
-        if (other == TennisManager.Instance.Ball.Collider)
+        if (_isDisplayingAcquisition)
         {
-            TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetExit);
+            return;
         }
+
+        onTargetAcquired?.Invoke(position, intensity);
+
+        TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetAcquired);
+
+        StartCoroutine(this.AcquisitionDisplayCoroutine());
+    }
+
+    private IEnumerator AcquisitionDisplayCoroutine()
+    {
+        _isDisplayingAcquisition = true;
+
+        float lerp = 0;
+
+        while (lerp < 1)
+        {
+            lerp += Time.fixedDeltaTime / glowDelay;
+
+            _material.color = Color.Lerp(_defaultColor, acquisitionColor, lerp);
+
+            yield return ApplicationManager.waitForFixedUpdateInstance;
+        }
+
+        while (lerp > 0)
+        {
+            lerp -= Time.fixedDeltaTime / fadeDelay;
+
+            _material.color = Color.Lerp(_defaultColor, acquisitionColor, lerp);
+
+            yield return ApplicationManager.waitForFixedUpdateInstance;
+        }
+
+        _material.color = _defaultColor;
+
+        _isDisplayingAcquisition = false;
     }
 }

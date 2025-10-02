@@ -6,6 +6,7 @@ using UnityEngine.InputSystem.XR;
 public class RacketBhv : CachedTransformBhv
 {
     // Public properties
+    public MeshRenderer MeshRenderer => _meshRenderer;
     public Vector3 HitVelocity => _hitLinearVelocity;
     public Vector3 HitContactNormal => _hitContactNormal;
     public Vector3 LinearVelocity => _linearVelocity;
@@ -36,6 +37,7 @@ public class RacketBhv : CachedTransformBhv
     private int _approxNumFrames;
 
     // Private fields
+    private MeshRenderer _meshRenderer;
     private RacketColliderBhv _racketCollider;
     private Vector3 _contactNormal;
     private Vector3 _linearVelocity;
@@ -56,6 +58,7 @@ public class RacketBhv : CachedTransformBhv
     {
         base.Awake();
 
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
         _racketCollider = GetComponentInChildren<RacketColliderBhv>();
     }
 

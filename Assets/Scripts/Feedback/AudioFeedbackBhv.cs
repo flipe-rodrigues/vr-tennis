@@ -1,5 +1,3 @@
-using Oculus.Interaction;
-using System.Collections;
 using UnityEngine;
 
 public class AudioFeedbackBhv : FeedbackBhv
@@ -36,7 +34,7 @@ public class AudioFeedbackBhv : FeedbackBhv
         Vector3 position = TennisManager.Instance.Ball.Position;
         float baseVolume = Mathf.Clamp(relativeSpeed * volumeModifier, 0, 1);
 
-        this.PlayClipAtPoint(position, relativeSpeed, baseVolume);
+        this.PlayClipAtPoint(position, baseVolume);
     }
 
     protected override void Play(Collision collision)
@@ -45,10 +43,10 @@ public class AudioFeedbackBhv : FeedbackBhv
         float relativeSpeed = collision.relativeVelocity.magnitude;
         float baseVolume = Mathf.Clamp(relativeSpeed * volumeModifier, 0, 1);
 
-        this.PlayClipAtPoint(position, relativeSpeed, baseVolume);
+        this.PlayClipAtPoint(position, baseVolume);
     }
 
-    private void PlayClipAtPoint(Vector3 position, float relativeSpeed, float baseVolume)
+    public void PlayClipAtPoint(Vector3 position, float baseVolume)
     {
         if (audioClip == null)
         {
@@ -61,8 +59,8 @@ public class AudioFeedbackBhv : FeedbackBhv
 
         audio.Source.clip = audioClip;
         audio.Source.pitch = Random.Range(1 - pitchVariationRange / 2f, 1 + pitchVariationRange / 2f);
-        audio.Source.volume = baseVolume * Random.Range(1 - volumeVariationRange / 2f, 1 + volumeVariationRange / 2f);
-
+        audio.Source.volume = baseVolume * Random.Range(1f - volumeVariationRange / 2f, 1 + volumeVariationRange / 2f);
+        
         audio.PlayAndReturnTo(_audioPool);
     }
 }

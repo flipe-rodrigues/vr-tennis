@@ -22,12 +22,12 @@ public class TaskManager : Singleton<TaskManager>
     public int TrialIndex => _trialIndex;
 
     // Public fields
-    [Min(.01f)]
-    public float interTrialInterval = 3;
-    public TruncatedExponentialDistribution itiDistribution = new TruncatedExponentialDistribution(1, 3, 10);
+    public TruncatedExponentialDistribution itiDistribution = new TruncatedExponentialDistribution(3, 4, 9);
     public List<TaskStage> stages;
 
-    // Read only fields
+    // Readonly fields
+    [SerializeField, ReadOnly]
+    public float _interTrialInterval = 3f;
     [SerializeField, ReadOnly]
     private int _stageIndex = 0;
     [SerializeField, ReadOnly]
@@ -71,7 +71,7 @@ public class TaskManager : Singleton<TaskManager>
             this.StartStage();
         }
 
-        if (Time.time - _lastTrialStartTime >= interTrialInterval)
+        if (Time.time - _lastTrialStartTime >= _interTrialInterval)
         {
             this.StartTrial();
         }
@@ -104,7 +104,7 @@ public class TaskManager : Singleton<TaskManager>
 
         _trialIndex++;
 
-        interTrialInterval = itiDistribution.Sample();
+        _interTrialInterval = itiDistribution.Sample();
 
         onTrialStart?.Invoke();
 

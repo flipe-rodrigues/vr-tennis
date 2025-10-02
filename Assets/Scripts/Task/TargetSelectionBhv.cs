@@ -32,7 +32,7 @@ public class TargetSelectionBhv : MonoBehaviour
 
         foreach (TargetBhv target in _targets)
         {
-            target.gameObject.SetActive(target == _targets[index]);
+            target.Active = target == _targets[index];
         }
     }
 }
