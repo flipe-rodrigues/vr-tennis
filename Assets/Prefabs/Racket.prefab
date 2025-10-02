@@ -534,7 +534,7 @@ GameObject:
   - component: {fileID: 6356289847302105734}
   - component: {fileID: 2913010170160402021}
   m_Layer: 6
-  m_Name: Box Collider
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

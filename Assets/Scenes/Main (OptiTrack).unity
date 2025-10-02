@@ -167,63 +167,13 @@ MonoBehaviour:
   samplingRate: 500
   _samplingInterval: 0.002
   _trackers:
-  - {fileID: 7996239910057813932}
-  - {fileID: 1346638848062879237}
-  - {fileID: 1324406917286027287}
-  - {fileID: 1361894310}
-  - {fileID: 5872129562439674650}
   - {fileID: 2003079447619129941}
+  - {fileID: 7996239910057813932}
+  - {fileID: 5872129562439674650}
+  - {fileID: 1346638848062879237}
   - {fileID: 7976822468721358775}
---- !u!1 &189885522
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 189885523}
-  - component: {fileID: 189885524}
-  m_Layer: 0
-  m_Name: Camera Offset Anchor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &189885523
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189885522}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 966192307}
-  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
---- !u!114 &189885524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189885522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23e8cdef766129d4b9c51e5ff8ed11bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AlignBhv
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 90, y: 270, z: 0}
-  _scale: {x: 1, y: 1, z: 1}
-  anchoredTransform: {fileID: 558680359}
-  overlapActionReference: {fileID: 1410537125184354943, guid: 4da4990f983efa242881508f7b71a600, type: 3}
-  alignActionReference: {fileID: -7554610795616076244, guid: 4da4990f983efa242881508f7b71a600, type: 3}
+  - {fileID: 1361894310}
+  - {fileID: 1324406917286027287}
 --- !u!1 &206971742
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,8 +221,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis-new\Assets\Data\2025-09-30_17-22-15
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-09-30_17-22-15
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-02_14-37-42
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-02_14-37-42
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,7 +879,7 @@ Transform:
   m_GameObject: {fileID: 558680358}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.36144, z: 0}
+  m_LocalPosition: {x: 0, y: 1.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2089,8 +2039,8 @@ Camera:
   m_GameObject: {fileID: 741577989}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2378,6 +2328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 966192307}
   - component: {fileID: 966192308}
+  - component: {fileID: 966192309}
   m_Layer: 0
   m_Name: HMD (Optitrack) Rigidbody
   m_TagString: Untagged
@@ -2397,8 +2348,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 189885523}
+  m_Children: []
   m_Father: {fileID: 3412188825629777220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &966192308
@@ -2416,6 +2366,25 @@ MonoBehaviour:
   StreamingClient: {fileID: 5617827582319936547}
   RigidBodyId: 4
   NetworkCompensation: 1
+--- !u!114 &966192309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966192306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e8cdef766129d4b9c51e5ff8ed11bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnchorBhv
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: -0, y: 0, z: 0}
+  _scale: {x: 1, y: 1, z: 1}
+  cameraOffsetTransform: {fileID: 558680359}
+  mainCameraTransform: {fileID: 741577990}
+  overlapActionReference: {fileID: 1410537125184354943, guid: 4da4990f983efa242881508f7b71a600, type: 3}
+  alignActionReference: {fileID: -7554610795616076244, guid: 4da4990f983efa242881508f7b71a600, type: 3}
 --- !u!114 &1164354166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3481,7 +3450,7 @@ MonoBehaviour:
   m_Camera: {fileID: 741577987}
   m_OriginBaseGameObject: {fileID: 1717954560845139033}
   m_CameraFloorOffsetObject: {fileID: 558680358}
-  m_RequestedTrackingOriginMode: 1
+  m_RequestedTrackingOriginMode: 2
   m_CameraYOffset: 0
 --- !u!1 &1271563707739749923
 GameObject:

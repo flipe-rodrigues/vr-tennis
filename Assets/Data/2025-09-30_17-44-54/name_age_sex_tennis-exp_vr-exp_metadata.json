@@ -1,0 +1,1309 @@
+{
+"Ball": {
+    "_position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "_rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "_scale": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "maxLinearVelocity": 100.0,
+    "maxAngularVelocity": 500.0,
+    "_linearVelocity": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "_angularVelocity": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "courtLayer": {
+        "serializedVersion": "2",
+        "m_Bits": 256
+    },
+    "mass": 0.057999998331069949,
+    "radius": 0.03400000184774399,
+    "airDensity": 1.225000023841858,
+    "_dragCoefficient": 0.0,
+    "_liftCoefficient": 0.0,
+    "_spinDecayRate": 0.0,
+    "_wasJustHit": false
+},
+"Racket": {
+    "_position": {
+        "x": -0.10415129363536835,
+        "y": 1.7999207973480225,
+        "z": -12.417953491210938
+    },
+    "_rotation": {
+        "x": 307.6077880859375,
+        "y": 86.14099884033203,
+        "z": 46.01066970825195
+    },
+    "_scale": {
+        "x": 0.7500001192092896,
+        "y": 0.75,
+        "z": 0.7499999403953552
+    },
+    "apparentNormalRestitution": 0.4000000059604645,
+    "apparentTangentialRestitution": 0.6499999761581421,
+    "apparentSpinRestitution": 0.4000000059604645,
+    "spinToTangentialConversion": 0.30000001192092898,
+    "tangentialToSpinConversion": 0.5799999833106995,
+    "refractoryPeriod": 0.10000000149011612,
+    "smoothingTimeConstantVelocity": 0.009999999776482582,
+    "smoothingTimeConstantNormal": 0.004999999888241291,
+    "onRacketHit": {
+        "m_PersistentCalls": {
+            "m_Calls": [
+                {
+                    "m_Target": {
+                        "instanceID": 60142
+                    },
+                    "m_TargetAssemblyTypeName": "AudioFeedbackBhv, Assembly-CSharp",
+                    "m_MethodName": "Play",
+                    "m_Mode": 0,
+                    "m_Arguments": {
+                        "m_ObjectArgument": {
+                            "instanceID": 0
+                        },
+                        "m_ObjectArgumentAssemblyTypeName": "UnityEngine.Object, UnityEngine",
+                        "m_IntArgument": 0,
+                        "m_FloatArgument": 0.0,
+                        "m_StringArgument": "",
+                        "m_BoolArgument": false
+                    },
+                    "m_CallState": 2
+                },
+                {
+                    "m_Target": {
+                        "instanceID": 60196
+                    },
+                    "m_TargetAssemblyTypeName": "HapticFeedbackBhv, Assembly-CSharp",
+                    "m_MethodName": "Play",
+                    "m_Mode": 0,
+                    "m_Arguments": {
+                        "m_ObjectArgument": {
+                            "instanceID": 0
+                        },
+                        "m_ObjectArgumentAssemblyTypeName": "UnityEngine.Object, UnityEngine",
+                        "m_IntArgument": 0,
+                        "m_FloatArgument": 0.0,
+                        "m_StringArgument": "",
+                        "m_BoolArgument": false
+                    },
+                    "m_CallState": 2
+                }
+            ]
+        }
+    },
+    "_smoothingRateVelocity": 0.09516257047653198,
+    "_smoothingRateNormal": 0.18126928806304933,
+    "_approxNumFrames": 10
+},
+"BallLauncher": {
+    "_position": {
+        "x": 1.000001072883606,
+        "y": 0.5,
+        "z": 10.000000953674317
+    },
+    "_rotation": {
+        "x": 321.3457946777344,
+        "y": 181.145751953125,
+        "z": 0.000003963134986406658
+    },
+    "_scale": {
+        "x": 0.5000001192092896,
+        "y": 0.5,
+        "z": 0.5000001192092896
+    },
+    "ballPrefab": {
+        "instanceID": 37030
+    },
+    "ballPoolSize": 10,
+    "linearSpeed": 9.0,
+    "topSpin": 0.0,
+    "sideSpin": 0.0
+},
+"TaskManager": {
+    "interTrialInterval": 3.0,
+    "itiDistribution": {
+        "min": 3.0,
+        "mean": 5.0,
+        "max": 15.0,
+        "_pdf": {
+            "serializedVersion": "2",
+            "m_Curve": [
+                {
+                    "serializedVersion": "3",
+                    "time": 0.0,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 0.14999999105930329,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 0.29999998211860659,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 0.44999998807907107,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 0.5999999642372131,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 0.75,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 0.8999999761581421,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 1.0499999523162842,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 1.1999999284744263,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 1.350000023841858,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 1.5,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 1.649999976158142,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 1.7999999523162842,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 1.9499999284744263,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 2.0999999046325685,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 2.25,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 2.3999998569488527,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 2.549999952316284,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 2.700000047683716,
+                    "value": 0.0,
+                    "inSlope": 0.0,
+                    "outSlope": 0.0,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 2.8499999046325685,
+                    "value": 0.0,
+                    "inSlope": 0.371883362531662,
+                    "outSlope": 0.371883362531662,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 3.0,
+                    "value": 0.11156508326530457,
+                    "inSlope": 0.3450123369693756,
+                    "outSlope": 0.3450123369693756,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 3.1499998569488527,
+                    "value": 0.10350378602743149,
+                    "inSlope": -0.05180041864514351,
+                    "outSlope": -0.05180041864514351,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 3.299999952316284,
+                    "value": 0.09602496027946472,
+                    "inSlope": -0.04805750399827957,
+                    "outSlope": -0.04805750399827957,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 3.450000047683716,
+                    "value": 0.08908652514219284,
+                    "inSlope": -0.04458504915237427,
+                    "outSlope": -0.04458504915237427,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 3.5999999046325685,
+                    "value": 0.08264944702386856,
+                    "inSlope": -0.04136347025632858,
+                    "outSlope": -0.04136347025632858,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 3.75,
+                    "value": 0.07667748630046845,
+                    "inSlope": -0.03837469220161438,
+                    "outSlope": -0.03837469220161438,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 3.8999998569488527,
+                    "value": 0.07113704085350037,
+                    "inSlope": -0.03560188412666321,
+                    "outSlope": -0.03560188412666321,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 4.050000190734863,
+                    "value": 0.065996915102005,
+                    "inSlope": -0.033029407262802127,
+                    "outSlope": -0.033029407262802127,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 4.199999809265137,
+                    "value": 0.06122821941971779,
+                    "inSlope": -0.030642814934253694,
+                    "outSlope": -0.030642814934253694,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 4.349999904632568,
+                    "value": 0.05680407956242561,
+                    "inSlope": -0.02842867746949196,
+                    "outSlope": -0.02842867746949196,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 4.5,
+                    "value": 0.05269961059093475,
+                    "inSlope": -0.026374517008662225,
+                    "outSlope": -0.026374517008662225,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 4.650000095367432,
+                    "value": 0.04889171943068504,
+                    "inSlope": -0.024468783289194108,
+                    "outSlope": -0.024468783289194108,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 4.799999713897705,
+                    "value": 0.04535898193717003,
+                    "inSlope": -0.022700753062963487,
+                    "outSlope": -0.022700753062963487,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 4.950000286102295,
+                    "value": 0.04208149015903473,
+                    "inSlope": -0.021060477942228318,
+                    "outSlope": -0.021060477942228318,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 5.099999904632568,
+                    "value": 0.039040833711624148,
+                    "inSlope": -0.019538719207048417,
+                    "outSlope": -0.019538719207048417,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 5.25,
+                    "value": 0.03621987998485565,
+                    "inSlope": -0.018126916140317918,
+                    "outSlope": -0.018126916140317918,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 5.400000095367432,
+                    "value": 0.0336027555167675,
+                    "inSlope": -0.016817133873701097,
+                    "outSlope": -0.016817133873701097,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 5.550000190734863,
+                    "value": 0.031174736097455026,
+                    "inSlope": -0.0156019888818264,
+                    "outSlope": -0.0156019888818264,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 5.699999809265137,
+                    "value": 0.02892216295003891,
+                    "inSlope": -0.014474642463028431,
+                    "outSlope": -0.014474642463028431,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 5.849999904632568,
+                    "value": 0.026832347735762597,
+                    "inSlope": -0.013428756967186928,
+                    "outSlope": -0.013428756967186928,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 6.0,
+                    "value": 0.024893533438444139,
+                    "inSlope": -0.012458443641662598,
+                    "outSlope": -0.012458443641662598,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 6.150000095367432,
+                    "value": 0.023094812408089639,
+                    "inSlope": -0.011558232828974724,
+                    "outSlope": -0.011558232828974724,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 6.299999713897705,
+                    "value": 0.021426066756248475,
+                    "inSlope": -0.010723074898123742,
+                    "outSlope": -0.010723074898123742,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 6.450000286102295,
+                    "value": 0.01987788826227188,
+                    "inSlope": -0.00994826853275299,
+                    "outSlope": -0.00994826853275299,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 6.599999904632568,
+                    "value": 0.018441583961248399,
+                    "inSlope": -0.009229441173374653,
+                    "outSlope": -0.009229441173374653,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 6.75,
+                    "value": 0.017109058797359468,
+                    "inSlope": -0.008562549948692322,
+                    "outSlope": -0.008562549948692322,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 6.900000095367432,
+                    "value": 0.015872817486524583,
+                    "inSlope": -0.007943850010633469,
+                    "outSlope": -0.007943850010633469,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 7.050000190734863,
+                    "value": 0.014725902117788792,
+                    "inSlope": -0.007369857281446457,
+                    "outSlope": -0.007369857281446457,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 7.199999809265137,
+                    "value": 0.013661862351000309,
+                    "inSlope": -0.006837335415184498,
+                    "outSlope": -0.006837335415184498,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 7.350000381469727,
+                    "value": 0.01267470046877861,
+                    "inSlope": -0.006343292072415352,
+                    "outSlope": -0.006343292072415352,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 7.5,
+                    "value": 0.011758873239159584,
+                    "inSlope": -0.005884949117898941,
+                    "outSlope": -0.005884949117898941,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 7.649999618530273,
+                    "value": 0.010909220203757286,
+                    "inSlope": -0.005459725856781006,
+                    "outSlope": -0.005459725856781006,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 7.799999713897705,
+                    "value": 0.010120957158505917,
+                    "inSlope": -0.0050652241334319119,
+                    "outSlope": -0.0050652241334319119,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 7.949999809265137,
+                    "value": 0.00938965193927288,
+                    "inSlope": -0.004699229262769222,
+                    "outSlope": -0.004699229262769222,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 8.100000381469727,
+                    "value": 0.008711185306310654,
+                    "inSlope": -0.0043596792966127399,
+                    "outSlope": -0.0043596792966127399,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 8.25,
+                    "value": 0.008081747218966484,
+                    "inSlope": -0.004044662229716778,
+                    "outSlope": -0.004044662229716778,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 8.399999618530274,
+                    "value": 0.007497789803892374,
+                    "inSlope": -0.0037524099461734297,
+                    "outSlope": -0.0037524099461734297,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 8.550000190734864,
+                    "value": 0.006956023629754782,
+                    "inSlope": -0.003481273539364338,
+                    "outSlope": -0.003481273539364338,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 8.699999809265137,
+                    "value": 0.006453406997025013,
+                    "inSlope": -0.003229729365557432,
+                    "outSlope": -0.003229729365557432,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 8.84999942779541,
+                    "value": 0.005987107288092375,
+                    "inSlope": -0.0029963611159473659,
+                    "outSlope": -0.0029963611159473659,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 9.0,
+                    "value": 0.005554498173296452,
+                    "inSlope": -0.0027798537630587818,
+                    "outSlope": -0.0027798537630587818,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 9.15000057220459,
+                    "value": 0.005153147969394922,
+                    "inSlope": -0.0025789900682866575,
+                    "outSlope": -0.0025789900682866575,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 9.300000190734864,
+                    "value": 0.004780800547450781,
+                    "inSlope": -0.0023926421999931337,
+                    "outSlope": -0.0023926421999931337,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 9.449999809265137,
+                    "value": 0.004435357172042131,
+                    "inSlope": -0.0022197586949914695,
+                    "outSlope": -0.0022197586949914695,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 9.59999942779541,
+                    "value": 0.004114874638617039,
+                    "inSlope": -0.0020593658555299045,
+                    "outSlope": -0.0020593658555299045,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 9.75,
+                    "value": 0.0038175471127033235,
+                    "inSlope": -0.0019105637911707163,
+                    "outSlope": -0.0019105637911707163,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 9.90000057220459,
+                    "value": 0.003541703335940838,
+                    "inSlope": -0.0017725126817822457,
+                    "outSlope": -0.0017725126817822457,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 10.050000190734864,
+                    "value": 0.003285792889073491,
+                    "inSlope": -0.001644436502829194,
+                    "outSlope": -0.001644436502829194,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 10.199999809265137,
+                    "value": 0.003048373619094491,
+                    "inSlope": -0.0015256158076226712,
+                    "outSlope": -0.0015256158076226712,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 10.350000381469727,
+                    "value": 0.002828107913956046,
+                    "inSlope": -0.0014153802767395974,
+                    "outSlope": -0.0014153802767395974,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 10.5,
+                    "value": 0.0026237592101097109,
+                    "inSlope": -0.0013131099985912443,
+                    "outSlope": -0.0013131099985912443,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 10.649999618530274,
+                    "value": 0.0024341759271919729,
+                    "inSlope": -0.001218229066580534,
+                    "outSlope": -0.001218229066580534,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 10.800000190734864,
+                    "value": 0.0022582903038710357,
+                    "inSlope": -0.00113020371645689,
+                    "outSlope": -0.00113020371645689,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 10.950000762939454,
+                    "value": 0.0020951135084033014,
+                    "inSlope": -0.0010485391831025482,
+                    "outSlope": -0.0010485391831025482,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 11.100000381469727,
+                    "value": 0.0019437283044680954,
+                    "inSlope": -0.0009727755095809698,
+                    "outSlope": -0.0009727755095809698,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 11.25,
+                    "value": 0.00180328160058707,
+                    "inSlope": -0.0009024864993989468,
+                    "outSlope": -0.0009024864993989468,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 11.399999618530274,
+                    "value": 0.0016729830531403423,
+                    "inSlope": -0.0008372758748009801,
+                    "outSlope": -0.0008372758748009801,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 11.549999237060547,
+                    "value": 0.001552099478431046,
+                    "inSlope": -0.0007767773931846023,
+                    "outSlope": -0.0007767773931846023,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 11.699999809265137,
+                    "value": 0.001439949730411172,
+                    "inSlope": -0.0007206504233181477,
+                    "outSlope": -0.0007206504233181477,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 11.850000381469727,
+                    "value": 0.001335903536528349,
+                    "inSlope": -0.0006685780826956034,
+                    "outSlope": -0.0006685780826956034,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 12.0,
+                    "value": 0.0012393761426210404,
+                    "inSlope": -0.0006202689837664366,
+                    "outSlope": -0.0006202689837664366,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 12.149999618530274,
+                    "value": 0.0011498233070597053,
+                    "inSlope": -0.0005754507146775723,
+                    "outSlope": -0.0005754507146775723,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 12.300000190734864,
+                    "value": 0.0010667408350855113,
+                    "inSlope": -0.0005338705377653241,
+                    "outSlope": -0.0005338705377653241,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 12.449999809265137,
+                    "value": 0.000989662017673254,
+                    "inSlope": -0.0004952952731400728,
+                    "outSlope": -0.0004952952731400728,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 12.59999942779541,
+                    "value": 0.0009181526256725192,
+                    "inSlope": -0.0004595067584887147,
+                    "outSlope": -0.0004595067584887147,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 12.75,
+                    "value": 0.0008518099202774465,
+                    "inSlope": -0.0004263042937964201,
+                    "outSlope": -0.0004263042937964201,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 12.90000057220459,
+                    "value": 0.0007902608485892415,
+                    "inSlope": -0.0003955011488869786,
+                    "outSlope": -0.0003955011488869786,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 13.050000190734864,
+                    "value": 0.0007331594824790955,
+                    "inSlope": -0.00036692339926958084,
+                    "outSlope": -0.00036692339926958084,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 13.199999809265137,
+                    "value": 0.0006801841082051396,
+                    "inSlope": -0.0003404109156690538,
+                    "outSlope": -0.0003404109156690538,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 13.34999942779541,
+                    "value": 0.0006310364697128534,
+                    "inSlope": -0.0003158142208121717,
+                    "outSlope": -0.0003158142208121717,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 13.5,
+                    "value": 0.0005854397895745933,
+                    "inSlope": -0.0002929943148046732,
+                    "outSlope": -0.0002929943148046732,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 13.65000057220459,
+                    "value": 0.0005431378376670182,
+                    "inSlope": -0.00027182354824617505,
+                    "outSlope": -0.00027182354824617505,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 13.800000190734864,
+                    "value": 0.0005038926610723138,
+                    "inSlope": -0.0002521827118471265,
+                    "outSlope": -0.0002521827118471265,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 13.949999809265137,
+                    "value": 0.00046748321619816124,
+                    "inSlope": -0.00023396071628667414,
+                    "outSlope": -0.00023396071628667414,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 14.100000381469727,
+                    "value": 0.00043370440835133195,
+                    "inSlope": -0.00021705552353523672,
+                    "outSlope": -0.00021705552353523672,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 14.25,
+                    "value": 0.00040236650966107845,
+                    "inSlope": -0.00020137194951530546,
+                    "outSlope": -0.00020137194951530546,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 14.399999618530274,
+                    "value": 0.0003732929762918502,
+                    "inSlope": -0.00018682147492654622,
+                    "outSlope": -0.00018682147492654622,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 14.550000190734864,
+                    "value": 0.0003463200409896672,
+                    "inSlope": -0.00017332244897261262,
+                    "outSlope": -0.00017332244897261262,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 14.700000762939454,
+                    "value": 0.0003212960436940193,
+                    "inSlope": -0.00016079873603302985,
+                    "outSlope": -0.00016079873603302985,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 14.850000381469727,
+                    "value": 0.00029808038379997015,
+                    "inSlope": -0.00014917991939000785,
+                    "outSlope": -0.00014917991939000785,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                },
+                {
+                    "serializedVersion": "3",
+                    "time": 15.0,
+                    "value": 0.00027654218138195574,
+                    "inSlope": -0.00014358837506733835,
+                    "outSlope": -0.00014358837506733835,
+                    "tangentMode": 0,
+                    "weightedMode": 0,
+                    "inWeight": 0.3333333432674408,
+                    "outWeight": 0.3333333432674408
+                }
+            ],
+            "m_PreInfinity": 2,
+            "m_PostInfinity": 2,
+            "m_RotationOrder": 4
+        }
+    },
+    "stages": [
+        {
+            "trialCount": 50,
+            "objectsToEnable": [
+                {
+                    "instanceID": 60158
+                },
+                {
+                    "instanceID": 60168
+                },
+                {
+                    "instanceID": 60242
+                },
+                {
+                    "instanceID": 60068
+                }
+            ],
+            "objectsToDisable": []
+        }
+    ],
+    "_stageIndex": 0,
+    "_trialIndex": 0,
+    "_totalTrialCount": 0
+},
+"BallPhysX": {
+    "dynamicFriction": 0.30000001192092898,
+    "staticFriction": 0.30000001192092898,
+    "bounciness": 0.7699999809265137,
+    "frictionCombine": "Multiply",
+    "bouncinessCombine": "Multiply"
+},
+"CourtPhysX": {
+    "dynamicFriction": 0.800000011920929,
+    "staticFriction": 0.800000011920929,
+    "bounciness": 1.0,
+    "frictionCombine": "Multiply",
+    "bouncinessCombine": "Multiply"
+},
+"NetPhysX": {
+    "dynamicFriction": 0.4000000059604645,
+    "staticFriction": 0.5,
+    "bounciness": 0.10000000149011612,
+    "frictionCombine": "Multiply",
+    "bouncinessCombine": "Multiply"
+}
+}

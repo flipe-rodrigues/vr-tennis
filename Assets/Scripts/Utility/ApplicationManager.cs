@@ -41,7 +41,7 @@ public class ApplicationManager : Singleton<ApplicationManager>
 
     private void LateUpdate()
     {
-        if (UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (!_hasStartedQuitting && UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             this.StartToQuit();
         }
