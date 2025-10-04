@@ -135,7 +135,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Overlap",
+                    "name": "Align Position",
                     "type": "Button",
                     "id": "eeb16229-6f22-4ba0-aa77-b20c0ed37892",
                     "expectedControlType": "",
@@ -144,7 +144,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Align",
+                    "name": "Align Rotation",
                     "type": "Button",
                     "id": "dd94fcbb-1cae-4202-9204-c1fa6fa9594f",
                     "expectedControlType": "",
@@ -227,7 +227,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Overlap",
+                    "action": "Align Position",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -238,7 +238,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Align",
+                    "action": "Align Rotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

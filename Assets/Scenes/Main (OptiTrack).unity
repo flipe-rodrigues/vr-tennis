@@ -167,12 +167,12 @@ MonoBehaviour:
   samplingRate: 500
   _samplingInterval: 0.002
   _trackers:
-  - {fileID: 1346638848062879237}
-  - {fileID: 7996239910057813932}
-  - {fileID: 2003079447619129941}
   - {fileID: 5872129562439674650}
-  - {fileID: 1324406917286027287}
+  - {fileID: 2003079447619129941}
   - {fileID: 7976822468721358775}
+  - {fileID: 7996239910057813932}
+  - {fileID: 1324406917286027287}
+  - {fileID: 1346638848062879237}
   - {fileID: 1361894310}
 --- !u!1 &206971742
 GameObject:
@@ -219,10 +219,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebe39524603cdd4b953f6dd022a3542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveData: 1
-  saveMetadata: 1
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-02_23-18-17
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-02_23-18-17
+  saveData: 0
+  saveMetadata: 0
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-04_15-33-12
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-04_15-33-12
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1109,7 +1109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570597e47369b94409c8be19b1a8bd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interTrialInterval: 3
   itiDistribution:
     min: 3
     mean: 4
@@ -2030,13 +2029,14 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   stages:
-  - trialCount: 50
+  - trialCount: 100
     objectsToEnable:
     - {fileID: 4048976150374128210}
     - {fileID: 5102816465464550694}
     - {fileID: 9054235859950929352}
     - {fileID: 1888609738}
     objectsToDisable: []
+  _interTrialInterval: 3
   _stageIndex: 0
   _trialIndex: 0
   _totalTrialCount: 0
@@ -2592,7 +2592,6 @@ GameObject:
   m_Component:
   - component: {fileID: 966192307}
   - component: {fileID: 966192308}
-  - component: {fileID: 966192309}
   m_Layer: 0
   m_Name: HMD (Optitrack) Rigidbody
   m_TagString: Untagged
@@ -2612,7 +2611,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1696872145}
   m_Father: {fileID: 3412188825629777220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &966192308
@@ -2630,25 +2630,6 @@ MonoBehaviour:
   StreamingClient: {fileID: 5617827582319936547}
   RigidBodyId: 4
   NetworkCompensation: 1
---- !u!114 &966192309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966192306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23e8cdef766129d4b9c51e5ff8ed11bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnchorBhv
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: -0, y: 0, z: 0}
-  _scale: {x: 1, y: 1, z: 1}
-  cameraOffsetTransform: {fileID: 558680359}
-  mainCameraTransform: {fileID: 741577990}
-  overlapActionReference: {fileID: 1410537125184354943, guid: 4da4990f983efa242881508f7b71a600, type: 3}
-  alignActionReference: {fileID: -7554610795616076244, guid: 4da4990f983efa242881508f7b71a600, type: 3}
 --- !u!114 &1164354166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3217,6 +3198,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd20eaedecd7054bbc4c49d27e0aeae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CourtTargetBhv
+--- !u!1 &1696872144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1696872145}
+  - component: {fileID: 1696872146}
+  m_Layer: 0
+  m_Name: HMD
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1696872145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696872144}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 966192307}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1696872146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696872144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e8cdef766129d4b9c51e5ff8ed11bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnchorBhv
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: -0, y: 90, z: -0}
+  _scale: {x: 1, y: 1, z: 1}
+  cameraOffsetTransform: {fileID: 558680359}
+  mainCameraTransform: {fileID: 741577990}
+  alignPositionActionReference: {fileID: 1410537125184354943, guid: 4da4990f983efa242881508f7b71a600, type: 3}
+  alignRotationActionReference: {fileID: -7554610795616076244, guid: 4da4990f983efa242881508f7b71a600, type: 3}
 --- !u!1 &1711456499
 GameObject:
   m_ObjectHideFlags: 0
@@ -3589,8 +3621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1836fa94319e82428348d967ce724c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetFrameRate: 120
-  targetPhysicsRate: 1000
+  targetFrameRate: 90
+  targetPhysicsRate: 250
   timeScale: 1
   _hasStartedQuitting: 0
 --- !u!1 &58445279710550776
@@ -3846,7 +3878,7 @@ MonoBehaviour:
   m_Camera: {fileID: 741577987}
   m_OriginBaseGameObject: {fileID: 1717954560845139033}
   m_CameraFloorOffsetObject: {fileID: 558680358}
-  m_RequestedTrackingOriginMode: 2
+  m_RequestedTrackingOriginMode: 1
   m_CameraYOffset: 0
 --- !u!1 &1271563707739749923
 GameObject:
@@ -4291,9 +4323,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _smoothingRateVelocity: 0.09516257
-  _smoothingRateNormal: 0.18126929
-  _approxNumFrames: 10
+  _smoothingRateVelocity: 0.32967997
+  _smoothingRateNormal: 0.5506711
+  _approxNumFrames: 2
 --- !u!4 &3412188825629777220
 Transform:
   m_ObjectHideFlags: 0
@@ -4893,7 +4925,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.36144
+  m_Height: 1.86
   m_Radius: 0.1
   m_SlopeLimit: 45
   m_StepOffset: 0.5

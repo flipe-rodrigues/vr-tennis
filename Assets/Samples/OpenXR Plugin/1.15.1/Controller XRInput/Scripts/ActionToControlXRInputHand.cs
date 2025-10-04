@@ -16,7 +16,7 @@ namespace UnityEngine.XR.OpenXR.Samples.ControllerSampleXRInput
         string m_UsageString;
 
         [SerializeField]
-        [Tooltip("Optional text element that will be set to the name of the alignActionReference")]
+        [Tooltip("Optional text element that will be set to the name of the alignRotationActionReference")]
         Text m_Text = null;
 
         protected InputDevice device { get; private set; }
