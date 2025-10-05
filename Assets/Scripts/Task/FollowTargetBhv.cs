@@ -11,14 +11,12 @@ public class FollowTargetBhv : TargetBhv
     private float _normalizedDistance;
 
     // Private fields
-    private Light _light;
     private ParticleSystem _particles;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _light = this.GetComponent<Light>();
         _particles = this.GetComponentInChildren<ParticleSystem>();
     }
 
@@ -28,7 +26,6 @@ public class FollowTargetBhv : TargetBhv
         _normalizedDistance = Mathf.InverseLerp(0, maximumDistance, distance);
         base.ColorLerp(1.0f - _normalizedDistance);
 
-        _light.color = base.MeshRenderer.material.color;
         var main = _particles.main;
         main.startColor = base.MeshRenderer.material.color;
     }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using UnityEngine.XR.Interaction.Toolkit.Locomotion;
 
 [System.Serializable]
 public class TaskStage
@@ -62,6 +61,8 @@ public class TaskManager : Singleton<TaskManager>
         }
 
         _stageTransitionThresholds[stages.Count] = int.MaxValue;
+
+        this.StartNextTrial();
     }
 
     private void FixedUpdate()
@@ -73,7 +74,7 @@ public class TaskManager : Singleton<TaskManager>
 
         if (Time.time - _lastTrialStartTime >= _interTrialInterval)
         {
-            this.StartTrial();
+            //this.StartTrial();
         }
 
         if (_trialIndex >= _totalTrialCount)
@@ -98,7 +99,7 @@ public class TaskManager : Singleton<TaskManager>
         _stageIndex++;
     }
 
-    private void StartTrial()
+    public void StartNextTrial()
     {
         _lastTrialStartTime = Time.time;
 

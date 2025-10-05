@@ -20,6 +20,7 @@ public class TargetBhv : CachedTransformBhv
 
     // Private fields
     private MeshRenderer _meshRenderer;
+    private Light _light;
     private Material _material;
     private Color _defaultColor;
 
@@ -28,6 +29,7 @@ public class TargetBhv : CachedTransformBhv
         base.Awake();
 
         _meshRenderer = this.GetComponent<MeshRenderer>();
+        _light = this.GetComponent<Light>();
         _material = _meshRenderer.material;
         _defaultColor = _material.color;
     }
@@ -35,6 +37,7 @@ public class TargetBhv : CachedTransformBhv
     public void ColorLerp(float t)
     {
         _material.color = Color.Lerp(_defaultColor, acquisitionColor, t);
+        _light.color = _material.color;
     }
 
     public void TryAcquireAt(Vector3 position, float intensity)
@@ -61,6 +64,7 @@ public class TargetBhv : CachedTransformBhv
     {
         onTargetAcquired?.Invoke(position, intensity);
         TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetAcquired);
+        TaskManager.Instance.StartNextTrial();
     }
 
     private IEnumerator FadeToCoroutine(Color finalColor, float duration)
@@ -71,8 +75,10 @@ public class TargetBhv : CachedTransformBhv
         {
             elapsedTime += Time.fixedDeltaTime;
             _material.color = Color.Lerp(initialColor, finalColor, elapsedTime / duration);
+            _light.color = _material.color;
             yield return ApplicationManager.waitForFixedUpdateInstance;
         }
         _material.color = finalColor;
+        _light.color = finalColor;
     }
 }

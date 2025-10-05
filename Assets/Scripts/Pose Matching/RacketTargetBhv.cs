@@ -4,6 +4,8 @@ public class RacketTargetBhv : TargetBhv
 {
     // Public fields
     [Range(0, 1f)]
+    public float respawnRadius = 0.5f;
+    [Range(0, 1f)]
     public float overlapThreshold = 0.9f;
 
     // Readonly fields
@@ -13,6 +15,18 @@ public class RacketTargetBhv : TargetBhv
     // Private fields
     private Timer _overlapTimer;
     private Timer _refractoryTimer;
+
+    private void OnEnable()
+    {
+        //base.onTargetAcquired.AddListener(this.RandomizeTransform);
+        TaskManager.onTrialStart += this.RandomizeTransform;
+    }
+
+    private void OnDisable()
+    {
+        //base.onTargetAcquired.RemoveListener(this.RandomizeTransform);
+        TaskManager.onTrialStart -= this.RandomizeTransform;
+    }
 
     private void Start()
     {
@@ -52,6 +66,12 @@ public class RacketTargetBhv : TargetBhv
                 _overlapTimer.Stop();
             }
         }
+    }
+
+    private void RandomizeTransform()
+    {
+        this.Position = TennisManager.Instance.Racket.Position + Random.insideUnitSphere * respawnRadius;
+        this.Rotation = Random.rotation;
     }
 
     private float OverlapFraction(MeshRenderer a, MeshRenderer b)

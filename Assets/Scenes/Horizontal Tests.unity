@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightingDataAsset: {fileID: 0}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 427517423}
     m_Modifications:
+    - target: {fileID: 1301805508023786039, guid: eaae454625d4ec144920a59bd95ee674, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3494764775948913599, guid: eaae454625d4ec144920a59bd95ee674, type: 3}
       propertyPath: _position.x
       value: -0.28
@@ -138,6 +142,18 @@ PrefabInstance:
     - target: {fileID: 4493706818138470206, guid: eaae454625d4ec144920a59bd95ee674, type: 3}
       propertyPath: m_Name
       value: Target (court)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548891095594848132, guid: eaae454625d4ec144920a59bd95ee674, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548891095594848132, guid: eaae454625d4ec144920a59bd95ee674, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.016666664
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548891095594848132, guid: eaae454625d4ec144920a59bd95ee674, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6548891095594848132, guid: eaae454625d4ec144920a59bd95ee674, type: 3}
       propertyPath: m_LocalPosition.x
@@ -187,22 +203,6 @@ PrefabInstance:
       propertyPath: _position.z
       value: -0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6741721363233433996, guid: eaae454625d4ec144920a59bd95ee674, type: 3}
-      propertyPath: acquisitionColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6741721363233433996, guid: eaae454625d4ec144920a59bd95ee674, type: 3}
-      propertyPath: acquisitionColor.b
-      value: 0.8000555
-      objectReference: {fileID: 0}
-    - target: {fileID: 6741721363233433996, guid: eaae454625d4ec144920a59bd95ee674, type: 3}
-      propertyPath: acquisitionColor.g
-      value: 0.9913309
-      objectReference: {fileID: 0}
-    - target: {fileID: 6741721363233433996, guid: eaae454625d4ec144920a59bd95ee674, type: 3}
-      propertyPath: onTargetAcquired.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayClipAtPoint
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -242,7 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570597e47369b94409c8be19b1a8bd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interTrialInterval: 1.5
   itiDistribution:
     min: 1
     mean: 3
@@ -1170,6 +1169,7 @@ MonoBehaviour:
     - {fileID: 7121291841259250081}
     - {fileID: 965222368}
     objectsToDisable: []
+  _interTrialInterval: 3
   _stageIndex: 0
   _trialIndex: 0
   _totalTrialCount: 9
@@ -1361,7 +1361,7 @@ MonoBehaviour:
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _scale: {x: 0, y: 0, z: 0}
-  displayAsMesh: 1
+  displayAsMesh: 0
 --- !u!65 &858259641
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1390,7 +1390,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858259637}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1741,8 +1741,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 0
   saveMetadata: 0
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-02_22-53-03
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-02_22-53-03
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-05_23-52-41
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-05_23-52-41
 --- !u!4 &1396866741
 Transform:
   m_ObjectHideFlags: 0
@@ -1967,7 +1967,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 1}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2017,7 +2017,7 @@ Transform:
   m_GameObject: {fileID: 1566786339}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: -1}
+  m_LocalPosition: {x: 0, y: 0.15, z: -1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2189,13 +2189,13 @@ MonoBehaviour:
   samplingRate: 500
   _samplingInterval: 0.002
   _trackers:
-  - {fileID: 1690077235}
+  - {fileID: 533789539}
+  - {fileID: 1804734641}
+  - {fileID: 1437636373}
   - {fileID: 454428205}
   - {fileID: 1467799598}
-  - {fileID: 533789539}
+  - {fileID: 1690077235}
   - {fileID: 1751295941}
-  - {fileID: 1437636373}
-  - {fileID: 1804734641}
 --- !u!4 &1749113138
 Transform:
   m_ObjectHideFlags: 0
@@ -2335,7 +2335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1807529657
 Light:
   m_ObjectHideFlags: 0
