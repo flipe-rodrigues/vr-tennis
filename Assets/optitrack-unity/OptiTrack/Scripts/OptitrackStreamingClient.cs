@@ -23,9 +23,7 @@ using UnityEngine;
 using NaturalPoint;
 using NaturalPoint.NatNetLib;
 using UnityEditor;
-//using UnityEditor.UIElements;
-//using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEditor.UIElements;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 
@@ -392,12 +390,6 @@ public class OptitrackStreamingClient : MonoBehaviour
     private object m_frameDataUpdateLock = new object();
     #endregion Private fields
 
-    void Start()
-    {
-        string lanIP = NetworkUtils.GetLocalIPAddress();
-        Debug.Log("My LAN IP: " + lanIP);
-    }
-
 
     private void Update()
     {
@@ -616,7 +608,7 @@ public class OptitrackStreamingClient : MonoBehaviour
     /// <returns>An arbitrary OptitrackClient from the scene, or null if none are found.</returns>
     public static OptitrackStreamingClient FindDefaultClient()
     {
-        OptitrackStreamingClient[] allClients = FindObjectsByType<OptitrackStreamingClient>(FindObjectsSortMode.None);
+        OptitrackStreamingClient[] allClients = FindObjectsByType<OptitrackStreamingClient>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         if ( allClients.Length == 0 )
         {
@@ -1246,7 +1238,6 @@ public class OptitrackStreamingClient : MonoBehaviour
                     SubscribeTMarkerset(tmark.Value, tmark.Key);
                 }
             }
-
 
             if ( RecordOnPlay == true )
             {

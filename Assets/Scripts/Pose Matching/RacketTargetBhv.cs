@@ -4,23 +4,53 @@ public class RacketTargetBhv : TargetBhv
 {
     // Public fields
     [Range(0, 1f)]
-    public float overlapAcquisitionThreshold = 0.9f;
+    public float overlapThreshold = 0.9f;
 
     // Readonly fields
     [SerializeField, ReadOnly, Range(0f, 1f)]
     private float _overlapFraction;
 
+    // Private fields
+    private Timer _overlapTimer;
+    private Timer _refractoryTimer;
+
+    private void Start()
+    {
+        _overlapTimer = new Timer(base.acquisitionDelay);
+        _refractoryTimer = new Timer(base.resetDelay);
+    }
+
     private void Update()
     {
+        if (!_refractoryTimer.IsExpired)
+        {
+            return;
+        }
+
         _overlapFraction = this.OverlapFraction(this.MeshRenderer, TennisManager.Instance.Racket.MeshRenderer);
 
-        if (_overlapFraction >= overlapAcquisitionThreshold)
+        if (_overlapFraction >= overlapThreshold)
         {
-            base.TryAcquireAt(this.Position, _overlapFraction);
+            if (!_overlapTimer.IsRunning)
+            {
+                _overlapTimer.Start();
+
+                base.TryAcquireAt(this.Position, 1f);
+            }
+            else if (_overlapTimer.IsExpired)
+            {
+                _overlapTimer.Stop();
+                _refractoryTimer.Start();
+            }
         }
         else
         {
-            base.TryDisplayProgress(_overlapFraction * .75f);
+            if (_overlapTimer.IsRunning)
+            {
+                base.Reset();
+
+                _overlapTimer.Stop();
+            }
         }
     }
 

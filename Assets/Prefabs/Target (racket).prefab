@@ -107,8 +107,8 @@ MonoBehaviour:
   _rotation: {x: 10.000005, y: 270, z: 90}
   _scale: {x: 0.75000036, y: 0.75000054, z: 0.75000036}
   acquisitionColor: {r: 0, g: 0.9913309, b: 0.8000555, a: 1}
-  glowDelay: 0.1
-  fadeDelay: 1
+  acquisitionDelay: 0.5
+  resetDelay: 1
   onTargetAcquired:
     m_PersistentCalls:
       m_Calls:
@@ -124,8 +124,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _isDisplayingAcquisition: 0
-  overlapAcquisitionThreshold: 0.9
+  overlapThreshold: 0.9
   _overlapFraction: 0
 --- !u!114 &8725424557601377526
 MonoBehaviour:

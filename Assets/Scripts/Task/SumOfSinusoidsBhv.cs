@@ -3,7 +3,15 @@ using UnityEngine;
 
 public class SumOfSinusoidsBhv : CachedTransformBhv
 {
+    // Public fields
+    [Range(0, 1)]
+    public float globalAmplitudeModifier = 0.05f;
+    [Range(0, 1)]
+    public float globalFrequencyModifier = 0.75f;
     public List<Sinusoid> sinusoids;
+
+    // Private fields
+    private Vector3 _initialPosition;
 
     private void OnValidate()
     {
@@ -11,6 +19,7 @@ public class SumOfSinusoidsBhv : CachedTransformBhv
         {
             sinusoids = new List<Sinusoid>
             {
+                // From Wang et al. 2021
                 new Sinusoid(2.31f, 0.1f),
                 new Sinusoid(2.31f, 0.25f),
                 new Sinusoid(2.31f, 0.55f),
@@ -25,11 +34,12 @@ public class SumOfSinusoidsBhv : CachedTransformBhv
     private void Start()
     {
         this.OnValidate();
+        _initialPosition = this.Position;
     }
 
     private void Update()
     {
-        this.Transform.position = this.SumOfSinusoids();
+        this.Position = this.SumOfSinusoids() + _initialPosition;
     }
 
     private Vector3 SumOfSinusoids()
@@ -38,8 +48,8 @@ public class SumOfSinusoidsBhv : CachedTransformBhv
 
         for (int i = 0; i < sinusoids.Count; i++)
         {
-            float amplitude = sinusoids[i].amplitude;
-            float frequency = sinusoids[i].frequency;
+            float amplitude = sinusoids[i].amplitude * globalAmplitudeModifier;
+            float frequency = sinusoids[i].frequency * globalFrequencyModifier;
             Vector3 phase = sinusoids[i].phase;
 
             r.x += amplitude * Mathf.Cos(2 * Mathf.PI * frequency * Time.time + phase.x);

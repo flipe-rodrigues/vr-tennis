@@ -3,15 +3,18 @@ using UnityEngine.InputSystem;
 
 public class OptiTrackXRAlignmentBhv : CachedTransformBhv
 {
+    // Public fields
     public Transform cameraOffsetTransform;
     public Transform mainCameraTransform;
     public InputActionReference alignPositionActionReference;
     public InputActionReference alignRotationActionReference;
+    [Min(0f)]
+    public float invokeDelay = 1.0f;
 
     private void Start()
     {
-        this.AlignPosition();
-        this.AlignRotation();
+        Invoke("AlignPosition", invokeDelay);
+        Invoke("AlignRotation", invokeDelay);
     }
 
     private void Update()

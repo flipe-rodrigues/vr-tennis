@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(MeshRenderer))]
 public class TargetBhv : CachedTransformBhv
@@ -11,15 +12,11 @@ public class TargetBhv : CachedTransformBhv
     // Public fields
     [ColorUsage(true, true)]
     public Color acquisitionColor;
-    [Range(.1f, 5f)]
-    public float glowDelay = 0.1f;
-    [Range(.1f, 5f)]
-    public float fadeDelay = 1f;
+    [Range(.01f, 5f)]
+    public float acquisitionDelay = 0.1f;
+    [Range(.01f, 5f)]
+    public float resetDelay = 1f;
     public UnityEvent<Vector3, float> onTargetAcquired = new UnityEvent<Vector3, float>();
-
-    // Readonly fields
-    [SerializeField, ReadOnly]
-    private bool _isDisplayingAcquisition;
 
     // Private fields
     private MeshRenderer _meshRenderer;
@@ -32,63 +29,50 @@ public class TargetBhv : CachedTransformBhv
 
         _meshRenderer = this.GetComponent<MeshRenderer>();
         _material = _meshRenderer.material;
-    }
-
-    private void Start()
-    {
         _defaultColor = _material.color;
     }
 
-    protected void TryDisplayProgress(float t)
+    public void ColorLerp(float t)
     {
-        if (_isDisplayingAcquisition)
-        {
-            return;
-        }
-
         _material.color = Color.Lerp(_defaultColor, acquisitionColor, t);
     }
 
-    protected void TryAcquireAt(Vector3 position, float intensity)
+    public void TryAcquireAt(Vector3 position, float intensity)
     {
-        if (_isDisplayingAcquisition)
-        {
-            return;
-        }
-
-        onTargetAcquired?.Invoke(position, intensity);
-
-        TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetAcquired);
-
-        StartCoroutine(this.AcquisitionDisplayCoroutine());
+        StopAllCoroutines();
+        StartCoroutine(this.AcquisitionCoroutine(position, intensity));
     }
 
-    private IEnumerator AcquisitionDisplayCoroutine()
+    public void Reset()
     {
-        _isDisplayingAcquisition = true;
+        StopAllCoroutines();
+        StartCoroutine(this.FadeToCoroutine(_defaultColor, resetDelay));
+    }
 
-        float lerp = 0;
+    private IEnumerator AcquisitionCoroutine(Vector3 position, float intensity)
+    {
+        yield return FadeToCoroutine(acquisitionColor, acquisitionDelay);
+        this.AcquireAt(position, intensity);
+        yield return FadeToCoroutine(_defaultColor, resetDelay);
+        
+    }
 
-        while (lerp < 1)
+    private void AcquireAt(Vector3 position, float intensity)
+    {
+        onTargetAcquired?.Invoke(position, intensity);
+        TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetAcquired);
+    }
+
+    private IEnumerator FadeToCoroutine(Color finalColor, float duration)
+    {
+        float elapsedTime = 0;
+        Color initialColor = _material.color;
+        while (elapsedTime < duration)
         {
-            lerp += Time.fixedDeltaTime / glowDelay;
-
-            _material.color = Color.Lerp(_defaultColor, acquisitionColor, lerp);
-
+            elapsedTime += Time.fixedDeltaTime;
+            _material.color = Color.Lerp(initialColor, finalColor, elapsedTime / duration);
             yield return ApplicationManager.waitForFixedUpdateInstance;
         }
-
-        while (lerp > 0)
-        {
-            lerp -= Time.fixedDeltaTime / fadeDelay;
-
-            _material.color = Color.Lerp(_defaultColor, acquisitionColor, lerp);
-
-            yield return ApplicationManager.waitForFixedUpdateInstance;
-        }
-
-        _material.color = _defaultColor;
-
-        _isDisplayingAcquisition = false;
+        _material.color = finalColor;
     }
 }
