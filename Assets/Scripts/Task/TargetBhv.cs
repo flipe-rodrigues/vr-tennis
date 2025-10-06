@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(MeshRenderer))]
 public class TargetBhv : CachedTransformBhv
@@ -34,10 +33,21 @@ public class TargetBhv : CachedTransformBhv
         _defaultColor = _material.color;
     }
 
+    public void Restart()
+    {
+        this.SetColor(Color.clear);
+        StartCoroutine(this.FadeToCoroutine(_defaultColor, acquisitionDelay));
+    }
+
+    private void SetColor(Color color)
+    {
+        _material.color = color;
+        _light.color = color;
+    }
+
     public void ColorLerp(float t)
     {
-        _material.color = Color.Lerp(_defaultColor, acquisitionColor, t);
-        _light.color = _material.color;
+        this.SetColor(Color.Lerp(_defaultColor, acquisitionColor, t));
     }
 
     public void TryAcquireAt(Vector3 position, float intensity)
@@ -56,7 +66,8 @@ public class TargetBhv : CachedTransformBhv
     {
         yield return FadeToCoroutine(acquisitionColor, acquisitionDelay);
         this.AcquireAt(position, intensity);
-        yield return FadeToCoroutine(_defaultColor, resetDelay);
+        yield return FadeToCoroutine(Color.clear, resetDelay);
+        this.Active = false;
     }
 
     private void AcquireAt(Vector3 position, float intensity)
@@ -73,11 +84,9 @@ public class TargetBhv : CachedTransformBhv
         while (elapsedTime < duration)
         {
             elapsedTime += Time.fixedDeltaTime;
-            _material.color = Color.Lerp(initialColor, finalColor, elapsedTime / duration);
-            _light.color = _material.color;
+            this.SetColor(Color.Lerp(initialColor, finalColor, elapsedTime / duration));
             yield return ApplicationManager.waitForFixedUpdateInstance;
         }
-        _material.color = finalColor;
-        _light.color = finalColor;
+        this.SetColor(finalColor);
     }
 }

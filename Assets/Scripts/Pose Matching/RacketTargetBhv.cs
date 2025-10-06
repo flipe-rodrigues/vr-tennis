@@ -4,34 +4,15 @@ public class RacketTargetBhv : TargetBhv
 {
     // Public fields
     [Range(0, 1f)]
-    public float respawnRadius = 0.5f;
-    [Range(0, 1f)]
     public float overlapThreshold = 0.9f;
 
     // Readonly fields
-    [SerializeField, ReadOnly]
-    private Vector3 _initialPosition;
     [SerializeField, ReadOnly, Range(0f, 1f)]
     private float _overlapFraction;
 
     // Private fields
     private Timer _overlapTimer;
     private Timer _refractoryTimer;
-
-    private void OnEnable()
-    {
-        TaskManager.onTrialStart += this.HandleTrialStart;
-    }
-
-    private void OnDisable()
-    {
-        TaskManager.onTrialStart -= this.HandleTrialStart;
-    }
-
-    private void OnValidate()
-    {
-        _initialPosition = this.Position;
-    }
 
     private void Start()
     {
@@ -73,13 +54,6 @@ public class RacketTargetBhv : TargetBhv
         }
     }
 
-    private void HandleTrialStart()
-    {
-        base.ColorLerp(0f);
-        this.Position = _initialPosition + Random.insideUnitSphere * respawnRadius;
-        this.Rotation = Random.rotation;
-    }
-
     private float OverlapFraction(MeshRenderer a, MeshRenderer b)
     {
         Bounds A = a.bounds;
@@ -103,11 +77,5 @@ public class RacketTargetBhv : TargetBhv
         float z = Mathf.Max(0, Mathf.Min(a.max.z, b.max.z) - Mathf.Max(a.min.z, b.min.z));
 
         return x * y * z;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.Position, respawnRadius);
     }
 }

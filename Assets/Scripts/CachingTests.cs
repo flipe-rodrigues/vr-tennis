@@ -26,7 +26,7 @@ public class CachingTests : CachedTransformBhv
                 {
                     case ComponentType.GameObject:
                         
-                        _name = this.Name;
+                        //_name = this.Name;
                         _isActive = this.Active;
 
                         break;

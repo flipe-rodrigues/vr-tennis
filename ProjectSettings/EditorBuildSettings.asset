@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main (OptiTrack).unity
+    path: Assets/Scenes/Main (OptiTrack + OpenXR).unity
     guid: 664ff57fc33a874429373b2ce7f0e201
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}

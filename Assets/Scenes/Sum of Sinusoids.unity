@@ -119,22 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &324890151 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-  m_PrefabInstance: {fileID: 5419632026719501656}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &324890156 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4308758073793666640, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-  m_PrefabInstance: {fileID: 5419632026719501656}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 554d9c9576a3069469595bf75c25ac9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FollowTargetBhv
 --- !u!1 &427517421
 GameObject:
   m_ObjectHideFlags: 0
@@ -2583,6 +2567,72 @@ Transform:
   - {fileID: 1651579880}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1171503978
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2116965607}
+    m_Modifications:
+    - target: {fileID: 41824784035801617, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: globalFrequencyModifier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205325836179416467, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: m_Name
+      value: Target (sines)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+--- !u!4 &1171503979 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
+  m_PrefabInstance: {fileID: 1171503978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1396866739
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,8 +2665,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 0
   saveMetadata: 0
-  _editorSavePath: C:\Users\Admin\Documents\GitHub\vr-tennis\Assets\Data\2025-10-06_13-28-32
-  _buildSavePath: C:\Users\Admin\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-06_13-28-32
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-06_23-30-38
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-06_23-30-38
 --- !u!4 &1396866741
 Transform:
   m_ObjectHideFlags: 0
@@ -3063,13 +3113,13 @@ MonoBehaviour:
   samplingRate: 500
   _samplingInterval: 0.002
   _trackers:
-  - {fileID: 533789539}
-  - {fileID: 1751295941}
+  - {fileID: 1467799598}
+  - {fileID: 1437636373}
   - {fileID: 454428205}
   - {fileID: 1804734641}
-  - {fileID: 1467799598}
   - {fileID: 1690077235}
-  - {fileID: 1437636373}
+  - {fileID: 1751295941}
+  - {fileID: 533789539}
 --- !u!4 &1749113138
 Transform:
   m_ObjectHideFlags: 0
@@ -3084,6 +3134,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 454428204}
+  - {fileID: 2095561895}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1751295939
@@ -3186,7 +3237,7 @@ MonoBehaviour:
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _scale: {x: 0, y: 0, z: 0}
-  gizmoColor: {r: 0, g: 0, b: 0, a: 1}
+  gizmoColor: {r: 0, g: 0, b: 1, a: 1}
   gizmoRadius: 0.025
   gizmoSelectedAlpha: 0.75
   gizmoIdleAlpha: 0.25
@@ -3313,6 +3364,59 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &2095561894
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2095561895}
+  - component: {fileID: 2095561896}
+  m_Layer: 0
+  m_Name: Target Tracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2095561895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095561894}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1749113138}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2095561896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095561894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd2a6082268626409b0abacdd7d283f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
+  gizmoColor: {r: 1, g: 0.07843115, b: 0.57647055, a: 1}
+  gizmoRadius: 0.025
+  gizmoSelectedAlpha: 0.75
+  gizmoIdleAlpha: 0.25
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_target-tracker.bin
+  _isDoneSaving: 0
 --- !u!1 &2116965606
 GameObject:
   m_ObjectHideFlags: 0
@@ -3343,7 +3447,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 324890151}
+  - {fileID: 1171503979}
   m_Father: {fileID: 427517423}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2116965608
@@ -3358,8 +3462,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63870a31860220d429f5b7ee71ea0554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetSelectionBhv
-  _targets:
-  - {fileID: 324890156}
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: -0, y: 0, z: 0}
+  _scale: {x: 1, y: 1, z: 1}
+  spawnRadius: 0.5
+  randomizePosition: 0
+  randomizeRotation: 0
+  gizmoColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &401097331833626543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3683,63 +3792,6 @@ MonoBehaviour:
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: -0, y: 90, z: -0}
   _scale: {x: 1, y: 1, z: 1}
---- !u!1001 &5419632026719501656
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2116965607}
-    m_Modifications:
-    - target: {fileID: 3205325836179416467, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-      propertyPath: m_Name
-      value: Sum Of Sinusoids
-      objectReference: {fileID: 0}
-    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8548316269815612202, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
 --- !u!23 &5963898074994166579
 MeshRenderer:
   m_ObjectHideFlags: 0

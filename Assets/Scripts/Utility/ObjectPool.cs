@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class ObjectPool<T> where T : CachedGameObjectBhv
 {
+    // Public properties
+    public int Count => _pool.Count;
+
+    // Private fields
     private readonly Queue<T> _pool;
 
     public ObjectPool(T prefab, int poolSize, Vector3? position = null)
@@ -30,6 +34,30 @@ public class ObjectPool<T> where T : CachedGameObjectBhv
 
             this._pool.Enqueue(obj);
         }
+    }
+
+    public ObjectPool(T[] objects)
+    {
+        this._pool = new Queue<T>(objects.Length);
+
+        foreach (T obj in objects)
+        {
+            obj.Active = false;
+
+            this._pool.Enqueue(obj);
+        }
+    }
+
+    public T GetRandom(bool activate = true)
+    {
+        int index = UnityEngine.Random.Range(0, _pool.Count);
+
+        for (int i = 0; i < index; i++)
+        {
+            _pool.Enqueue(_pool.Dequeue());
+        }
+
+        return this.Get(activate);
     }
 
     public T Get(bool activate = true)
