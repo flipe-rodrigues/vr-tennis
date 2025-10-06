@@ -30,7 +30,7 @@ public class DataManager : Singleton<DataManager>
     {
         base.Awake();
 
-        if (!Directory.Exists(SavePath))
+        if ((saveData || saveMetadata) && !Directory.Exists(SavePath))
         {
             Directory.CreateDirectory(SavePath);
         }
