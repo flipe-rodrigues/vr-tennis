@@ -57,7 +57,6 @@ public class TargetBhv : CachedTransformBhv
         yield return FadeToCoroutine(acquisitionColor, acquisitionDelay);
         this.AcquireAt(position, intensity);
         yield return FadeToCoroutine(_defaultColor, resetDelay);
-        
     }
 
     private void AcquireAt(Vector3 position, float intensity)

@@ -9,6 +9,8 @@ public class RacketTargetBhv : TargetBhv
     public float overlapThreshold = 0.9f;
 
     // Readonly fields
+    [SerializeField, ReadOnly]
+    private Vector3 _initialPosition;
     [SerializeField, ReadOnly, Range(0f, 1f)]
     private float _overlapFraction;
 
@@ -18,14 +20,17 @@ public class RacketTargetBhv : TargetBhv
 
     private void OnEnable()
     {
-        //base.onTargetAcquired.AddListener(this.RandomizeTransform);
-        TaskManager.onTrialStart += this.RandomizeTransform;
+        TaskManager.onTrialStart += this.HandleTrialStart;
     }
 
     private void OnDisable()
     {
-        //base.onTargetAcquired.RemoveListener(this.RandomizeTransform);
-        TaskManager.onTrialStart -= this.RandomizeTransform;
+        TaskManager.onTrialStart -= this.HandleTrialStart;
+    }
+
+    private void OnValidate()
+    {
+        _initialPosition = this.Position;
     }
 
     private void Start()
@@ -68,9 +73,10 @@ public class RacketTargetBhv : TargetBhv
         }
     }
 
-    private void RandomizeTransform()
+    private void HandleTrialStart()
     {
-        this.Position = TennisManager.Instance.Racket.Position + Random.insideUnitSphere * respawnRadius;
+        base.ColorLerp(0f);
+        this.Position = _initialPosition + Random.insideUnitSphere * respawnRadius;
         this.Rotation = Random.rotation;
     }
 
@@ -97,5 +103,11 @@ public class RacketTargetBhv : TargetBhv
         float z = Mathf.Max(0, Mathf.Min(a.max.z, b.max.z) - Mathf.Max(a.min.z, b.min.z));
 
         return x * y * z;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.Position, respawnRadius);
     }
 }
