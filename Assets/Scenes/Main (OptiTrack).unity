@@ -167,13 +167,13 @@ MonoBehaviour:
   samplingRate: 500
   _samplingInterval: 0.002
   _trackers:
+  - {fileID: 1324406917286027287}
+  - {fileID: 1361894310}
+  - {fileID: 7996239910057813932}
   - {fileID: 7976822468721358775}
   - {fileID: 5872129562439674650}
-  - {fileID: 1361894310}
-  - {fileID: 1324406917286027287}
-  - {fileID: 7996239910057813932}
-  - {fileID: 2003079447619129941}
   - {fileID: 1346638848062879237}
+  - {fileID: 2003079447619129941}
 --- !u!1 &206971742
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,8 +221,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 0
   saveMetadata: 0
-  _editorSavePath: C:\Users\Admin\Documents\GitHub\vr-tennis\Assets\Data\2025-10-06_15-30-31
-  _buildSavePath: C:\Users\Admin\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-06_15-30-31
+  _editorSavePath: C:\Users\Admin\Documents\GitHub\vr-tennis\Assets\Data\2025-10-06_16-01-31
+  _buildSavePath: C:\Users\Admin\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-06_16-01-31
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4036,6 +4036,20 @@ MonoBehaviour:
   mainCameraTransform: {fileID: 741577990}
   alignPositionActionReference: {fileID: 1410537125184354943, guid: 4da4990f983efa242881508f7b71a600, type: 3}
   alignRotationActionReference: {fileID: -7554610795616076244, guid: 4da4990f983efa242881508f7b71a600, type: 3}
+  fineTunePositionInput:
+    m_InputSourceMode: 2
+    m_InputAction:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 42319842-a4dc-4d4c-8b6d-4feff9c04691
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_InputActionReference: {fileID: 6972639530819350904, guid: 4da4990f983efa242881508f7b71a600, type: 3}
+    m_ObjectReferenceObject: {fileID: 0}
+    m_ManualValue: {x: 0, y: 0}
   invokeDelay: 0.01
 --- !u!1 &1711456499
 GameObject:
@@ -4620,7 +4634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Mediator: {fileID: 6640002711952321583}
   m_TransformationPriority: 0
-  m_MoveSpeed: 0.5
+  m_MoveSpeed: 0.25
   m_InAirControlModifier: 1
   m_EnableStrafe: 1
   m_EnableFly: 0
@@ -4987,7 +5001,7 @@ Transform:
   m_GameObject: {fileID: 1717954560845139033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00641, y: -0, z: -0.01789}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5770,7 +5784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackingType: 0
+  m_TrackingType: 1
   m_UpdateType: 0
   m_IgnoreTrackingState: 0
   m_PositionInput:
@@ -5981,7 +5995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Mediator: {fileID: 6640002711952321583}
   m_TransformationPriority: 0
-  m_TurnSpeed: 25
+  m_TurnSpeed: 15
   m_EnableTurnLeftRight: 1
   m_EnableTurnAround: 0
   m_LeftHandTurnInput:

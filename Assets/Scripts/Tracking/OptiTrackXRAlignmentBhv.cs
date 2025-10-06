@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 
 public class OptiTrackXRAlignmentBhv : CachedTransformBhv
 {
@@ -8,8 +9,12 @@ public class OptiTrackXRAlignmentBhv : CachedTransformBhv
     public Transform mainCameraTransform;
     public InputActionReference alignPositionActionReference;
     public InputActionReference alignRotationActionReference;
+    public XRInputValueReader<Vector2> fineTunePositionInput;
     [Min(0f)]
     public float invokeDelay = 1.0f;
+
+    // Private fields
+    private Vector3 _offset;
 
     private void Start()
     {
@@ -28,6 +33,9 @@ public class OptiTrackXRAlignmentBhv : CachedTransformBhv
         {
             this.AlignRotation();
         }
+
+        Vector2 moveInput = fineTunePositionInput.ReadValue();
+        _offset += new Vector3(moveInput.x, 0f, moveInput.y) * Time.deltaTime;
     }
 
     private void AlignPosition()
