@@ -37,8 +37,10 @@ public class OptiTrackXRAlignmentBhv : CachedTransformBhv
 
     private void AlignRotation()
     {
-        float alpha = Vector3.Angle(cameraOffsetTransform.forward, mainCameraTransform.forward);
-        Vector3 forward = Vector3.ProjectOnPlane(this.Forward, Vector3.up).normalized;
-        cameraOffsetTransform.forward = Quaternion.AngleAxis(alpha, Vector3.up) * forward;
+        Vector3 hmdProjection = Vector3.ProjectOnPlane(this.Forward, Vector3.up).normalized;
+        Vector3 cameraFloorProjection = Vector3.ProjectOnPlane(mainCameraTransform.forward, Vector3.up).normalized;
+        Vector3 offsetFloorProjection = Vector3.ProjectOnPlane(cameraOffsetTransform.forward, Vector3.up).normalized;
+        Quaternion rotation = Quaternion.FromToRotation(cameraFloorProjection, offsetFloorProjection);
+        cameraOffsetTransform.forward = rotation * hmdProjection;
     }
 }
