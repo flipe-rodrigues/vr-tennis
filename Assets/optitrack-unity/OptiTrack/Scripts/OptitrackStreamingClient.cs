@@ -17,6 +17,7 @@ limitations under the License.
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Threading;
 using UnityEngine;
@@ -272,7 +273,6 @@ public static class OptitrackHiResTimer
     }
 }
 
-
 /// <summary>
 /// Connects to a NatNet streaming server and makes the data available in lightweight Unity-friendly representations.
 /// </summary>
@@ -289,8 +289,8 @@ public class OptitrackStreamingClient : MonoBehaviour
     [Tooltip("The Streaming IP (Local Interface) in Motive")]
     public string ServerAddress = "127.0.0.1";
 
-    [Tooltip("Must be on the same network as the Streaming IP (Local Interface) in Motive.")]
-    public string LocalAddress = "127.0.0.1";
+    [SerializeField, ReadOnly, Tooltip("Must be on the same network as the Streaming IP (Local Interface) in Motive.")]
+    public string LocalAddress; // "127.0.0.1";
 
     [Tooltip("Unicast performs subscription reducing your overall data set in some applications.")]
     public ClientConnectionType ConnectionType;
@@ -331,6 +331,23 @@ public class OptitrackStreamingClient : MonoBehaviour
     //[Tooltip("Timecode Provider")]
     //public bool TimecodeProvider = false;
 
+    private string GetLocalIPAddress()
+    {
+        var host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                return ip.ToString();
+            }
+        }
+        return "No network adapters with an IPv4 address in the system!";
+    }
+
+    private void OnValidate()
+    {
+        LocalAddress = this.GetLocalIPAddress();
+    }
 
     #region Private fields
     //private UInt16 ServerCommandPort = NatNetConstants.DefaultCommandPort;

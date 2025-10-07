@@ -5,20 +5,22 @@ public class Timer
 {
     // Public properties
     public float ElapsedTime => Time.time - _startTime;
-    public bool IsExpired => this.ElapsedTime >= _duration;
+    public bool IsExpired => this.ElapsedTime >= duration;
     public bool IsRunning => _isRunning;
+
+    // Public fields
+    [Min(0)]
+    public float duration;
 
     // Readonly fields
     [SerializeField, ReadOnly, Min(0)]
     private float _startTime;
-    [SerializeField, ReadOnly, Min(0)]
-    private float _duration;
     [SerializeField, ReadOnly]
     private bool _isRunning;
 
     public Timer(float duration)
     {
-        _duration = duration;
+        this.duration = duration;
         _isRunning = false;
     }
     

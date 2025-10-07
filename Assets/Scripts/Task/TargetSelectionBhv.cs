@@ -11,6 +11,7 @@ public class TargetSelectionBhv : CachedTransformBhv
     public float spawnRadius = 0.5f;
     public bool randomizePosition = true;
     public bool randomizeRotation = true;
+    public bool deactivateOnReturn = false;
     public Color gizmoColor;
 
     // Private fields
@@ -55,7 +56,7 @@ public class TargetSelectionBhv : CachedTransformBhv
     {
         if (_currentTarget != null)
         {
-            _targetPool.Return(_currentTarget, deactivate: false);
+            _targetPool.Return(_currentTarget, deactivate: deactivateOnReturn);
         }
 
         _currentTarget = _targetPool.GetRandom();

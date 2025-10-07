@@ -5,6 +5,8 @@ using System;
 [System.Serializable]
 public class TaskStage
 {
+    [Min(0)]
+    public float duration = Mathf.Infinity;
     [Min(1)]
     public int trialCount = 10;
     public GameObject[] objectsToEnable;
@@ -33,6 +35,8 @@ public class TaskManager : Singleton<TaskManager>
     private int _trialIndex = 0;
     [SerializeField, ReadOnly]
     private int _totalTrialCount;
+    [SerializeField, ReadOnly]
+    private Timer _stageTimer;
 
     // Private fields
     private float _lastTrialStartTime = -Mathf.Infinity;
@@ -67,14 +71,15 @@ public class TaskManager : Singleton<TaskManager>
 
     private void FixedUpdate()
     {
-        if (_trialIndex >= _stageTransitionThresholds[_stageIndex])
+        if (_trialIndex >= _stageTransitionThresholds[_stageIndex] || _stageTimer.IsExpired)
         {
             this.StartStage();
         }
 
         if (Time.time - _lastTrialStartTime >= _interTrialInterval)
         {
-            //this.StartTrial();
+            if (_stageIndex == 3)
+                this.StartNextTrial();
         }
 
         if (_trialIndex >= _totalTrialCount)
@@ -86,6 +91,9 @@ public class TaskManager : Singleton<TaskManager>
     }
     private void StartStage()
     {
+        _stageTimer = new Timer(stages[_stageIndex].duration);
+        _stageTimer.Start();
+
         foreach (GameObject obj in stages[_stageIndex].objectsToEnable)
         {
             obj.SetActive(true);

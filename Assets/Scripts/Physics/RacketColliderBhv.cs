@@ -4,6 +4,9 @@ using System.Collections;
 [RequireComponent(typeof(Collider))]
 public class RacketColliderBhv : CachedTransformBhv
 {
+    // Protected properties
+    protected Collider Collider => _collider;
+
     // Private properties
     private MeshRenderer MeshRenderer => _meshRenderer == null ? GetComponent<MeshRenderer>() : _meshRenderer;
 
@@ -15,7 +18,7 @@ public class RacketColliderBhv : CachedTransformBhv
     private MeshRenderer _meshRenderer;
     private Collider _collider;
 
-    private void OnValidate()
+    protected virtual void OnValidate()
     {
         this.MeshRenderer.enabled = displayAsMesh;
     }
@@ -31,12 +34,22 @@ public class RacketColliderBhv : CachedTransformBhv
         _collider = GetComponent<Collider>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         this.OnValidate();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        _racketBhv.OnTriggerStay(other);
+    }
+
     private void OnTriggerStay(Collider other)
+    {
+        _racketBhv.OnTriggerStay(other);
+    }
+
+    private void OnTriggerExit(Collider other)
     {
         _racketBhv.OnTriggerStay(other);
     }

@@ -58,7 +58,7 @@ public class RacketBhv : CachedTransformBhv
     {
         base.Awake();
 
-        _meshRenderer = GetComponentInChildren<MeshRenderer>();
+        _meshRenderer = GetComponentInParent<MeshRenderer>();
         _racketCollider = GetComponentInChildren<RacketColliderBhv>();
     }
 
@@ -91,7 +91,7 @@ public class RacketBhv : CachedTransformBhv
         _previousRotation = this.Rotation;
     }
 
-    private void UpdateConstactNormal()
+    private void UpdateContactNormal()
     {
         Vector3 instantaneousContactNormal = (this.Forward * Vector3.Dot(this.Forward, TennisManager.Instance.RelativeVelocity)).normalized;
 
@@ -100,7 +100,7 @@ public class RacketBhv : CachedTransformBhv
 
     public void OnTriggerStay(Collider other)
     {
-        this.UpdateConstactNormal();
+        this.UpdateContactNormal();
 
         if (Vector3.Dot(_contactNormal, TennisManager.Instance.RelativePosition) < 0)
         {
