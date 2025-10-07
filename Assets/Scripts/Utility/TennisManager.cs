@@ -3,7 +3,7 @@ using UnityEngine;
 public class TennisManager : Singleton<TennisManager>
 {
     // Public properties
-    public BallRigidbodyBhv Ball { get {return _ball; } set { _ball = value; } }
+    public BallBhv Ball { get {return _ball; } set { _ball = value; } }
     public RacketBhv Racket => _racket;
     public Vector3 RelativePosition
     {
@@ -32,7 +32,7 @@ public class TennisManager : Singleton<TennisManager>
 
     // Read only fields
     [SerializeField, ReadOnly]
-    private BallRigidbodyBhv _ball;
+    private BallBhv _ball;
     [SerializeField, ReadOnly]
     private RacketBhv _racket;
 
@@ -42,7 +42,7 @@ public class TennisManager : Singleton<TennisManager>
 
         if (_ball == null)
         {
-            _ball = FindFirstObjectByType<BallRigidbodyBhv>();
+            _ball = FindFirstObjectByType<BallBhv>();
         }
         if (_racket == null)
         {

@@ -7,7 +7,7 @@ public class BallLaunchBhv : CachedTransformBhv
     public static Action onBallLaunch;
 
     // Public fields
-    public BallRigidbodyBhv ballPrefab;
+    public BallBhv ballPrefab;
     [Range(0, 100)]
     public int ballPoolSize = 10;
     [Range(0, 100)]
@@ -18,8 +18,8 @@ public class BallLaunchBhv : CachedTransformBhv
     public float sideSpin = 0f;
 
     // Private fields
-    private ObjectPool<BallRigidbodyBhv> _ballPool;
-    private BallRigidbodyBhv _currentBall;
+    private ObjectPool<BallBhv> _ballPool;
+    private BallBhv _currentBall;
 
     protected override void Awake()
     {
@@ -30,7 +30,7 @@ public class BallLaunchBhv : CachedTransformBhv
             return;
         }
 
-        _ballPool = new ObjectPool<BallRigidbodyBhv>(ballPrefab, ballPoolSize, this.Position);
+        _ballPool = new ObjectPool<BallBhv>(ballPrefab, ballPoolSize, this.Position);
     }
 
     private void OnEnable()

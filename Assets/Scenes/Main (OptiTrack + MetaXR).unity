@@ -199,13 +199,13 @@ MonoBehaviour:
   samplingRate: 250
   _samplingInterval: 0.004
   _trackers:
+  - {fileID: 1324406917286027287}
+  - {fileID: 984377533}
+  - {fileID: 7976822468721358775}
+  - {fileID: 1361894310}
+  - {fileID: 2003079447619129941}
   - {fileID: 7996239910057813932}
   - {fileID: 5872129562439674650}
-  - {fileID: 984377533}
-  - {fileID: 1324406917286027287}
-  - {fileID: 2003079447619129941}
-  - {fileID: 1361894310}
-  - {fileID: 7976822468721358775}
   - {fileID: 1346638848062879237}
 --- !u!1 &20478871
 GameObject:
@@ -2161,10 +2161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebe39524603cdd4b953f6dd022a3542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveData: 0
-  saveMetadata: 0
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-07_18-18-15
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-07_18-18-15
+  saveData: 1
+  saveMetadata: 1
+  _editorSavePath: C:\Users\Admin\Documents\GitHub\vr-tennis\Assets\Data\2025-10-07_19-30-55
+  _buildSavePath: C:\Users\Admin\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-07_19-30-55
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5919,7 +5919,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   stages:
   - duration: Infinity
-    trialCount: 5
+    trialCount: 10
     objectsToEnable:
     - {fileID: 4048976150374128210}
     - {fileID: 5102816465464550694}
@@ -5929,7 +5929,7 @@ MonoBehaviour:
     - {fileID: 844569173}
     - {fileID: 1888609738}
     - {fileID: 1787883650}
-  - duration: 10
+  - duration: 30
     trialCount: 1
     objectsToEnable:
     - {fileID: 844569173}
@@ -16397,7 +16397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetFrameRate: 90
-  targetPhysicsRate: 250
+  targetPhysicsRate: 500
   timeScale: 1
   _hasStartedQuitting: 0
 --- !u!1 &2094533217
@@ -16702,7 +16702,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8497731725431676291}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -17113,7 +17113,7 @@ MonoBehaviour:
   apparentSpinRestitution: 0.4
   spinToTangentialConversion: 0.3
   tangentialToSpinConversion: 0.58
-  refractoryPeriod: 0.1
+  refractoryPeriod: 0.25
   smoothingTimeConstantVelocity: 0.01
   smoothingTimeConstantNormal: 0.005
   onRacketHit:
@@ -17143,9 +17143,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _smoothingRateVelocity: 0.32967997
-  _smoothingRateNormal: 0.5506711
-  _approxNumFrames: 2
+  _smoothingRateVelocity: 0.18126929
+  _smoothingRateNormal: 0.32967997
+  _approxNumFrames: 5
 --- !u!4 &3412188825629777220
 Transform:
   m_ObjectHideFlags: 0
@@ -17491,7 +17491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ServerAddress: 10.40.49.47
-  LocalAddress: 10.40.49.9
+  LocalAddress: 10.40.49.47
   ConnectionType: 0
   SkeletonCoordinates: 0
   TMarkersetCoordinates: 0
@@ -17819,11 +17819,11 @@ MonoBehaviour:
   _position: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _scale: {x: 0, y: 0, z: 0}
-  displayAsMesh: 1
-  scaleModifier: {x: 0.25, y: 0.25, z: 0.1}
-  maxScaleFactor: 10
+  displayAsMesh: 0
+  scaleModifier: {x: 0.5, y: 0.5, z: 0.25}
+  maxScaleFactor: 7.5
   smoothingTimeConstant: 0.1
-  _smoothingRate: 0.039210558
+  _smoothingRate: 0.019801319
 --- !u!1 &8507140765353159293
 GameObject:
   m_ObjectHideFlags: 0

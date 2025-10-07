@@ -100,6 +100,9 @@ public class RacketBhv : CachedTransformBhv
 
     public void OnTriggerStay(Collider other)
     {
+        if (TennisManager.Instance.Ball.WasJustHit)
+            return;
+
         this.UpdateContactNormal();
 
         if (Vector3.Dot(_contactNormal, TennisManager.Instance.RelativePosition) < 0)
@@ -122,7 +125,7 @@ public class RacketBhv : CachedTransformBhv
         }
     }
 
-    private void Hit(BallRigidbodyBhv ball)
+    private void Hit(BallBhv ball)
     {
         // Following Cross 2005
         Vector3 v_racket_i = this.GetVelocityAtContactPoint();

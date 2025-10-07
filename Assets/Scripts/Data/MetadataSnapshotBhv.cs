@@ -13,7 +13,7 @@ public class MetadataSnapshotBhv : MonoBehaviour
     [Header("Components")]
     public TaskManager taskManager;
     public BallLaunchBhv ballSpawner;
-    public BallRigidbodyBhv ball;
+    public BallBhv ball;
     public RacketBhv racket;
 
     [Header("Physics Materials")]

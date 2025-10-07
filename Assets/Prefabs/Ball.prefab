@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1584005004659877603}
   - component: {fileID: 2982270267574870622}
   - component: {fileID: 7021041810745415179}
+  - component: {fileID: 1986069689839577493}
   - component: {fileID: 501471969410220606}
   m_Layer: 7
   m_Name: Ball
@@ -306,6 +307,18 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1986069689839577493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256145129520494433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb78621d0efc084c80f5eaa10e3d1dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &501471969410220606
 MonoBehaviour:
   m_ObjectHideFlags: 0

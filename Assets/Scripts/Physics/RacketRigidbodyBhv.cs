@@ -127,7 +127,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
         }
     }
 
-    private void Hit(BallRigidbodyBhv ball)
+    private void Hit(BallBhv ball)
     {
         // Following Cross 2005
         Vector3 v_racket_i = this.GetVelocityAtContactPoint();

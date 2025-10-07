@@ -5,7 +5,7 @@ public class CourtTargetBhv : TargetBhv
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<BallRigidbodyBhv>().WasJustHit)
+        if (!other.GetComponent<BallBhv>().WasJustHit)
         {
             return;
         }

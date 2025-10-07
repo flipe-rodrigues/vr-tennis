@@ -1,0 +1,160 @@
+﻿using UnityEngine;
+
+public class BallBhv : CachedRigidbodyBhv
+{
+    // Public properties
+    public Collider Collider => _collider;
+    public bool WasJustHit { get { return _wasJustHit; } set { _wasJustHit = value; } }
+
+    // Public fields
+    public Color topSpinColor = Color.red;
+    public Color backSpinColor = Color.cyan;
+    public LayerMask courtLayer;
+    public float mass = 0.057f; // kg (standard tennis ball mass)
+    public float radius = 0.033f; // m (standard tennis ball radius)
+    public float airDensity = 1.225f; // kg/m³ at sea level
+
+    // Read only fields
+    [SerializeField, ReadOnly]
+    private float _dragCoefficient;
+    [SerializeField, ReadOnly]
+    private float _liftCoefficient;
+    [SerializeField, ReadOnly]
+    private float _spinDecayRate;
+    [SerializeField, ReadOnly]
+    private bool _wasJustHit;
+
+    // Private fields
+    private MeshRenderer _meshRenderer;
+    private Material _material;
+    private Collider _collider;
+    private Light _light;
+    private float _crossSectionalArea;
+    private float _V;
+    private float _W;
+
+    private void OnValidate()
+    {
+        this.Scale = Vector3.one * radius * 2f;
+
+        this.Rigidbody.mass = mass;
+
+        _crossSectionalArea = Mathf.PI * radius * radius;
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        this.OnValidate();
+
+        _meshRenderer = GetComponent<MeshRenderer>();
+        _material = _meshRenderer.material;
+        _collider = GetComponent<Collider>();
+        _light = GetComponent<Light>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        _dragCoefficient = 0f;
+        _liftCoefficient = 0f;
+        _spinDecayRate = 1f;
+        _V = 0f;
+        _W = 0f;
+    }
+
+    public void SpawnAt(Vector3 position, Quaternion rotation)
+    {
+        this.Position = position;
+        this.Rotation = rotation;
+        this.Start();
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        _V = this.LinearVelocity.magnitude;
+        _W = this.AngularVelocity.magnitude;
+
+        this.UpdateDrag();
+        this.UpdateLift();
+        this.UpdateBuoyancy();
+        this.UpdateSpin();
+        this.UpdateLight();
+    }
+
+    private void UpdateDrag()
+    {
+        if (_V == 0)
+        {
+            return;
+        }
+
+        // From Robinson & Robinson 2018
+        _dragCoefficient = 0.6204f - 9.76e-4f * (_V - 50f) + (1.027e-4f - 2.24e-6f * (_V - 50f)) * _W;
+
+        // Calculate drag force: Fd = (1/2) * ρ * A * Cd * V * v
+        Vector3 dragForce = -0.5f * airDensity * _crossSectionalArea * _dragCoefficient * _V * this.LinearVelocity;
+
+        this.AddForce(dragForce);
+    }
+
+    private void UpdateLift()
+    {
+        if (_W == 0)
+        {
+            return;
+        }
+
+        // From Robinson & Robinson 2018
+        _liftCoefficient = (4.68e-4f - 2.0984e-5f * (_V - 50f)) * _W;
+
+        // Calculate lift force: Fl = (1/2) * ρ * A * Cl * V * (w x v) / W
+        Vector3 liftForce = 0.5f * airDensity * _crossSectionalArea * _liftCoefficient * _V * Vector3.Cross(this.AngularVelocity, this.LinearVelocity) / _W;
+
+        this.AddForce(liftForce);
+    }
+
+    private void UpdateBuoyancy()
+    {
+        // Calculate buoyancy force: Fb = (4/3) * π * r³ * ρ * g
+        Vector3 buoyancyForce = 4f / 3f * Mathf.PI * Mathf.Pow(radius, 3f) * airDensity * Physics.gravity;
+
+        this.AddForce(buoyancyForce);
+    }
+
+    private void UpdateSpin()
+    {
+        if (_V == 0)
+        {
+            return;
+        }
+
+        // From Robinson & Robinson 2018
+        _spinDecayRate = Mathf.Exp(-Time.fixedDeltaTime / (164f / _V));
+
+        this.AngularVelocity *= _spinDecayRate;
+    }
+
+    private void UpdateLight()
+    {
+        _light.intensity = Mathf.Clamp(this.LinearVelocity.sqrMagnitude / 250f, 0f, .05f);
+
+        //Color spinColor = Color.Lerp(backSpinColor, topSpinColor, Mathf.Clamp(this.AngularVelocity.magnitude / 50f, 0f, 1f));
+
+        //_light.color = spinColor;
+
+        _material.SetColor("_EmissionColor", Color.Lerp(Color.black, Color.white, _light.intensity / .05f));
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (((1 << collision.gameObject.layer) & courtLayer) != 0)
+        {
+            _wasJustHit = false;
+        }
+    }
+}
