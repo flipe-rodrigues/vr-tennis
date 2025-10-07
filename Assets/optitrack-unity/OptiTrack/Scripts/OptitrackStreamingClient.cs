@@ -349,6 +349,13 @@ public class OptitrackStreamingClient : MonoBehaviour
         LocalAddress = this.GetLocalIPAddress();
     }
 
+    private void Awake()
+    {
+#if ENABLE_IL2CPP
+    UnityEngine.Debug.Log("OptiTrack Streaming Client running with IL2CPP-safe NatNetClient.");
+#endif
+    }
+
     #region Private fields
     //private UInt16 ServerCommandPort = NatNetConstants.DefaultCommandPort;
     //private UInt16 ServerDataPort = NatNetConstants.DefaultDataPort;

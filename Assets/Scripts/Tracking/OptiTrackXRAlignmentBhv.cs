@@ -29,8 +29,7 @@ public class OptiTrackXRAlignmentBhv : CachedTransformBhv
 
     private void Start()
     {
-        OVRManager.instance.isInsightPassthroughEnabled = false;
-
+        Invoke("TogglePassthrough", invokeDelay);
         Invoke("RecenterPose", invokeDelay);
         Invoke("AlignPosition", invokeDelay);
         Invoke("AlignRotation", invokeDelay);
@@ -38,6 +37,11 @@ public class OptiTrackXRAlignmentBhv : CachedTransformBhv
 
     private void Update()
     {
+        if (OVRManager.instance == null)
+        {
+            return;
+        }
+
         if (trackingSpaceTransform == null || mainCameraTransform == null)
         {
             return;
@@ -84,6 +88,11 @@ public class OptiTrackXRAlignmentBhv : CachedTransformBhv
 
     private void AlignPosition()
     {
+        if (OVRManager.instance == null)
+        {
+            return;
+        }
+
         Vector3 position = this.Position;
 
         if (OVRManager.instance.usePositionTracking)
@@ -111,6 +120,11 @@ public class OptiTrackXRAlignmentBhv : CachedTransformBhv
 
     private void TogglePassthrough()
     {
+        if (OVRManager.instance == null)
+        {
+            return;
+        }
+
         OVRManager.instance.isInsightPassthroughEnabled = !OVRManager.instance.isInsightPassthroughEnabled;
     }
 }

@@ -168,13 +168,13 @@ MonoBehaviour:
   samplingRate: 250
   _samplingInterval: 0.004
   _trackers:
-  - {fileID: 7976822468721358775}
-  - {fileID: 5872129562439674650}
-  - {fileID: 1361894310}
   - {fileID: 2003079447619129941}
-  - {fileID: 1324406917286027287}
   - {fileID: 7996239910057813932}
   - {fileID: 984377533}
+  - {fileID: 7976822468721358775}
+  - {fileID: 1361894310}
+  - {fileID: 1324406917286027287}
+  - {fileID: 5872129562439674650}
   - {fileID: 1346638848062879237}
 --- !u!1001 &45409214
 PrefabInstance:
@@ -637,8 +637,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 0
   saveMetadata: 0
-  _editorSavePath: C:\Users\Admin\Documents\GitHub\vr-tennis\Assets\Data\2025-10-07_13-43-31
-  _buildSavePath: C:\Users\Admin\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-07_13-43-31
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-07_18-13-37
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-07_18-13-37
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2139,7 +2139,8 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   stages:
-  - trialCount: 10
+  - duration: Infinity
+    trialCount: 10
     objectsToEnable:
     - {fileID: 4048976150374128210}
     - {fileID: 5102816465464550694}
@@ -2149,12 +2150,14 @@ MonoBehaviour:
     objectsToDisable:
     - {fileID: 844569173}
     - {fileID: 1888609738}
-  - trialCount: 1
+  - duration: Infinity
+    trialCount: 1
     objectsToEnable:
     - {fileID: 844569173}
     objectsToDisable:
     - {fileID: 1465274943}
-  - trialCount: 10
+  - duration: Infinity
+    trialCount: 10
     objectsToEnable:
     - {fileID: 1787883650}
     - {fileID: 1888609738}
@@ -2164,6 +2167,10 @@ MonoBehaviour:
   _stageIndex: 0
   _trialIndex: 0
   _totalTrialCount: 0
+  _stageTimer:
+    duration: 0
+    _startTime: 0
+    _isRunning: 0
 --- !u!1 &669633108
 GameObject:
   m_ObjectHideFlags: 0
@@ -2508,6 +2515,7 @@ MonoBehaviour:
   spawnRadius: 0.5
   randomizePosition: 0
   randomizeRotation: 0
+  deactivateOnReturn: 0
   gizmoColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &854235175
 PrefabInstance:
@@ -4340,6 +4348,7 @@ MonoBehaviour:
   spawnRadius: 0.5
   randomizePosition: 1
   randomizeRotation: 1
+  deactivateOnReturn: 0
   gizmoColor: {r: 1, g: 0.07843115, b: 0.57647055, a: 1}
 --- !u!1 &1696872144
 GameObject:
@@ -5012,6 +5021,7 @@ MonoBehaviour:
   spawnRadius: 0
   randomizePosition: 0
   randomizeRotation: 0
+  deactivateOnReturn: 0
   gizmoColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &2052168793
 PrefabInstance:
@@ -6258,7 +6268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ServerAddress: 10.40.49.47
-  LocalAddress: 10.40.49.47
+  LocalAddress: 10.40.49.9
   ConnectionType: 0
   SkeletonCoordinates: 0
   TMarkersetCoordinates: 0

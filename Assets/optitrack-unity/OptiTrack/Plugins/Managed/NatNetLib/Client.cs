@@ -283,6 +283,7 @@ namespace NaturalPoint.NatNetLib
     }
 
 
+    // --- Paste this in place of the existing NatNetClient class definition ---
     internal class NatNetClient : IDisposable
     {
         public class DataDescriptions
@@ -294,7 +295,6 @@ namespace NaturalPoint.NatNetLib
             public List<sForcePlateDescription> ForcePlateDescriptions;
             public List<sCameraDescription> CameraDescriptions;
         }
-
 
         public static Version NatNetLibVersion
         {
@@ -316,10 +316,6 @@ namespace NaturalPoint.NatNetLib
         /// IMPORTANT: This executes (via reverse P/Invoke) in the context of
         /// the NatNetLib network service thread.
         /// </summary>
-        /// <remarks>
-        /// NB: The sFrameOfMocapData native structure is large and expensive
-        /// to marshal. In particular, each invocation allocates ~200 KB.
-        /// </remarks>
         public event EventHandler<NativeFrameReceivedEventArgs> NativeFrameReceived;
 
         public class NativeFrameReceivedEventArgs : EventArgs
@@ -357,23 +353,81 @@ namespace NaturalPoint.NatNetLib
             }
         }
 
-
         #region Private fields
         private bool m_disposed = false;
         private IntPtr m_clientHandle = IntPtr.Zero;
         private sServerDescription m_serverDesc;
+        // removed instance reverse-P/Invoke delegate field - using static delegate instead
         private NativeFrameReceivedEventArgs m_nativeFrameReceivedEventArgs = new NativeFrameReceivedEventArgs();
-
-        // IL2CPP fix: Static callback and instance registry
-        private static Dictionary<IntPtr, NatNetClient> s_clientInstances = new Dictionary<IntPtr, NatNetClient>();
-        private static object s_clientInstancesLock = new object();
-        private static NatNetFrameReceivedCallback s_staticFrameReceivedHandler;
         #endregion Private fields
 
+        // --- IL2CPP-safe static callback machinery ---
+
+        // Hold the static delegate so the delegate instance is not GC'd.
+        private static readonly object s_clientsLock = new object();
+        private static readonly List<WeakReference<NatNetClient>> s_activeClients = new List<WeakReference<NatNetClient>>();
+
+        // Single static delegate used for all native client handles.
+        private static readonly NatNetFrameReceivedCallback s_nativeFrameReceivedHandler;
+
+        // Static ctor: initialize the static callback delegate.
         static NatNetClient()
         {
-            s_staticFrameReceivedHandler = StaticFrameReceivedNativeThunk;
+            s_nativeFrameReceivedHandler = FrameReceivedNativeStaticThunk;
+            // We do NOT call NatNet methods here because the native client handle is per-instance.
+            // Each instance will call NatNet_Client_SetFrameReceivedCallback passing this static delegate.
         }
+
+        /// <summary>
+        /// This static thunk is registered with native code (reverse P/Invoke) for all client handles.
+        /// It dispatches incoming frames to the managed NatNetClient instances (if any).
+        /// </summary>
+        [AOT.MonoPInvokeCallback(typeof(NatNetFrameReceivedCallback))]
+        private static void FrameReceivedNativeStaticThunk(IntPtr pFrameOfMocapData, IntPtr pUserData)
+        {
+            try
+            {
+                // Iterate current active clients and notify them. We use weak references so clients
+                // that have been collected/disposed don't prevent shutdown.
+                lock (s_clientsLock)
+                {
+                    // Walk the list backwards so we can prune dead references while iterating.
+                    for (int i = s_activeClients.Count - 1; i >= 0; --i)
+                    {
+                        WeakReference<NatNetClient> weakRef = s_activeClients[i];
+                        NatNetClient clientInstance;
+                        if (weakRef.TryGetTarget(out clientInstance) && clientInstance != null)
+                        {
+                            try
+                            {
+                                if (clientInstance.NativeFrameReceived != null)
+                                {
+                                    clientInstance.m_nativeFrameReceivedEventArgs.NativeFramePointer = pFrameOfMocapData;
+                                    clientInstance.NativeFrameReceived(clientInstance, clientInstance.m_nativeFrameReceivedEventArgs);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                // Swallow exceptions per original design so native thread can't be terminated by them.
+                                System.Diagnostics.Debug.WriteLine("ERROR - Exception occurred while dispatching NatNet frame to client instance: " + ex.ToString());
+                            }
+                        }
+                        else
+                        {
+                            // remove dead weak refs
+                            s_activeClients.RemoveAt(i);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Very defensive: don't let outer exceptions escape to native code.
+                System.Diagnostics.Debug.WriteLine("ERROR - Exception occurred in FrameReceivedNativeStaticThunk: " + ex.ToString());
+            }
+        }
+
+        // --- end static callback machinery ---
 
         public NatNetClient()
         {
@@ -385,19 +439,16 @@ namespace NaturalPoint.NatNetLib
                 throw new NatNetException("NatNet_Client_Create returned null handle.");
             }
 
-            // Register this instance in the static dictionary
-            lock (s_clientInstancesLock)
+            // Register this instance in the static registry so the static native callback can dispatch to it.
+            lock (s_clientsLock)
             {
-                s_clientInstances[m_clientHandle] = this;
+                s_activeClients.Add(new WeakReference<NatNetClient>(this));
             }
 
-            // Use the static delegate (only 2 parameters)
-            retval = NatNetLib.NativeMethods.NatNet_Client_SetFrameReceivedCallback(
-                m_clientHandle,
-                s_staticFrameReceivedHandler);
+            // Register the single static delegate with the native handle. This avoids instance delegate marshaling.
+            retval = NatNetLib.NativeMethods.NatNet_Client_SetFrameReceivedCallback(m_clientHandle, s_nativeFrameReceivedHandler);
             NatNetException.ThrowIfNotOK(retval, "NatNet_Client_SetFrameReceivedCallback failed.");
         }
-
 
         public void Connect(NatNetConnectionType connType,
                              IPAddress localAddress,
@@ -435,7 +486,6 @@ namespace NaturalPoint.NatNetLib
             Connected = true;
         }
 
-
         public void Disconnect()
         {
             ThrowIfDisposed();
@@ -463,7 +513,6 @@ namespace NaturalPoint.NatNetLib
             return retval;
         }
 
-
         public float RequestFloat(string request, Int32 timeoutMs = 1000, Int32 numAttempts = 1)
         {
             ThrowIfDisposed();
@@ -482,7 +531,6 @@ namespace NaturalPoint.NatNetLib
             Marshal.Copy(responsePtr, responseArray, 0, 1);
             return responseArray[0];
         }
-
 
         public Int32 RequestInt32(string request, Int32 timeoutMs = 1000, Int32 numAttempts = 1)
         {
@@ -503,7 +551,6 @@ namespace NaturalPoint.NatNetLib
             return responseArray[0];
         }
 
-
         public bool RequestCommand(string request, Int32 timeoutMs = 1000, Int32 numAttempts = 1)
         {
             ThrowIfDisposed();
@@ -513,7 +560,6 @@ namespace NaturalPoint.NatNetLib
             NatNetError result = NatNetLib.NativeMethods.NatNet_Client_Request(m_clientHandle, request, out responsePtr, out responseLen, timeoutMs, numAttempts);
             return result == NatNetError.NatNetError_OK;
         }
-
 
         public DataDescriptions GetDataDescriptions(UInt32 descriptionTypesMask = 0xFFFFFFFF)
         {
@@ -608,67 +654,16 @@ namespace NaturalPoint.NatNetLib
             return retDescriptions;
         }
 
-
         public NatNetError GetPredictedRigidBodyPose(Int32 rbId, out sRigidBodyData rbData, double dt)
         {
             return NatNetLib.NativeMethods.NatNet_Client_GetPredictedRigidBodyPose(m_clientHandle, rbId, out rbData, dt);
         }
-
-
-        /// <summary>
-        /// Static reverse P/Invoke delegate that routes to the correct instance.
-        /// IL2CPP compatible.
-        /// </summary>
-        private static void StaticFrameReceivedNativeThunk(IntPtr pFrameOfMocapData, IntPtr pUserData)
-        {
-            try
-            {
-                NatNetClient instance = null;
-
-                lock (s_clientInstancesLock)
-                {
-                    if (!s_clientInstances.TryGetValue(pUserData, out instance))
-                    {
-                        System.Diagnostics.Debug.WriteLine("ERROR - Could not find NatNetClient instance for callback");
-                        return;
-                    }
-                }
-
-                if (instance.m_disposed)
-                {
-                    return;
-                }
-
-                // Call the instance method
-                instance.FrameReceivedHandler(pFrameOfMocapData);
-            }
-#pragma warning disable CA1031 // Do not catch general exception types
-            catch (Exception ex)
-#pragma warning restore CA1031 // Do not catch general exception types
-            {
-                System.Diagnostics.Debug.WriteLine("ERROR - Exception occurred in StaticFrameReceivedNativeThunk: " + ex.ToString());
-            }
-        }
-
-        /// <summary>
-        /// Instance method that handles frame received events.
-        /// </summary>
-        private void FrameReceivedHandler(IntPtr pFrameOfMocapData)
-        {
-            if (NativeFrameReceived != null)
-            {
-                m_nativeFrameReceivedEventArgs.NativeFramePointer = pFrameOfMocapData;
-                NativeFrameReceived(this, m_nativeFrameReceivedEventArgs);
-            }
-        }
-
 
         #region Dispose pattern
         ~NatNetClient()
         {
             Dispose(false);
         }
-
 
         /// <summary>Implements IDisposable.</summary>
         public void Dispose()
@@ -677,26 +672,22 @@ namespace NaturalPoint.NatNetLib
             GC.SuppressFinalize(this);
         }
 
-
-        /// <summary>
-        /// Called by both the <see cref="IDisposable.Dispose()"/> override,
-        /// as well as the finalizer, to do the actual cleanup work.
-        /// </summary>
-        /// <param name="disposing">
-        /// True if <see cref="Dispose()"/> was called explicitly. False if
-        /// running as part of the finalizer. If false, do not attempt to
-        /// reference other managed objects, since they may have already been
-        /// finalized themselves.
-        /// </param>
         protected virtual void Dispose(bool disposing)
         {
             if (m_disposed)
                 return;
 
             // Remove from static registry
-            lock (s_clientInstancesLock)
+            lock (s_clientsLock)
             {
-                s_clientInstances.Remove(m_clientHandle);
+                for (int i = s_activeClients.Count - 1; i >= 0; --i)
+                {
+                    NatNetClient target;
+                    if (!s_activeClients[i].TryGetTarget(out target) || target == this)
+                    {
+                        s_activeClients.RemoveAt(i);
+                    }
+                }
             }
 
             // Disconnect if necessary.
@@ -725,7 +716,6 @@ namespace NaturalPoint.NatNetLib
             m_disposed = true;
         }
 
-
         private void ThrowIfDisposed()
         {
             if (m_disposed)
@@ -735,4 +725,5 @@ namespace NaturalPoint.NatNetLib
         }
         #endregion Dispose pattern
     }
+
 }
