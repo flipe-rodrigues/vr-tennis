@@ -4,7 +4,7 @@ using UnityEngine.InputSystem.XR;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(Rigidbody))]
-public class RacketRigidbodyBhv : CachedRigidbodyBhv
+public class RacketRigidbodyBhv_OLD : CachedRigidbodyBhv
 {
     // Public properties
     public Vector3 HitVelocity => _hitVelocity;
@@ -38,7 +38,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
     private int _approxNumFrames;
 
     // Private fields
-    private RacketDynamicColliderBhv _racketCollider;
+    private RacketDynamicColliderBhv_OLD _racketCollider;
     private Vector3 _smoothContactNormal;
     private Vector3 _smoothLinearVelocity;
     private Vector3 _smoothAngularVelocity;
@@ -61,7 +61,7 @@ public class RacketRigidbodyBhv : CachedRigidbodyBhv
     {
         base.Awake();
 
-        _racketCollider = GetComponentInChildren<RacketDynamicColliderBhv>();
+        _racketCollider = GetComponentInChildren<RacketDynamicColliderBhv_OLD>();
     }
 
     private void Update()

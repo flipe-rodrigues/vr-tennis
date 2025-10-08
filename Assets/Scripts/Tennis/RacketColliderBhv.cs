@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using System.Collections;
 
 [RequireComponent(typeof(Collider))]
-public class RacketColliderBhv : MonoBehaviour
+public class RacketColliderBhv : CachedTransformBhv
 {
     // Public properties
     public Vector3 ContactNormal => _contactNormal;
@@ -20,23 +20,50 @@ public class RacketColliderBhv : MonoBehaviour
     [Min(0f)]
     public float refractoryPeriod = 0.05f;
     public bool displayAsMesh;
+    [Header("Dynamic Rescaling Settings:")]
+    public Vector3 scaleModifier = Vector3.one;
+    [Range(1, 10)]
+    public float maxScaleFactor = 5f;
+    public bool rescaleDynamically;
 
     // Private fields
     private RacketBhv _racketBhv;
-    private Collider _collider;
+    private BoxCollider _collider;
     private MeshRenderer _meshRenderer;
     private Vector3 _contactNormal;
+    private Vector3 _defaultScale;
 
     private void OnValidate()
     {
         this.GetComponentInChildren<MeshRenderer>().enabled = displayAsMesh;
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _racketBhv = this.GetComponentInParent<RacketBhv>();
-        _collider = GetComponent<Collider>();
+        _collider = GetComponent<BoxCollider>();
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
+    }
+    private void Start()
+    {
+        _defaultScale = _collider.size;
+    }
+
+    private void FixedUpdate()
+    {
+        if (rescaleDynamically)
+        {
+            this.RescaleColliderDynamically();
+        }
+    }
+
+    private void RescaleColliderDynamically()
+    {
+        Vector3 localVelocity = this.Transform.InverseTransformDirection(_racketBhv.LinearVelocity);
+        Vector3 deltaScale = localVelocity.ElementWiseMultiplication(scaleModifier).Abs();
+        _collider.size = (_defaultScale + deltaScale).ClampBetween(_defaultScale, _defaultScale * maxScaleFactor);
     }
 
     private void OnTriggerEnter(Collider other)

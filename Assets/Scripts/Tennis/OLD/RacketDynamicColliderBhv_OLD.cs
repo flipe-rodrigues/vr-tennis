@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RacketDynamicColliderBhv : RacketColliderBhv_OLD
+public class RacketDynamicColliderBhv_OLD : RacketColliderBhv_OLD
 {
     // Public fields
     public Vector3 scaleModifier = Vector3.one;

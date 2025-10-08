@@ -3,7 +3,7 @@ using UnityEngine;
 public class RacketAnchorBhv : CachedTransformBhv
 {
     // Public fields
-    public RacketRigidbodyBhv anchoredRigidbody;
+    public RacketRigidbodyBhv_OLD anchoredRigidbody;
 
     private void OnValidate()
     {
