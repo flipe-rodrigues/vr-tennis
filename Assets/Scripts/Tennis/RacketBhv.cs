@@ -6,7 +6,7 @@ public class RacketBhv : MonoBehaviour
     // Public properties
     public RacketMeshBhv Mesh => _mesh;
     public Vector3 Forward => _transform.forward;
-    public Vector3 Position => _transform.position;
+    public Vector3 Position => _kalmanPosition;
     public Vector3 LinearVelocity => _kalmanLinearVelocity;
     public Vector3 AngularVelocity => _smoothAngularVelocity;
 
@@ -35,7 +35,7 @@ public class RacketBhv : MonoBehaviour
     private Vector3 _kalmanLinearVelocity;
 
     // Private fields
-    private OptitrackRigidBodyKalmanFilter _optitrackRigidbody;
+    private OptitrackRigidBody _optitrackRigidbody;
     private Transform _transform;
     private RacketColliderBhv _collider;
     private RacketMeshBhv _mesh;
@@ -48,7 +48,7 @@ public class RacketBhv : MonoBehaviour
 
     private void Awake()
     {
-        _optitrackRigidbody = this.GetComponentInParent<OptitrackRigidBodyKalmanFilter>();
+        _optitrackRigidbody = this.GetComponentInParent<OptitrackRigidBody>();
         _transform = this.GetComponent<Transform>();
         _collider = this.GetComponentInChildren<RacketColliderBhv>();
         _mesh = this.GetComponentInChildren<RacketMeshBhv>();
@@ -58,13 +58,13 @@ public class RacketBhv : MonoBehaviour
     {
         this.UpdateLinearVelocity();
         this.UpdateAngularVelocity();
+        this.ApplySmoothing();
         this.ApplyKalmanFilter();
     }
 
     private void UpdateLinearVelocity()
     {
         _rawLinearVelocity = (_optitrackRigidbody.CurrentPosition - _optitrackRigidbody.PreviousPosition) / Time.fixedDeltaTime;
-        _smoothLinearVelocity = Vector3.Lerp(_smoothLinearVelocity, _rawLinearVelocity, _smoothingRate);
     }
 
     private void UpdateAngularVelocity()
@@ -72,6 +72,11 @@ public class RacketBhv : MonoBehaviour
         Quaternion deltaRawRotation = _optitrackRigidbody.CurrentRotation * Quaternion.Inverse(_optitrackRigidbody.PreviousRotation);
         deltaRawRotation.ToAngleAxis(out float angleInDegrees, out Vector3 axis);
         _rawAngularVelocity = axis * (angleInDegrees * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+    }
+
+    private void ApplySmoothing()
+    {
+        _smoothLinearVelocity = Vector3.Lerp(_smoothLinearVelocity, _rawLinearVelocity, _smoothingRate);
         _smoothAngularVelocity = Vector3.Lerp(_smoothAngularVelocity, _rawAngularVelocity, _smoothingRate);
     }
 
@@ -87,21 +92,21 @@ public class RacketBhv : MonoBehaviour
         _kalmanLinearVelocity = predictedLinearVelocity + beta * residualPosition / dt;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(this.Position, this.Position + _collider.ContactNormal * 0.5f);
-        if (TennisManager.Instance.Ball != null)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(this.Position, TennisManager.Instance.Ball.Position);
-        }
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(this.Position, this.Position + this.Forward * .25f);
-        if (TennisManager.Instance.Ball != null)
-        {
-            Gizmos.color = Color.gray;
-            Gizmos.DrawLine(this.Position, this.Position + TennisManager.Instance.RelativeVelocity.normalized * 0.5f);
-        }
-    }
+    //private void OnDrawGizmos()
+    //{
+        //Gizmos.color = Color.cyan;
+        //Gizmos.DrawLine(this.Position, this.Position + _collider.ContactNormal * 0.5f);
+        //if (TennisManager.Instance.Ball != null)
+        //{
+        //    Gizmos.color = Color.yellow;
+        //    Gizmos.DrawLine(this.Position, TennisManager.Instance.Ball.Position);
+        //}
+        //Gizmos.color = Color.blue;
+        //Gizmos.DrawLine(this.Position, this.Position + this.Forward * .25f);
+        //if (TennisManager.Instance.Ball != null)
+        //{
+        //    Gizmos.color = Color.gray;
+        //    Gizmos.DrawLine(this.Position, this.Position + TennisManager.Instance.RelativeVelocity.normalized * 0.5f);
+        //}
+    //}
 }

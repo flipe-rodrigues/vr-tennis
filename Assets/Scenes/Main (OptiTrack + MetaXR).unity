@@ -200,16 +200,16 @@ MonoBehaviour:
   _samplingInterval: 0.004
   _trackers:
   - {fileID: 1976230216}
-  - {fileID: 984377533}
+  - {fileID: 445923867}
+  - {fileID: 5872129562439674650}
   - {fileID: 7976822468721358775}
   - {fileID: 7996239910057813932}
-  - {fileID: 1361894310}
   - {fileID: 1324406917286027287}
-  - {fileID: 1346638848062879237}
-  - {fileID: 5872129562439674650}
+  - {fileID: 984377533}
+  - {fileID: 1361894310}
   - {fileID: 2046919132}
-  - {fileID: 445923867}
   - {fileID: 2003079447619129941}
+  - {fileID: 1346638848062879237}
 --- !u!1 &20478871
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +628,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47002681}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2403,8 +2403,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-08_14-38-51
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-08_14-38-51
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-08_17-58-26
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-08_17-58-26
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2418,8 +2418,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fileName: name_age_sex_tennis-exp_vr-exp_metadata.json
-  taskManager: {fileID: 1076347914}
-  ballSpawner: {fileID: 2094281208}
+  taskManager: {fileID: 660574638}
+  ballSpawner: {fileID: 1787883655}
   ball: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
   racketCollider: {fileID: 3329892996646116251}
   ballPhysXMaterial: {fileID: 13400000, guid: b558220af477b2f4892404acd79394ba, type: 2}
@@ -3827,7 +3827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HandType: 1
   _pointerPoseRoot: {fileID: 0}
-  m_showState: 0
+  m_showState: 3
   RayHelper: {fileID: 0}
 --- !u!114 &445923866
 MonoBehaviour:
@@ -5543,7 +5543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &660574637
 Transform:
   m_ObjectHideFlags: 0
@@ -8238,6 +8238,21 @@ MonoBehaviour:
   randomizeRotation: 0
   deactivateOnReturn: 0
   gizmoColor: {r: 0, g: 0, b: 0, a: 0}
+  onTargetSelection:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 984377533}
+        m_TargetAssemblyTypeName: TargetTrackingBhv, Assembly-CSharp
+        m_MethodName: ReparentToCurrentTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &847487813
 GameObject:
   m_ObjectHideFlags: 0
@@ -9428,15 +9443,6 @@ MonoBehaviour:
   rigidBodyLabel: 4
   _rigidbodyId: 4
   networkCompensation: 1
-  _rawPosition: {x: 0, y: 0, z: 0}
-  _rawRotation: {x: 0, y: 0, z: 0, w: 0}
-  _rawLinearVelocity: {x: 0, y: 0, z: 0}
-  _rawAngularVelocity: {x: 0, y: 0, z: 0}
-  smoothingTimeConstant: 0.01
-  _smoothPosition: {x: 0, y: 0, z: 0}
-  _smoothRotation: {x: 0, y: 0, z: 0, w: 0}
-  _smoothLinearVelocity: {x: 0, y: 0, z: 0}
-  _smoothAngularVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &980353199
 GameObject:
   m_ObjectHideFlags: 0
@@ -10193,7 +10199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1076347914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13618,6 +13624,9 @@ MonoBehaviour:
   randomizeRotation: 0
   deactivateOnReturn: 1
   gizmoColor: {r: 0, g: 0, b: 0, a: 0}
+  onTargetSelection:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1273085065
 Transform:
   m_ObjectHideFlags: 0
@@ -14723,6 +14732,21 @@ MonoBehaviour:
   randomizeRotation: 1
   deactivateOnReturn: 0
   gizmoColor: {r: 1, g: 0.07843115, b: 0.57647055, a: 1}
+  onTargetSelection:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 984377533}
+        m_TargetAssemblyTypeName: TargetTrackingBhv, Assembly-CSharp
+        m_MethodName: ReparentToCurrentTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1469942928
 GameObject:
   m_ObjectHideFlags: 0
@@ -16649,6 +16673,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf408a6ca5813f429d0f17378882667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothingTimeConstant: 0.01
+  alpha: 0.5
+  beta: 0.05
+  _rawLinearVelocity: {x: 0, y: 0, z: 0}
+  _rawAngularVelocity: {x: 0, y: 0, z: 0}
+  _smoothLinearVelocity: {x: 0, y: 0, z: 0}
+  _smoothAngularVelocity: {x: 0, y: 0, z: 0}
+  _kalmanPosition: {x: 0, y: 0, z: 0}
+  _kalmanLinearVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1742962498
 GameObject:
   m_ObjectHideFlags: 0
@@ -17222,7 +17255,7 @@ MonoBehaviour:
   _lutWeight: 1
   _flipLutY: 1
   serializedSurfaceGeometry: []
-  textureOpacity_: 0.25
+  textureOpacity_: 0.15
   edgeRenderingEnabled_: 0
   edgeColor_: {r: 0, g: 0, b: 0, a: 1}
   colorMapType: 0
@@ -18475,6 +18508,21 @@ MonoBehaviour:
   randomizeRotation: 0
   deactivateOnReturn: 1
   gizmoColor: {r: 0, g: 0, b: 0, a: 0}
+  onTargetSelection:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 984377533}
+        m_TargetAssemblyTypeName: TargetTrackingBhv, Assembly-CSharp
+        m_MethodName: ReparentToCurrentTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1913648122
 GameObject:
   m_ObjectHideFlags: 0
@@ -19938,7 +19986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HandType: 0
   _pointerPoseRoot: {fileID: 0}
-  m_showState: 0
+  m_showState: 3
   RayHelper: {fileID: 0}
 --- !u!114 &2046919131
 MonoBehaviour:
@@ -20225,7 +20273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetFrameRate: 90
-  targetPhysicsRate: 500
+  targetPhysicsRate: 250
   timeScale: 1
   _hasStartedQuitting: 0
 --- !u!1 &2094281206
@@ -21096,7 +21144,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   refractoryPeriod: 0.05
-  displayAsMesh: 1
+  displayAsMesh: 0
 --- !u!4 &3412188825629777220
 Transform:
   m_ObjectHideFlags: 0
@@ -21347,15 +21395,6 @@ MonoBehaviour:
   rigidBodyLabel: 3
   _rigidbodyId: 3
   networkCompensation: 1
-  _rawPosition: {x: 0, y: 0, z: 0}
-  _rawRotation: {x: 0, y: 0, z: 0, w: 0}
-  _rawLinearVelocity: {x: 0, y: 0, z: 0}
-  _rawAngularVelocity: {x: 0, y: 0, z: 0}
-  smoothingTimeConstant: 0.01
-  _smoothPosition: {x: 0, y: 0, z: 0}
-  _smoothRotation: {x: 0, y: 0, z: 0, w: 0}
-  _smoothLinearVelocity: {x: 0, y: 0, z: 0}
-  _smoothAngularVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &5270873625885880312
 GameObject:
   m_ObjectHideFlags: 0

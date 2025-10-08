@@ -1,11 +1,9 @@
-using UnityEngine;
 using System;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class TargetSelectionBhv : CachedTransformBhv
 {
-    // Static fields
-    public static Action<TargetBhv> onTargetSelection;
-
     // Public fields
     [Range(0, 25f)]
     public float spawnRadius = 0.5f;
@@ -13,6 +11,7 @@ public class TargetSelectionBhv : CachedTransformBhv
     public bool randomizeRotation = true;
     public bool deactivateOnReturn = false;
     public Color gizmoColor;
+    public UnityEvent<TargetBhv> onTargetSelection = new UnityEvent<TargetBhv>();
 
     // Private fields
     private ObjectPool<TargetBhv> _targetPool;

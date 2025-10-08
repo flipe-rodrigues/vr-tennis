@@ -27,6 +27,11 @@ public class RacketColliderBhv : MonoBehaviour
     private MeshRenderer _meshRenderer;
     private Vector3 _contactNormal;
 
+    private void OnValidate()
+    {
+        this.GetComponentInChildren<MeshRenderer>().enabled = displayAsMesh;
+    }
+
     private void Awake()
     {
         _racketBhv = this.GetComponentInParent<RacketBhv>();
@@ -51,11 +56,6 @@ public class RacketColliderBhv : MonoBehaviour
 
     private void HandleImpendingHit()
     {
-        if (TennisManager.Instance.Ball.WasJustHit)
-        {
-            return;
-        }
-
         this.UpdateContactNormal();
 
         if (Vector3.Dot(_contactNormal, TennisManager.Instance.RelativePosition) < 0)
