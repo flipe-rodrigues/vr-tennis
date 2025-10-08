@@ -1,0 +1,6 @@
+stage,trial,time,position.x,position.y,position.z,rotation.x,rotation.y,rotation.z,rotation.w,event
+1,1,0.002,-1,0.001,14.5,0,0,0,1,TrialStart
+1,1,0.006,-1,0.001,14.5,0,0,0,1,
+1,1,0.01,-1,0.001,14.5,0,0,0,1,
+1,1,0.014,-1,0.001,14.5,0,0,0,1,
+1,1,0.018,-1,0.001,14.5,0,0,0,1,

@@ -14,7 +14,7 @@ public class MetadataSnapshotBhv : MonoBehaviour
     public TaskManager taskManager;
     public BallLaunchBhv ballSpawner;
     public BallBhv ball;
-    public RacketBhv racket;
+    public RacketColliderBhv racketCollider;
 
     [Header("Physics Materials")]
     public PhysicsMaterial ballPhysXMaterial;
@@ -30,7 +30,6 @@ public class MetadataSnapshotBhv : MonoBehaviour
 
         taskManager = TaskManager.Instance;
         ballSpawner = FindFirstObjectByType<BallLaunchBhv>();
-        racket = TennisManager.Instance.Racket;
     }
 
     private void Awake()
@@ -53,7 +52,7 @@ public class MetadataSnapshotBhv : MonoBehaviour
         List<MonoBehaviour> components = new List<MonoBehaviour>
         {
             ball,
-            racket,
+            racketCollider,
             ballSpawner,
             taskManager
         };

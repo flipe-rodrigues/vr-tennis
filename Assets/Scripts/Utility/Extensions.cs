@@ -71,9 +71,9 @@ public static class Extensions
         return color;
     }
 
-    public static float TauToLambda(this float tau)
+    public static float TauToLambda(this float tau, float dt)
     {
-        return 1f - Mathf.Exp(-Time.fixedDeltaTime / tau);
+        return 1f - Mathf.Exp(-dt / tau);
     }
 
     public static void WriteTrackingDatum(this BinaryWriter writer, TrackingDatum datum)
