@@ -21,6 +21,7 @@ public class RacketColliderBhv : CachedTransformBhv
     public float refractoryPeriod = 0.05f;
     public bool displayAsMesh;
     [Header("Dynamic Rescaling Settings:")]
+    public Transform debugger;
     public Vector3 scaleModifier = Vector3.one;
     [Range(1, 10)]
     public float maxScaleFactor = 5f;
@@ -64,6 +65,7 @@ public class RacketColliderBhv : CachedTransformBhv
         Vector3 localVelocity = this.Transform.InverseTransformDirection(_racketBhv.LinearVelocity);
         Vector3 deltaScale = localVelocity.ElementWiseMultiplication(scaleModifier).Abs();
         _collider.size = (_defaultScale + deltaScale).ClampBetween(_defaultScale, _defaultScale * maxScaleFactor);
+        debugger.localScale = _collider.size;
     }
 
     private void OnTriggerEnter(Collider other)
