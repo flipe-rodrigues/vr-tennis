@@ -78,7 +78,7 @@ public class TaskManager : Singleton<TaskManager>
 
         if (Time.time - _lastTrialStartTime >= _interTrialInterval)
         {
-            //if (_stageIndex == 3)
+            if (_stageIndex == 3)
                 this.StartNextTrial();
         }
 

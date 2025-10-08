@@ -6,14 +6,82 @@ public class RacketBhv : MonoBehaviour
     // Public properties
     public RacketMeshBhv Mesh => _mesh;
     public Vector3 Forward => _transform.forward;
-    public Vector3 Position => _kalmanPosition;
-    public Vector3 LinearVelocity => _kalmanLinearVelocity;
-    public Vector3 AngularVelocity => _smoothAngularVelocity;
+    public Vector3 Position
+    {
+        get
+        {
+            switch (positionPreprocessing)
+            {
+                case KinematicPreprocessingType.ExponentialSmoothing:
+                    return _smoothPosition;
+                case KinematicPreprocessingType.KalmanFilter:
+                    return _kalmanPosition;
+                case KinematicPreprocessingType.None:
+                default:
+                    return optitrackRigidbody.CurrentPosition;
+            }
+        }
+    }
+    public Quaternion Rotation 
+    {
+        get
+        {
+            switch (rotationPreprocessing)
+            {
+                case KinematicPreprocessingType.ExponentialSmoothing:
+                    return _smoothRotation;
+                case KinematicPreprocessingType.None:
+                default:
+                    return optitrackRigidbody.CurrentRotation;
+            }
+        }
+    }
+    public Vector3 LinearVelocity
+    {
+        get
+        {
+            switch (linearVelocityPreprocessing)
+            {
+                case KinematicPreprocessingType.ExponentialSmoothing:
+                    return _smoothLinearVelocity;
+                case KinematicPreprocessingType.KalmanFilter:
+                    return _kalmanLinearVelocity;
+                case KinematicPreprocessingType.None:
+                default:
+                    return _rawLinearVelocity;
+            }
+        }
+    }
+    public Vector3 AngularVelocity 
+    {
+        get
+        {
+            switch (angularVelocityPreprocessing)
+            {
+                case KinematicPreprocessingType.ExponentialSmoothing:
+                    return _smoothAngularVelocity;
+                case KinematicPreprocessingType.None:
+                default:
+                    return _rawAngularVelocity;
+            }
+        }
+    }
 
     // Public fields
+    [Header("Tracking Data Source:")]
+    public OptitrackRigidBody optitrackRigidbody;
+    [Header("Preprocessing Settings:")]
+    public KinematicPreprocessingType positionPreprocessing = KinematicPreprocessingType.KalmanFilter;
+    public KinematicPreprocessingType rotationPreprocessing = KinematicPreprocessingType.None;
+    public KinematicPreprocessingType linearVelocityPreprocessing = KinematicPreprocessingType.KalmanFilter;
+    public KinematicPreprocessingType angularVelocityPreprocessing = KinematicPreprocessingType.ExponentialSmoothing;
     [Header("Temporal Smoothing Settings:")]
-    [Range(0.001f, 1f)]
+    [Range(0.001f, .25f)]
     public float smoothingTimeConstant = 0.01f;
+    [SerializeField, ReadOnly]
+    private float _suggestedAlpha;
+    [SerializeField, ReadOnly]
+    private float _suggestedBeta;
     [Header("Kalman Filter Settings:")]
     [Range(0f, 1f)]
     public float alpha = 0.5f;
@@ -21,10 +89,15 @@ public class RacketBhv : MonoBehaviour
     public float beta = 0.05f;
 
     // Readonly fields
+    [Header("Debugging:")]
     [SerializeField, ReadOnly]
     private Vector3 _rawLinearVelocity;
     [SerializeField, ReadOnly]
     private Vector3 _rawAngularVelocity;
+    [SerializeField, ReadOnly]
+    private Vector3 _smoothPosition;
+    [SerializeField, ReadOnly]
+    private Quaternion _smoothRotation;
     [SerializeField, ReadOnly]
     private Vector3 _smoothLinearVelocity;
     [SerializeField, ReadOnly]
@@ -35,7 +108,6 @@ public class RacketBhv : MonoBehaviour
     private Vector3 _kalmanLinearVelocity;
 
     // Private fields
-    private OptitrackRigidBody _optitrackRigidbody;
     private Transform _transform;
     private RacketColliderBhv _collider;
     private RacketMeshBhv _mesh;
@@ -44,11 +116,11 @@ public class RacketBhv : MonoBehaviour
     private void OnValidate()
     {
         _smoothingRate = smoothingTimeConstant.TauToLambda(Time.fixedDeltaTime);
+        smoothingTimeConstant.AlphaBetaFromTau(Time.fixedDeltaTime, out _suggestedAlpha, out _suggestedBeta);
     }
 
     private void Awake()
     {
-        _optitrackRigidbody = this.GetComponentInParent<OptitrackRigidBody>();
         _transform = this.GetComponent<Transform>();
         _collider = this.GetComponentInChildren<RacketColliderBhv>();
         _mesh = this.GetComponentInChildren<RacketMeshBhv>();
@@ -62,20 +134,28 @@ public class RacketBhv : MonoBehaviour
         this.ApplyKalmanFilter();
     }
 
+    private void LateUpdate()
+    {
+        _transform.position = this.Position;
+        _transform.rotation = this.Rotation;
+    }
+
     private void UpdateLinearVelocity()
     {
-        _rawLinearVelocity = (_optitrackRigidbody.CurrentPosition - _optitrackRigidbody.PreviousPosition) / Time.fixedDeltaTime;
+        _rawLinearVelocity = (optitrackRigidbody.CurrentPosition - optitrackRigidbody.PreviousPosition) / Time.fixedDeltaTime;
     }
 
     private void UpdateAngularVelocity()
     {
-        Quaternion deltaRawRotation = _optitrackRigidbody.CurrentRotation * Quaternion.Inverse(_optitrackRigidbody.PreviousRotation);
+        Quaternion deltaRawRotation = optitrackRigidbody.CurrentRotation * Quaternion.Inverse(optitrackRigidbody.PreviousRotation);
         deltaRawRotation.ToAngleAxis(out float angleInDegrees, out Vector3 axis);
         _rawAngularVelocity = axis * (angleInDegrees * Mathf.Deg2Rad) / Time.fixedDeltaTime;
     }
 
     private void ApplySmoothing()
     {
+        _smoothPosition = Vector3.Lerp(_smoothPosition, optitrackRigidbody.CurrentPosition, _smoothingRate);
+        _smoothRotation = Quaternion.Slerp(_smoothRotation, optitrackRigidbody.CurrentRotation, _smoothingRate);
         _smoothLinearVelocity = Vector3.Lerp(_smoothLinearVelocity, _rawLinearVelocity, _smoothingRate);
         _smoothAngularVelocity = Vector3.Lerp(_smoothAngularVelocity, _rawAngularVelocity, _smoothingRate);
     }
@@ -85,7 +165,7 @@ public class RacketBhv : MonoBehaviour
         float dt = Time.fixedDeltaTime;
 
         Vector3 predictedPosition = _kalmanPosition + _kalmanLinearVelocity * dt;
-        Vector3 residualPosition = _optitrackRigidbody.CurrentPosition - predictedPosition;
+        Vector3 residualPosition = optitrackRigidbody.CurrentPosition - predictedPosition;
         _kalmanPosition = predictedPosition + alpha * residualPosition;
 
         Vector3 predictedLinearVelocity = _kalmanLinearVelocity;

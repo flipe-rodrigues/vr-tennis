@@ -3,34 +3,36 @@ using UnityEngine.Events;
 using System.Collections;
 
 [RequireComponent(typeof(Collider))]
-public class RacketColliderBhv : CachedTransformBhv
+public class RacketColliderBhv : MonoBehaviour
 {
     // Public properties
     public Vector3 ContactNormal => _contactNormal;
 
     // Public fields
-    [Header("Bounce settings:")]
+    [Header("Bounce Settings:")]
     public float apparentNormalRestitution = .4f;
     public float apparentTangentialRestitution = .65f;
     public float apparentSpinRestitution = .4f;
     public float spinToTangentialConversion = .3f;
-    public float tangentialToSpinConversion = .58f; 
-    public UnityEvent<float> onRacketHit = new UnityEvent<float>();
+    public float tangentialToSpinConversion = .58f;
+    public UnityEvent<float> onRacketBounce = new UnityEvent<float>();
     [Header("Refractory Period Settings:")]
     [Min(0f)]
     public float refractoryPeriod = 0.05f;
-    public bool displayAsMesh;
     [Header("Dynamic Rescaling Settings:")]
-    public Transform debugger;
     public Vector3 scaleModifier = Vector3.one;
     [Range(1, 10)]
     public float maxScaleFactor = 5f;
     public bool rescaleDynamically;
+    [Header("Debugging:")]
+    public bool displayAsMesh;
 
     // Private fields
     private RacketBhv _racketBhv;
+    private Transform _transform;
     private BoxCollider _collider;
     private MeshRenderer _meshRenderer;
+    private Transform _meshTransform;
     private Vector3 _contactNormal;
     private Vector3 _defaultScale;
 
@@ -39,14 +41,15 @@ public class RacketColliderBhv : CachedTransformBhv
         this.GetComponentInChildren<MeshRenderer>().enabled = displayAsMesh;
     }
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
         _racketBhv = this.GetComponentInParent<RacketBhv>();
-        _collider = GetComponent<BoxCollider>();
-        _meshRenderer = GetComponentInChildren<MeshRenderer>();
+        _transform = this.GetComponent<Transform>();
+        _collider = this.GetComponent<BoxCollider>();
+        _meshRenderer = this.GetComponentInChildren<MeshRenderer>();
+        _meshTransform = _meshRenderer.GetComponent<Transform>();
     }
+
     private void Start()
     {
         _defaultScale = _collider.size;
@@ -62,43 +65,37 @@ public class RacketColliderBhv : CachedTransformBhv
 
     private void RescaleColliderDynamically()
     {
-        Vector3 localVelocity = this.Transform.InverseTransformDirection(_racketBhv.LinearVelocity);
+        Vector3 localVelocity = _transform.InverseTransformDirection(_racketBhv.LinearVelocity);
         Vector3 deltaScale = localVelocity.ElementWiseMultiplication(scaleModifier).Abs();
         _collider.size = (_defaultScale + deltaScale).ClampBetween(_defaultScale, _defaultScale * maxScaleFactor);
-        debugger.localScale = _collider.size;
+        _meshTransform.localScale = _collider.size;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        this.HandleImpendingHit();
+        this.HandleImpendingBounce();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        this.HandleImpendingHit();
+        this.HandleImpendingBounce();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        this.HandleImpendingHit();
+        this.HandleImpendingBounce();
     }
 
-    private void HandleImpendingHit()
+    private void HandleImpendingBounce()
     {
         this.UpdateContactNormal();
 
         if (Vector3.Dot(_contactNormal, TennisManager.Instance.RelativePosition) < 0)
         {
             this.StartRefractoryPeriod();
-
-            float relativeSpeed = TennisManager.Instance.RelativeVelocity.magnitude;
-
-            this.Hit(TennisManager.Instance.Ball);
-
-            onRacketHit?.Invoke(relativeSpeed);
-
+            this.Bounce(TennisManager.Instance.Ball);
+            onRacketBounce?.Invoke(TennisManager.Instance.RelativeVelocity.magnitude);
             TennisManager.Instance.Ball.WasJustHit = true;
-
             TrackingManager.Instance.RecordTaskEvent(TaskEventType.RacketHit);
         }
     }
@@ -108,7 +105,7 @@ public class RacketColliderBhv : CachedTransformBhv
         _contactNormal = (_racketBhv.Forward * Vector3.Dot(_racketBhv.Forward, TennisManager.Instance.RelativeVelocity)).normalized;
     }
 
-    private void Hit(BallBhv ball)
+    private void Bounce(BallBhv ball)
     {
         // Following Cross 2005
         Vector3 v_racket_i = this.GetVelocityAtContactPoint();
@@ -118,7 +115,6 @@ public class RacketColliderBhv : CachedTransformBhv
         // Separate initial velocity into normal and tangential components
         Vector3 v_ball_normal_i = Vector3.Project(v_ball_i, _contactNormal);
         Vector3 v_ball_tangential_i = v_ball_i - v_ball_normal_i;
-
         Vector3 v_racket_normal_i = Vector3.Project(v_racket_i, _contactNormal);
         Vector3 v_racket_tangential_i = v_racket_i - v_racket_normal_i;
 

@@ -76,6 +76,13 @@ public static class Extensions
         return 1f - Mathf.Exp(-dt / tau);
     }
 
+    public static void AlphaBetaFromTau(this float tau, float dt, out float alpha, out float beta)
+    {
+        alpha = 2f * (dt / (tau + dt));
+        alpha = Mathf.Clamp01(alpha);
+        beta = (alpha * alpha) * 0.25f;
+    }
+
     public static void WriteTrackingDatum(this BinaryWriter writer, TrackingDatum datum)
     {
         writer.Write(datum.stage);
