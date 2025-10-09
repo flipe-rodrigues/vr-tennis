@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8548316269815612202}
   - component: {fileID: 3625561273425512608}
   - component: {fileID: 2191237773541037009}
-  - component: {fileID: 41824784035801617}
   - component: {fileID: 4308758073793666640}
+  - component: {fileID: 41824784035801617}
   - component: {fileID: 1088370854049143318}
   - component: {fileID: 2204383418758018390}
   m_Layer: 0
@@ -91,6 +91,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4308758073793666640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3205325836179416467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554d9c9576a3069469595bf75c25ac9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: 0, y: 1, z: -2.5}
+  _rotation: {x: -0, y: 0, z: 0}
+  _scale: {x: 0.05, y: 0.05, z: 0.05}
+  hitColor: {r: 0, g: 1, b: 0.75, a: 1}
+  hitDelay: 0.1
+  resetDelay: 1
+  disableOnHit: 0
+  duration: 10
+  maximumDistance: 0.5
+  _durationTimer:
+    duration: Infinity
+    _startTime: 0
+    _isRunning: 0
+  _normalizedDistance: 0
 --- !u!114 &41824784035801617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,29 +156,6 @@ MonoBehaviour:
   - amplitude: 0.73
     frequency: 2.05
     phase: {x: 1.9923317, y: -0.23185086, z: 0.839605}
---- !u!114 &4308758073793666640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3205325836179416467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 554d9c9576a3069469595bf75c25ac9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FollowTargetBhv
-  _position: {x: 0, y: 1, z: -2.5}
-  _rotation: {x: -0, y: 0, z: 0}
-  _scale: {x: 0.05, y: 0.05, z: 0.05}
-  acquisitionColor: {r: 0, g: 0.9913309, b: 0.8000555, a: 1}
-  acquisitionDelay: 0.1
-  resetDelay: 1
-  onTargetAcquired:
-    m_PersistentCalls:
-      m_Calls: []
-  maximumDistance: 0.5
-  _normalizedDistance: 0
 --- !u!108 &1088370854049143318
 Light:
   m_ObjectHideFlags: 0

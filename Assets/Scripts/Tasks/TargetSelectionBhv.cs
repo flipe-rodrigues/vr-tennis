@@ -4,18 +4,47 @@ using UnityEngine.Events;
 
 public class TargetSelectionBhv : CachedTransformBhv
 {
+    // Static fields
+    //public static event Action onTargetSelection;
+
     // Public fields
     [Range(0, 25f)]
     public float spawnRadius = 0.5f;
     public bool randomizePosition = true;
     public bool randomizeRotation = true;
-    public bool deactivateOnReturn = false;
     public Color gizmoColor;
     public UnityEvent<TargetBhv> onTargetSelection = new UnityEvent<TargetBhv>();
 
     // Private fields
     private ObjectPool<TargetBhv> _targetPool;
     private TargetBhv _currentTarget;
+
+    private void OnEnable()
+    {
+        TaskManager.onTrialStart += this.HandleTrialStart;
+        TargetBhv.onTargetExpired += this.DeselectTarget;
+    }
+
+    private void OnDisable()
+    {
+        TaskManager.onTrialStart -= this.HandleTrialStart;
+        TargetBhv.onTargetExpired -= this.DeselectTarget;
+    }
+
+    private void HandleTrialStart()
+    {
+        if (_targetPool == null)
+        {
+            return;
+        }
+
+        if (_currentTarget != null && _currentTarget.Active == true)
+        {
+            this.DeselectTarget(_currentTarget);
+        }
+
+        this.SelectTarget();
+    }
 
     protected override void Awake()
     {
@@ -31,33 +60,13 @@ public class TargetSelectionBhv : CachedTransformBhv
         _targetPool = new ObjectPool<TargetBhv>(targets);
     }
 
-    private void OnEnable()
+    private void DeselectTarget(TargetBhv target)
     {
-        TaskManager.onTrialStart += this.HandleTrialStart;
-    }
-
-    private void OnDisable()
-    {
-        TaskManager.onTrialStart -= this.HandleTrialStart;
-    }
-
-    private void HandleTrialStart()
-    {
-        if (_targetPool == null)
-        {
-            return;
-        }
-
-        this.SelectTarget();
+        _targetPool.Return(target, deactivate: true);
     }
 
     private void SelectTarget()
     {
-        if (_currentTarget != null)
-        {
-            _targetPool.Return(_currentTarget, deactivate: deactivateOnReturn);
-        }
-
         _currentTarget = _targetPool.GetRandom();
 
         if (randomizePosition)

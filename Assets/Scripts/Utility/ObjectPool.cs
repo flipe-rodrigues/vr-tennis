@@ -71,7 +71,10 @@ public class ObjectPool<T> where T : CachedGameObjectBhv
 
     public void Return(T obj, bool deactivate = true)
     {
-        obj.Active = !deactivate;
+        if (deactivate)
+        {
+            obj.Deactivate();
+        }
 
         _pool.Enqueue(obj);
     }

@@ -36,6 +36,21 @@ public class TennisManager : Singleton<TennisManager>
     [SerializeField, ReadOnly]
     private RacketBhv _racket;
 
+    private void OnEnable()
+    {
+        BallLaunchBhv.onBallLaunch += this.HandleBallLaunch;
+    }
+
+    private void OnDisable()
+    {
+        BallLaunchBhv.onBallLaunch -= this.HandleBallLaunch;
+    }
+
+    private void HandleBallLaunch(BallBhv ball)
+    {
+        this.Ball = ball;
+    }
+
     protected override void OnValidate()
     {
         base.OnValidate();

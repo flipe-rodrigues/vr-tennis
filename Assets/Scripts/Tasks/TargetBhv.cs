@@ -7,6 +7,7 @@ public class TargetBhv : CachedTransformBhv
 {
     // Static fields
     public static event Action<TargetBhv> onTargetHit;
+    public static event Action<TargetBhv> onTargetExpired;
 
     // Public properties
     public MeshRenderer MeshRenderer => _meshRenderer;
@@ -18,7 +19,13 @@ public class TargetBhv : CachedTransformBhv
     public float hitDelay = 0.1f;
     [Range(.01f, 5f)]
     public float resetDelay = 1f;
+    [Min(0)]
+    public float expirationDelay = 10;
     public bool disableOnHit = true;
+
+    // Readonly fields
+    [SerializeField, ReadOnly]
+    private Timer _expirationTimer;
 
     // Private fields
     private MeshRenderer _meshRenderer;
@@ -36,6 +43,21 @@ public class TargetBhv : CachedTransformBhv
         _defaultColor = _material.color;
     }
 
+    protected virtual void Start()
+    {
+        _expirationTimer = new Timer(expirationDelay);
+        _expirationTimer.Start();
+    }
+
+    private void LateUpdate()
+    {
+        if (_expirationTimer.IsExpired)
+        {
+            this.Expire();
+            _expirationTimer.Stop();
+        }
+    }
+
     public void Restart()
     {
         this.SetColor(Color.clear);
@@ -45,7 +67,7 @@ public class TargetBhv : CachedTransformBhv
     private void SetColor(Color color)
     {
         _material.color = color;
-        _light.color = color;
+        _light.color = color.SetAlpha(1f);
     }
 
     public void ColorLerp(float t)
@@ -56,7 +78,7 @@ public class TargetBhv : CachedTransformBhv
     public void TryHit()
     {
         StopAllCoroutines();
-        StartCoroutine(this.HitCoroutine());
+        StartCoroutine(this.TryHitCoroutine());
     }
 
     public void Reset()
@@ -65,7 +87,17 @@ public class TargetBhv : CachedTransformBhv
         StartCoroutine(this.FadeToCoroutine(_defaultColor, resetDelay));
     }
 
-    private IEnumerator HitCoroutine()
+    public override void Deactivate()
+    {
+        this.SlowDeactivate();
+    }
+
+    public void SlowDeactivate()
+    {
+        StartCoroutine(this.SlowDeactivateCoroutine());
+    }
+
+    private IEnumerator TryHitCoroutine()
     {
         yield return FadeToCoroutine(hitColor, hitDelay);
         this.Hit();
@@ -73,10 +105,24 @@ public class TargetBhv : CachedTransformBhv
         this.Active = !disableOnHit;
     }
 
+    private IEnumerator SlowDeactivateCoroutine()
+    {
+        yield return FadeToCoroutine(Color.clear, resetDelay);
+        this.Active = false;
+    }
+
     private void Hit()
     {
         onTargetHit?.Invoke(this);
+
         TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetHit);
+    }
+
+    private void Expire()
+    {
+        onTargetExpired?.Invoke(this);
+
+        TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetExpired);
     }
 
     private IEnumerator FadeToCoroutine(Color finalColor, float duration)

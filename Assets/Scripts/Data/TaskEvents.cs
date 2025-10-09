@@ -12,9 +12,11 @@ public enum TaskEventType
     NetExit,
     TargetEnter,
     TargetHit,
+    TargetExpired,
     TargetExit,
     RacketHit,
     BallOutOfPlay,
+    ITIOnset,
 }
 
 public static class TaskEvents
@@ -31,9 +33,11 @@ public static class TaskEvents
         { TaskEventType.NetExit, "NetExit" },
         { TaskEventType.TargetEnter, "TargetEnter" },
         { TaskEventType.TargetHit, "TargetHit" },
+        { TaskEventType.TargetExpired, "TargetExpired" },
         { TaskEventType.TargetExit, "TargetExit" },
         { TaskEventType.RacketHit, "RacketHit" },
         { TaskEventType.BallOutOfPlay, "BallOutOfPlay" },
+        { TaskEventType.ITIOnset, "ITIOnset" },
     };
 
     public static int GetCode(this TaskEventType eventType)

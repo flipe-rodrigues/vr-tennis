@@ -5032,28 +5032,19 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddd20eaedecd7054bbc4c49d27e0aeae, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CourtTargetBhv
+  m_EditorClassIdentifier: 
   _position: {x: 0, y: 0.001, z: 0}
   _rotation: {x: -0, y: 0, z: 0}
   _scale: {x: 0.3, y: 0.099999994, z: 0.3}
-  acquisitionColor: {r: 0, g: 0.9913309, b: 0.8000555, a: 1}
-  acquisitionDelay: 0.1
+  hitColor: {r: 0, g: 1, b: 0.75, a: 1}
+  hitDelay: 0.1
   resetDelay: 1
-  onTargetAcquired:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3494764775948913599}
-        m_TargetAssemblyTypeName: AudioFeedbackBhv, Assembly-CSharp
-        m_MethodName: PlayClipAtPoint
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  expirationDelay: Infinity
+  disableOnHit: 0
+  _expirationTimer:
+    duration: Infinity
+    _startTime: 0
+    _isRunning: 0
 --- !u!114 &3494764775948913599
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,12 @@ public class Timer
     [SerializeField, ReadOnly]
     private bool _isRunning;
 
+    public Timer()
+    {
+        this.duration = Mathf.Infinity;
+        _isRunning = false;
+    }
+
     public Timer(float duration)
     {
         this.duration = duration;

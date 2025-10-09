@@ -3,14 +3,10 @@ using UnityEngine;
 public class PursuitTargetBhv : TargetBhv
 {
     // Public fields
-    [Min(0)]
-    public float duration = 10;
     [Range(0, 1)]
     public float maximumDistance = .5f;
 
     // Readonly fields
-    [SerializeField, ReadOnly]
-    private Timer _durationTimer;
     [SerializeField, ReadOnly, Range(0, 1)]
     private float _normalizedDistance;
 
@@ -26,12 +22,6 @@ public class PursuitTargetBhv : TargetBhv
         _particlesMainModule = _particleSystem.main;
     }
 
-    private void Start()
-    {
-        _durationTimer = new Timer(duration);
-        _durationTimer.Start();
-    }
-
     private void Update()
     {
         float distance = Vector3.Distance(this.Position, TennisManager.Instance.Racket.Position);
@@ -39,11 +29,5 @@ public class PursuitTargetBhv : TargetBhv
         base.ColorLerp(1.0f - _normalizedDistance);
 
         _particlesMainModule.startColor = base.MeshRenderer.material.color;
-
-        if (_durationTimer.IsExpired)
-        {
-            this.TryHit();
-            _durationTimer.Stop();
-        }
     }
 }

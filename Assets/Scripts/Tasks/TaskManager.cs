@@ -22,11 +22,11 @@ public class TaskManager : Singleton<TaskManager>
 
     // Public fields
     public List<TaskStage> stages;
-    public TruncatedExponentialDistribution ITIDistribution = new TruncatedExponentialDistribution(3, 4, 9);
+    public TruncatedExponentialDistribution ITIDistribution = new TruncatedExponentialDistribution(1, 2, 4);
 
     // Readonly fields
     [SerializeField, ReadOnly]
-    private Timer _ITITimer;
+    private Timer _ITITimer = new Timer();
     [SerializeField, ReadOnly]
     private int _stageIndex = 0;
     [SerializeField, ReadOnly]
@@ -41,17 +41,23 @@ public class TaskManager : Singleton<TaskManager>
     private void OnEnable()
     {
         TargetBhv.onTargetHit += HandleTargetHit;
-        BallBhv.onBallOutOfPlay += HandleBallSecondBounce;
+        TargetBhv.onTargetExpired += HandleTargetExpired;
+        BallBhv.onBallOutOfPlay += HandleBallOutOfPlay;
     }
 
     private void HandleTargetHit(TargetBhv target)
     {
-        this.EndTrial();
+        this.StartInterTrialInterval();
     }
 
-    private void HandleBallSecondBounce(BallBhv ball)
+    private void HandleTargetExpired(TargetBhv target)
     {
-        this.EndTrial();
+        this.StartInterTrialInterval();
+    }
+
+    private void HandleBallOutOfPlay(BallBhv ball)
+    {
+        this.StartInterTrialInterval();
     }
 
     protected override void OnValidate()
@@ -74,7 +80,6 @@ public class TaskManager : Singleton<TaskManager>
         }
 
         _stageTransitionThresholds[stages.Count] = int.MaxValue;
-        _ITITimer = new Timer(ITIDistribution.mean);
     }
 
     private void FixedUpdate()
@@ -124,8 +129,10 @@ public class TaskManager : Singleton<TaskManager>
         TrackingManager.Instance.RecordTaskEvent(TaskEventType.TrialStart);
     }
 
-    private void EndTrial()
+    private void StartInterTrialInterval()
     {
         _ITITimer.Start();
+
+        TrackingManager.Instance.RecordTaskEvent(TaskEventType.ITIOnset);
     }
 }

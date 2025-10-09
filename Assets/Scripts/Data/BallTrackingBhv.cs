@@ -16,15 +16,14 @@ public class BallTrackingBhv : TrackingBhv
         BallLaunchBhv.onBallLaunch -= this.HandleBallLaunch;
     }
 
-    private void HandleBallLaunch()
+    private void HandleBallLaunch(BallBhv ball)
     {
-        this.ReparentToCurrentBall();
+        this.ReparentToCurrentBall(ball);
     }
 
-    private void ReparentToCurrentBall()
+    private void ReparentToCurrentBall(BallBhv ball)
     {
-        this.Transform.SetParent(TennisManager.Instance.Ball.Transform);
-
+        this.Transform.SetParent(ball.Transform);
         this.Transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
 }

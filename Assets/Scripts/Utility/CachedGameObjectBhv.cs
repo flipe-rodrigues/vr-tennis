@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class CachedGameObjectBhv : MonoBehaviour
 {
@@ -14,5 +15,10 @@ public class CachedGameObjectBhv : MonoBehaviour
     protected virtual void Awake()
     {
         _gameObject = this.GameObject;
+    }
+
+    public virtual void Deactivate()
+    {
+        this.Active = false;
     }
 }

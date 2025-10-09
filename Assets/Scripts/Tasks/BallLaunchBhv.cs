@@ -4,10 +4,11 @@ using System;
 public class BallLaunchBhv : CachedTransformBhv
 {
     // Static fields
-    public static Action onBallLaunch;
+    public static Action<BallBhv> onBallLaunch;
 
     // Public fields
     public BallBhv ballPrefab;
+    public TruncatedExponentialDistribution LaunchDelayDistribution = new TruncatedExponentialDistribution(1, 2, 4);
     [Range(0, 100)]
     public int ballPoolSize = 10;
     [Range(0, 100)]
@@ -16,6 +17,10 @@ public class BallLaunchBhv : CachedTransformBhv
     public float topSpin = 0f;
     [Range(-500, 500)]
     public float sideSpin = 0f;
+
+    // Readonly fields
+    [SerializeField, ReadOnly]
+    private Timer _launchTimer = new Timer();
 
     // Private fields
     private ObjectPool<BallBhv> _ballPool;
@@ -45,12 +50,17 @@ public class BallLaunchBhv : CachedTransformBhv
 
     private void HandleTrialStart()
     {
-        if (ballPrefab == null)
+        _launchTimer.duration = LaunchDelayDistribution.Sample();
+        _launchTimer.Start();
+    }
+
+    private void Update()
+    {
+        if (_launchTimer.IsExpired)
         {
-            return;
+            this.LaunchBall();
+            _launchTimer.Stop();
         }
-    
-        this.LaunchBall();
     }
 
     private void LaunchBall()
@@ -64,10 +74,8 @@ public class BallLaunchBhv : CachedTransformBhv
         _currentBall.SpawnAt(this.Position, this.Rotation);
         _currentBall.LinearVelocity = this.Forward * linearSpeed;
         _currentBall.AngularVelocity = this.Right * topSpin + this.Up * sideSpin;
+        onBallLaunch?.Invoke(_currentBall);
 
-        TennisManager.Instance.Ball = _currentBall;
-
-        onBallLaunch?.Invoke();
         TrackingManager.Instance.RecordTaskEvent(TaskEventType.BallLaunch);
     }
 }

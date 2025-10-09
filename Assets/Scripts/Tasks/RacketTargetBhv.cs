@@ -13,8 +13,10 @@ public class RacketTargetBhv : TargetBhv
     // Private fields
     private Timer _overlapTimer;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         _overlapTimer = new Timer(base.hitDelay);
     }
 
