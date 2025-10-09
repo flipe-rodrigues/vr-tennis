@@ -199,17 +199,18 @@ MonoBehaviour:
   samplingRate: 250
   _samplingInterval: 0.004
   _trackers:
-  - {fileID: 2003079447619129941}
-  - {fileID: 1361894310}
-  - {fileID: 1346638848062879237}
-  - {fileID: 5872129562439674650}
-  - {fileID: 1976230216}
-  - {fileID: 1324406917286027287}
   - {fileID: 7976822468721358775}
-  - {fileID: 984377533}
-  - {fileID: 445923867}
-  - {fileID: 2046919132}
+  - {fileID: 1334971607}
+  - {fileID: 1361894310}
+  - {fileID: 1324406917286027287}
   - {fileID: 7996239910057813932}
+  - {fileID: 920026025}
+  - {fileID: 1346638848062879237}
+  - {fileID: 2003079447619129941}
+  - {fileID: 575539740}
+  - {fileID: 5872129562439674650}
+  - {fileID: 984377533}
+  - {fileID: 911978360}
 --- !u!1 &20478871
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,38 +431,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 148652379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &30504219
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 30504220}
-  m_Layer: 0
-  m_Name: Dummy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &30504220
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30504219}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
-  m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 1334971604}
-  m_Father: {fileID: 5229257466296537834}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!1001 &45409214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2435,8 +2404,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-08_23-30-01
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-08_23-30-01
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-09_14-25-39
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-09_14-25-39
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3701,7 +3670,6 @@ GameObject:
   - component: {fileID: 445923862}
   - component: {fileID: 445923861}
   - component: {fileID: 445923860}
-  - component: {fileID: 445923867}
   m_Layer: 0
   m_Name: '[BuildingBlock] Hand Tracking right'
   m_TagString: Untagged
@@ -3721,7 +3689,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 575539739}
   m_Father: {fileID: 1578927493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &445923860
@@ -3879,27 +3848,6 @@ MonoBehaviour:
   installationRoutineCheckpoint:
     _installationRoutineId: 
     _installationVariants: []
---- !u!114 &445923867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 445923858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _scale: {x: 0, y: 0, z: 0}
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  gizmoRadius: 0.025
-  gizmoSelectedAlpha: 0.75
-  gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_[buildingblock]-hand-tracking-right.bin
-  _isDoneSaving: 0
 --- !u!1 &452994625
 GameObject:
   m_ObjectHideFlags: 0
@@ -4847,6 +4795,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1497595294511456386, guid: 3961368eda036434f904d27e7a4a2940, type: 3}
   m_PrefabInstance: {fileID: 572403296}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &575539738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 575539739}
+  - component: {fileID: 575539740}
+  m_Layer: 0
+  m_Name: Right Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &575539739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575539738}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 445923859}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &575539740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575539738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  gizmoRadius: 0.025
+  gizmoSelectedAlpha: 0.75
+  gizmoIdleAlpha: 0.25
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_right-hand.bin
+  _isDoneSaving: 0
 --- !u!1 &582832357
 GameObject:
   m_ObjectHideFlags: 0
@@ -5575,7 +5576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &660574637
 Transform:
   m_ObjectHideFlags: 0
@@ -8809,6 +8810,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 694895441}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &911978358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 911978359}
+  - component: {fileID: 911978360}
+  m_Layer: 0
+  m_Name: HMD
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &911978359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911978358}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1976230212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &911978360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911978358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  gizmoRadius: 0.025
+  gizmoSelectedAlpha: 0.75
+  gizmoIdleAlpha: 0.25
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_hmd.bin
+  _isDoneSaving: 0
 --- !u!1 &913454726
 GameObject:
   m_ObjectHideFlags: 0
@@ -8902,6 +8956,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 148652379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &920026023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920026024}
+  - component: {fileID: 920026025}
+  m_Layer: 0
+  m_Name: Left Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &920026024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920026023}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2046919124}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &920026025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920026023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  gizmoRadius: 0.025
+  gizmoSelectedAlpha: 0.75
+  gizmoIdleAlpha: 0.25
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_left-hand.bin
+  _isDoneSaving: 0
 --- !u!1 &927494417
 GameObject:
   m_ObjectHideFlags: 0
@@ -9475,6 +9582,7 @@ MonoBehaviour:
   rigidBodyLabel: 4
   _rigidbodyId: 4
   networkCompensation: 1
+  useDedicatedCoroutine: 0
 --- !u!1 &980353199
 GameObject:
   m_ObjectHideFlags: 0
@@ -10231,7 +10339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1076347914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14088,8 +14196,9 @@ GameObject:
   - component: {fileID: 1334971604}
   - component: {fileID: 1334971606}
   - component: {fileID: 1334971605}
+  - component: {fileID: 1334971607}
   m_Layer: 6
-  m_Name: Mesh
+  m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14103,12 +14212,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334971603}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 30504220}
+  m_Father: {fileID: 5229257466296537834}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1334971605
 MeshRenderer:
@@ -14163,6 +14272,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334971603}
   m_Mesh: {fileID: -5523277661179574252, guid: 34424729ef5b0754da8c5be8281d7931, type: 3}
+--- !u!114 &1334971607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334971603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  _scale: {x: 0, y: 0, z: 0}
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  gizmoRadius: 0.025
+  gizmoSelectedAlpha: 0.75
+  gizmoIdleAlpha: 0.25
+  _binaryFilename: name_age_sex_tennis-exp_vr-exp_dummy.bin
+  _isDoneSaving: 0
 --- !u!1 &1343573423
 GameObject:
   m_ObjectHideFlags: 0
@@ -16815,7 +16945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741830059}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16836,13 +16966,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optitrackRigidbody: {fileID: 5229257466296537835}
-  positionPreprocessing: 1
+  positionPreprocessing: 0
   rotationPreprocessing: 0
-  linearVelocityPreprocessing: 1
-  angularVelocityPreprocessing: 2
+  linearVelocityPreprocessing: 0
+  angularVelocityPreprocessing: 0
   smoothingTimeConstant: 0.01
-  _suggestedAlpha: 0.5714286
-  _suggestedBeta: 0.08163266
+  _suggestedAlpha: 0.18181819
+  _suggestedBeta: 0.008264463
   alpha: 0.57
   beta: 0.08
   _rawLinearVelocity: {x: 0, y: 0, z: 0}
@@ -16851,8 +16981,8 @@ MonoBehaviour:
   _smoothRotation: {x: 0, y: 0, z: 0, w: 0}
   _smoothLinearVelocity: {x: 0, y: 0, z: 0}
   _smoothAngularVelocity: {x: 0, y: 0, z: 0}
-  _kalmanPosition: {x: 0, y: 0, z: 0}
-  _kalmanLinearVelocity: {x: 0, y: 0, z: 0}
+  _alphaBetaPosition: {x: 0, y: 0, z: 0}
+  _alphaBetaLinearVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1742962498
 GameObject:
   m_ObjectHideFlags: 0
@@ -18993,7 +19123,6 @@ GameObject:
   - component: {fileID: 1976230214}
   - component: {fileID: 1976230213}
   - component: {fileID: 1976230215}
-  - component: {fileID: 1976230216}
   m_Layer: 0
   m_Name: CenterEyeAnchor
   m_TagString: MainCamera
@@ -19013,7 +19142,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 911978359}
   m_Father: {fileID: 1616043653}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1976230213
@@ -19119,27 +19249,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &1976230216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1976230211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _scale: {x: 0, y: 0, z: 0}
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  gizmoRadius: 0.025
-  gizmoSelectedAlpha: 0.75
-  gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_centereyeanchor.bin
-  _isDoneSaving: 0
 --- !u!1 &1978854105
 GameObject:
   m_ObjectHideFlags: 0
@@ -19999,7 +20108,6 @@ GameObject:
   - component: {fileID: 2046919127}
   - component: {fileID: 2046919126}
   - component: {fileID: 2046919125}
-  - component: {fileID: 2046919132}
   m_Layer: 0
   m_Name: '[BuildingBlock] Hand Tracking left'
   m_TagString: Untagged
@@ -20019,7 +20127,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 920026024}
   m_Father: {fileID: 1696536066}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &2046919125
@@ -20177,27 +20286,6 @@ MonoBehaviour:
   installationRoutineCheckpoint:
     _installationRoutineId: 
     _installationVariants: []
---- !u!114 &2046919132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046919123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96a13d4372fe5245ab29242f8173fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _scale: {x: 0, y: 0, z: 0}
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  gizmoRadius: 0.025
-  gizmoSelectedAlpha: 0.75
-  gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_[buildingblock]-hand-tracking-left.bin
-  _isDoneSaving: 0
 --- !u!1001 &2052168793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20444,7 +20532,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetFrameRate: 120
-  targetPhysicsRate: 250
+  _targetFrameInterval: 0.008333334
+  targetPhysicsRate: 1000
+  _targetPhysicsInterval: 0.001
   timeScale: 1
   _hasStartedQuitting: 0
 --- !u!1 &2094281206
@@ -21550,7 +21640,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 30504220}
+  - {fileID: 1334971604}
   m_Father: {fileID: 3412188825629777220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5229257466296537835
@@ -21569,6 +21659,7 @@ MonoBehaviour:
   rigidBodyLabel: 3
   _rigidbodyId: 3
   networkCompensation: 1
+  useDedicatedCoroutine: 0
 --- !u!1 &5270873625885880312
 GameObject:
   m_ObjectHideFlags: 0
@@ -21649,6 +21740,8 @@ MonoBehaviour:
   SkeletonCoordinates: 0
   TMarkersetCoordinates: 0
   BoneNamingConvention: 0
+  trackingFrequency: 250
+  _trackingInterval: 0.004
   DrawMarkers: 0
   DrawTMarkersetMarkers: 0
   DrawCameras: 0
@@ -22006,5 +22099,5 @@ SceneRoots:
   - {fileID: 1076347915}
   - {fileID: 524767214}
   - {fileID: 928949004}
-  - {fileID: 3412188825629777220}
   - {fileID: 1741830060}
+  - {fileID: 3412188825629777220}

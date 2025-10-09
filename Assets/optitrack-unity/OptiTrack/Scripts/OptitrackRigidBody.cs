@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class OptitrackRigidBody : MonoBehaviour
@@ -15,6 +16,7 @@ public class OptitrackRigidBody : MonoBehaviour
     [SerializeField, ReadOnly]
     private int _rigidbodyId;
     public bool networkCompensation = true;
+    public bool useDedicatedCoroutine = false;
 
     // Private fields
     private Transform _transform;
@@ -22,6 +24,7 @@ public class OptitrackRigidBody : MonoBehaviour
     private Vector3 _previousPosition;
     private Quaternion _currentRotation;
     private Quaternion _previousRotation;
+    private WaitForSeconds _waitForTrackingInterval;
 
     private void OnValidate()
     {
@@ -35,49 +38,69 @@ public class OptitrackRigidBody : MonoBehaviour
 
     private void Start()
     {
-        // If the user didn't explicitly associate a client, find a suitable default.
-        if (this.streamingClient == null)
+        if (streamingClient == null)
         {
-            this.streamingClient = OptitrackStreamingClient.FindDefaultClient();
-
-            // If we still couldn't find one, disable this component.
-            if (this.streamingClient == null)
+            streamingClient = OptitrackStreamingClient.FindDefaultClient();
+            if (streamingClient == null)
             {
-                Debug.LogError(GetType().FullName + ": Streaming client not set, and no " + typeof(OptitrackStreamingClient).FullName + " components found in scene; disabling this component.", this);
-                this.enabled = false;
                 return;
             }
         }
 
-        this.streamingClient.RegisterRigidBody(this, _rigidbodyId);
+        streamingClient.RegisterRigidBody(this, _rigidbodyId);
+
+        if (useDedicatedCoroutine)
+        {
+            _waitForTrackingInterval = new WaitForSeconds(1f / streamingClient.trackingFrequency);
+            StartCoroutine(this.OptiTrackUpdateCoroutine());
+        }
+
     }
 
-    protected virtual void FixedUpdate()
+    private IEnumerator OptiTrackUpdateCoroutine()
     {
-        if (streamingClient == null)
+        while (true)
+        {
+            this.UpdateTrackingState();
+            this.UpdateTransform();
+
+            yield return _waitForTrackingInterval;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (streamingClient == null || useDedicatedCoroutine)
         {
             return;
         }
 
-        this.UpdatePose();
+        this.UpdateTrackingState();
     }
 
-    private void UpdatePose()
+    private void LateUpdate()
+    {
+        if (streamingClient == null || useDedicatedCoroutine)
+        {
+            return;
+        }
+
+        this.UpdateTransform();
+    }
+
+    private void UpdateTrackingState()
     {
         OptitrackRigidBodyState rbState = streamingClient.GetLatestRigidBodyState(_rigidbodyId, networkCompensation);
-        if (rbState == null)
+        if (rbState != null)
         {
-            return;
+            _previousPosition = _currentPosition;
+            _previousRotation = _currentRotation;
+            _currentPosition = rbState.Pose.Position;
+            _currentRotation = rbState.Pose.Orientation;
         }
-
-        _previousPosition = _currentPosition;
-        _previousRotation = _currentRotation;
-
-        _currentPosition = rbState.Pose.Position;
-        _currentRotation = rbState.Pose.Orientation;
     }
 
-    protected virtual void LateUpdate()
+    private void UpdateTransform()
     {
         _transform.SetPositionAndRotation(_currentPosition, _currentRotation);
     }

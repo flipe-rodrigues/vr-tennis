@@ -78,7 +78,7 @@ public class TaskManager : Singleton<TaskManager>
 
         if (Time.time - _lastTrialStartTime >= _interTrialInterval)
         {
-            if (_stageIndex == 3)
+            //if (_stageIndex == 3)
                 this.StartNextTrial();
         }
 
@@ -89,6 +89,7 @@ public class TaskManager : Singleton<TaskManager>
             this.enabled = false;
         }
     }
+
     private void StartStage()
     {
         _stageTimer = new Timer(stages[_stageIndex].duration);
@@ -107,7 +108,7 @@ public class TaskManager : Singleton<TaskManager>
         _stageIndex++;
     }
 
-    public void StartNextTrial()
+    private void StartNextTrial()
     {
         _lastTrialStartTime = Time.time;
 

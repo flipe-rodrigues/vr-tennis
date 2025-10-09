@@ -284,7 +284,7 @@ public class OptitrackStreamingClient : MonoBehaviour
         Unicast
     }
 
-    [Header("Connection Settings")]
+    [Header("Connection Settings:")]
 
     [Tooltip("The Streaming IP (Local Interface) in Motive")]
     public string ServerAddress = "127.0.0.1";
@@ -304,7 +304,13 @@ public class OptitrackStreamingClient : MonoBehaviour
     [Tooltip("Controls the Bone Naming Convention in the streamed data.")]
     public OptitrackBoneNameConvention BoneNamingConvention = OptitrackBoneNameConvention.Motive;
 
-    [Header("Extra Features")]
+    [Header("Tracking Settings:")]
+
+    [Tooltip("Motive's sampling frequency (Hz)")]
+    public float trackingFrequency = 250;
+    [SerializeField, ReadOnly] private float _trackingInterval;
+
+    [Header("Extra Features:")]
 
     [Tooltip("Draws marker visuals in the viewport for debugging and other uses. Using this will increase the data rate in Unicast mode.")]
     public bool DrawMarkers = false;
@@ -347,6 +353,7 @@ public class OptitrackStreamingClient : MonoBehaviour
     private void OnValidate()
     {
         LocalAddress = this.GetLocalIPAddress();
+        _trackingInterval = 1f / trackingFrequency;
     }
 
     private void Awake()

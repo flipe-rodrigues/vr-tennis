@@ -1,10 +1,14 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
+using System.Collections;
 
 [RequireComponent(typeof(MeshRenderer))]
 public class TargetBhv : CachedTransformBhv
 {
+    // Static fields
+    public static event Action<Vector3, float> onTargetAcquiredV2;
+
     // Public properties
     public MeshRenderer MeshRenderer => _meshRenderer;
 
@@ -15,6 +19,7 @@ public class TargetBhv : CachedTransformBhv
     public float acquisitionDelay = 0.1f;
     [Range(.01f, 5f)]
     public float resetDelay = 1f;
+    public bool disableOnAcquisition = true;
     public UnityEvent<Vector3, float> onTargetAcquired = new UnityEvent<Vector3, float>();
 
     // Private fields
@@ -66,15 +71,16 @@ public class TargetBhv : CachedTransformBhv
     {
         yield return FadeToCoroutine(acquisitionColor, acquisitionDelay);
         this.AcquireAt(position, intensity);
-        yield return FadeToCoroutine(Color.clear, resetDelay);
-        this.Active = false;
+        yield return FadeToCoroutine(disableOnAcquisition ? Color.clear : _defaultColor, resetDelay);
+        this.Active = !disableOnAcquisition;
     }
 
     private void AcquireAt(Vector3 position, float intensity)
     {
         onTargetAcquired?.Invoke(position, intensity);
+        onTargetAcquiredV2?.Invoke(position, intensity);
         TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetAcquired);
-        TaskManager.Instance.StartNextTrial();
+        //TaskManager.Instance.StartNextTrial();
     }
 
     private IEnumerator FadeToCoroutine(Color finalColor, float duration)

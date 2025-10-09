@@ -28,7 +28,7 @@ public class RacketColliderBhv : MonoBehaviour
     public bool displayAsMesh;
 
     // Private fields
-    private RacketBhv _racketBhv;
+    private RacketBhv _racket;
     private Transform _transform;
     private BoxCollider _collider;
     private MeshRenderer _meshRenderer;
@@ -43,7 +43,7 @@ public class RacketColliderBhv : MonoBehaviour
 
     private void Awake()
     {
-        _racketBhv = this.GetComponentInParent<RacketBhv>();
+        _racket = this.GetComponentInParent<RacketBhv>();
         _transform = this.GetComponent<Transform>();
         _collider = this.GetComponent<BoxCollider>();
         _meshRenderer = this.GetComponentInChildren<MeshRenderer>();
@@ -65,7 +65,7 @@ public class RacketColliderBhv : MonoBehaviour
 
     private void RescaleColliderDynamically()
     {
-        Vector3 localVelocity = _transform.InverseTransformDirection(_racketBhv.LinearVelocity);
+        Vector3 localVelocity = _transform.InverseTransformDirection(_racket.LinearVelocity);
         Vector3 deltaScale = localVelocity.ElementWiseMultiplication(scaleModifier).Abs();
         _collider.size = (_defaultScale + deltaScale).ClampBetween(_defaultScale, _defaultScale * maxScaleFactor);
         _meshTransform.localScale = _collider.size;
@@ -73,6 +73,11 @@ public class RacketColliderBhv : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // this should be a local thing.. a ball enters? pass it along to a couroutine
+        // so that (in theory) multiple can be hit in parallel
+        // refractory period should be per ball, not per racket
+        // then again.. only one ball tracker.. hmmm...
+
         this.HandleImpendingBounce();
     }
 
@@ -102,7 +107,7 @@ public class RacketColliderBhv : MonoBehaviour
 
     private void UpdateContactNormal()
     {
-        _contactNormal = (_racketBhv.Forward * Vector3.Dot(_racketBhv.Forward, TennisManager.Instance.RelativeVelocity)).normalized;
+        _contactNormal = (_racket.Forward * Vector3.Dot(_racket.Forward, TennisManager.Instance.RelativeVelocity)).normalized;
     }
 
     private void Bounce(BallBhv ball)
@@ -145,10 +150,10 @@ public class RacketColliderBhv : MonoBehaviour
 
     private Vector3 GetVelocityAtContactPoint()
     {
-        Vector3 relativePosition = Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, _racketBhv.Forward);
-        Vector3 tangentialVelocity = Vector3.Cross(_racketBhv.AngularVelocity, relativePosition);
+        Vector3 relativePosition = Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, _racket.Forward);
+        Vector3 tangentialVelocity = Vector3.Cross(_racket.AngularVelocity, relativePosition);
 
-        return _racketBhv.LinearVelocity + tangentialVelocity;
+        return _racket.LinearVelocity + tangentialVelocity;
     }
 
     private void StartRefractoryPeriod()

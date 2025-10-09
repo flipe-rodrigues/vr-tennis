@@ -13,7 +13,12 @@ public class ApplicationManager : Singleton<ApplicationManager>
 
     // Public fields
     public int targetFrameRate = 90;
+    [SerializeField, ReadOnly]
+    private float _targetFrameInterval;
+    [Tooltip("It seems this needs to be high for the ball's sake, not so much the collision")]
     public int targetPhysicsRate = 1000;
+    [SerializeField, ReadOnly]
+    private float _targetPhysicsInterval;
     [Range(.01f, 1f)]
     public float timeScale = 1f;
 
@@ -28,8 +33,10 @@ public class ApplicationManager : Singleton<ApplicationManager>
         Application.targetFrameRate = targetFrameRate;
 
         Time.fixedDeltaTime = 1f / targetPhysicsRate;
-
         Time.maximumDeltaTime = 1f / targetFrameRate;
+
+        _targetFrameInterval = 1f / targetFrameRate;
+        _targetPhysicsInterval = 1f / targetPhysicsRate;
 
         Time.timeScale = timeScale;
     }
