@@ -21,11 +21,13 @@ public class TargetBhv : CachedTransformBhv
     public float resetDelay = 1f;
     [Min(0)]
     public float expirationDelay = 10;
-    public bool disableOnHit = true;
+    public bool expireOnHit = true;
 
     // Readonly fields
     [SerializeField, ReadOnly]
     private Timer _expirationTimer;
+    [SerializeField, ReadOnly]
+    private bool _isDeactivating;
 
     // Private fields
     private MeshRenderer _meshRenderer;
@@ -58,10 +60,11 @@ public class TargetBhv : CachedTransformBhv
         }
     }
 
-    public void Restart()
+    public void Activate()
     {
         this.SetColor(Color.clear);
         StartCoroutine(this.FadeToCoroutine(_defaultColor, hitDelay));
+        _expirationTimer.Start();
     }
 
     private void SetColor(Color color)
@@ -77,12 +80,20 @@ public class TargetBhv : CachedTransformBhv
 
     public void TryHit()
     {
+        if (_isDeactivating)
+        {
+            return;
+        }
         StopAllCoroutines();
         StartCoroutine(this.TryHitCoroutine());
     }
 
     public void Reset()
     {
+        if (_isDeactivating)
+        {
+            return;
+        }
         StopAllCoroutines();
         StartCoroutine(this.FadeToCoroutine(_defaultColor, resetDelay));
     }
@@ -94,6 +105,11 @@ public class TargetBhv : CachedTransformBhv
 
     public void SlowDeactivate()
     {
+        if (_isDeactivating)
+        {
+            return;
+        }
+        StopAllCoroutines();
         StartCoroutine(this.SlowDeactivateCoroutine());
     }
 
@@ -101,14 +117,19 @@ public class TargetBhv : CachedTransformBhv
     {
         yield return FadeToCoroutine(hitColor, hitDelay);
         this.Hit();
-        yield return FadeToCoroutine(disableOnHit ? Color.clear : _defaultColor, resetDelay);
-        this.Active = !disableOnHit;
+        yield return FadeToCoroutine(expireOnHit ? Color.clear : _defaultColor, resetDelay);
+        if (expireOnHit)
+        {
+            this.Expire();
+        }
     }
 
     private IEnumerator SlowDeactivateCoroutine()
     {
+        _isDeactivating = true;
         yield return FadeToCoroutine(Color.clear, resetDelay);
         this.Active = false;
+        _isDeactivating = false;
     }
 
     private void Hit()

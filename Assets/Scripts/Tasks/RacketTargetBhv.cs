@@ -12,16 +12,27 @@ public class RacketTargetBhv : TargetBhv
 
     // Private fields
     private Timer _overlapTimer;
+    private Timer _refractoryTimer;
 
     protected override void Start()
     {
         base.Start();
 
         _overlapTimer = new Timer(base.hitDelay);
+        _refractoryTimer = new Timer((base.hitDelay + base.resetDelay) * 2f);
     }
 
     private void Update()
     {
+        if (_refractoryTimer.IsExpired)
+        {
+            _refractoryTimer.Stop();
+        }
+        else if (_refractoryTimer.IsRunning)
+        {
+            return;
+        }
+
         _overlapFraction = this.OverlapFraction(this.MeshRenderer, TennisManager.Instance.Racket.Mesh.Renderer);
 
         if (_overlapFraction >= overlapThreshold)
@@ -36,6 +47,7 @@ public class RacketTargetBhv : TargetBhv
             else if (_overlapTimer.IsExpired)
             {
                 _overlapTimer.Stop();
+                _refractoryTimer.Start();
             }
         }
         else

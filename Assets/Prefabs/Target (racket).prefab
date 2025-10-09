@@ -172,8 +172,14 @@ MonoBehaviour:
   _scale: {x: 0.75000054, y: 0.7500009, z: 0.75000054}
   hitColor: {r: 0, g: 1, b: 0.75, a: 1}
   hitDelay: 0.25
-  resetDelay: 1
-  disableOnHit: 1
+  resetDelay: 0.75
+  expirationDelay: 10
+  deactivateOnHit: 1
+  _expirationTimer:
+    duration: Infinity
+    _startTime: 0
+    _isRunning: 0
+  _isDeactivating: 0
   overlapThreshold: 0.9
   _overlapFraction: 0
 --- !u!114 &8725424557601377526

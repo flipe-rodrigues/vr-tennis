@@ -75,7 +75,7 @@ public class TaskManager : Singleton<TaskManager>
 
         for (int i = 1; i < stages.Count; i++)
         {
-            _stageTransitionThresholds[i] = _stageTransitionThresholds[i - 1] + stages[i - 1].trialCount;
+            _stageTransitionThresholds[i] = _stageTransitionThresholds[i - 1] + stages[i - 1].trialCount + 1;
             _totalTrialCount += stages[i].trialCount;
         }
 

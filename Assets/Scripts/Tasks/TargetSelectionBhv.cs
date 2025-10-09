@@ -38,7 +38,7 @@ public class TargetSelectionBhv : CachedTransformBhv
             return;
         }
 
-        if (_currentTarget != null && _currentTarget.Active == true)
+        if (_currentTarget != null)
         {
             this.DeselectTarget(_currentTarget);
         }
@@ -62,6 +62,11 @@ public class TargetSelectionBhv : CachedTransformBhv
 
     private void DeselectTarget(TargetBhv target)
     {
+        if (_currentTarget == target)
+        {
+            _currentTarget = null;
+        }
+
         _targetPool.Return(target, deactivate: true);
     }
 
@@ -78,7 +83,7 @@ public class TargetSelectionBhv : CachedTransformBhv
             _currentTarget.Rotation = UnityEngine.Random.rotation;
         }
 
-        _currentTarget.Restart();
+        _currentTarget.Activate();
 
         onTargetSelection?.Invoke(_currentTarget);
     }

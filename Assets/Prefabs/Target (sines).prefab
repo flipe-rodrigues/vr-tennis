@@ -109,13 +109,14 @@ MonoBehaviour:
   hitColor: {r: 0, g: 1, b: 0.75, a: 1}
   hitDelay: 0.1
   resetDelay: 1
-  disableOnHit: 0
-  duration: 10
-  maximumDistance: 0.5
-  _durationTimer:
+  expirationDelay: 10
+  expireOnHit: 0
+  _expirationTimer:
     duration: Infinity
     _startTime: 0
     _isRunning: 0
+  _isDeactivating: 0
+  maximumDistance: 0.5
   _normalizedDistance: 0
 --- !u!114 &41824784035801617
 MonoBehaviour:

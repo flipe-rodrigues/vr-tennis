@@ -5040,11 +5040,12 @@ MonoBehaviour:
   hitDelay: 0.1
   resetDelay: 1
   expirationDelay: Infinity
-  disableOnHit: 0
+  expireOnHit: 0
   _expirationTimer:
     duration: Infinity
     _startTime: 0
     _isRunning: 0
+  _isDeactivating: 0
 --- !u!114 &3494764775948913599
 MonoBehaviour:
   m_ObjectHideFlags: 0
