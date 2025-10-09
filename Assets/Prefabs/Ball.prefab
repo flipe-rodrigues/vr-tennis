@@ -162,16 +162,18 @@ MonoBehaviour:
   maxAngularVelocity: 500
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
-  courtLayer:
+  bounceLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 384
   mass: 0.058
   radius: 0.034
   airDensity: 1.225
   _dragCoefficient: 0
   _liftCoefficient: 0
   _spinDecayRate: 0
+  _bounceCounter: 0
   _wasJustHit: 0
+  _isInPlay: 1
 --- !u!114 &3296053829661479314
 MonoBehaviour:
   m_ObjectHideFlags: 0

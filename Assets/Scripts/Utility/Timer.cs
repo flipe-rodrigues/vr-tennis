@@ -5,7 +5,7 @@ public class Timer
 {
     // Public properties
     public float ElapsedTime => Time.time - _startTime;
-    public bool IsExpired => this.ElapsedTime >= duration;
+    public bool IsExpired => this.ElapsedTime >= duration && this.IsRunning;
     public bool IsRunning => _isRunning;
 
     // Public fields
@@ -32,7 +32,6 @@ public class Timer
 
     public void Stop()
     {
-        _startTime = Time.time;
         _isRunning = false;
     }
 }

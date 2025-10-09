@@ -1085,13 +1085,18 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   stages:
-  - trialCount: 25
+  - duration: Infinity
+    trialCount: 25
     objectsToEnable: []
     objectsToDisable: []
   _interTrialInterval: 3
   _stageIndex: 0
   _trialIndex: 0
   _totalTrialCount: 0
+  _stageTimer:
+    duration: 0
+    _startTime: 0
+    _isRunning: 0
 --- !u!1 &454428202
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,6 +2103,10 @@ MonoBehaviour:
   _stageIndex: 0
   _trialIndex: 0
   _totalTrialCount: 0
+  _stageTimer:
+    duration: 0
+    _startTime: 0
+    _isRunning: 0
 --- !u!4 &466151968
 Transform:
   m_ObjectHideFlags: 0
@@ -2227,9 +2236,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d04de5242658c459e4878e3f6b5681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _scale: {x: 0, y: 0, z: 0}
+  apparentNormalRestitution: 0.4
+  apparentTangentialRestitution: 0.65
+  apparentSpinRestitution: 0.4
+  spinToTangentialConversion: 0.3
+  tangentialToSpinConversion: 0.58
+  refractoryPeriod: 0.05
+  scaleModifier: {x: 1, y: 1, z: 1}
+  maxScaleFactor: 5
+  rescaleDynamically: 0
   displayAsMesh: 0
 --- !u!65 &858259641
 BoxCollider:
@@ -2436,7 +2451,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetFrameRate: 90
+  _targetFrameInterval: 0.011111111
   targetPhysicsRate: 1000
+  _targetPhysicsInterval: 0.001
   timeScale: 1
   _hasStartedQuitting: 0
 --- !u!1 &1149186590
@@ -2665,8 +2682,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 0
   saveMetadata: 0
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-06_23-30-38
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-v2\Data\2025-10-06_23-30-38
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-09_17-01-58
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-09_17-01-58
 --- !u!4 &1396866741
 Transform:
   m_ObjectHideFlags: 0
@@ -2698,7 +2715,7 @@ MonoBehaviour:
   taskManager: {fileID: 427517424}
   ballSpawner: {fileID: 0}
   ball: {fileID: -16429739311734148, guid: 429275865da541d43a1fac14633fa5d3, type: 3}
-  racket: {fileID: 1149186593}
+  racketCollider: {fileID: 0}
   ballPhysXMaterial: {fileID: 13400000, guid: b558220af477b2f4892404acd79394ba, type: 2}
   courtPhysXMaterial: {fileID: 13400000, guid: d832140f09fae5645a787353fc5098e1, type: 2}
   netPhysXMaterial: {fileID: 13400000, guid: 9d26cd2b8e23cd84db2961ca90fe8964, type: 2}
@@ -2838,7 +2855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TennisManager
   _ball: {fileID: 0}
-  _racket: {fileID: 1149186593}
+  _racket: {fileID: 0}
 --- !u!4 &1534334721
 Transform:
   m_ObjectHideFlags: 0
@@ -3114,12 +3131,13 @@ MonoBehaviour:
   _samplingInterval: 0.002
   _trackers:
   - {fileID: 1467799598}
-  - {fileID: 1437636373}
-  - {fileID: 454428205}
-  - {fileID: 1804734641}
-  - {fileID: 1690077235}
-  - {fileID: 1751295941}
   - {fileID: 533789539}
+  - {fileID: 1437636373}
+  - {fileID: 1690077235}
+  - {fileID: 454428205}
+  - {fileID: 1751295941}
+  - {fileID: 1804734641}
+  - {fileID: 2095561896}
 --- !u!4 &1749113138
 Transform:
   m_ObjectHideFlags: 0
@@ -3428,7 +3446,7 @@ GameObject:
   - component: {fileID: 2116965607}
   - component: {fileID: 2116965608}
   m_Layer: 0
-  m_Name: Targets
+  m_Name: Target Selector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3468,7 +3486,11 @@ MonoBehaviour:
   spawnRadius: 0.5
   randomizePosition: 0
   randomizeRotation: 0
+  deactivateOnReturn: 0
   gizmoColor: {r: 0, g: 0, b: 0, a: 0}
+  onTargetSelection:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &401097331833626543
 MonoBehaviour:
   m_ObjectHideFlags: 0

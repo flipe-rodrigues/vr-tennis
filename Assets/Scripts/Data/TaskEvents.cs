@@ -3,16 +3,18 @@ using System.Collections.Generic;
 public enum TaskEventType
 {
     None,
+    StageStart,
     TrialStart,
-    BallSpawn,
+    BallLaunch,
     CourtEnter,
     CourtExit,
     NetEnter,
     NetExit,
-    TargetAcquired,
     TargetEnter,
+    TargetHit,
     TargetExit,
     RacketHit,
+    BallOutOfPlay,
 }
 
 public static class TaskEvents
@@ -20,16 +22,18 @@ public static class TaskEvents
     public static readonly Dictionary<TaskEventType, string> Map = new()
     {
         { TaskEventType.None, "" },
+        { TaskEventType.StageStart, "StageStart" },
         { TaskEventType.TrialStart, "TrialStart" },
-        { TaskEventType.BallSpawn, "BallSpawn" },
+        { TaskEventType.BallLaunch, "BallLaunch" },
         { TaskEventType.CourtEnter, "CourtEnter" },
         { TaskEventType.CourtExit, "CourtExit" },
         { TaskEventType.NetEnter, "NetEnter" },
         { TaskEventType.NetExit, "NetExit" },
-        { TaskEventType.TargetAcquired, "TargetAcquired" },
         { TaskEventType.TargetEnter, "TargetEnter" },
+        { TaskEventType.TargetHit, "TargetHit" },
         { TaskEventType.TargetExit, "TargetExit" },
         { TaskEventType.RacketHit, "RacketHit" },
+        { TaskEventType.BallOutOfPlay, "BallOutOfPlay" },
     };
 
     public static int GetCode(this TaskEventType eventType)

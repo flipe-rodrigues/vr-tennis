@@ -1,15 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
+[SelectionBase]
 public class BallBhv : CachedRigidbodyBhv
 {
+    // Static fields
+    public static event Action<BallBhv> onBallOutOfPlay;
+
     // Public properties
     public Collider Collider => _collider;
     public bool WasJustHit { get { return _wasJustHit; } set { _wasJustHit = value; } }
 
     // Public fields
-    public Color topSpinColor = Color.red;
-    public Color backSpinColor = Color.cyan;
-    public LayerMask courtLayer;
+    public LayerMask bounceLayers;
     public float mass = 0.057f; // kg (standard tennis ball mass)
     public float radius = 0.033f; // m (standard tennis ball radius)
     public float airDensity = 1.225f; // kg/m³ at sea level
@@ -22,7 +25,11 @@ public class BallBhv : CachedRigidbodyBhv
     [SerializeField, ReadOnly]
     private float _spinDecayRate;
     [SerializeField, ReadOnly]
+    private int _bounceCounter;
+    [SerializeField, ReadOnly]
     private bool _wasJustHit;
+    [SerializeField, ReadOnly]
+    private bool _isInPlay = true;
 
     // Private fields
     private MeshRenderer _meshRenderer;
@@ -142,19 +149,25 @@ public class BallBhv : CachedRigidbodyBhv
     private void UpdateLight()
     {
         _light.intensity = Mathf.Clamp(this.LinearVelocity.sqrMagnitude / 250f, 0f, .05f);
-
         //Color spinColor = Color.Lerp(backSpinColor, topSpinColor, Mathf.Clamp(this.AngularVelocity.magnitude / 50f, 0f, 1f));
-
         //_light.color = spinColor;
-
         _material.SetColor("_EmissionColor", Color.Lerp(Color.black, Color.white, _light.intensity / .05f));
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (((1 << collision.gameObject.layer) & courtLayer) != 0)
+        if (((1 << collision.gameObject.layer) & bounceLayers) != 0)
         {
+            _bounceCounter++;
             _wasJustHit = false;
+        }
+
+        if (_bounceCounter >= 2 && _isInPlay)
+        {
+            _isInPlay = false;
+            onBallOutOfPlay?.Invoke(this);
+
+            TrackingManager.Instance.RecordTaskEvent(TaskEventType.BallOutOfPlay);
         }
     }
 }

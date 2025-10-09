@@ -1,21 +1,23 @@
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 using System.Collections;
 
 [RequireComponent(typeof(Collider))]
 public class RacketColliderBhv : MonoBehaviour
 {
+    // Static fields
+    public static event Action onRacketHit;
+
     // Public properties
     public Vector3 ContactNormal => _contactNormal;
 
     // Public fields
-    [Header("Bounce Settings:")]
+    [Header("Hit Settings:")]
     public float apparentNormalRestitution = .4f;
     public float apparentTangentialRestitution = .65f;
     public float apparentSpinRestitution = .4f;
     public float spinToTangentialConversion = .3f;
     public float tangentialToSpinConversion = .58f;
-    public UnityEvent<float> onRacketBounce = new UnityEvent<float>();
     [Header("Refractory Period Settings:")]
     [Min(0f)]
     public float refractoryPeriod = 0.05f;
@@ -78,28 +80,28 @@ public class RacketColliderBhv : MonoBehaviour
         // refractory period should be per ball, not per racket
         // then again.. only one ball tracker.. hmmm...
 
-        this.HandleImpendingBounce();
+        this.HandleImpendingHit();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        this.HandleImpendingBounce();
+        this.HandleImpendingHit();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        this.HandleImpendingBounce();
+        this.HandleImpendingHit();
     }
 
-    private void HandleImpendingBounce()
+    private void HandleImpendingHit()
     {
         this.UpdateContactNormal();
 
         if (Vector3.Dot(_contactNormal, TennisManager.Instance.RelativePosition) < 0)
         {
             this.StartRefractoryPeriod();
-            this.Bounce(TennisManager.Instance.Ball);
-            onRacketBounce?.Invoke(TennisManager.Instance.RelativeVelocity.magnitude);
+            this.Hit(TennisManager.Instance.Ball);
+            onRacketHit?.Invoke();
             TennisManager.Instance.Ball.WasJustHit = true;
             TrackingManager.Instance.RecordTaskEvent(TaskEventType.RacketHit);
         }
@@ -110,7 +112,7 @@ public class RacketColliderBhv : MonoBehaviour
         _contactNormal = (_racket.Forward * Vector3.Dot(_racket.Forward, TennisManager.Instance.RelativeVelocity)).normalized;
     }
 
-    private void Bounce(BallBhv ball)
+    private void Hit(BallBhv ball)
     {
         // Following Cross 2005
         Vector3 v_racket_i = this.GetVelocityAtContactPoint();

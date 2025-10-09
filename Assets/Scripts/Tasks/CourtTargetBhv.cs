@@ -10,7 +10,7 @@ public class CourtTargetBhv : TargetBhv
             return;
         }
 
-        this.TryAcquireAt(TennisManager.Instance.Ball.Position, TennisManager.Instance.Ball.LinearVelocity.magnitude);
+        this.TryHit();
 
         if (other == TennisManager.Instance.Ball.Collider)
         {

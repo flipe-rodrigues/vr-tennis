@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 using System;
 using System.Collections;
 
@@ -7,20 +6,19 @@ using System.Collections;
 public class TargetBhv : CachedTransformBhv
 {
     // Static fields
-    public static event Action<Vector3, float> onTargetAcquiredV2;
+    public static event Action<TargetBhv> onTargetHit;
 
     // Public properties
     public MeshRenderer MeshRenderer => _meshRenderer;
 
     // Public fields
     [ColorUsage(true, true)]
-    public Color acquisitionColor;
+    public Color hitColor = new Color(0f, 1f, .75f, 1f);
     [Range(.01f, 5f)]
-    public float acquisitionDelay = 0.1f;
+    public float hitDelay = 0.1f;
     [Range(.01f, 5f)]
     public float resetDelay = 1f;
-    public bool disableOnAcquisition = true;
-    public UnityEvent<Vector3, float> onTargetAcquired = new UnityEvent<Vector3, float>();
+    public bool disableOnHit = true;
 
     // Private fields
     private MeshRenderer _meshRenderer;
@@ -41,7 +39,7 @@ public class TargetBhv : CachedTransformBhv
     public void Restart()
     {
         this.SetColor(Color.clear);
-        StartCoroutine(this.FadeToCoroutine(_defaultColor, acquisitionDelay));
+        StartCoroutine(this.FadeToCoroutine(_defaultColor, hitDelay));
     }
 
     private void SetColor(Color color)
@@ -52,13 +50,13 @@ public class TargetBhv : CachedTransformBhv
 
     public void ColorLerp(float t)
     {
-        this.SetColor(Color.Lerp(_defaultColor, acquisitionColor, t));
+        this.SetColor(Color.Lerp(_defaultColor, hitColor, t));
     }
 
-    public void TryAcquireAt(Vector3 position, float intensity)
+    public void TryHit()
     {
         StopAllCoroutines();
-        StartCoroutine(this.AcquisitionCoroutine(position, intensity));
+        StartCoroutine(this.HitCoroutine());
     }
 
     public void Reset()
@@ -67,20 +65,18 @@ public class TargetBhv : CachedTransformBhv
         StartCoroutine(this.FadeToCoroutine(_defaultColor, resetDelay));
     }
 
-    private IEnumerator AcquisitionCoroutine(Vector3 position, float intensity)
+    private IEnumerator HitCoroutine()
     {
-        yield return FadeToCoroutine(acquisitionColor, acquisitionDelay);
-        this.AcquireAt(position, intensity);
-        yield return FadeToCoroutine(disableOnAcquisition ? Color.clear : _defaultColor, resetDelay);
-        this.Active = !disableOnAcquisition;
+        yield return FadeToCoroutine(hitColor, hitDelay);
+        this.Hit();
+        yield return FadeToCoroutine(disableOnHit ? Color.clear : _defaultColor, resetDelay);
+        this.Active = !disableOnHit;
     }
 
-    private void AcquireAt(Vector3 position, float intensity)
+    private void Hit()
     {
-        onTargetAcquired?.Invoke(position, intensity);
-        onTargetAcquiredV2?.Invoke(position, intensity);
-        TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetAcquired);
-        //TaskManager.Instance.StartNextTrial();
+        onTargetHit?.Invoke(this);
+        TrackingManager.Instance.RecordTaskEvent(TaskEventType.TargetHit);
     }
 
     private IEnumerator FadeToCoroutine(Color finalColor, float duration)
