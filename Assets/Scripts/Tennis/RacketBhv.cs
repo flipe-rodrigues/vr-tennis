@@ -5,7 +5,6 @@ public class RacketBhv : MonoBehaviour
 {
     // Public properties
     public RacketMeshBhv Mesh => _mesh;
-    public Vector3 Forward => _transform.forward;
     public Vector3 Position
     {
         get
@@ -149,8 +148,8 @@ public class RacketBhv : MonoBehaviour
         
         this.UpdateLinearVelocity();
         this.UpdateAngularVelocity();
-        this.ApplySmoothing();
-        this.ApplyKalmanFilter();
+        this.ApplyExponentialSmoothing();
+        this.ApplyAlphaBetaFilter();
     }
 
     private void LateUpdate()
@@ -171,7 +170,7 @@ public class RacketBhv : MonoBehaviour
         _rawAngularVelocity = axis * (angleInDegrees * Mathf.Deg2Rad) / Time.fixedDeltaTime;
     }
 
-    private void ApplySmoothing()
+    private void ApplyExponentialSmoothing()
     {
         _smoothPosition = Vector3.Lerp(_smoothPosition, _currentPosition, _smoothingRate);
         _smoothRotation = Quaternion.Slerp(_smoothRotation, _currentRotation, _smoothingRate);
@@ -179,7 +178,7 @@ public class RacketBhv : MonoBehaviour
         _smoothAngularVelocity = Vector3.Lerp(_smoothAngularVelocity, _rawAngularVelocity, _smoothingRate);
     }
 
-    private void ApplyKalmanFilter()
+    private void ApplyAlphaBetaFilter()
     {
         float dt = Time.fixedDeltaTime;
 

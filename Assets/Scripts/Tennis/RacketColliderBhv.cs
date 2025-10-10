@@ -41,6 +41,7 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
     private void OnValidate()
     {
         this.GetComponentInChildren<MeshRenderer>().enabled = displayAsMesh;
+        this.GetComponentInChildren<MeshRenderer>().transform.localScale = this.GetComponent<BoxCollider>().size;
     }
 
     private void Awake()
@@ -110,7 +111,7 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
 
     private void UpdateContactNormal()
     {
-        _contactNormal = (_racket.Forward * Vector3.Dot(_racket.Forward, TennisManager.Instance.RelativeVelocity)).normalized;
+        _contactNormal = (_transform.forward * Vector3.Dot(_transform.forward, TennisManager.Instance.RelativeVelocity)).normalized;
     }
 
     private void Hit(BallBhv ball)
@@ -153,7 +154,7 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
 
     private Vector3 GetVelocityAtContactPoint()
     {
-        Vector3 relativePosition = Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, _racket.Forward);
+        Vector3 relativePosition = Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, _transform.forward);
         Vector3 tangentialVelocity = Vector3.Cross(_racket.AngularVelocity, relativePosition);
 
         return _racket.LinearVelocity + tangentialVelocity;
@@ -180,21 +181,21 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
         _collider.enabled = true;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(_racket.Position, _racket.Position + _contactNormal * 0.5f);
-        if (TennisManager.Instance.Ball != null)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(_racket.Position, TennisManager.Instance.Ball.Position);
-        }
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(_racket.Position, _racket.Position + _racket.Forward * .25f);
-        if (TennisManager.Instance.Ball != null)
-        {
-            Gizmos.color = Color.gray;
-            Gizmos.DrawLine(_racket.Position, _racket.Position + TennisManager.Instance.RelativeVelocity.normalized * 0.5f);
-        }
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.cyan;
+    //    Gizmos.DrawLine(_racket.Position, _racket.Position + _contactNormal * 0.5f);
+    //    if (TennisManager.Instance.Ball != null)
+    //    {
+    //        Gizmos.color = Color.yellow;
+    //        Gizmos.DrawLine(_racket.Position, TennisManager.Instance.Ball.Position);
+    //    }
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawLine(_racket.Position, _racket.Position + _racket.Forward * .25f);
+    //    if (TennisManager.Instance.Ball != null)
+    //    {
+    //        Gizmos.color = Color.gray;
+    //        Gizmos.DrawLine(_racket.Position, _racket.Position + TennisManager.Instance.RelativeVelocity.normalized * 0.5f);
+    //    }
+    //}
 }
