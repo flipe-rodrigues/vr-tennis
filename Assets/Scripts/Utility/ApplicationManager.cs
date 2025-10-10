@@ -21,7 +21,7 @@ public class ApplicationManager : Singleton<ApplicationManager>
     [SerializeField, ReadOnly]
     private float _targetPhysicsInterval;
     [SerializeField, ReadOnly]
-    private float _minimumPhysicsInterval;
+    private float _maximumPhysicsInterval;
     [Range(.01f, 1f)]
     public float timeScale = 1f;
 
@@ -40,7 +40,7 @@ public class ApplicationManager : Singleton<ApplicationManager>
 
         _targetFrameInterval = 1f / Application.targetFrameRate;
         _targetPhysicsInterval = Time.fixedDeltaTime;
-        _minimumPhysicsInterval = Time.maximumDeltaTime;
+        _maximumPhysicsInterval = Time.maximumDeltaTime;
 
         Time.timeScale = timeScale;
     }
