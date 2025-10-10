@@ -1,5 +1,6 @@
-using UnityEngine;
 using System;
+using UnityEngine;
+using static Meta.XR.MRUtilityKit.SceneDecorator.SceneDecorator;
 
 public class BallLaunchBhv : CachedTransformBhv
 {
@@ -26,6 +27,11 @@ public class BallLaunchBhv : CachedTransformBhv
     private ObjectPool<BallBhv> _ballPool;
     private BallBhv _currentBall;
 
+    private void OnValidate()
+    {
+        LaunchDelayDistribution.UpdatePDF();
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -49,6 +55,11 @@ public class BallLaunchBhv : CachedTransformBhv
     }
 
     private void HandleTrialStart()
+    {
+        this.StartPreLaunchDelay();
+    }
+
+    private void StartPreLaunchDelay()
     {
         _launchTimer.duration = LaunchDelayDistribution.Sample();
         _launchTimer.Start();

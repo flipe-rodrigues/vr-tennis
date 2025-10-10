@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 4939647626396622115}
   - component: {fileID: 8504257586633168741}
   m_Layer: 0
-  m_Name: Racket Pivot
+  m_Name: Racket Pivot (OLD)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

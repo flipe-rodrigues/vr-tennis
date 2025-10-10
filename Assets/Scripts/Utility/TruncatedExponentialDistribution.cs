@@ -22,6 +22,11 @@ public class TruncatedExponentialDistribution
 
     public float Sample()
     {
+        if (mean - min == 0)
+        {
+            return min;
+        }
+
         float lambda = 1f / (mean - min);
         float u = Random.value;
         float expTerm = Mathf.Exp(-lambda * max);

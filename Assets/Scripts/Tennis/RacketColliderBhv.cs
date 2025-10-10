@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 
 [RequireComponent(typeof(Collider))]
-public class RacketColliderBhv : MonoBehaviour
+public class RacketColliderBhv : MonoBehaviour // switch back to cached transform if the whole transform update thing works out !!!!
 {
     // Static fields
     public static event Action onRacketHit;
@@ -79,7 +79,7 @@ public class RacketColliderBhv : MonoBehaviour
         // so that (in theory) multiple can be hit in parallel
         // refractory period should be per ball, not per racket
         // then again.. only one ball tracker.. hmmm...
-
+        Debug.Log("here");
         this.HandleImpendingHit();
     }
 
@@ -99,6 +99,7 @@ public class RacketColliderBhv : MonoBehaviour
 
         if (Vector3.Dot(_contactNormal, TennisManager.Instance.RelativePosition) < 0)
         {
+            Debug.Log("also here..");
             this.StartRefractoryPeriod();
             this.Hit(TennisManager.Instance.Ball);
             onRacketHit?.Invoke();
@@ -177,5 +178,23 @@ public class RacketColliderBhv : MonoBehaviour
 
         _meshRenderer.enabled = displayAsMesh;
         _collider.enabled = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(_racket.Position, _racket.Position + _contactNormal * 0.5f);
+        if (TennisManager.Instance.Ball != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(_racket.Position, TennisManager.Instance.Ball.Position);
+        }
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(_racket.Position, _racket.Position + _racket.Forward * .25f);
+        if (TennisManager.Instance.Ball != null)
+        {
+            Gizmos.color = Color.gray;
+            Gizmos.DrawLine(_racket.Position, _racket.Position + TennisManager.Instance.RelativeVelocity.normalized * 0.5f);
+        }
     }
 }
