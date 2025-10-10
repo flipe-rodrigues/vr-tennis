@@ -200,18 +200,17 @@ MonoBehaviour:
   _samplingInterval: 0.004
   _trackers:
   - {fileID: 1334971607}
-  - {fileID: 1361894310}
-  - {fileID: 1741830062}
-  - {fileID: 1346638848062879237}
-  - {fileID: 575539740}
-  - {fileID: 7996239910057813932}
-  - {fileID: 2003079447619129941}
-  - {fileID: 984377533}
-  - {fileID: 1324406917286027287}
-  - {fileID: 920026025}
-  - {fileID: 5872129562439674650}
-  - {fileID: 7976822468721358775}
   - {fileID: 911978360}
+  - {fileID: 2003079447619129941}
+  - {fileID: 7996239910057813932}
+  - {fileID: 7976822468721358775}
+  - {fileID: 5872129562439674650}
+  - {fileID: 575539740}
+  - {fileID: 920026025}
+  - {fileID: 1361894310}
+  - {fileID: 1324406917286027287}
+  - {fileID: 984377533}
+  - {fileID: 1346638848062879237}
 --- !u!1 &20478871
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,7 +732,7 @@ MonoBehaviour:
   LateControllerUpdate: 1
   LateLatching: 0
   controllerDrivenHandPosesType: 2
-  SimultaneousHandsAndControllersEnabled: 1
+  SimultaneousHandsAndControllersEnabled: 0
   _readOnlyWideMotionModeHandPosesEnabled: 0
   wideMotionModeHandPosesEnabled: 1
   dynamicResolutionVersion: 1
@@ -2346,8 +2345,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\Admin\Documents\GitHub\vr-tennis\Assets\Data\2025-10-10_12-10-37
-  _buildSavePath: C:\Users\Admin\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-10_12-10-37
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-10_12-28-24
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-10_12-28-24
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14352,7 +14351,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1741830060}
   - component: {fileID: 1741830061}
-  - component: {fileID: 1741830062}
   m_Layer: 0
   m_Name: Racket
   m_TagString: Untagged
@@ -14391,9 +14389,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optitrackRigidbody: {fileID: 5229257466296537835}
-  positionPreprocessing: 0
+  positionPreprocessing: 1
   rotationPreprocessing: 0
-  linearVelocityPreprocessing: 0
+  linearVelocityPreprocessing: 1
   angularVelocityPreprocessing: 0
   smoothingTimeConstant: 0.01
   _suggestedAlpha: 0.33333334
@@ -14408,27 +14406,6 @@ MonoBehaviour:
   _smoothAngularVelocity: {x: 0, y: 0, z: 0}
   _alphaBetaPosition: {x: 0, y: 0, z: 0}
   _alphaBetaLinearVelocity: {x: 0, y: 0, z: 0}
---- !u!114 &1741830062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741830059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b623afa7f0e3c4082168c0c78d6dda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0, z: 0}
-  _rotation: {x: 0, y: 0, z: 0}
-  _scale: {x: 0, y: 0, z: 0}
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  gizmoRadius: 0.025
-  gizmoSelectedAlpha: 0.75
-  gizmoIdleAlpha: 0.25
-  _binaryFilename: name_age_sex_tennis-exp_vr-exp_racket.bin
-  _isDoneSaving: 0
 --- !u!1 &1742962498
 GameObject:
   m_ObjectHideFlags: 0
@@ -18480,10 +18457,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetFrameRate: 120
   _targetFrameInterval: 0.008333334
-  targetPhysicsRate: 250
-  minimumPhysicsRate: 120
-  _targetPhysicsInterval: 0.004
-  _maximumPhysicsInterval: 0.008333334
+  targetPhysicsRate: 1000
+  minimumPhysicsRate: 3
+  _targetPhysicsInterval: 0.001
+  _maximumPhysicsInterval: 0.33333334
   timeScale: 1
   _hasStartedQuitting: 0
 --- !u!1 &2094533217
@@ -19119,7 +19096,7 @@ MonoBehaviour:
   refractoryPeriod: 0.25
   scaleModifier: {x: 0.5, y: 0.5, z: 0.25}
   maxScaleFactor: 5
-  rescaleDynamically: 0
+  rescaleDynamically: 1
   displayAsMesh: 1
 --- !u!4 &3412188825629777220
 Transform:
@@ -19447,7 +19424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ServerAddress: 10.40.49.47
-  LocalAddress: 10.40.49.47
+  LocalAddress: 10.40.49.9
   ConnectionType: 0
   SkeletonCoordinates: 0
   TMarkersetCoordinates: 0
