@@ -68,7 +68,7 @@ public class RacketBhv : MonoBehaviour
 
     // Public fields
     [Header("Tracking Data Source:")]
-    public OptitrackRigidBody optitrackRigidbody;
+    public OptiTrackRigidbody optitrackRigidbody;
     [Header("Preprocessing Settings:")]
     public KinematicPreprocessingType positionPreprocessing = KinematicPreprocessingType.AlphaBeta;
     public KinematicPreprocessingType rotationPreprocessing = KinematicPreprocessingType.None;
@@ -79,11 +79,11 @@ public class RacketBhv : MonoBehaviour
     public float smoothingTimeConstant = 0.01f;
     [SerializeField, ReadOnly]
     private float _smoothingRate;
+    [Header("Alpha-Beta Filter Settings:")]
     [SerializeField, ReadOnly]
     private float _suggestedAlpha;
     [SerializeField, ReadOnly]
     private float _suggestedBeta;
-    [Header("Alpha-Beta Filter Settings:")]
     [Range(0f, 1f)]
     public float alpha = 0.5f;
     [Range(0f, 1f)]
@@ -116,6 +116,7 @@ public class RacketBhv : MonoBehaviour
     private Vector3 _previousPosition;
     private Quaternion _currentRotation;
     private Quaternion _previousRotation;
+
     private void OnValidate()
     {
         _smoothingRate = smoothingTimeConstant.TauToLambda(Time.fixedDeltaTime);
@@ -127,6 +128,11 @@ public class RacketBhv : MonoBehaviour
         _transform = this.GetComponent<Transform>();
         _collider = this.GetComponentInChildren<RacketColliderBhv>();
         _mesh = this.GetComponentInChildren<RacketMeshBhv>();
+    }
+
+    private void Start()
+    {
+        this.OnValidate();
     }
 
     protected virtual void FixedUpdate()

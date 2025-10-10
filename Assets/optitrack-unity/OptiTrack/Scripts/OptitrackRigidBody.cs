@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OptitrackRigidBody : MonoBehaviour
+public class OptiTrackRigidbody : MonoBehaviour
 {
     // Public properties
     public Vector3 CurrentPosition => _currentPosition;
@@ -10,12 +10,11 @@ public class OptitrackRigidBody : MonoBehaviour
     public Quaternion PreviousRotation => _previousRotation;
 
     // Public / readonly fields
-    public OptitrackStreamingClient streamingClient;
-    public OptitrackRigidBodyLabel rigidBodyLabel;
+    public OptiTrackStreamingClient streamingClient;
+    public OptiTrackRigidbodyLabel rigidbodyLabel;
     [SerializeField, ReadOnly]
     private int _rigidbodyId;
     public bool networkCompensation = true;
-    public bool useDedicatedCoroutine = false;
 
     // Private fields
     private Transform _transform;
@@ -27,7 +26,7 @@ public class OptitrackRigidBody : MonoBehaviour
 
     private void OnValidate()
     {
-        _rigidbodyId = (int)rigidBodyLabel;
+        _rigidbodyId = (int)rigidbodyLabel;
     }
 
     private void Awake()
@@ -39,7 +38,7 @@ public class OptitrackRigidBody : MonoBehaviour
     {
         if (streamingClient == null)
         {
-            streamingClient = OptitrackStreamingClient.FindDefaultClient();
+            streamingClient = OptiTrackStreamingClient.FindDefaultClient();
             if (streamingClient == null)
             {
                 return;
@@ -48,43 +47,19 @@ public class OptitrackRigidBody : MonoBehaviour
 
         streamingClient.RegisterRigidBody(this, _rigidbodyId);
 
-        if (useDedicatedCoroutine)
-        {
-            _waitForTrackingInterval = new WaitForSeconds(streamingClient.TrackingInterval);
-            StartCoroutine(this.OptiTrackUpdateCoroutine());
-        }
-
+        _waitForTrackingInterval = new WaitForSeconds(streamingClient.TrackingInterval);
+        StartCoroutine(this.OptiTrackUpdateCoroutine());
     }
 
     private IEnumerator OptiTrackUpdateCoroutine()
     {
-        while (true)
+        while (streamingClient != null)
         {
             this.UpdateTrackingState();
             this.UpdateTransform();
 
             yield return _waitForTrackingInterval;
         }
-    }
-
-    private void FixedUpdate()
-    {
-        if (streamingClient == null || useDedicatedCoroutine)
-        {
-            return;
-        }
-
-        this.UpdateTrackingState();
-    }
-
-    private void LateUpdate()
-    {
-        if (streamingClient == null || useDedicatedCoroutine)
-        {
-            return;
-        }
-
-        this.UpdateTransform();
     }
 
     private void UpdateTrackingState()

@@ -10,8 +10,8 @@ public class TrackedRigidbodyBhv : MonoBehaviour
 
     // Public / readonly fields
     [Header("Optitrack Settings:")]
-    public OptitrackStreamingClient streamingClient;
-    public OptitrackRigidBodyLabel rigidBodyLabel;
+    public OptiTrackStreamingClient streamingClient;
+    public OptiTrackRigidbodyLabel rigidBodyLabel;
     public bool networkCompensation = true;
     [SerializeField, ReadOnly]
     private int _rigidbodyId;
@@ -49,12 +49,12 @@ public class TrackedRigidbodyBhv : MonoBehaviour
         // If the user didn't explicitly associate a client, find a suitable default.
         if (this.streamingClient == null)
         {
-            this.streamingClient = OptitrackStreamingClient.FindDefaultClient();
+            this.streamingClient = OptiTrackStreamingClient.FindDefaultClient();
 
             // If we still couldn't find one, disable this component.
             if (this.streamingClient == null)
             {
-                Debug.LogError(GetType().FullName + ": Streaming client not set, and no " + typeof(OptitrackStreamingClient).FullName + " components found in scene; disabling this component.", this);
+                Debug.LogError(GetType().FullName + ": Streaming client not set, and no " + typeof(OptiTrackStreamingClient).FullName + " components found in scene; disabling this component.", this);
                 this.enabled = false;
                 return;
             }

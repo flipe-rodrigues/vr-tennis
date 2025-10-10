@@ -14,6 +14,7 @@ public class MetadataSnapshotBhv : MonoBehaviour
     public TaskManager taskManager;
     public BallLaunchBhv ballSpawner;
     public BallBhv ball;
+    public RacketBhv racket;
     public RacketColliderBhv racketCollider;
 
     [Header("Physics Materials")]
@@ -52,6 +53,7 @@ public class MetadataSnapshotBhv : MonoBehaviour
         List<MonoBehaviour> components = new List<MonoBehaviour>
         {
             ball,
+            racket,
             racketCollider,
             ballSpawner,
             taskManager

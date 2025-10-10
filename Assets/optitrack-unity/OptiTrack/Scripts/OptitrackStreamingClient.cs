@@ -69,7 +69,7 @@ public class OptitrackMarkerState
 /// <summary>Represents the state of a streamed rigid body at an instant in time.</summary>
 public class OptitrackRigidBodyState
 {
-    public OptitrackHiResTimer.Timestamp DeliveryTimestamp;
+    public OptiTrackHiResTimer.Timestamp DeliveryTimestamp;
     public OptitrackPose Pose;
     public bool IsTracked;
 }
@@ -126,7 +126,7 @@ public class OptitrackSkeletonDefinition
         public Vector3 Offset;
     }
 
-    /// <summary>Skeleton ID. Used as an argument to <see cref="OptitrackStreamingClient.GetLatestSkeletonState"/>.</summary>
+    /// <summary>Skeleton ID. Used as an argument to <see cref="OptiTrackStreamingClient.GetLatestSkeletonState"/>.</summary>
     public Int32 Id;
 
     /// <summary>Skeleton asset name.</summary>
@@ -172,7 +172,7 @@ public class OptitrackTMarkersetDefinition // trained markerset added // check w
         //public bool IsActive;
     }
 
-    /// <summary>Asset ID. Used as an argument to <see cref="OptitrackStreamingClient.GetLatestTMarkersetState"/>.</summary>
+    /// <summary>Asset ID. Used as an argument to <see cref="OptiTrackStreamingClient.GetLatestTMarkersetState"/>.</summary>
     public Int32 Id;
 
     /// <summary>Skeleton asset name.</summary>
@@ -244,7 +244,7 @@ public class OptitrackCameraDefinition
 }
 
 
-public static class OptitrackHiResTimer
+public static class OptiTrackHiResTimer
 {
     public struct Timestamp
     {
@@ -276,7 +276,7 @@ public static class OptitrackHiResTimer
 /// <summary>
 /// Connects to a NatNet streaming server and makes the data available in lightweight Unity-friendly representations.
 /// </summary>
-public class OptitrackStreamingClient : MonoBehaviour
+public class OptiTrackStreamingClient : MonoBehaviour
 {
     public enum ClientConnectionType
     {
@@ -375,7 +375,7 @@ public class OptitrackStreamingClient : MonoBehaviour
     private bool m_hasDrawnForcePlates = false;
     private bool m_subscribedToMarkers = false;
 
-    private OptitrackHiResTimer.Timestamp m_lastFrameDeliveryTimestamp;
+    private OptiTrackHiResTimer.Timestamp m_lastFrameDeliveryTimestamp;
     private Coroutine m_connectionHealthCoroutine = null;
 
     private NatNetClient m_client;
@@ -636,23 +636,23 @@ public class OptitrackStreamingClient : MonoBehaviour
 
 
     /// <summary>
-    /// Returns the first <see cref="OptitrackStreamingClient"/> component located in the scene.
+    /// Returns the first <see cref="OptiTrackStreamingClient"/> component located in the scene.
     /// Provides a convenient, sensible default in the common case where only a single client exists.
     /// Issues a warning if more than one such component is found.
     /// </summary>
     /// <returns>An arbitrary OptitrackClient from the scene, or null if none are found.</returns>
-    public static OptitrackStreamingClient FindDefaultClient()
+    public static OptiTrackStreamingClient FindDefaultClient()
     {
-        OptitrackStreamingClient[] allClients = FindObjectsByType<OptitrackStreamingClient>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        OptiTrackStreamingClient[] allClients = FindObjectsByType<OptiTrackStreamingClient>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         if ( allClients.Length == 0 )
         {
-            Debug.LogError( "Unable to locate any " + typeof( OptitrackStreamingClient ).FullName + " components." );
+            Debug.LogError( "Unable to locate any " + typeof( OptiTrackStreamingClient ).FullName + " components." );
             return null;
         }
         else if ( allClients.Length > 1 )
         {
-            Debug.LogWarning( "Multiple " + typeof( OptitrackStreamingClient ).FullName + " components found in scene; defaulting to first available." );
+            Debug.LogWarning( "Multiple " + typeof( OptiTrackStreamingClient ).FullName + " components found in scene; defaulting to first available." );
         }
 
         return allClients[0];
@@ -705,7 +705,7 @@ public class OptitrackStreamingClient : MonoBehaviour
             m_client.GetPredictedRigidBodyPose( rigidBodyId, out rbData, 0.0 );
 
             rbState = new OptitrackRigidBodyState();
-            RigidBodyDataToState( rbData, OptitrackHiResTimer.Now(), rbState );
+            RigidBodyDataToState( rbData, OptiTrackHiResTimer.Now(), rbState );
 
             
         }
@@ -1327,8 +1327,8 @@ public class OptitrackStreamingClient : MonoBehaviour
         // The lifespan of these variables is tied to the lifespan of a single connection session.
         // The coroutine is stopped on disconnect and restarted on connect.
         YieldInstruction checkIntervalYield = new WaitForSeconds( kHealthCheckIntervalSeconds );
-        OptitrackHiResTimer.Timestamp connectionInitiatedTimestamp = OptitrackHiResTimer.Now();
-        OptitrackHiResTimer.Timestamp lastFrameReceivedTimestamp;
+        OptiTrackHiResTimer.Timestamp connectionInitiatedTimestamp = OptiTrackHiResTimer.Now();
+        OptiTrackHiResTimer.Timestamp lastFrameReceivedTimestamp;
         bool wasReceivingFrames = false;
         bool warnedPendingFirstFrame = false;
 
@@ -1401,7 +1401,7 @@ public class OptitrackStreamingClient : MonoBehaviour
         {
             // Update health markers.
             m_receivedFrameSinceConnect = true;
-            Interlocked.Exchange( ref m_lastFrameDeliveryTimestamp.m_ticks, OptitrackHiResTimer.Now().m_ticks );
+            Interlocked.Exchange( ref m_lastFrameDeliveryTimestamp.m_ticks, OptiTrackHiResTimer.Now().m_ticks );
 
             // Process received frame.
             IntPtr pFrame = eventArgs.NativeFramePointer;
@@ -1441,7 +1441,7 @@ public class OptitrackStreamingClient : MonoBehaviour
 
                 // Ensure we have a state corresponding to this rigid body ID.
                 OptitrackRigidBodyState rbState = GetOrCreateRigidBodyState( rbData.Id );
-                RigidBodyDataToState(rbData, OptitrackHiResTimer.Now(), rbState);
+                RigidBodyDataToState(rbData, OptiTrackHiResTimer.Now(), rbState);
             }
 
 
@@ -1700,7 +1700,7 @@ public class OptitrackStreamingClient : MonoBehaviour
         return name;
     }
 
-    private void RigidBodyDataToState(sRigidBodyData rbData, OptitrackHiResTimer.Timestamp timestamp, OptitrackRigidBodyState rbState)
+    private void RigidBodyDataToState(sRigidBodyData rbData, OptiTrackHiResTimer.Timestamp timestamp, OptitrackRigidBodyState rbState)
     {
         rbState.DeliveryTimestamp = timestamp;
         rbState.Pose = new OptitrackPose
