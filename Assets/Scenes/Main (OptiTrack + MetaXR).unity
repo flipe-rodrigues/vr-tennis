@@ -199,19 +199,19 @@ MonoBehaviour:
   samplingRate: 250
   _samplingInterval: 0.004
   _trackers:
-  - {fileID: 7976822468721358775}
-  - {fileID: 984377533}
-  - {fileID: 5872129562439674650}
-  - {fileID: 1361894310}
-  - {fileID: 920026025}
   - {fileID: 575539740}
-  - {fileID: 911978360}
   - {fileID: 2003079447619129941}
-  - {fileID: 1324406917286027287}
   - {fileID: 1334971607}
-  - {fileID: 1346638848062879237}
   - {fileID: 7996239910057813932}
+  - {fileID: 1361894310}
+  - {fileID: 1324406917286027287}
+  - {fileID: 5872129562439674650}
+  - {fileID: 7976822468721358775}
+  - {fileID: 920026025}
+  - {fileID: 911978360}
   - {fileID: 1741830062}
+  - {fileID: 984377533}
+  - {fileID: 1346638848062879237}
 --- !u!1 &20478871
 GameObject:
   m_ObjectHideFlags: 0
@@ -2135,7 +2135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6170597449697902076, guid: 3961368eda036434f904d27e7a4a2940, type: 3}
       propertyPath: expirationDelay
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6170597449697902076, guid: 3961368eda036434f904d27e7a4a2940, type: 3}
       propertyPath: acquisitionDelay
@@ -2346,8 +2346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-10_11-17-05
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-10_11-17-05
+  _editorSavePath: C:\Users\Admin\Documents\GitHub\vr-tennis\Assets\Data\2025-10-10_11-52-02
+  _buildSavePath: C:\Users\Admin\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-10_11-52-02
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3668,7 +3668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6170597449697902076, guid: 3961368eda036434f904d27e7a4a2940, type: 3}
       propertyPath: expirationDelay
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6170597449697902076, guid: 3961368eda036434f904d27e7a4a2940, type: 3}
       propertyPath: acquisitionDelay
@@ -4529,7 +4529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6170597449697902076, guid: 3961368eda036434f904d27e7a4a2940, type: 3}
       propertyPath: expirationDelay
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6170597449697902076, guid: 3961368eda036434f904d27e7a4a2940, type: 3}
       propertyPath: acquisitionDelay
@@ -5388,7 +5388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stages:
-  - trialCount: 5
+  - trialCount: 10
     objectsToEnable:
     - {fileID: 4048976150374128210}
     - {fileID: 5102816465464550694}
@@ -8339,7 +8339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6170597449697902076, guid: 3961368eda036434f904d27e7a4a2940, type: 3}
       propertyPath: expirationDelay
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6170597449697902076, guid: 3961368eda036434f904d27e7a4a2940, type: 3}
       propertyPath: acquisitionDelay
@@ -12087,7 +12087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4308758073793666640, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
       propertyPath: expirationDelay
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4308758073793666640, guid: 55097fbe337265b45ac0e4dfa5b9857e, type: 3}
       propertyPath: m_EditorClassIdentifier
@@ -14391,10 +14391,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optitrackRigidbody: {fileID: 5229257466296537835}
-  positionPreprocessing: 1
+  positionPreprocessing: 0
   rotationPreprocessing: 0
-  linearVelocityPreprocessing: 1
-  angularVelocityPreprocessing: 2
+  linearVelocityPreprocessing: 0
+  angularVelocityPreprocessing: 0
   smoothingTimeConstant: 0.01
   _suggestedAlpha: 0.18181819
   _suggestedBeta: 0.008264463
@@ -18295,7 +18295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6170597449697902076, guid: 3961368eda036434f904d27e7a4a2940, type: 3}
       propertyPath: expirationDelay
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6170597449697902076, guid: 3961368eda036434f904d27e7a4a2940, type: 3}
       propertyPath: acquisitionDelay
@@ -18480,8 +18480,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetFrameRate: 120
   _targetFrameInterval: 0.008333334
-  targetPhysicsRate: 1000
-  _targetPhysicsInterval: 0.001
+  targetPhysicsRate: 500
+  minimumPhysicsRate: 120
+  _targetPhysicsInterval: 0.002
+  _minimumPhysicsInterval: 0.008333334
   timeScale: 1
   _hasStartedQuitting: 0
 --- !u!1 &2094533217
@@ -19445,7 +19447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ServerAddress: 10.40.49.47
-  LocalAddress: 10.40.49.9
+  LocalAddress: 10.40.49.47
   ConnectionType: 0
   SkeletonCoordinates: 0
   TMarkersetCoordinates: 0
