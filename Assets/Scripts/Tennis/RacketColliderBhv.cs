@@ -80,7 +80,6 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
         // so that (in theory) multiple can be hit in parallel
         // refractory period should be per ball, not per racket
         // then again.. only one ball tracker.. hmmm...
-        Debug.Log("here");
         this.HandleImpendingHit();
     }
 
@@ -100,7 +99,6 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
 
         if (Vector3.Dot(_contactNormal, TennisManager.Instance.RelativePosition) < 0)
         {
-            Debug.Log("also here..");
             this.StartRefractoryPeriod();
             this.Hit(TennisManager.Instance.Ball);
             onRacketHit?.Invoke();

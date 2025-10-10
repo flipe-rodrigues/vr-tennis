@@ -78,6 +78,8 @@ public class RacketBhv : MonoBehaviour
     [Range(0.001f, .25f)]
     public float smoothingTimeConstant = 0.01f;
     [SerializeField, ReadOnly]
+    private float _smoothingRate;
+    [SerializeField, ReadOnly]
     private float _suggestedAlpha;
     [SerializeField, ReadOnly]
     private float _suggestedBeta;
@@ -114,8 +116,6 @@ public class RacketBhv : MonoBehaviour
     private Vector3 _previousPosition;
     private Quaternion _currentRotation;
     private Quaternion _previousRotation;
-    private float _smoothingRate;
-
     private void OnValidate()
     {
         _smoothingRate = smoothingTimeConstant.TauToLambda(Time.fixedDeltaTime);

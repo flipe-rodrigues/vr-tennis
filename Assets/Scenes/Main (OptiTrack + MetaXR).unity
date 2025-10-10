@@ -321,16 +321,16 @@ MonoBehaviour:
   _samplingInterval: 0.004
   _trackers:
   - {fileID: 1361894310}
-  - {fileID: 984377533}
   - {fileID: 575539740}
-  - {fileID: 5872129562439674650}
-  - {fileID: 7976822468721358775}
-  - {fileID: 2003079447619129941}
-  - {fileID: 1324406917286027287}
-  - {fileID: 920026025}
-  - {fileID: 911978360}
   - {fileID: 1346638848062879237}
+  - {fileID: 5872129562439674650}
+  - {fileID: 920026025}
+  - {fileID: 1324406917286027287}
+  - {fileID: 984377533}
+  - {fileID: 2003079447619129941}
   - {fileID: 7996239910057813932}
+  - {fileID: 911978360}
+  - {fileID: 7976822468721358775}
 --- !u!1 &20478871
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +824,7 @@ MonoBehaviour:
   LateControllerUpdate: 1
   LateLatching: 0
   controllerDrivenHandPosesType: 2
-  SimultaneousHandsAndControllersEnabled: 1
+  SimultaneousHandsAndControllersEnabled: 0
   _readOnlyWideMotionModeHandPosesEnabled: 0
   wideMotionModeHandPosesEnabled: 1
   dynamicResolutionVersion: 1
@@ -2390,8 +2390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\Admin\Documents\GitHub\vr-tennis\Assets\Data\2025-10-10_17-39-07
-  _buildSavePath: C:\Users\Admin\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-10_17-39-07
+  _editorSavePath: C:\Users\Admin\Documents\GitHub\vr-tennis\Assets\Data\2025-10-10_18-16-35
+  _buildSavePath: C:\Users\Admin\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-10_18-16-35
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17918,9 +17918,10 @@ MonoBehaviour:
   rotationPreprocessing: 0
   linearVelocityPreprocessing: 1
   angularVelocityPreprocessing: 2
-  smoothingTimeConstant: 0.005
-  _suggestedAlpha: 0.33333334
-  _suggestedBeta: 0.02777778
+  smoothingTimeConstant: 0.1
+  _smoothingRate: 0.009950161
+  _suggestedAlpha: 0.019801982
+  _suggestedBeta: 0.00009802962
   alpha: 0.57
   beta: 0.08
   _rawLinearVelocity: {x: 0, y: 0, z: 0}
