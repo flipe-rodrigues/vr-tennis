@@ -199,18 +199,18 @@ MonoBehaviour:
   samplingRate: 250
   _samplingInterval: 0.004
   _trackers:
-  - {fileID: 1334971607}
   - {fileID: 911978360}
-  - {fileID: 2003079447619129941}
-  - {fileID: 7996239910057813932}
-  - {fileID: 7976822468721358775}
-  - {fileID: 5872129562439674650}
-  - {fileID: 575539740}
   - {fileID: 920026025}
-  - {fileID: 1361894310}
+  - {fileID: 2003079447619129941}
+  - {fileID: 5872129562439674650}
   - {fileID: 1324406917286027287}
+  - {fileID: 1334971607}
+  - {fileID: 7976822468721358775}
+  - {fileID: 1361894310}
   - {fileID: 984377533}
   - {fileID: 1346638848062879237}
+  - {fileID: 575539740}
+  - {fileID: 7996239910057813932}
 --- !u!1 &20478871
 GameObject:
   m_ObjectHideFlags: 0
@@ -2345,8 +2345,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-10_12-28-24
-  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-10_12-28-24
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-10_15-21-20
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-10_15-21-20
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14394,8 +14394,8 @@ MonoBehaviour:
   linearVelocityPreprocessing: 1
   angularVelocityPreprocessing: 0
   smoothingTimeConstant: 0.01
-  _suggestedAlpha: 0.33333334
-  _suggestedBeta: 0.02777778
+  _suggestedAlpha: 0.18181819
+  _suggestedBeta: 0.008264463
   alpha: 0.57
   beta: 0.08
   _rawLinearVelocity: {x: 0, y: 0, z: 0}
@@ -18457,10 +18457,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetFrameRate: 120
   _targetFrameInterval: 0.008333334
-  targetPhysicsRate: 1000
-  minimumPhysicsRate: 3
-  _targetPhysicsInterval: 0.001
-  _maximumPhysicsInterval: 0.33333334
+  targetPhysicsRate: 250
+  minimumPhysicsRate: 120
+  _targetPhysicsInterval: 0.004
+  _maximumPhysicsInterval: 0.008333334
   timeScale: 1
   _hasStartedQuitting: 0
 --- !u!1 &2094533217
