@@ -61,6 +61,12 @@ public class BallBhv : CachedRigidbodyBhv
         _light = GetComponent<Light>();
     }
 
+    public void Launch(Vector3 position, Quaternion rotation)
+    {
+        this.Rigidbody.Move(position, rotation);
+        this.Start();
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -70,13 +76,10 @@ public class BallBhv : CachedRigidbodyBhv
         _spinDecayRate = 1f;
         _V = 0f;
         _W = 0f;
-    }
 
-    public void SpawnAt(Vector3 position, Quaternion rotation)
-    {
-        this.Position = position;
-        this.Rotation = rotation;
-        this.Start();
+        _bounceCounter = 0;
+        _isInPlay = true;
+        _wasJustHit = false;
     }
 
     protected override void FixedUpdate()
@@ -154,20 +157,26 @@ public class BallBhv : CachedRigidbodyBhv
         _material.SetColor("_EmissionColor", Color.Lerp(Color.black, Color.white, _light.intensity / .05f));
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (((1 << collision.gameObject.layer) & bounceLayers) != 0)
         {
             _bounceCounter++;
-            _wasJustHit = false;
+            if (_bounceCounter >= 2 && _isInPlay)
+            {
+                _isInPlay = false;
+                onBallOutOfPlay?.Invoke(this);
+
+                TrackingManager.Instance.RecordTaskEvent(TaskEventType.BallOutOfPlay);
+            }
         }
+    }
 
-        if (_bounceCounter >= 2 && _isInPlay)
+    private void OnCollisionExit(Collision collision)
+    {
+        if (((1 << collision.gameObject.layer) & bounceLayers) != 0)
         {
-            _isInPlay = false;
-            onBallOutOfPlay?.Invoke(this);
-
-            TrackingManager.Instance.RecordTaskEvent(TaskEventType.BallOutOfPlay);
+            _wasJustHit = false;
         }
     }
 }

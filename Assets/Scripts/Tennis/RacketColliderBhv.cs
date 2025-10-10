@@ -129,7 +129,7 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
 
         // Apply restitution to normal component
         Vector3 v_ball_normal_f = 
-            (1 + apparentNormalRestitution) * v_racket_normal_i + apparentNormalRestitution * -v_ball_normal_i;
+            (1f + apparentNormalRestitution) * v_racket_normal_i + apparentNormalRestitution * -v_ball_normal_i;
 
         // Apply friction and spin effects to tangential component
         Vector3 v_ball_tangential_f = 
@@ -191,11 +191,14 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
     //        Gizmos.DrawLine(_racket.Position, TennisManager.Instance.Ball.Position);
     //    }
     //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawLine(_racket.Position, _racket.Position + _racket.Forward * .25f);
+    //    Gizmos.DrawLine(_racket.Position, _racket.Position + _transform.forward * .25f);
     //    if (TennisManager.Instance.Ball != null)
     //    {
     //        Gizmos.color = Color.gray;
     //        Gizmos.DrawLine(_racket.Position, _racket.Position + TennisManager.Instance.RelativeVelocity.normalized * 0.5f);
     //    }
+
+    //    Gizmos.color = Color.magenta;
+    //    Gizmos.DrawLine(_racket.Position, _racket.Position + _contactPoint);
     //}
 }

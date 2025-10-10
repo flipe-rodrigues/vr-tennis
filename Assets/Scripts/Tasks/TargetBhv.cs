@@ -11,6 +11,7 @@ public class TargetBhv : CachedTransformBhv
 
     // Public properties
     public MeshRenderer MeshRenderer => _meshRenderer;
+    public bool IsDeactivating => _isDeactivating;
 
     // Public fields
     [ColorUsage(true, true)]
@@ -62,9 +63,21 @@ public class TargetBhv : CachedTransformBhv
 
     public void Activate()
     {
+        _isDeactivating = false;
         this.SetColor(Color.clear);
+        StopAllCoroutines();
         StartCoroutine(this.FadeToCoroutine(_defaultColor, hitDelay));
         _expirationTimer.Start();
+    }
+
+    public override void Deactivate()
+    {
+        if (_isDeactivating)
+        {
+            return;
+        }
+        this.SlowDeactivate();
+        _expirationTimer.Stop();
     }
 
     private void SetColor(Color color)
@@ -96,15 +109,6 @@ public class TargetBhv : CachedTransformBhv
         }
         StopAllCoroutines();
         StartCoroutine(this.FadeToCoroutine(_defaultColor, resetDelay));
-    }
-
-    public override void Deactivate()
-    {
-        if (_isDeactivating)
-        {
-            return;
-        }
-        this.SlowDeactivate();
     }
 
     public void SlowDeactivate()

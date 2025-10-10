@@ -82,7 +82,7 @@ public class BallLaunchBhv : CachedTransformBhv
         }
 
         _currentBall = _ballPool.Get();
-        _currentBall.SpawnAt(this.Position, this.Rotation);
+        _currentBall.Launch(this.Position, this.Rotation);
         _currentBall.LinearVelocity = this.Forward * linearSpeed;
         _currentBall.AngularVelocity = this.Right * topSpin + this.Up * sideSpin;
         onBallLaunch?.Invoke(_currentBall);

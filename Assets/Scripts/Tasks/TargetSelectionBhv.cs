@@ -10,6 +10,7 @@ public class TargetSelectionBhv : CachedTransformBhv
     // Public fields
     [Range(0, 25f)]
     public float spawnRadius = 0.5f;
+    public bool randomizeOrder = true;
     public bool randomizePosition = true;
     public bool randomizeRotation = true;
     public Color gizmoColor;
@@ -38,7 +39,7 @@ public class TargetSelectionBhv : CachedTransformBhv
             return;
         }
 
-        if (_currentTarget != null)
+        if (_currentTarget != null && !_currentTarget.IsDeactivating)
         {
             this.DeselectTarget(_currentTarget);
         }
@@ -72,7 +73,7 @@ public class TargetSelectionBhv : CachedTransformBhv
 
     private void SelectTarget()
     {
-        _currentTarget = _targetPool.GetRandom();
+        _currentTarget = randomizeOrder ? _targetPool.GetRandom() : _targetPool.Get();
 
         if (randomizePosition)
         {

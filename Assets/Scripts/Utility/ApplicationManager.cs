@@ -15,7 +15,7 @@ public class ApplicationManager : Singleton<ApplicationManager>
     public int targetFrameRate = 90;
     [SerializeField, ReadOnly]
     private float _targetFrameInterval;
-    [Tooltip("It seems this needs to be high for the ball's sake, not so much the collision")]
+    [Range(90, 1000), Tooltip("It seems this needs to be high for the ball's sake, not so much the collision")]
     public int targetPhysicsRate = 1000;
     public int minimumPhysicsRate = 250;
     [SerializeField, ReadOnly]

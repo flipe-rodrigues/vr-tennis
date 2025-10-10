@@ -4856,7 +4856,6 @@ GameObject:
   - component: {fileID: 3876047224700234832}
   - component: {fileID: 1301805508023786039}
   - component: {fileID: 6741721363233433996}
-  - component: {fileID: 3494764775948913599}
   - component: {fileID: 6322779820619881963}
   m_Layer: 10
   m_Name: Target (court)
@@ -5046,30 +5045,6 @@ MonoBehaviour:
     _startTime: 0
     _isRunning: 0
   _isDeactivating: 0
---- !u!114 &3494764775948913599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4493706818138470206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 858c103e0df2f524a90cefbdb308a504, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0.001, z: 0}
-  _rotation: {x: -0, y: 0, z: 0}
-  _scale: {x: 0.3, y: 0.099999994, z: 0.3}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  audioPrefab: {fileID: 4532499111118335401, guid: 9ea427fa35afc8a4e80815788cd50632, type: 3}
-  audioPoolSize: 10
-  audioClip: {fileID: 8300000, guid: 455b9b36bd968934e95a0356de3da062, type: 3}
-  volumeModifier: 0.25
-  volumeVariationRange: 0
-  pitchVariationRange: 0
 --- !u!114 &6322779820619881963
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -189,22 +189,4 @@ public class RacketBhv : MonoBehaviour
         Vector3 predictedLinearVelocity = _alphaBetaLinearVelocity;
         _alphaBetaLinearVelocity = predictedLinearVelocity + beta * residualPosition / dt;
     }
-
-    //private void OnDrawGizmos()
-    //{
-        //Gizmos.color = Color.cyan;
-        //Gizmos.DrawLine(this.Position, this.Position + _collider.ContactNormal * 0.5f);
-        //if (TennisManager.Instance.Ball != null)
-        //{
-        //    Gizmos.color = Color.yellow;
-        //    Gizmos.DrawLine(this.Position, TennisManager.Instance.Ball.Position);
-        //}
-        //Gizmos.color = Color.blue;
-        //Gizmos.DrawLine(this.Position, this.Position + this.Forward * .25f);
-        //if (TennisManager.Instance.Ball != null)
-        //{
-        //    Gizmos.color = Color.gray;
-        //    Gizmos.DrawLine(this.Position, this.Position + TennisManager.Instance.RelativeVelocity.normalized * 0.5f);
-        //}
-    //}
 }

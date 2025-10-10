@@ -12,9 +12,9 @@ public class CachedRigidbodyBhv : CachedTransformBhv
 
     // Public fields
     [Range(0, 1e3f)]
-    public float maxLinearVelocity = 500;
+    public float maxLinearVelocity = 100;
     [Range(0, 1e3f)]
-    public float maxAngularVelocity = 50;
+    public float maxAngularVelocity = 500;
 
     // Read only fields
     [SerializeField, ReadOnly]
