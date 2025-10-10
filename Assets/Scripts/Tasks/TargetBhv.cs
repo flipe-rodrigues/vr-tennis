@@ -100,6 +100,10 @@ public class TargetBhv : CachedTransformBhv
 
     public override void Deactivate()
     {
+        if (_isDeactivating)
+        {
+            return;
+        }
         this.SlowDeactivate();
     }
 

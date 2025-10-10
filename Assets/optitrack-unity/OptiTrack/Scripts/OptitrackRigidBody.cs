@@ -50,7 +50,7 @@ public class OptitrackRigidBody : MonoBehaviour
 
         if (useDedicatedCoroutine)
         {
-            _waitForTrackingInterval = new WaitForSeconds(1f / streamingClient.trackingFrequency);
+            _waitForTrackingInterval = new WaitForSeconds(streamingClient.TrackingInterval);
             StartCoroutine(this.OptiTrackUpdateCoroutine());
         }
 

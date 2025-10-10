@@ -284,6 +284,8 @@ public class OptitrackStreamingClient : MonoBehaviour
         Unicast
     }
 
+    public float TrackingInterval => _trackingInterval;
+
     [Header("Connection Settings:")]
 
     [Tooltip("The Streaming IP (Local Interface) in Motive")]

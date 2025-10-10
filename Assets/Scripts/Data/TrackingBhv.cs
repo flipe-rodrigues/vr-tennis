@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.IO;
+using System.Collections;
 
 public class TrackingBhv : CachedTransformBhv
 {
@@ -26,7 +27,7 @@ public class TrackingBhv : CachedTransformBhv
     private TaskEventType _taskEvent;
     private string _binaryPath;
     private string _csvPath;
-    private float _samplingTimer;
+    private WaitForSeconds _waitForTrackingInterval;
 
     private void OnValidate()
     {
@@ -47,23 +48,19 @@ public class TrackingBhv : CachedTransformBhv
         if (DataManager.Instance.saveData)
         {
             _binaryWriter = new BinaryWriter(File.Open(_binaryPath, FileMode.Create));
+
+            _waitForTrackingInterval = new WaitForSeconds(TrackingManager.Instance.SamplingInterval);
+            StartCoroutine(this.TrackingUpdateCoroutine());
         }
     }
 
-    private void FixedUpdate()
+    private IEnumerator TrackingUpdateCoroutine()
     {
-        if (!DataManager.Instance.saveData || ApplicationManager.Instance.HasStartedQuitting)
-        {
-            return;
-        }
-
-        _samplingTimer += Time.fixedDeltaTime;
-
-        if (_samplingTimer >= TrackingManager.Instance.SamplingInterval)
+        while (DataManager.Instance.saveData && !ApplicationManager.Instance.HasStartedQuitting)
         {
             this.Record();
 
-            _samplingTimer = 0f;
+            yield return _waitForTrackingInterval;
         }
     }
 

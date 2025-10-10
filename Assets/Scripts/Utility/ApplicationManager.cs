@@ -17,8 +17,11 @@ public class ApplicationManager : Singleton<ApplicationManager>
     private float _targetFrameInterval;
     [Tooltip("It seems this needs to be high for the ball's sake, not so much the collision")]
     public int targetPhysicsRate = 1000;
+    public int minimumPhysicsRate = 250;
     [SerializeField, ReadOnly]
     private float _targetPhysicsInterval;
+    [SerializeField, ReadOnly]
+    private float _minimumPhysicsInterval;
     [Range(.01f, 1f)]
     public float timeScale = 1f;
 
@@ -33,10 +36,11 @@ public class ApplicationManager : Singleton<ApplicationManager>
         Application.targetFrameRate = targetFrameRate;
 
         Time.fixedDeltaTime = 1f / targetPhysicsRate;
-        Time.maximumDeltaTime = 1f / targetFrameRate;
+        Time.maximumDeltaTime = 1f / minimumPhysicsRate;
 
-        _targetFrameInterval = 1f / targetFrameRate;
-        _targetPhysicsInterval = 1f / targetPhysicsRate;
+        _targetFrameInterval = 1f / Application.targetFrameRate;
+        _targetPhysicsInterval = Time.fixedDeltaTime;
+        _minimumPhysicsInterval = Time.maximumDeltaTime;
 
         Time.timeScale = timeScale;
     }
