@@ -106,7 +106,7 @@ public class RacketBhv : MonoBehaviour
     public KinematicPreprocessingType angularVelocityPreprocessing = KinematicPreprocessingType.None;
 
     [Header("Exponential Smoothing:")]
-    [Range(0.001f, .25f)]
+    [Range(0.001f, .5f)]
     public float smoothingTimeConstant = 0.01f;
     [SerializeField, ReadOnly]
     private float _smoothingRate;
@@ -120,6 +120,8 @@ public class RacketBhv : MonoBehaviour
     private Vector3 _smoothAngularVelocity;
 
     [Header("Alpha-Beta Filter:")]
+    [Range(0.001f, .5f)]
+    public float intendedTimeConstant = 0.01f;
     [SerializeField, ReadOnly]
     private float _suggestedAlpha;
     [SerializeField, ReadOnly]
@@ -146,7 +148,7 @@ public class RacketBhv : MonoBehaviour
     private void OnValidate()
     {
         _smoothingRate = smoothingTimeConstant.TauToLambda(Time.fixedDeltaTime);
-        smoothingTimeConstant.AlphaBetaFromTau(Time.fixedDeltaTime, out _suggestedAlpha, out _suggestedBeta);
+        intendedTimeConstant.AlphaBetaFromTau(Time.fixedDeltaTime, out _suggestedAlpha, out _suggestedBeta);
     }
 
     private void Awake()

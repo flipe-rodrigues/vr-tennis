@@ -692,7 +692,7 @@ public class OptiTrackStreamingClient : MonoBehaviour
     {
         OptitrackRigidBodyState rbState;
 
-        if ( ! networkCompensation || m_client == null )
+        if ( !networkCompensation || m_client == null )
         {
             lock ( m_frameDataUpdateLock )
             {

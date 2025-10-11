@@ -23,6 +23,7 @@ public class OptiTrackRigidbody : MonoBehaviour
     private Quaternion _currentRotation;
     private Quaternion _previousRotation;
     private WaitForSeconds _waitForTrackingInterval;
+    private float _nextSampleTime;
 
     private void OnValidate()
     {
@@ -48,6 +49,7 @@ public class OptiTrackRigidbody : MonoBehaviour
         streamingClient.RegisterRigidBody(this, _rigidbodyId);
         //_waitForTrackingInterval = new WaitForSeconds(streamingClient.TrackingInterval);
         //StartCoroutine(this.OptiTrackUpdateCoroutine());
+        _nextSampleTime = Time.fixedTime;
     }
 
     private void FixedUpdate()
@@ -57,8 +59,12 @@ public class OptiTrackRigidbody : MonoBehaviour
             return;
         }
 
-        this.UpdateTrackingState();
-        this.UpdateTransform();
+        if (Time.fixedTime >= _nextSampleTime)
+        {
+            this.UpdateTrackingState();
+            this.UpdateTransform();
+            _nextSampleTime += streamingClient.TrackingInterval / 2f;
+        }
     }
 
     private IEnumerator OptiTrackUpdateCoroutine()
