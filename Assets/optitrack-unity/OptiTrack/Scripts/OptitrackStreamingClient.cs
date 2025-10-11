@@ -289,7 +289,7 @@ public class OptiTrackStreamingClient : MonoBehaviour
     [Header("Connection Settings:")]
 
     [Tooltip("The Streaming IP (Local Interface) in Motive")]
-    public string ServerAddress = "127.0.0.1";
+    public string ServerAddress = "10.40.49.47";
 
     [SerializeField, ReadOnly, Tooltip("Must be on the same network as the Streaming IP (Local Interface) in Motive.")]
     public string LocalAddress; // "127.0.0.1";

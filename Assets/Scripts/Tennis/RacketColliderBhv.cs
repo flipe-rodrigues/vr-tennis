@@ -12,6 +12,8 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
     public Vector3 ContactNormal => _contactNormal;
 
     // Public fields
+    [Range(0f, 1f)]
+    public float globalRacketVelocityModifier = .1f;
     [Header("Hit Settings:")]
     public float apparentNormalRestitution = .4f;
     public float apparentTangentialRestitution = .65f;
@@ -68,7 +70,7 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
 
     private void RescaleColliderDynamically()
     {
-        Vector3 localVelocity = _transform.InverseTransformDirection(_racket.LinearVelocity);
+        Vector3 localVelocity = _transform.InverseTransformDirection(_racket.LinearVelocity * globalRacketVelocityModifier);
         Vector3 deltaScale = localVelocity.ElementWiseMultiplication(scaleModifier).Abs();
         _collider.size = (_defaultScale + deltaScale).ClampBetween(_defaultScale, _defaultScale * maxScaleFactor);
         _meshTransform.localScale = _collider.size;
@@ -88,13 +90,13 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
         this.HandleImpendingHit();
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        this.HandleImpendingHit();
-    }
-
     private void HandleImpendingHit()
     {
+        if (TennisManager.Instance.Ball.WasJustHit)
+        {
+            return;
+        }
+
         this.UpdateContactNormal();
 
         if (Vector3.Dot(_contactNormal, TennisManager.Instance.RelativePosition) < 0)
@@ -115,7 +117,7 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
     private void Hit(BallBhv ball)
     {
         // Following Cross 2005
-        Vector3 v_racket_i = this.GetVelocityAtContactPoint();
+        Vector3 v_racket_i = this.GetVelocityAtContactPoint() * globalRacketVelocityModifier;
         Vector3 v_ball_i = ball.LinearVelocity;
         Vector3 w_ball_i = ball.AngularVelocity;
 
