@@ -46,9 +46,19 @@ public class OptiTrackRigidbody : MonoBehaviour
         }
 
         streamingClient.RegisterRigidBody(this, _rigidbodyId);
+        //_waitForTrackingInterval = new WaitForSeconds(streamingClient.TrackingInterval);
+        //StartCoroutine(this.OptiTrackUpdateCoroutine());
+    }
 
-        _waitForTrackingInterval = new WaitForSeconds(streamingClient.TrackingInterval);
-        StartCoroutine(this.OptiTrackUpdateCoroutine());
+    private void FixedUpdate()
+    {
+        if (streamingClient == null)
+        {
+            return;
+        }
+
+        this.UpdateTrackingState();
+        this.UpdateTransform();
     }
 
     private IEnumerator OptiTrackUpdateCoroutine()

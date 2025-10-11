@@ -28,6 +28,7 @@ public class TrackingBhv : CachedTransformBhv
     private string _binaryPath;
     private string _csvPath;
     private WaitForSeconds _waitForTrackingInterval;
+    private float _nextSampleTime;
 
     private void OnValidate()
     {
@@ -50,7 +51,22 @@ public class TrackingBhv : CachedTransformBhv
             _binaryWriter = new BinaryWriter(File.Open(_binaryPath, FileMode.Create));
 
             _waitForTrackingInterval = new WaitForSeconds(TrackingManager.Instance.SamplingInterval);
-            StartCoroutine(this.TrackingUpdateCoroutine());
+            //StartCoroutine(this.TrackingUpdateCoroutine());
+            _nextSampleTime = Time.fixedTime;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!DataManager.Instance.saveData || ApplicationManager.Instance.HasStartedQuitting)
+        {
+            return;
+        }
+
+        if (Time.fixedTime >= _nextSampleTime)
+        {
+            this.Record();
+            _nextSampleTime += TrackingManager.Instance.SamplingInterval;
         }
     }
 

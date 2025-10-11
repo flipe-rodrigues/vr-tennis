@@ -39,6 +39,7 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
     private Transform _meshTransform;
     private Vector3 _contactNormal;
     private Vector3 _defaultScale;
+    private float _lastHitTime;
 
     private void OnValidate()
     {
@@ -76,15 +77,6 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
         _meshTransform.localScale = _collider.size;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // this should be a local thing.. a ball enters? pass it along to a couroutine
-        // so that (in theory) multiple can be hit in parallel
-        // refractory period should be per ball, not per racket
-        // then again.. only one ball tracker.. hmmm...
-        this.HandleImpendingHit();
-    }
-
     private void OnTriggerStay(Collider other)
     {
         this.HandleImpendingHit();
@@ -92,7 +84,7 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
 
     private void HandleImpendingHit()
     {
-        if (TennisManager.Instance.Ball.WasJustHit)
+        if (Time.fixedTime - _lastHitTime < refractoryPeriod)
         {
             return;
         }
@@ -101,17 +93,26 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
 
         if (Vector3.Dot(_contactNormal, TennisManager.Instance.RelativePosition) < 0)
         {
-            this.StartRefractoryPeriod();
+            //this.StartRefractoryPeriod();
             this.Hit(TennisManager.Instance.Ball);
             onRacketHit?.Invoke();
             TennisManager.Instance.Ball.WasJustHit = true;
             TrackingManager.Instance.RecordTaskEvent(TaskEventType.RacketHit);
+            _lastHitTime = Time.fixedTime;
+        }
+    }
+
+    private void CheckRefractoryPeriod()
+    {
+        if (Time.fixedTime - _lastHitTime >= refractoryPeriod)
+        {
+            return;
         }
     }
 
     private void UpdateContactNormal()
     {
-        _contactNormal = (_transform.forward * Vector3.Dot(_transform.forward, TennisManager.Instance.RelativeVelocity)).normalized;
+        _contactNormal = (_racket.Forward * Vector3.Dot(_racket.Forward, TennisManager.Instance.RelativeVelocity)).normalized;
     }
 
     private void Hit(BallBhv ball)
@@ -138,9 +139,6 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
 
         // Calculate final velocity
         Vector3 v_ball_f = v_ball_normal_f + v_ball_tangential_f;
-        Vector3 v_ball_y_f = Vector3.Project(v_ball_f, Vector3.up);
-        Vector3 v_ball_x_f = v_ball_f - v_ball_y_f;
-        v_ball_f = v_ball_y_f + v_ball_x_f;
 
         // Calculate the final angular velocity of the ball
         Vector3 w_ball_f = 
@@ -154,7 +152,7 @@ public class RacketColliderBhv : MonoBehaviour // switch back to cached transfor
 
     private Vector3 GetVelocityAtContactPoint()
     {
-        Vector3 relativePosition = Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, _transform.forward);
+        Vector3 relativePosition = Vector3.ProjectOnPlane(TennisManager.Instance.RelativePosition, _racket.Forward);
         Vector3 tangentialVelocity = Vector3.Cross(_racket.AngularVelocity, relativePosition);
 
         return _racket.LinearVelocity + tangentialVelocity;

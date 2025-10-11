@@ -5,19 +5,35 @@ public class RacketBhv : MonoBehaviour
 {
     // Public properties
     public RacketMeshBhv Mesh => _mesh;
+    public Vector3 Forward
+    {
+        get
+        {
+            switch (forwardPreprocessing)
+            {
+                case KinematicPreprocessingType.AlphaBetaFilter:
+                    return _alphaBetaRotation * Vector3.forward;
+                case KinematicPreprocessingType.ExponentialSmoothing:
+                    return _smoothRotation * Vector3.forward;
+                case KinematicPreprocessingType.None:
+                default:
+                    return _rawRotation * Vector3.forward;
+            }
+        }
+    }
     public Vector3 Position
     {
         get
         {
             switch (positionPreprocessing)
             {
+                case KinematicPreprocessingType.AlphaBetaFilter:
+                    return _alphaBetaPosition;
                 case KinematicPreprocessingType.ExponentialSmoothing:
                     return _smoothPosition;
-                case KinematicPreprocessingType.AlphaBeta:
-                    return _alphaBetaPosition;
                 case KinematicPreprocessingType.None:
                 default:
-                    return _currentPosition;
+                    return _rawPosition;
             }
         }
     }
@@ -27,11 +43,13 @@ public class RacketBhv : MonoBehaviour
         {
             switch (rotationPreprocessing)
             {
+                case KinematicPreprocessingType.AlphaBetaFilter:
+                    return _alphaBetaRotation;
                 case KinematicPreprocessingType.ExponentialSmoothing:
                     return _smoothRotation;
                 case KinematicPreprocessingType.None:
                 default:
-                    return _currentRotation;
+                    return _rawRotation;
             }
         }
     }
@@ -41,10 +59,10 @@ public class RacketBhv : MonoBehaviour
         {
             switch (linearVelocityPreprocessing)
             {
+                case KinematicPreprocessingType.AlphaBetaFilter:
+                    return _alphaBetaLinearVelocity;
                 case KinematicPreprocessingType.ExponentialSmoothing:
                     return _smoothLinearVelocity;
-                case KinematicPreprocessingType.AlphaBeta:
-                    return _alphaBetaLinearVelocity;
                 case KinematicPreprocessingType.None:
                 default:
                     return _rawLinearVelocity;
@@ -57,6 +75,8 @@ public class RacketBhv : MonoBehaviour
         {
             switch (angularVelocityPreprocessing)
             {
+                case KinematicPreprocessingType.AlphaBetaFilter:
+                    return _alphaBetaAngularVelocity;
                 case KinematicPreprocessingType.ExponentialSmoothing:
                     return _smoothAngularVelocity;
                 case KinematicPreprocessingType.None:
@@ -67,34 +87,29 @@ public class RacketBhv : MonoBehaviour
     }
 
     // Public fields
-    [Header("Tracking Data Source:")]
+    [Header("Motion Capture:")]
     public OptiTrackRigidbody optitrackRigidbody;
-    [Header("Preprocessing Settings:")]
-    public KinematicPreprocessingType positionPreprocessing = KinematicPreprocessingType.AlphaBeta;
-    public KinematicPreprocessingType rotationPreprocessing = KinematicPreprocessingType.None;
-    public KinematicPreprocessingType linearVelocityPreprocessing = KinematicPreprocessingType.AlphaBeta;
-    public KinematicPreprocessingType angularVelocityPreprocessing = KinematicPreprocessingType.ExponentialSmoothing;
-    [Header("Temporal Smoothing Settings:")]
-    [Range(0.001f, .25f)]
-    public float smoothingTimeConstant = 0.01f;
     [SerializeField, ReadOnly]
-    private float _smoothingRate;
-    [Header("Alpha-Beta Filter Settings:")]
+    private Vector3 _rawPosition;
     [SerializeField, ReadOnly]
-    private float _suggestedAlpha;
-    [SerializeField, ReadOnly]
-    private float _suggestedBeta;
-    [Range(0f, 1f)]
-    public float alpha = 0.5f;
-    [Range(0f, 1f)]
-    public float beta = 0.05f;
-
-    // Readonly fields
-    [Header("Debugging:")]
+    private Quaternion _rawRotation;
     [SerializeField, ReadOnly]
     private Vector3 _rawLinearVelocity;
     [SerializeField, ReadOnly]
     private Vector3 _rawAngularVelocity;
+
+    [Header("Preprocessing Settings:")]
+    public KinematicPreprocessingType forwardPreprocessing = KinematicPreprocessingType.None;
+    public KinematicPreprocessingType positionPreprocessing = KinematicPreprocessingType.None;
+    public KinematicPreprocessingType rotationPreprocessing = KinematicPreprocessingType.None;
+    public KinematicPreprocessingType linearVelocityPreprocessing = KinematicPreprocessingType.None;
+    public KinematicPreprocessingType angularVelocityPreprocessing = KinematicPreprocessingType.None;
+
+    [Header("Exponential Smoothing:")]
+    [Range(0.001f, .25f)]
+    public float smoothingTimeConstant = 0.01f;
+    [SerializeField, ReadOnly]
+    private float _smoothingRate;
     [SerializeField, ReadOnly]
     private Vector3 _smoothPosition;
     [SerializeField, ReadOnly]
@@ -103,19 +118,30 @@ public class RacketBhv : MonoBehaviour
     private Vector3 _smoothLinearVelocity;
     [SerializeField, ReadOnly]
     private Vector3 _smoothAngularVelocity;
+
+    [Header("Alpha-Beta Filter:")]
+    [SerializeField, ReadOnly]
+    private float _suggestedAlpha;
+    [SerializeField, ReadOnly]
+    private float _suggestedBeta;
+    [Range(0f, 1f)]
+    public float alpha = 0.5f;
+    [Range(0f, 1f)]
+    public float beta = 0.05f;
     [SerializeField, ReadOnly]
     private Vector3 _alphaBetaPosition;
     [SerializeField, ReadOnly]
+    private Quaternion _alphaBetaRotation;
+    [SerializeField, ReadOnly]
     private Vector3 _alphaBetaLinearVelocity;
+    [SerializeField, ReadOnly]
+    private Vector3 _alphaBetaAngularVelocity;
 
     // Private fields
     private Transform _transform;
-    private RacketColliderBhv _collider;
     private RacketMeshBhv _mesh;
-    private Vector3 _currentPosition;
-    private Vector3 _previousPosition;
-    private Quaternion _currentRotation;
-    private Quaternion _previousRotation;
+    private Vector3 _previousRawPosition;
+    private Quaternion _previousRawRotation;
 
     private void OnValidate()
     {
@@ -126,36 +152,36 @@ public class RacketBhv : MonoBehaviour
     private void Awake()
     {
         _transform = this.GetComponent<Transform>();
-        _collider = this.GetComponentInChildren<RacketColliderBhv>();
         _mesh = this.GetComponentInChildren<RacketMeshBhv>();
     }
 
     private void Start()
     {
         this.OnValidate();
+
+        this.GetRawTrackingData();
+        _smoothPosition = _rawPosition;
+        _smoothRotation = _rawRotation;
+        _alphaBetaPosition = _rawPosition;
+        _alphaBetaRotation = _rawRotation;
     }
 
     protected virtual void FixedUpdate()
     {
-        if (optitrackRigidbody == null)
-        {
-            _previousPosition = _currentPosition;
-            _currentPosition = _transform.position;
-            _previousRotation = _currentRotation;
-            _currentRotation = _transform.rotation;
-        }
-        else
-        {
-            _previousPosition = optitrackRigidbody.PreviousPosition;
-            _currentPosition = optitrackRigidbody.CurrentPosition;
-            _previousRotation = optitrackRigidbody.PreviousRotation;
-            _currentRotation = optitrackRigidbody.CurrentRotation;
-        }
-        
+        this.GetRawTrackingData();
         this.UpdateLinearVelocity();
         this.UpdateAngularVelocity();
         this.ApplyExponentialSmoothing();
-        this.ApplyAlphaBetaFilter();
+        this.ApplyAlphaBetaFilterPosition();
+        this.ApplyAlphaBetaFilterRotation();
+    }
+
+    private void GetRawTrackingData()
+    {
+        _previousRawPosition = optitrackRigidbody.PreviousPosition;
+        _previousRawRotation = optitrackRigidbody.PreviousRotation;
+        _rawPosition = optitrackRigidbody.CurrentPosition;
+        _rawRotation = optitrackRigidbody.CurrentRotation;
     }
 
     private void LateUpdate()
@@ -166,33 +192,73 @@ public class RacketBhv : MonoBehaviour
 
     private void UpdateLinearVelocity()
     {
-        _rawLinearVelocity = (_currentPosition - _previousPosition) / Time.fixedDeltaTime;
+        _rawLinearVelocity = (_rawPosition - _previousRawPosition) / Time.fixedDeltaTime;
     }
 
     private void UpdateAngularVelocity()
     {
-        Quaternion deltaRawRotation = _currentRotation * Quaternion.Inverse(_previousRotation);
-        deltaRawRotation.ToAngleAxis(out float angleInDegrees, out Vector3 axis);
+        Quaternion deltaRotation = _rawRotation * Quaternion.Inverse(_previousRawRotation);
+        deltaRotation.ToAngleAxis(out float angleInDegrees, out Vector3 axis);
+        if (angleInDegrees > 180f)
+        {
+            angleInDegrees -= 360f;
+        }
         _rawAngularVelocity = axis * (angleInDegrees * Mathf.Deg2Rad) / Time.fixedDeltaTime;
     }
 
     private void ApplyExponentialSmoothing()
     {
-        _smoothPosition = Vector3.Lerp(_smoothPosition, _currentPosition, _smoothingRate);
-        _smoothRotation = Quaternion.Slerp(_smoothRotation, _currentRotation, _smoothingRate);
+        _smoothPosition = Vector3.Lerp(_smoothPosition, _rawPosition, _smoothingRate);
+        _smoothRotation = Quaternion.Slerp(_smoothRotation, _rawRotation, _smoothingRate);
         _smoothLinearVelocity = Vector3.Lerp(_smoothLinearVelocity, _rawLinearVelocity, _smoothingRate);
         _smoothAngularVelocity = Vector3.Lerp(_smoothAngularVelocity, _rawAngularVelocity, _smoothingRate);
     }
 
-    private void ApplyAlphaBetaFilter()
+    private void ApplyAlphaBetaFilterPosition()
     {
         float dt = Time.fixedDeltaTime;
 
         Vector3 predictedPosition = _alphaBetaPosition + _alphaBetaLinearVelocity * dt;
-        Vector3 residualPosition = _currentPosition - predictedPosition;
+        Vector3 residualPosition = _rawPosition - predictedPosition;
         _alphaBetaPosition = predictedPosition + alpha * residualPosition;
 
         Vector3 predictedLinearVelocity = _alphaBetaLinearVelocity;
         _alphaBetaLinearVelocity = predictedLinearVelocity + beta * residualPosition / dt;
+    }
+
+    private void ApplyAlphaBetaFilterRotation()
+    {
+        float dt = Time.fixedDeltaTime;
+
+        // Convert angular velocity to quaternion increment
+        Vector3 angularDisplacement = _alphaBetaAngularVelocity * dt;
+        float angle = angularDisplacement.magnitude;
+        Vector3 axis = angularDisplacement / angle;
+
+        // Predict rotation using angular velocity
+        Quaternion predictedDeltaRotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, axis);
+        Quaternion predictedRotation = predictedDeltaRotation * _alphaBetaRotation;
+
+        // Calculate residual rotation (difference between measured and predicted)
+        Quaternion residualRotation = _rawRotation * Quaternion.Inverse(predictedRotation);
+        residualRotation.ToAngleAxis(out float residualAngle, out Vector3 residualAxis);
+
+        // Handle angle wrapping
+        if (residualAngle > 180f)
+        {
+            residualAngle -= 360f;
+        }
+
+        // Convert residual to angular displacement vector
+        Vector3 residualAngularDisplacement = residualAxis * (residualAngle * Mathf.Deg2Rad);
+
+        // Update filtered rotation (apply alpha correction)
+        float correctionAngle = residualAngularDisplacement.magnitude * alpha;
+        Vector3 correctionAxis = residualAngularDisplacement.normalized;
+        Quaternion correction = Quaternion.AngleAxis(correctionAngle * Mathf.Rad2Deg, correctionAxis);
+        _alphaBetaRotation = correction * predictedRotation;
+
+        // Update filtered angular velocity (apply beta correction)
+        _alphaBetaAngularVelocity = _alphaBetaAngularVelocity + (beta * residualAngularDisplacement / dt);
     }
 }

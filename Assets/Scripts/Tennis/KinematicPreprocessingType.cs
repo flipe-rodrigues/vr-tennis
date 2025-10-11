@@ -1,6 +1,6 @@
 public enum KinematicPreprocessingType
 {
     None,
-    AlphaBeta,
+    AlphaBetaFilter,
     ExponentialSmoothing
 }

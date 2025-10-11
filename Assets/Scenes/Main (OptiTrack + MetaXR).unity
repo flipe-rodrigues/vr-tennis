@@ -321,12 +321,13 @@ MonoBehaviour:
   _samplingInterval: 0.004
   _trackers:
   - {fileID: 1346638848062879237}
-  - {fileID: 7976822468721358775}
   - {fileID: 575539740}
-  - {fileID: 1361894310}
-  - {fileID: 911978360}
   - {fileID: 920026025}
   - {fileID: 984377533}
+  - {fileID: 7976822468721358775}
+  - {fileID: 1361894310}
+  - {fileID: 911978360}
+  - {fileID: 1334971607}
 --- !u!1 &20478871
 GameObject:
   m_ObjectHideFlags: 0
@@ -2390,8 +2391,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData: 1
   saveMetadata: 1
-  _editorSavePath: C:\Users\Admin\Documents\GitHub\vr-tennis\Assets\Data\2025-10-11_15-04-32
-  _buildSavePath: C:\Users\Admin\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-11_15-04-32
+  _editorSavePath: C:\Users\flipe\Documents\Unity\vr-tennis\Assets\Data\2025-10-12_00-00-46
+  _buildSavePath: C:\Users\flipe\AppData\LocalLow\Warehouse\VR-tennis-mocap\Data\2025-10-12_00-00-46
 --- !u!114 &206971746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13983,12 +13984,12 @@ GameObject:
   - component: {fileID: 1334971605}
   - component: {fileID: 1334971607}
   m_Layer: 6
-  m_Name: Dummy
+  m_Name: Dummy Tracker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1334971604
 Transform:
   m_ObjectHideFlags: 0
@@ -16981,24 +16982,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optitrackRigidbody: {fileID: 5229257466296537835}
-  positionPreprocessing: 0
-  rotationPreprocessing: 0
-  linearVelocityPreprocessing: 2
-  angularVelocityPreprocessing: 2
-  smoothingTimeConstant: 0.025
-  _smoothingRate: 0.039210558
-  _suggestedAlpha: 0.07692308
-  _suggestedBeta: 0.0014792901
-  alpha: 0.57
-  beta: 0.05
+  _rawPosition: {x: 0, y: 0, z: 0}
+  _rawRotation: {x: 0, y: 0, z: 0, w: 0}
   _rawLinearVelocity: {x: 0, y: 0, z: 0}
   _rawAngularVelocity: {x: 0, y: 0, z: 0}
+  forwardPreprocessing: 0
+  positionPreprocessing: 1
+  rotationPreprocessing: 1
+  linearVelocityPreprocessing: 1
+  angularVelocityPreprocessing: 1
+  smoothingTimeConstant: 0.01
+  _smoothingRate: 0.09516257
   _smoothPosition: {x: 0, y: 0, z: 0}
   _smoothRotation: {x: 0, y: 0, z: 0, w: 0}
   _smoothLinearVelocity: {x: 0, y: 0, z: 0}
   _smoothAngularVelocity: {x: 0, y: 0, z: 0}
+  _suggestedAlpha: 0.18126929
+  _suggestedBeta: 0.032858554
+  alpha: 0.18
+  beta: 0.03
   _alphaBetaPosition: {x: 0, y: 0, z: 0}
+  _alphaBetaRotation: {x: 0, y: 0, z: 0, w: 0}
   _alphaBetaLinearVelocity: {x: 0, y: 0, z: 0}
+  _alphaBetaAngularVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1742962498
 GameObject:
   m_ObjectHideFlags: 0
@@ -21745,12 +21751,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1836fa94319e82428348d967ce724c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetFrameRate: 72
-  _targetFrameInterval: 0.013888889
+  questFrameRate: 72
+  _deltaTime: 0.013888889
   targetPhysicsRate: 1000
-  minimumPhysicsRate: 72
-  _targetPhysicsInterval: 0.001
-  _maximumPhysicsInterval: 0.013888889
+  _fixedDeltaTime: 0.001
+  _physicsStepsPerFrame: 14
+  _maximumAllowedTimestep: 0.071428575
   timeScale: 1
   _hasStartedQuitting: 0
 --- !u!1 &2094533217
@@ -22339,7 +22345,7 @@ Transform:
   m_GameObject: {fileID: 5270873625885880312}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5142751, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -22440,7 +22446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ServerAddress: 10.40.49.47
-  LocalAddress: 10.40.49.47
+  LocalAddress: 192.168.1.107
   ConnectionType: 0
   SkeletonCoordinates: 0
   TMarkersetCoordinates: 0
