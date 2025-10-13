@@ -28,7 +28,7 @@ public class ApplicationManager : Singleton<ApplicationManager>
     private float _fixedDeltaTime;
     [SerializeField, ReadOnly]
     private float _physicsStepsPerFrame;
-    [SerializeField, ReadOnly]
+    [SerializeField]
     private float _maximumAllowedTimestep;
     [Range(.01f, 1f)]
     public float timeScale = 1f;
@@ -41,16 +41,14 @@ public class ApplicationManager : Singleton<ApplicationManager>
     {
         base.OnValidate();
 
-        Application.targetFrameRate = (int)questFrameRate;
-
+        _deltaTime = 1f / (float)questFrameRate;
+        _fixedDeltaTime = 1f / targetPhysicsRate;
         _physicsStepsPerFrame = MathF.Ceiling((float)targetPhysicsRate / (float)Application.targetFrameRate);
-        Time.fixedDeltaTime = 1f / targetPhysicsRate;
-        Time.maximumDeltaTime = 1f / _physicsStepsPerFrame;
+        //Time.maximumDeltaTime = 1f / _physicsStepsPerFrame;
 
-        _deltaTime = 1f / Application.targetFrameRate;
-        _fixedDeltaTime = Time.fixedDeltaTime;
-        _maximumAllowedTimestep = Time.maximumDeltaTime;
-
+        Application.targetFrameRate = (int)questFrameRate;
+        Time.fixedDeltaTime = _fixedDeltaTime;
+        Time.maximumDeltaTime = _maximumAllowedTimestep;
         Time.timeScale = timeScale;
     }
 
